@@ -1,0 +1,25 @@
+.container.mt-2
+	.row.mb-4
+		.col-md-11
+			%h2 #{@bylaw.title}
+			- if @bylaw.status == "Draft"
+				%em.text-muted #{@bylaw.status.upcase}
+		.col-md-1
+			= link_to edit_admin_bylaw_path(@bylaw), class: "btn btn-primary", role: "button", aria:{label: "Edit #{@bylaw.title}"} do 
+				%i.bi.bi-pencil{aria:{hidden: true}}
+	.row.mb-4
+		= simple_format(@bylaw.introduction)
+
+	.row.mb-4
+		%h3 Articles
+		- if @articles.count == 0 then
+			%p You currently don't have any articles for this set of bylaws.  Add one below.
+		- else
+			%ul.list-group
+				- @articles.each do |a|
+					%li.list-group-item.list-group-action.border.border-dark
+						= link_to "Article #{a.roman_numeral.upcase}: #{a.title.upcase}",  admin_bylaw_article_path(a), class: "nav-link"
+		.row
+			= link_to new_admin_bylaw_bylaw_article_path(@bylaw), class: "btn btn-primary btn-lg", role: "button" do 
+				%i.bi.bi-plus{aria:{hidden: true}}
+				Add Article

@@ -1,0 +1,24 @@
+.container.mt-4.d-print-none{style: "-webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;"}
+	.col-md-6.mx-auto
+		%h1 #{@bylaws.title}
+
+		%em.text-muted #{@bylaws.status.upcase}
+
+		= simple_format(@bylaws.introduction)
+
+		- @bylaws.bylaw_articles.each do |article|
+			%h2.text-center.mb-4 
+				ARTICLE #{article.roman_numeral.upcase}
+				%br
+				= article.title.upcase
+			= simple_format(article.introduction)
+			- article.bylaw_article_sections.each do |section|
+				%h3.mt-4 
+					%strong
+						Section #{section.sec_num}.
+						<u>#{section.title}</u>.
+				= simple_format(section.content)
+				- section.bylaw_article_subsections.each do |subsection|
+					.p-4
+						%h4.mt-2 #{subsection.title}
+						= simple_format (subsection.content)

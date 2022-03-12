@@ -1,0 +1,20 @@
+.container.mt-2
+	%h2 New Subsection for Article #{@section.bylaw_article.roman_numeral.upcase}: #{@section.bylaw_article.title.upcase}, Section #{@section.sec_num}: #{@section.title}
+
+	= form_with(model: [:admin, @section, @subsection]) do |f|
+		= f.hidden_field :bylaw_article_id, value: @section.bylaw_article_id
+
+		.form-group.mb-4
+			= f.label :subsec_num, "Subsection Number"
+			= f.number_field :subsec_num, class: "form-control border border-dark"		
+
+		.form-group.mb-4
+			= f.label :title, "Subsection Number"
+			= f.text_field :title, class: "form-control border border-dark"		
+
+		.form-group.mb-4
+			= f.label :content, "Subsection Number"
+			= f.text_area :content, rows: 15, class: "form-control border border-dark"		
+
+		.row
+			= f.submit "Add Subsection", class: "btn btn-primary"

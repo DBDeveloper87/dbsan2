@@ -1,0 +1,30 @@
+%h2 New Board Member
+
+= form_with(model: [:admin, @member]) do |f|
+	.form_group.mb-4
+		= f.label :name, "Name"
+		= f.text_field :name, class: "form-control border border-dark"
+
+	
+	.form-group.mb-4
+		= f.label :position, "Position"
+		= f.select :position, options_for_select(position_list, selected: @member.position), { prompt: "Choose one. . . "},  {class: "form-select form-select-lg border border-dark"}
+
+	%fieldset.border.border-dark.p-2.mb-4
+		%legend Pronouns
+		.row.mb-4
+			= f.collection_check_boxes :pronouns, pronoun_list, :first, :last do |b|
+				.col-md-4.d-grid.d-block.mb-2
+					= b.check_box(class: "btn-check")
+					= b.label(:"data-value" => b.value, class: "btn btn-outline-dark text-start btn-lg") 
+
+		.form-group.mb-4
+			= f.label :pronouns, "Other Pronouns"
+			= f.text_field :pronouns, class: "form-control border border-dark"
+			
+	.form-group.mb-4
+		= f.label :bio, "Biography"
+		= f.text_area :bio, class: "form-control border border-dark", rows: 15
+
+	.row
+		= f.submit "Add Board Member", class: "btn btn-primary"

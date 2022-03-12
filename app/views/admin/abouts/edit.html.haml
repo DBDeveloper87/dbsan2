@@ -1,0 +1,30 @@
+%h2 Edit About Section
+
+= form_with(model: [:admin, @section]) do |f|
+	.form-group.mb-4
+		= f.label :title, "Section Title"
+		= f.text_field :title, class: "form-control border border-dark"
+	
+	-# Heading Level
+	.row.mb-4
+		%span Heading Level
+		.container
+			= f.radio_button :heading_level, "first", checked: true, class: "btn-check"
+			= f.label :heading_level_first, "First Level", class: "btn btn-outline-primary"
+			= f.radio_button :heading_level, "second", class: "btn-check"
+			= f.label :heading_level_second, "Second Level", class: "btn btn-outline-primary"
+
+	.row.mb-4
+		%span Publish
+		.container
+			= f.radio_button :published, "true", class: "btn-check"
+			= f.label :published_true, "Yes", class: "btn btn-outline-primary"
+			= f.radio_button :published, "false", class: "btn-check"
+			= f.label :published_false, "No", class: "btn btn-outline-primary"
+
+	.form-group.mb-4
+		= f.label :content, "Section Content"
+		= f.text_area :content, class: "form-control border border-dark", rows: 5
+	
+	.row
+		= f.submit "Update Section", class: "btn btn-primary"

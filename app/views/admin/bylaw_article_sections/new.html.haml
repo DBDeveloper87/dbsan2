@@ -1,0 +1,18 @@
+.container.mt-4
+	%h2 New Section for Article #{@section.bylaw_article.roman_numeral.upcase}: #{@section.bylaw_article.title.upcase}
+
+	= form_with(model: [:admin, @article, @section]) do |f|
+		.form-group.mb-4
+			= f.label :sec_num, "Section Number"
+			= f.number_field :sec_num, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :title, "Section Title"
+			= f.text_field :title, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :content, "Section Content"
+			= f.text_area :content, rows: 15, class: "form-control border border-dark"
+
+		.row.mb-4
+			= f.submit "Add Section", class: "btn btn-primary"

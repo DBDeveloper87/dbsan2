@@ -1,0 +1,15 @@
+.container.mt-4
+	%h1 #{@event.title}
+	%p #{notice}
+	%p #{@event.description}
+	
+	%p Current Number of Attendees: #{@event.event_attendees.count}
+	-#- @attendees.each do |person|
+	-#	%p #{person = @full_name}
+
+	-#- if @event.event_attendee_ids.map { |user| user = current_user.id }
+	-#	%p You are already registered.
+	= link_to "Register", new_event_event_attendee_path(@event)	
+	|
+	= link_to "Edit", edit_event_path(@event)
+

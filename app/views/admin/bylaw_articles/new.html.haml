@@ -1,0 +1,18 @@
+.container.mt-4
+	%h2 New Bylaw Article
+
+	= form_with(model: [:admin, @bylaw, @article]) do |f|
+		.form-group.mb-4
+			= f.label :roman_numeral, "Article Number (Roman Numeral)"
+			= f.text_field :roman_numeral, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :title, "Article Title"
+			= f.text_field :title, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :introduction, "Introduction"
+			= f.text_area :introduction, rows: 15, class: "form-control border border-dark"
+
+		.row.mb-4
+			= f.submit "Add Article", class: "btn btn-primary"

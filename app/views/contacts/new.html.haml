@@ -1,0 +1,32 @@
+.container.mt-4
+	.col-md-6.mx-auto
+		%h1 We'd love to hear from you!
+
+		%p Please fill out the form below and we will get back to you as soon as possible.  Thank you in advance.
+
+		= form_with(url: contact_path, model: @contact) do |f|
+			.row
+				.col-md-6.form-group.mb-4
+					= f.label :first_name, "First Name"
+					= f.text_field :first_name, placeholder: "John", class: "form-control border border-dark"
+
+				.col-md-6.form-group.mb-4
+					= f.label :last_name, "Last Name"
+					= f.text_field :last_name, placeholder: "Doe", class: "form-control border border-dark"
+
+			.form-group.mb-4
+				= f.label :email, "Your Email Address"
+				= f.email_field :email, placeholder: "you@example.com", class: "form-control border border-dark"
+
+			.foorm-group.mb-4
+				= f.label :message_subject, "Subject"
+				= f.text_field :message_subject, placeholder: "What can we help you with?", limit: 200, class: "form-control border border-dark"
+
+			.foorm-group.mb-4
+				= f.label :message, "Your Message"
+				= f.text_area :message, rows: 10, placeholder: "Please place your message here.", limit: 200, class: "form-control border border-dark"
+
+			= f.hidden_field :nickname
+
+			.row
+				= f.submit "Send Message", class: "btn btn-primary"

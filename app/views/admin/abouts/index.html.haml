@@ -1,0 +1,29 @@
+.container.mt-2
+	%h2 <i class="bi bi-file-person" aria-hidden="true"></i> About
+	- if @sections.count == 0 then
+		%p There are currently no sections for the About page.  Please click on "Create Section" below to create your first section.
+
+		= link_to new_admin_about_path, class: "btn btn-lg btn-primary", role: "button" do
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Create New Section
+
+	- else
+		- @sections.each do |s|
+			.mb-4
+				.row
+					.col-md-10
+						%h3 #{s.title}
+						- if s.heading_level == "first" then
+							%span.text-muted Heading 1
+						- else
+							%span.text-muted Heading 2
+						- if s.published? then
+							%span.text-muted (Published)
+					.col-md-2.text-end
+						= link_to edit_admin_about_path(s), class: "btn btn-primary" do
+							%i.bi.bi-pencil
+				%p #{s.content}
+		= link_to new_admin_about_path, class: "btn btn-primary", role: "button" do
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Add Section
+			

@@ -1,0 +1,20 @@
+.col-md-6.mx-auto.mt-4
+	%h1 Create Zoom Meeting
+
+	= form_with(model: [@virtual_space, @zoom]) do |f|
+		%p The Room Type below will be appended to the event title o create the topic for the Zoom meeting.  The current event title is: "#{@event.title}".
+
+		%fieldset.border.border-dark.p-2.mb-4
+			%legend Room Type
+
+			.row.mb-4
+				.d-grid.d-block.col-md-6.mb-2
+					= f.radio_button :room_type, "Main Room", class: "btn-check"
+					= f.label :room_type_main_room, "Main Room", class: "btn btn-outline-dark btn-lg text-start"
+
+				.d-grid.d-block.col-md-6.mb-2
+					= f.radio_button :room_type, "CDI Access Room", class: "btn-check"
+					= f.label :room_type_cdi_access_room, "CDI Access Room", class: "btn btn-outline-dark btn-lg text-start"
+
+			.row
+				= f.submit "Create Room", class: "btn btn-primary btn-lg"

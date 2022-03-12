@@ -1,0 +1,48 @@
+#parentVideoContainer.row.container-fluid
+	#videoContainer1.col-6.border.border-dark.p-4
+		%img{src: "/frame1/Slide1.png", width: "100%"}
+	#videoContainer2.col-6.border.border-dark.p-4
+		%img{src: "/frame2/Slide1.png", width: "100%"}
+
+.container
+	%button#pipLayoutBtn{onclick: "togglePipLayout()", value: "OFF"} Make Frame 1 Primary and Frame 2 Secondary
+
+:javascript
+	function togglePipLayout() {
+		toggleBtn = document.getElementById("pipLayoutBtn")
+		parent = document.getElementById("parentVideoContainer")
+		frame1 = document.getElementById("videoContainer1")
+		frame2 = document.getElementById("videoContainer2")
+
+		if (toggleBtn.innerText == "Make Frame 1 Primary and Frame 2 Secondary") {
+			toggleBtn.innerText = "Make Frame 2 Primary and Frame 1 Secondary"
+			frame1Primary()
+		} else {
+			toggleBtn.innerText = "Make Frame 1 Primary and Frame 2 Secondary"
+			frame2Primary()
+		}
+
+		function frame1Primary() {
+			parent.classList.remove(...parent.classList)
+			parent.classList.add("container", "position-relative", "mx-auto")
+			frame1.classList.remove(...frame1.classList)
+			frame1.classList.add("border", "border-dark", "p-4")
+			frame2.classList.remove(...frame2.classList)
+			frame2.classList.add("position-absolute", "top-0", "end-0", "w-25", "me-4", "border", "border-dark", "p-4")
+		}
+
+		function frame2Primary() {
+			parent.classList.remove(...parent.classList)
+			parent.classList.add("container", "position-relative", "mx-auto")
+			frame1.classList.remove(...frame1.classList)
+			frame2.classList.remove(...frame2.classList)
+			frame1.classList.add("position-absolute", "top-0", "end-0", "w-25", "me-4", "border", "border-dark", "p-4")
+			frame2.classList.add("border", "border-dark", "p-4")
+			frame1.style.zIndex = 2
+			
+			
+			
+		}
+
+	}
+

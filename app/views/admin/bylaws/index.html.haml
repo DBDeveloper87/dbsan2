@@ -1,0 +1,19 @@
+.container.mt-2
+	%h2 <i class="bi bi-list" aria-hidden:true></i> Bylaws
+	- if @bylaws.count == 0 then
+		%p There are no bylaws currently available.  Create one below.
+	- else
+		- @bylaws.each do |b|
+			.row.mb-4
+				.col-md-11
+					= link_to admin_bylaw_path(b) do 
+						%h3 #{b.title}
+					- if b.status == "Draft" then
+						%em.text-muted #{b.status.upcase}
+				.col-md-1
+					= link_to edit_admin_bylaw_path(b), class: "btn btn-primary", role: "button", aria:{label: "Edit #{b.title}"} do 
+						%i.bi.bi-pencil{aria:{hidden: true}}
+
+	= link_to new_admin_bylaw_path, class: "btn btn-primary", role: "button" do 
+		%i.bi.bi-plus{aria:{hidden: true}}
+		Add New Bylaws

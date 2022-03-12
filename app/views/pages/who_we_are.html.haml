@@ -1,0 +1,31 @@
+.container.pt-4
+	.row
+		.col-md-8
+			- @sections.each do |s|
+				- if s.heading_level == "first" then
+					%h1 #{s.title}
+				- else
+					%h2 #{s.title}
+				%p #{s.content}
+
+		.col-md-4
+			%img{src: "#{asset_path('colorgradientfulllogo.png')}", width: "100%", alt: ""}
+
+.container.mt-4.mb-4
+	%h2 Meet the Board of Directors
+	.row
+		- @board.each do |member|
+			- if member.position ==  'President'
+				= render 'board_member', member: member
+		- @board.each do |member|
+			- if member.position == "Vice President"
+				= render 'board_member', member: member
+		- @board.each do |member|
+			- if member.position == "Treasurer"
+				= render 'board_member', member: member
+		- @board.each do |member|
+			- if member.position == "Secretary"
+				= render 'board_member', member: member
+		- @board.each do |member|
+			- if member.position == "Member At Large"
+				= render 'board_member', member: member

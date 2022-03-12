@@ -1,0 +1,23 @@
+.container.mt-2
+	%h2 New State or Province
+
+	= form_with(model: [:admin, @country, @state]) do |f|
+		.form-group.mb-4
+			= f.select :country_id, Country.all.collect { |c| [ "#{sanitize(c.unicode_flag)} #{c.name} (#{c.country_code})" , c.id] }
+
+		
+
+		.form-floating.mb-4
+			= f.text_field :name, placeholder: "State / Province Name", class: "form-control border border-dark"
+			= f.label :name, "State/ Province Name"
+
+		.form-floating.mb-4
+			= f.text_field :unicode_flag, placeholder: "Unicode Flag", class: "form-control border border-dark"
+			= f.label :unicode_flag, "Unicode Flag"
+
+		.form-floating.mb-4
+			= f.text_field :code, placeholder: "ISO Code", class: "form-control border border-dark"
+			= f.label :code, "ISO Code"
+
+		.row
+			= f.submit "Save", class: "btn btn-primary"

@@ -1,0 +1,15 @@
+.container.mt-4
+	%h2 Edit Bylaws
+
+	= form_with(model: [:admin, @bylaw]) do |f|
+		.form-group.mb-4
+			= f.label :title, "Bylaws Title"
+			= f.text_field :title, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :introduction, "Introduction"
+			= f.text_area :introduction, rows: 15, class: "form-control border border-dark"
+
+		.row.mb-4
+			= f.submit "Update Bylaws", class: "btn btn-primary"
+

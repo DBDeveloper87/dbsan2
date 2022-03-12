@@ -1,0 +1,8 @@
+.modal.fade{id: "#{modal_id}", tabindex: "-1", aria:{labelledby: "#{modal_id}", hidden: "true"}}
+  .modal-dialog
+    .modal-content
+      .modal-header.bg-dark
+        %h1.text-light.modal-title{id: "#{modal_id}Label"} #{modal_title}
+        %button{type: "button", class: "btn-close bg-light", data:{bs:{dismiss: "modal"}}, aria:{label: "Close"}}
+      = render "users/registrations/#{local_partial}"
+       

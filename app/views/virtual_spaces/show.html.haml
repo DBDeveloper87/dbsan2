@@ -1,0 +1,16 @@
+.container.mt-4
+	%h1 Virtual Space
+
+	= link_to "Create a Zoom Meeting", new_virtual_space_zoom_meeting_path(@virtual_space)
+	.row
+		- @zoom_meetings.each do |meeting|
+			.col-md-6.border.border-dark
+				%h2 Topic: #{meeting.topic}
+				%p Meeting ID: #{meeting.meeting_id}
+				.row.p-2
+					.col-4.d-grid.d-block
+						%a{href: "#{meeting.start_url}", class: "btn btn-dark btn-lg", target: "_blank"} Start
+					.col-4.d-grid.d-block
+						%a{href: "#{meeting.join_url}", class: "btn btn-dark btn-lg", target: "_blank"} Join
+					.col-4.d-grid.d-block
+						= button_to "Delete", meeting, method: :delete, class: "btn btn-dark btn-lg"

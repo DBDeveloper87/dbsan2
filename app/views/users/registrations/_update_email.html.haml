@@ -1,0 +1,30 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, data: { turbo: false } }) do |f|
+  .modal-body.pt-4
+    = render "devise/shared/error_messages", resource: resource
+      
+    .mb-4
+      .input-group
+        .input-group-text.bg-dark
+          %i.bi.bi-envelope.text-light
+        .form-floating.flex-grow-1
+          = f.email_field :email, placeholder: "Email Address", readonly: true, aria:{readonly: true}, class: "form-control border border-dark"
+          = f.label :email, "Email Address"
+            
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      .text-center
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+      
+    .mb-4
+      %p We need your current password to confirm your changes.
+      .input-group
+        .input-group-text.bg-dark
+          %i.bi.bi-key.text-light
+        .form-floating.flex-grow-1
+          = f.password_field :current_password, placeholder: "Current Password", class: "form-control border border-dark"
+          = f.label :current_password, "Current Password"  
+        
+  .modal-footer.d-block
+    .row
+      = f.submit "Update", class: "btn btn-primary btn-lg"
+    
+    

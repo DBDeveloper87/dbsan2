@@ -1,0 +1,18 @@
+.container.mt-2
+	%h2 Edit Policy
+
+	= form_with(model: [:admin, @policy]) do |f|
+		.form-group.mb-4
+			= f.label :title, "Policy Title"
+			= f.text_field :title, class: "form-control border border-dark"
+
+		.form-check.mb-4
+			= f.check_box :copy_protect, class: "form-check-input"
+			= f.label :copy_protect, "Require copy protection", class: "form-check-label"
+
+		.form-group.mb-4
+			= f.label :content, "Policy Content Here"
+			= f.text_area :content, class: "form-control border border-dark", rows: 15
+
+		.row.mb-4
+			= f.submit "Update Policy", class: "btn btn-primary"

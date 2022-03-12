@@ -1,0 +1,33 @@
+%nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top.d-print-none
+	.container
+		.justify-content-left
+			%a.navbar-brand{href: "/"} DBSAN
+		.justified-content-center
+			%ul.navbar-nav.me-auto.mb-2.mb-lg-0
+				%li.nav-item
+					= link_to "Events", root_path, class: "nav-link"
+				%li.nav-item
+					= link_to "Videos", root_path, class: "nav-link"
+				%li.nav-item
+					= link_to "About", about_path, class: "nav-link"
+				%li.nav-item
+					= link_to "Contact", contact_path, class: "nav-link"
+				
+		.justify-content-end
+			- if user_signed_in?
+				%ul.nav
+					%li.nav-item.dropdown
+						%a.nav-link.dropdown-toggle.text-light{data:{bs:{toggle: "dropdown"}}, href: "#", role: "button", aria:{expanded: "false"}} #{current_user.profile.first_name}
+						%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+							%li.mb-1
+								= button_to "Edit Account", edit_user_registration_path(current_user), class: "dropdown-item border", method: :get
+							%li.mb-1
+								= button_to "Log out", destroy_user_session_path, class:"dropdown-item", method: :delete, data: { turbo: "false" }
+							
+
+			-#= link_to 'Donate', donate_path, class: "btn btn-primary", role: "button"
+			
+			-#- if admin?
+				-#= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary", role: "button"
+			-#- if user_signed_in?
+				-#= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary", role: "button"

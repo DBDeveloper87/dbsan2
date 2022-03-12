@@ -1,0 +1,13 @@
+.container.mt-2
+	%h1 Countries
+
+	- @countries.each do |country|
+		.row
+			.col-2
+				= country.unicode_flag.html_safe
+			.col-6
+				= link_to "#{country.name}", admin_country_path(country)
+			.col-2
+				= country.country_code
+			.col-2
+				= link_to "edit", edit_admin_country_path(country)

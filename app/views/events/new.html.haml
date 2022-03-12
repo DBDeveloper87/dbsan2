@@ -1,0 +1,53 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1.text-center Create Event
+
+		= form_with(model: @event) do |f|
+			.form-floating.mb-4
+				= f.text_field :title, placeholder: "Event Title", class: "form-control border border-dark"
+				= f.label :title, "Event Title"
+
+			.form-floating.mb-4
+				= f.text_area :description, placeholder: "Description", class: "form-control border border-dark", data:{controller: "textarea-autogrow"}, style: "height: 100px"
+				= f.label :description, "Description"
+			
+			.row.mb-4
+				.col-md-6.mb-2
+					%fieldset.border.border-dark.p-2
+						%legend Start Date
+						.input-group
+							= f.date_select :start_time, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: Date.today.year, end_year: (Date.today.year + 1)}, {class: "form-select form-select-lg border border-dark"}
+				.col-md-6.mb-2
+					- Time.use_zone("Eastern Time (US & Canada)") do
+						%fieldset.border.border-dark.p-2
+							%legend Start Time
+							.input-group
+								= f.time_select :start_time, {ignore_date: true, minute_step: 15, prompt: true, ampm: true}, {class: "form-select form-select-lg border border-dark ms-2 me-2"}
+						.text-end.text-muted
+							= Time.zone
+			.row.mb-4
+				.col-md-6.mb-2
+					%fieldset.border.border-dark.p-2
+						%legend End Date
+						.input-group
+							= f.date_select :end_time, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: Date.today.year, end_year: (Date.today.year + 1)}, {class: "form-select form-select-lg border border-dark"}
+				.col-md-6.mb-2
+					- Time.use_zone("Eastern Time (US & Canada)") do
+						%fieldset.border.border-dark.p-2
+							%legend End Time
+							.input-group
+								= f.time_select :end_time, {ignore_date: true, minute_step: 15, prompt: true, ampm: true}, {class: "form-select form-select-lg border border-dark ms-2 me-2"}
+						.text-end.text-muted
+							= Time.zone
+			
+			%fieldset.border.border-dark.p-2.mb-4
+				%legend Venue Type
+				.d-grid.d-block.mb-2
+					= f.check_box :has_virtual_space, class: "btn-check"
+					= f.label :has_virtual_space, "Virtual", class: "btn btn-outline-dark btn-lg text-start"
+
+
+
+			.row.mb-4
+				= f.submit "create Event", class: "btn btn-lg btn-primary"
+

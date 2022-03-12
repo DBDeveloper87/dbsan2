@@ -1,0 +1,32 @@
+.container.mt-2
+	%h1 <i class="bi bi-people-fill" aria-hidden="true"></i> Board Members
+	- if @board.count == 0 then
+		%p Oh dear, it looks like you don't currently have any board members!  Use the button below to add some.
+		= link_to new_admin_board_member_path, class: "btn btn-primary", role: "button" do
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Add Board Member
+
+	- else
+		- @board.each do |b|
+			.row
+				.col-md-11
+					%h3 #{b.name}
+				.col-md-1.text-end
+					= link_to edit_admin_board_member_path(b), class: "btn btn-primary", role: "button" do 
+						%i.bi.bi-pencil
+
+			%em.text-muted #{b.position}
+			|
+			%em.text-muted 
+				Pronouns: 
+				- b.pronouns.each do |p|
+					- if b.pronouns.count > 1 then
+						#{p},
+					- else
+						= p
+					
+			= simple_format(b.bio)
+
+		= link_to new_admin_board_member_path, class: "btn btn-primary", role: "button" do
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Add Board Member

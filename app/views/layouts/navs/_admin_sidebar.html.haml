@@ -1,0 +1,19 @@
+%ul.nav.flex-column
+	%li.nav-item
+		= link_to admin_abouts_path, class: "nav-link bg-dark text-light" do
+			%i.bi.bi-file-person{aria:{hidden: true}}
+			About
+		= link_to admin_board_members_path, class: "nav-link bg-dark text-light" do
+			%i.bi.bi-people-fill{aria:{hidden: true}}
+			Board Members
+		= link_to admin_social_networks_path, class: "nav-link bg-dark text-light" do
+			%i.bi.bi-share-fill{aria:{hidden: true}}
+			Social Networks
+		= link_to admin_policies_path, class: "nav-link bg-dark text-light" do
+			%i.bi.bi-briefcase-fill{aria:{hidden: true}}
+			Policies
+		= link_to admin_bylaws_path, class: "nav-link bg-dark text-light" do
+			%i.bi.bi-list{aria:{hidden: true}}
+			Bylaws
+
+	

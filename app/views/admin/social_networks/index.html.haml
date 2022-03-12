@@ -1,0 +1,23 @@
+.container.mt-2
+	%h2 <i class="bi bi-share-fill" aria-hidden=true></i> Social Networks
+
+	- if @networks.count == 0 then
+		%p You don't have any social networks at the moment.  Create one below
+		= link_to new_admin_social_network_path, class: "btn btn-primary", role: "button" do 
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Add Social Network
+	
+	- else
+		- @networks.each do |n|
+			.row.mb-4
+				.col-md-3
+					%span <i class="#{n.icon_class}" aria-hidden=true></i> #{n.name}
+				.col-md-8
+					= n.url
+				.col-md-1.text-end
+					= link_to edit_admin_social_network_path(n), class: "btn btn-primary", role: "button" do 
+						%i.bi.bi-pencil{aria:{hidden: true}}
+
+		= link_to new_admin_social_network_path, class: "btn btn-primary", role: "button" do 
+			%i.bi.bi-plus{aria:{hidden: true}}
+			Add Social Network

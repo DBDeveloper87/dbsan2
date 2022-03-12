@@ -1,0 +1,18 @@
+.container.mt-4
+	%h2 <i class="bi bi-briefcase-fill" aria-hidden:true></i> Policies
+	- if @policies.count == 0 then
+		%p There are no policies currently.  Create one below
+	- else
+		- @policies.each do |p|
+			.row.mb-4
+				.col-md-11
+					%h3 #{p.title}
+					%em.text-muted Last Updated: #{p.updated_at.strftime("%B %d, %Y")}
+				.col-md-1.text-end
+					= link_to edit_admin_policy_path(p), class: "btn btn-primary", role: "button", aria:{label: "Edit"} do 
+						%i.bi.bi-pencil{aria:{hidden: true}}
+
+	= link_to new_admin_policy_path, class: "btn btn-primary", role: "button" do 
+		%i.bi.bi-plus{aria:{hidden: true}}
+		Add New Policy
+

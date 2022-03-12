@@ -1,0 +1,9 @@
+.col-md-4.mx-auto
+	%h3 #{member.name}
+	%em.text-muted #{member.position}
+	%br
+	%em.text-muted 
+		Pronouns: 
+		- member.pronouns.each do |p|
+			= p
+	= simple_format(member.bio) 

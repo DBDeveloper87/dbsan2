@@ -1,0 +1,56 @@
+.container.mt-4
+  .col-md-4.mx-auto
+    %h1.text-center Create Account
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { turbo: false} } ) do |f|
+      = render "users/shared/error_messages", resource: resource
+      
+      = f.fields_for :profile, Profile.new do |p|
+        .mb-4
+          .input-group
+            .input-group-text.bg-dark
+              %i.bi.bi-person.text-light
+            .form-floating.flex-grow-1
+              = p.text_field :first_name, placeholder: "First Name", class: "form-control border border-dark"
+              = p.label :first_name, "First Name"
+        
+        .mb-4
+          .input-group
+            .input-group-text.bg-dark
+              %i.bi.bi-person.text-light 
+            .form-floating.flex-grow-1
+              = p.text_field :last_name, placeholder: "Last Name", class: "form-control border border-dark"
+              = p.label :last_name, "Last Name"
+        
+      
+
+      .mb-4
+        .input-group
+          .input-group-text.bg-dark
+            %i.bi.bi-envelope.text-light
+          .form-floating.flex-grow-1
+            = f.email_field :email, placeholder: "Email Address", class: "form-control border border-dark"
+            = f.label :email, "Email Address"
+        
+      .mb-4
+        .input-group
+          .input-group-text.bg-dark
+            %bi.bi-key.text-light
+          .form-floating.flex-grow-1
+            = f.password_field :password, placeholder: "Password", class: "form-control border border-dark"
+            = f.label :password, "Password"
+        - if @minimum_password_length
+          .text-end.text-muted Minimun #{@minimum_password_length} characters
+            
+
+      .mb-4
+        .input-group
+          .input-group-text.bg-dark
+            %i.bi.bi-key.text-light
+          .form-floating.flex-grow-1
+            = f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control border border-dark"
+            = f.label :password_confirmation, "Confirm Password"
+        
+      .row
+        = button_tag(class: "btn btn-primary btn-lg") do 
+          %i.bi.bi-door-open
+          %span Create Account

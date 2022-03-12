@@ -1,0 +1,19 @@
+.container.mt-2
+	%h2 New Social Network
+
+	= form_with(model: [:admin, @network]) do |f|
+		.form-group.mb-4
+			= f.label :name, "Network Name"
+			= f.text_field :name, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :icon_class, "Icon Class"
+			= f.text_field :icon_class, class: "form-control border border-dark"
+
+		.form-group.mb-4
+			= f.label :url, "Network URL"
+			= f.url_field :url, class: "form-control border border-dark"
+
+		
+		.row
+			= f.submit "Create Network", class: "btn btn-primary"
