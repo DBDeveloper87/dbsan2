@@ -1,0 +1,31 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Communication and Code of Conduct
+
+		%p DeafBlind Retreat at Isola Bella (DBRIB) respects all kinds of communication preferences. Since all participants have some combined degree of hearing loss and vision loss, communication modes may include spoken language, sign language, use of assistive devices, or a combination of all. All volunteers and workers at the retreat will strive to use the communication mode or modes preferred by the DeafBlind individual. The retreat's goal is for inclusion of all participants. 
+		
+		%p DBRIB has a zero tolerance policy for alcohol and illegal drugs. Individuals attending or volunteering at the DeafBlind Retreat at Isola Bella must not bring alcohol or illegal drugs into the retreat, come onto the retreat grounds while intoxicated, or smoke in non-designated smoking areas. Anyone who breaks this policy will be asked to leave the retreat immediately, and no refund will be given.
+
+		= form_with(model: [camp, application, c3]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend I have read and agree to follow the policies set by DBRIB.
+
+				.row.mb-4
+					- agree_or_decline.each do |aod|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if aod.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :agree,  value, class: "btn-check"
+							- symlabel = ("agree_" + aod.first).to_sym
+							= f.label symlabel, aod.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_emergency_path(@camp, @application, @application.camp_application_emergency), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  camp_application: one
+  medical_policy: false
+  bring_assistant: false
+  smoke: false
+  medical_conditions: MyText
+  other_health: MyText
+  medical_allergies: MyText
+
+two:
+  camp_application: two
+  medical_policy: false
+  bring_assistant: false
+  smoke: false
+  medical_conditions: MyText
+  other_health: MyText
+  medical_allergies: MyText

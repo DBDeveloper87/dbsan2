@@ -1,0 +1,2 @@
+module CampApplicationC3sHelper
+end

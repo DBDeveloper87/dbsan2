@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  camp_application: one
+  identity: MyText
+  communication_pref: MyText
+  receiv_signs: MyText
+  dominant_hand: MyText
+
+two:
+  camp_application: two
+  identity: MyText
+  communication_pref: MyText
+  receiv_signs: MyText
+  dominant_hand: MyText

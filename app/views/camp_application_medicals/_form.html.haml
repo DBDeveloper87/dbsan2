@@ -1,0 +1,79 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Medical Information
+
+		= form_with(model: [camp, application, medical]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend DBRIB does not provide a nurse. You may store medications in the refrigerator. You are responsible to bring and take your medicines. We cannot administer prescription medications whatsoever. Do you understand? 
+
+				.row.mb-4
+					- yes_no.each do |soc|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if soc.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :medical_policy,  value, class: "btn-check"
+							- symlabel = ("medical_policy_" + soc.first).to_sym
+							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Will you be bringing an Assistant? The Retreat does not provide personal care such as bathing, grooming, feeding, and others. Furthermore the assistant will not be a dual role and will be required to pay the full amount of the participant fee as well.
+
+				.row.mb-4
+					- yes_no.each do |soc|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if soc.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :bring_assistant,  value, class: "btn-check"
+							- symlabel = ("bring_assistant_" + soc.first).to_sym
+							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you smoke?
+
+				.row.mb-4
+					- yes_no.each do |soc|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if soc.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :smoke,  value, class: "btn-check"
+							- symlabel = ("smoke_" + soc.first).to_sym
+							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Please check any of the following you may have
+
+				.row.mb-4
+					- medical_conditions.each do |condition|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.check_box :medical_conditions, { multiple: true, class: "btn-check" }, condition.first, false
+							= f.label :medical_conditions, condition.last, value: condition.first, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				.form-group.mb-4
+					%legend
+						= f.label :other_health, "Describe any other health conditions "
+					= f.text_area :other_health, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				.form-group.mb-4
+					%legend
+						= f.label :medical_allergies, "Name any medical or environmental allergies (e.g. latex, aspirin, dogs, etc)"
+					= f.text_area :medical_allergies, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_meal_path(@camp, @application, @application.camp_application_meal), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"
+				

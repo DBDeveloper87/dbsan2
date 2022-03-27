@@ -1,0 +1,7 @@
+.container.mt-4
+	%h1 Camps and Retreats
+
+	= link_to "New Camp or Retreat", new_camp_path
+
+	- @camps.each do |camp|
+		%h2 #{link_to camp.title, camp_path(camp)}

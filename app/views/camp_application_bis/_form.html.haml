@@ -1,0 +1,42 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Background Information
+		
+		= form_with(model: [camp, application, bi]) do |f|
+
+			.form-group.mb-4
+				= f.label :about_you, "Please tell us a little more about yourself: How did you find out about this DeafBlind Retreat? Through friends, internet, or DB/Deaf service?"
+				= f.text_area :about_you, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+			
+			.form-group.mb-4
+				= f.label :past_camps, "Have you joined other DB Retreats or camps before? If yes, where?"
+				= f.text_area :past_camps, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+			
+			.form-group.mb-4
+				= f.label :active_community, "Do you have an active DB community in your area? If yes, please describe the community."
+				= f.text_area :active_community, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend What are your interests?  You can select more than one.  If one is not listed, please feel free to add others to the "Other interests" text field.
+
+				.row.mb-4
+					- camp_interests.each do |interest|
+						.col-md-4.d-grid.d-block.mb-2
+							= f.check_box :interests, { multiple: true, class: "btn-check" }, interest, false
+							= f.label :interests, interest, value: interest, class: "btn btn-outline-dark btn-lg text-start"
+
+				.form-floating.mb-4
+					= f.text_area :interests, placeholder: "Other interests", class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+					= f.label :interests, "Other interests"
+
+			.form-group.mb-4
+				= f.label :other_comments, "Any other comments you would like to add?"
+				= f.text_area :other_comments, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_pi_path(@camp, @application, @application.camp_application_pi), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

@@ -1,0 +1,91 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Emergency Contact
+
+		= form_with(model: [camp, application, contact]) do |f|
+			.form-floating.mb-4
+				= f.text_field :contact_full_name, placeholder: "Contact Full Name", class: "border border-dark form-control"
+				= f.label :contact_full_name, "Contact Full Name"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend What is the contact person's relationship to you?
+
+				.row.mb-4
+					- relationships.each do |relationship|
+						.d-grid.d-block.mb-2
+							= f.radio_button :contact_relationship,  relationship.first, class: "btn-check"
+							- symlabel = ("contact_relationship_" + relationship.first).to_sym
+							= f.label symlabel, relationship.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				= f.fields_for :phone_number, PhoneNumber.new do |pn|
+					%legend Emergency Contact Phone
+
+					.row
+						= pn.hidden_field :phone_type, value: "Emergency Phone"
+
+					.form-floating.mb-4
+						= pn.text_field :phone_number, maxlength: 16, placeholder: "Primary Phone", class: "border border-dark form-control", id: "primaryPhone"
+						= pn.label :phone_number, "Emergency Contact Phone"
+
+					.row.mb-4
+						- phone_service_types.each do |serv_type|
+							.col-md-4.d-grid.d-block.mb-2
+								= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+								= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+			
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_medical_path(@camp, @application, @application.camp_application_medical), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"
+
+:javascript
+	const isNumericInput = (event) => {
+	const key = event.keyCode;
+		return ((key >= 48 && key <= 57) || // Allow number line
+		(key >= 96 && key <= 105) // Allow number pad
+	);
+	};
+
+	const isModifierKey = (event) => {
+		const key = event.keyCode;
+		return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
+			(key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
+			(key > 36 && key < 41) || // Allow left, up, right, down
+			(
+				(event.ctrlKey === true || event.metaKey === true) &&
+				(key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+			)
+	};
+
+	const enforceFormat = (event) => {
+		if(!isNumericInput(event) && !isModifierKey(event)){
+			event.preventDefault();
+		}
+	};
+
+	const formatToPhone = (event) => {
+		if(isModifierKey(event)) {return;}
+
+		const input = event.target.value.replace(/\D/g,'').substring(0,10); // First ten digits of input only
+		const areaCode = input.substring(0,3);
+		const middle = input.substring(3,6);
+		const last = input.substring(6,10);
+
+		if(input.length > 6){event.target.value = `(${areaCode}) ${middle} - ${last}`;}
+		else if(input.length > 3){event.target.value = `(${areaCode}) ${middle}`;}
+		else if(input.length > 0){event.target.value = `(${areaCode}`;}
+	};
+
+	const inputElement1 = document.getElementById('primaryPhone');
+	inputElement1.addEventListener('keydown',enforceFormat);
+	inputElement1.addEventListener('keyup',formatToPhone);
+
+	const inputElement2 = document.getElementById('alternatePhone');
+	inputElement2.addEventListener('keydown',enforceFormat);
+	inputElement2.addEventListener('keyup',formatToPhone);
+
+									

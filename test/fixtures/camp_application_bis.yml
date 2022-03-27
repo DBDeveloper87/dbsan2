@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  about_you: MyText
+  past_camps: MyText
+  active_community: MyText
+  interests: MyText
+  other_comments: MyText
+  camp_application: one
+
+two:
+  about_you: MyText
+  past_camps: MyText
+  active_community: MyText
+  interests: MyText
+  other_comments: MyText
+  camp_application: two

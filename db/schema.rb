@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_225712) do
+ActiveRecord::Schema.define(version: 2022_03_25_130133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,6 +23,24 @@ ActiveRecord::Schema.define(version: 2022_02_03_225712) do
     t.boolean "published", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "address_type"
+    t.string "address_l1"
+    t.string "address_l2"
+    t.string "city"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "state_province_id", null: false
+    t.uuid "country_id", null: false
+    t.uuid "camp_application_pi_id", null: false
+    t.uuid "profile_id", null: false
+    t.string "zippostal"
+    t.index ["camp_application_pi_id"], name: "index_addresses_on_camp_application_pi_id"
+    t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["profile_id"], name: "index_addresses_on_profile_id"
+    t.index ["state_province_id"], name: "index_addresses_on_state_province_id"
   end
 
   create_table "board_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -77,6 +95,171 @@ ActiveRecord::Schema.define(version: 2022_02_03_225712) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "camp_application_bis", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "about_you"
+    t.text "past_camps"
+    t.text "active_community"
+    t.text "interests"
+    t.text "other_comments"
+    t.uuid "camp_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_bis_on_camp_application_id"
+  end
+
+  create_table "camp_application_c3s", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "agree"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_c3s_on_camp_application_id"
+  end
+
+  create_table "camp_application_ceus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.text "certifications"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_ceus_on_camp_application_id"
+  end
+
+  create_table "camp_application_covids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "vaccinated"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_covids_on_camp_application_id"
+  end
+
+  create_table "camp_application_emergencies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.string "contact_full_name"
+    t.string "contact_relationship"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_emergencies_on_camp_application_id"
+  end
+
+  create_table "camp_application_incs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.text "identity"
+    t.text "communication_pref"
+    t.text "receiv_signs"
+    t.text "dominant_hand"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_incs_on_camp_application_id"
+  end
+
+  create_table "camp_application_lodgings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "on_premises"
+    t.boolean "share_smoker"
+    t.boolean "difficulty_walking"
+    t.boolean "difficulty_stairs"
+    t.boolean "service_animal"
+    t.boolean "share_service_animal"
+    t.text "mobility_aids"
+    t.boolean "medical_device_charging"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_lodgings_on_camp_application_id"
+  end
+
+  create_table "camp_application_matchings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.text "work_with_type"
+    t.string "height"
+    t.string "describe_self"
+    t.text "activity_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_matchings_on_camp_application_id"
+  end
+
+  create_table "camp_application_matchnps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_matching_id", null: false
+    t.string "name_type"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_matching_id"], name: "index_camp_application_matchnps_on_camp_application_matching_id"
+  end
+
+  create_table "camp_application_meals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.string "dietary_lifestyle"
+    t.text "allergens"
+    t.text "dietary_restrictions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_meals_on_camp_application_id"
+  end
+
+  create_table "camp_application_medicals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "medical_policy"
+    t.boolean "bring_assistant"
+    t.boolean "smoke"
+    t.text "medical_conditions"
+    t.text "other_health"
+    t.text "medical_allergies"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_medicals_on_camp_application_id"
+  end
+
+  create_table "camp_application_permissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "agree"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_permissions_on_camp_application_id"
+  end
+
+  create_table "camp_application_pis", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "gender"
+    t.text "pronouns"
+    t.date "dob"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_pis_on_camp_application_id"
+  end
+
+  create_table "camp_application_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "kind"
+    t.text "description"
+    t.uuid "camp_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_id"], name: "index_camp_application_types_on_camp_id"
+  end
+
+  create_table "camp_applications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_id", null: false
+    t.uuid "user_id", null: false
+    t.string "status", default: "New Application -- In Progress", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "camp_application_type_id"
+    t.index ["camp_application_type_id"], name: "index_camp_applications_on_camp_application_type_id"
+    t.index ["camp_id"], name: "index_camp_applications_on_camp_id"
+    t.index ["user_id"], name: "index_camp_applications_on_user_id"
+  end
+
+  create_table "camps", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.datetime "start", precision: 6
+    t.datetime "end", precision: 6
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "unicode_flag"
     t.string "country_code"
@@ -104,6 +287,20 @@ ActiveRecord::Schema.define(version: 2022_02_03_225712) do
     t.boolean "has_virtual_space", default: false, null: false
     t.boolean "in_person", default: false, null: false
     t.boolean "registration_required", default: false, null: false
+  end
+
+  create_table "phone_numbers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "phone_type"
+    t.string "phone_number"
+    t.string "service_type"
+    t.uuid "camp_application_pi_id", null: false
+    t.uuid "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "camp_application_emergency_id"
+    t.index ["camp_application_emergency_id"], name: "index_phone_numbers_on_camp_application_emergency_id"
+    t.index ["camp_application_pi_id"], name: "index_phone_numbers_on_camp_application_pi_id"
+    t.index ["profile_id"], name: "index_phone_numbers_on_profile_id"
   end
 
   create_table "policies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -191,12 +388,36 @@ ActiveRecord::Schema.define(version: 2022_02_03_225712) do
     t.index ["virtual_space_id"], name: "index_zoom_meetings_on_virtual_space_id"
   end
 
+  add_foreign_key "addresses", "camp_application_pis"
+  add_foreign_key "addresses", "countries"
+  add_foreign_key "addresses", "profiles"
+  add_foreign_key "addresses", "state_provinces"
   add_foreign_key "bylaw_article_sections", "bylaw_articles"
   add_foreign_key "bylaw_article_subsections", "bylaw_article_sections"
   add_foreign_key "bylaw_article_subsections", "bylaw_articles"
   add_foreign_key "bylaw_articles", "bylaws"
+  add_foreign_key "camp_application_bis", "camp_applications"
+  add_foreign_key "camp_application_c3s", "camp_applications"
+  add_foreign_key "camp_application_ceus", "camp_applications"
+  add_foreign_key "camp_application_covids", "camp_applications"
+  add_foreign_key "camp_application_emergencies", "camp_applications"
+  add_foreign_key "camp_application_incs", "camp_applications"
+  add_foreign_key "camp_application_lodgings", "camp_applications"
+  add_foreign_key "camp_application_matchings", "camp_applications"
+  add_foreign_key "camp_application_matchnps", "camp_application_matchings"
+  add_foreign_key "camp_application_meals", "camp_applications"
+  add_foreign_key "camp_application_medicals", "camp_applications"
+  add_foreign_key "camp_application_permissions", "camp_applications"
+  add_foreign_key "camp_application_pis", "camp_applications"
+  add_foreign_key "camp_application_types", "camps"
+  add_foreign_key "camp_applications", "camp_application_types"
+  add_foreign_key "camp_applications", "camps"
+  add_foreign_key "camp_applications", "users"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
+  add_foreign_key "phone_numbers", "camp_application_emergencies"
+  add_foreign_key "phone_numbers", "camp_application_pis"
+  add_foreign_key "phone_numbers", "profiles"
   add_foreign_key "profiles", "users"
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "virtual_spaces", "events"

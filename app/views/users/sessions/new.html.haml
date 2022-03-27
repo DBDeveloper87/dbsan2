@@ -1,23 +1,24 @@
 .container.mt-4
   .col-md-4.mx-auto
-    %h1.text-center Log In
+    %h1.text-center Login
     %p #{notice}
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       
       .input-group.flex-nowrap.mb-4
         .input-group-text.bg-dark
-          %i.text-light.bi.bi-envelope
+          %i.text-light.bi.bi-envelope{aria:{hidden: "true"}}
         .form-floating.flex-grow-1
+          = f.label :email, "Email Address", class: "visually-hidden"
           = f.email_field :email, placeholder: "Email Address", class: "form-control border border-dark"
-          = f.label :email, "Email Address"
-
+          %label{for: "email", aria:{hidden: "true"}} Email Address
+          
       .mb-4
         .input-group
           .input-group-text.bg-dark
-            %i.text-light.bi.bi-key
+            %i.text-light.bi.bi-key{aria:{hidden: "true"}}
           .form-floating.flex-grow-1
             = f.password_field :password, placeholder: "Password", class: "form-control border border-dark"
-            = f.label :password, "Password"
+            %label{for: "password", aria:{hidden: "true"}} Password
         .text-end #{link_to "Forgot password?", new_password_path(resource_name)}
       
       - if devise_mapping.rememberable?
@@ -28,6 +29,6 @@
           
       .row.mb-4
         = button_tag(class: "btn btn-primary btn-lg") do
-          %i.bi.bi-box-arrow-in-right
+          %i.bi.bi-box-arrow-in-right{aria:{hidden: "true"}}
           %span Login
         .text-center Don't have an account yet?  #{link_to "Create account", new_user_registration_path}.

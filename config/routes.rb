@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  resources :camps do
+    resources :camp_applications do
+      resources :camp_application_pis
+      resources :camp_application_bis
+      resources :camp_application_incs
+      resources :camp_application_matchings
+      resources :camp_application_lodgings
+      resources :camp_application_meals
+      resources :camp_application_medicals
+      resources :camp_application_emergencies
+      resources :camp_application_c3s
+      resources :camp_application_permissions
+      resources :camp_application_covids
+      get 'next_steps', to: 'camp_applications#next_steps'
+    end
+    resources :camp_application_types
+  end
+  
   # Get Time Zone
   post 'events/set_time_zone', to: 'events#set_time_zone'
 

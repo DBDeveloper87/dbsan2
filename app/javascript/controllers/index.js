@@ -8,3 +8,5 @@ import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 import TextareaAutogrow from "stimulus-textarea-autogrow"
 application.register("textarea-autogrow", TextareaAutogrow)
+import NestedForm from "stimulus-rails-nested-form"
+application.register("nested-form", NestedForm)

@@ -79,5 +79,5 @@ config.action_mailer.smtp_settings = {
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  config.hosts << 'f2fc-66-41-5-253.ngrok.io'
+  config.hosts << 'dcb5-66-41-5-253.ngrok.io'
 end

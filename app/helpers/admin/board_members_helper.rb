@@ -20,6 +20,7 @@ module Admin::BoardMembersHelper
 			"Ve/Ver/Vis",
 			"Tey/Ter/Tem",
 			"E/Em/Eir",
+			"Name Only",
 			"Prefer not to disclose"			
 		]
 	end

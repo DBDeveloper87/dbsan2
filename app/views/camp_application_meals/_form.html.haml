@@ -1,0 +1,38 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Meals
+
+		= form_with(model: [camp, application, meal]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend What dietary lifestyle do you follow?
+
+				.row.mb-4
+					- dietary_lifestyle.each do |lifestyle|
+						.d-grid.d-block.mb-2
+							= f.radio_button :dietary_lifestyle,  lifestyle.first, class: "btn-check"
+							- symlabel = ("dietary_lifestyle_" + lifestyle.first).to_sym
+							= f.label symlabel, lifestyle.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you have any of the following food allergens or sensitivities?  (You can select more than one)
+
+				.row.mb-4
+					- allergen_sensitive.each do |allergen|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.check_box :allergens, { multiple: true, class: "btn-check" }, allergen.first, false
+							= f.label :allergens, allergen.last, value: allergen.first, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				.form-group.mb-4
+					%legend
+						= f.label :dietary_restrictions, "Do you have any other dietary restrictions?  If yes, please explain."
+					= f.text_area :dietary_restrictions, class: "border border-dark form-control", height: "100px", data:{controller: "textarea-autogrow"}
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_lodging_path(@camp, @application, @application.camp_application_lodging), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"
+				

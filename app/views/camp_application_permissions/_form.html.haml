@@ -1,0 +1,33 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Permissions
+
+		%p I acknowledge, agree, and do hereby release from all liability and hold harmless DeafBlind Retreat at Isola Bella and any of its staff or representatives. This liability release is for any and all liability for personal injuries including death and property losses or damage in connection with any activity or accommodation of the above mentioned business. The undersigned does hereby further agree to abide by all the rules and regulations that are presented by DeafBlind Retreat at Isola Bella.
+
+		%p I consent to receive emergency medical treatment in event of illness or injury and release and forever discharge above mentioned Business from any liability or claim whatsoever what arises or may later arise on account of medical services rendered in connection with an emergency during participation in the Program.
+
+		%p I hereby irrevocably authorize the above mentioned business to edit, alter, copy, exhibit, publish, or distribute any photos, images, videos, or audio recordings for any lawful purpose. I waive any claims or any right to royalties or other compensation arising or related to the use of the photos, images, videos, or audio recordings.
+		
+		= form_with(model: [camp, application, permission]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend I have read and grant DBRIB permission.
+
+				.row.mb-4
+					- agree_or_decline.each do |aod|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if aod.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :agree,  value, class: "btn-check"
+							- symlabel = ("agree_" + aod.first).to_sym
+							= f.label symlabel, aod.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_c3_path(@camp, @application, @application.camp_application_c3), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

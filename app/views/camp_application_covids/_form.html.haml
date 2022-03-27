@@ -1,0 +1,31 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 COVID-19 Vaccination
+
+		%p For the health and safety of all people at the Retreat, only people that are full vaccinated will be allowed to be on Isola Bella. Fully vaccinated means having one shot of Johnson & Johnson OR two shots of either Moderna or Pfizer. Upon being accepted, we will schedule a video meeting over Facetime, Zoom, or VP to verify your vaccination status.
+		
+		= form_with(model: [camp, application, covid]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Have you been vaccinated against COVID-19?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :vaccinated,  value, class: "btn-check"
+							- symlabel = ("vaccinated_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_permission_path(@camp, @application, @application.camp_application_permission), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

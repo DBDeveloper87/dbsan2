@@ -1,0 +1,29 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 #{@camp.title}
+
+		- Time.use_zone("Eastern Time (US & Canada)") do
+			%p.text-muted 
+				= @camp.start.strftime("%A, %B %d, %Y %l:%M %p")
+				to 
+				= @camp.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")
+		%p #{notice}
+		= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+
+		%h2.mt-4 Description
+		%p #{@camp.description}
+
+		%h2 Application Types
+		= link_to "Add Type", new_camp_camp_application_type_path(@camp)
+		- @camp.camp_application_types.each do |type|
+			%p #{type.kind}
+		%h2 Applications
+		- @applications.each do |app|
+			.row
+				.col-md-4
+					= app.status
+				.col-md-6
+					= app.user.profile.first_name
+					= app.user.profile.last_name
+				.col-md-2
+					= app.camp_application_type.kind

@@ -1,0 +1,50 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Identity and Communication
+
+		= form_with(model: [camp, application, inc]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend What describes you best? Select all the apply to you.
+
+				.row.mb-4
+					- identify_as.each do |identity|
+						.d-grid.d-block.mb-2
+							= f.check_box :identity, { multiple: true, class: "btn-check" }, identity, false
+							= f.label :identity, identity, value: identity, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend How do you prefer to communicate?  (You can select more than one)
+
+				.row.mb-4
+					- comm_prefs.each do |pref|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.check_box :communication_pref, { multiple: true, class: "btn-check" }, pref.first, false
+							= f.label :communication_pref, pref.last, value: pref.first, class: "btn btn-outline-dark btn-lg text-start"
+	
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend When using tactile or ProTactile sign language, which hand do you primarily receive signs with?
+
+				.row.mb-4
+					- tactile_receptive_hand.each do |hand|
+						.col-md-4.d-grid.d-block.mb-2
+							= f.radio_button :receiv_signs,  hand.downcase, class: "btn-check"
+							- symlabel = ("receiv_signs_" + hand.downcase).to_sym
+							= f.label symlabel, hand, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Which hand do you primarily use as your dominant sign hand?
+
+				.row.mb-4
+					- hands.each do |hand|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.radio_button :dominant_hand,  hand.downcase, class: "btn-check"
+							- symlabel = ("dominant_hand_" + hand.downcase).to_sym
+							= f.label symlabel, hand, class: "btn btn-outline-dark btn-lg text-start"
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_bi_path(@camp, @application, @application.camp_application_bi), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

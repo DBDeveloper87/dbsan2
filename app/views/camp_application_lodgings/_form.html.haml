@@ -1,0 +1,127 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Lodging Information
+
+		= form_with(model: [camp, application, lodging]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Will you be staying on the property or commuting each day? 
+
+				.row.mb-4
+					- stay_or_commute.each do |soc|
+						.col-md-6.d-grid.d-block.mb-2
+							- value = nil
+							- if soc.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :on_premises,  value, class: "btn-check"
+							- symlabel = ("on_premises_" + soc.first).to_sym
+							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Will you share a cabin with a smoker?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :share_smoker,  value, class: "btn-check"
+							- symlabel = ("share_smoker_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you have difficulty walking?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :difficulty_walking,  value, class: "btn-check"
+							- symlabel = ("difficulty_walking_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you have difficulty with stairs?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :difficulty_stairs,  value, class: "btn-check"
+							- symlabel = ("difficulty_stairs_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Will you bring your hearing or guide dog?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :service_animal,  value, class: "btn-check"
+							- symlabel = ("service_animal_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Will you share a cabin with a hearing or guide dog?
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :share_service_animal,  value, class: "btn-check"
+							- symlabel = ("share_service_animal_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you use any mobility aids?
+
+				.row.mb-4
+					- mobility_aids.each do |aid|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.radio_button :mobility_aids,  aid.first, class: "btn-check"
+							- symlabel = ("mobility_aids_" + aid.first).to_sym
+							= f.label symlabel, aid.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Do you have medical devices that need to be plugged in overnight? (e.g. respirator)
+
+				.row.mb-4
+					- yes_no.each do |tof|
+						.col-6.d-grid.d-block.mb-2
+							- value = nil
+							- if tof.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :medical_device_charging,  value, class: "btn-check"
+							- symlabel = ("medical_device_charging_" + tof.first).to_sym
+							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_matching_path(@camp, @application, @application.camp_application_matching), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

@@ -1,22 +1,28 @@
-%nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top.d-print-none
-	.container
-		.justify-content-left
-			%a.navbar-brand{href: "/"} DBSAN
-		.justified-content-center
-			%ul.navbar-nav.me-auto.mb-2.mb-lg-0
-				%li.nav-item
-					= link_to "Events", root_path, class: "nav-link"
-				%li.nav-item
-					= link_to "Videos", root_path, class: "nav-link"
-				%li.nav-item
-					= link_to "About", about_path, class: "nav-link"
-				%li.nav-item
-					= link_to "Contact", contact_path, class: "nav-link"
-				
+%nav.navbar.bg-dark.navbar-dark.sticky-top.d-print-none.d-md-none
+	.container-fluid
+		.justify-content-start
+			%button.navbar-toggler{type: "button", data:{bs:{toggle: "offcanvas", target: "#offcanvasNavbar"}}, aria:{controls: "offcanvasNavbar", label: "Menu"}}
+				%span.navbar-toggler-icon
+			%a.navbar-brand{href: "#"} DBSAN
+			.offcanvas.offcanvas-start{tabindex: "-1", id: "offcanvasNavbar", aria:{labelledby: "offcanvasNavbarLabel"}}
+				.offcanvas-header
+					%span.offcanvas-title.text-dark{id: "offcanvasNavbarLabel"} DBSAN Menu
+					%button.btn-close.text-reset{type: "button", data:{bs:{dismiss: "offcanvas"}}, aria:{label: "Close"}}
+				.offcanvas-body
+					%ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+						%li.nav-item.mb-0
+							= link_to "Events", root_path, class: "nav-link text-dark"
+						%li.nav-item.mb-0
+							= link_to "Videos", root_path, class: "nav-link text-dark"
+						%li.nav-item.mb-0
+							= link_to "About", about_path, class: "nav-link text-dark"
+						%li.nav-item.mb-0
+							= link_to "Contact", contact_path, class: "nav-link text-dark"
+	
 		.justify-content-end
 			- if user_signed_in?
 				%ul.nav
-					%li.nav-item.dropdown
+					%li.nav-item.dropdown.mb-0
 						%a.nav-link.dropdown-toggle.text-light{data:{bs:{toggle: "dropdown"}}, href: "#", role: "button", aria:{expanded: "false"}} #{current_user.profile.first_name}
 						%ul.dropdown-menu.dropdown-menu-end.border.border-dark
 							%li.mb-1
@@ -24,10 +30,49 @@
 							%li.mb-1
 								= button_to "Log out", destroy_user_session_path, class:"dropdown-item", method: :delete, data: { turbo: "false" }
 							
-
+		-#.justified-content-center.text-light
+		-#	%ul.navbar-nav
+				-#%li.nav-item.mb-0
+				-#	= link_to "Events", root_path, class: "nav-link"
+				-#%li.nav-item.mb-0
+				-#	= link_to "Videos", root_path, class: "nav-link"
+				-#%li.nav-item.mb-0
+				-#	= link_to "About", about_path, class: "nav-link"
+				-#%li.nav-item.mb-0
+				-#	= link_to "Contact", contact_path, class: "nav-link"
+		
+				
+		
 			-#= link_to 'Donate', donate_path, class: "btn btn-primary", role: "button"
 			
 			-#- if admin?
 				-#= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary", role: "button"
 			-#- if user_signed_in?
 				-#= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-primary", role: "button"
+
+%nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top.d-print-none.d-none.d-sm-none.d-md-block
+	.container
+		.justify-content-start
+			%a.navbar-brand{href: "#"} DBSAN
+		.justify-content-center.mx-auto
+			%ul.navbar-nav
+				%li.nav-item.mb-0
+					= link_to "Events", root_path, class: "nav-link text-light"
+				%li.nav-item.mb-0
+					= link_to "Videos", root_path, class: "nav-link text-light"
+				%li.nav-item.mb-0
+					= link_to "About", about_path, class: "nav-link text-light"
+				%li.nav-item.mb-0
+					= link_to "Contact", contact_path, class: "nav-link text-light"
+	
+		.justify-content-end
+			- if user_signed_in?
+				%ul.nav
+					%li.nav-item.dropdown.mb-0
+						%a.nav-link.dropdown-toggle.text-light{data:{bs:{toggle: "dropdown"}}, href: "#", role: "button", aria:{expanded: "false"}} #{current_user.profile.first_name}
+						%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+							%li.mb-1
+								= button_to "Edit Account", edit_user_registration_path(current_user), class: "dropdown-item border", method: :get
+							%li.mb-1
+								= button_to "Log out", destroy_user_session_path, class:"dropdown-item", method: :delete, data: { turbo: "false" }
+						

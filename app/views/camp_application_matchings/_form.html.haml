@@ -1,0 +1,107 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Matching
+
+		%p 
+			You are applying as a <strong>#{app_type}</strong>. On this screen, the answers below will help us match you with our 
+			- camp_app_types.each do |type|
+				- if type.kind.downcase != app_type
+					%strong #{type.kind.downcase.pluralize}
+			and we will try our best.
+
+		= form_with(model: [camp, application, match]) do |f|
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend 
+					Please select all the types of 
+					- camp_app_types.each do |type|
+						- if type.kind.downcase != app_type
+							%strong #{type.kind.downcase.pluralize}
+					you would work with?
+
+				.row.mb-4
+					- matchup_types.each do |type|
+						.col-md-4.d-grid.d-block.mb-2
+							= f.check_box :work_with_type, { multiple: true, class: "btn-check" }, type, false
+							= f.label :work_with_type, type, value: type, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend How tall are you?
+
+				.row.mb-4
+					- self_height.each do |height|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.radio_button :height,  height.first, class: "btn-check"
+							- symlabel = ("height_" + height.first).to_sym
+							= f.label symlabel, height.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend How would you generally describe yourself?
+
+				.row.mb-4
+					- self_described.each do |describe|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.radio_button :describe_self,  describe.first, class: "btn-check"
+							- symlabel = ("describe_self_" + describe.first).to_sym
+							= f.label symlabel, describe.last, class: "btn btn-outline-dark btn-lg text-start"
+			
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend What activities do you like?
+					
+				.row.mb-4
+					- activities.each do |activity|
+						.d-grid.d-block.mb-2
+							= f.check_box :activity_type, { multiple: true, class: "btn-check" }, activity, false
+							= f.label :activity_type, activity, value: activity, class: "btn btn-outline-dark btn-lg text-start"
+
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend 
+					Names of your preferred 
+					- camp_app_types.each do |type|
+						- if type.kind.downcase != app_type
+							%strong #{type.kind.downcase.pluralize}
+					if any. We will try to match you with your preferred 
+					- camp_app_types.each do |type|
+						- if type.kind.downcase != app_type
+							%strong #{type.kind.downcase.pluralize}
+					but we cannot promise you will have those people, or they will be at the retreat. 
+
+				.mb-4{data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }}
+					%template{data:{nested:{form:{target: "template"}}}}
+						= f.fields_for :camp_application_matchnps, CampApplicationMatchnp.new, child_index: "NEW_RECORD" do |matchnp_fields|
+							= render "matchnp_form", f: matchnp_fields, name_type: "preferred"
+    			
+					= f.fields_for :camp_application_matchnps do |matchnp_fields|
+						= render "matchnp_form", f: matchnp_fields, name_type: "preferred"
+
+					%div{data:{nested:{form:{target: "target"}}}}
+
+					%button{type: "button", class: "btn btn-primary btn-lg", data:{action: "nested-form#add"}} Add Name
+  
+			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend 
+					Names of 
+					- camp_app_types.each do |type|
+						- if type.kind.downcase != app_type
+							%strong #{type.kind.downcase.pluralize}
+					you prefer NOT to be matched with, if any. 
+
+				.mb-4{data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }}
+					%template{data:{nested:{form:{target: "template"}}}}
+						= f.fields_for :camp_application_matchnps, CampApplicationMatchnp.new, child_index: "NEW_RECORD" do |matchnp_fields|
+							= render "matchnp_form", f: matchnp_fields, name_type: "not work with"
+    			
+					= f.fields_for :camp_application_matchnps do |matchnp_fields|
+						= render "matchnp_form", f: matchnp_fields, name_type: "not work with"
+
+					%div{data:{nested:{form:{target: "target"}}}}
+
+					%button{type: "button", class: "btn btn-primary btn-lg", data:{action: "nested-form#add"}} Add Name 
+			
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", edit_camp_camp_application_camp_application_inc_path(@camp, @application, @application.camp_application_inc), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"
+				

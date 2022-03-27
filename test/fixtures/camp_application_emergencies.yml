@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  camp_application: one
+  contact_full_name: MyString
+  contact_relationship: MyString
+
+two:
+  camp_application: two
+  contact_full_name: MyString
+  contact_relationship: MyString

@@ -1,0 +1,10 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Application Type
+		= form_with(model: [@camp, @type]) do |f|
+			.form-floating.mb-4
+				= f.text_field :kind, placeholder: "Application Type", class: "border border-dark form-control"
+				= f.label :kind, "Application Type"
+
+			.row.mb-4
+				= f.submit "add", class: "btn btn-primary btn-lg"

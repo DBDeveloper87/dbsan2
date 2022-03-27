@@ -1,0 +1,18 @@
+.nested-form-wrapper{data:{new:{record: "#{ f.object.new_record? }"}}}
+  .row.mb-2
+    %div
+      = f.hidden_field :name_type, value: name_type
+    .col-md-5
+      .form-floating
+        = f.text_field :first_name, placeholder: "First Name", class: "border border-dark form-control"
+        = f.label :first_name, "First Name"
+    
+    .col-md-5
+      .form-floating
+        = f.text_field :last_name, placeholder: "Last Name", class: "border border-dark form-control"
+        = f.label :last_name, "Last Name"
+    
+    .col-md-2
+      %button{type: "button", class: "btn btn-primary btn-lg", data:{action: "nested-form#remove"}} Remove
+  
+  = f.hidden_field :_destroy
