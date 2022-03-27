@@ -65,64 +65,8 @@ Country.create!([
 ])
 
 
-CampApplicationEmergency.create!([
-  {camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629", contact_full_name: "", contact_relationship: nil},
-  {camp_application_id: "bdfd97c4-c694-403e-af6a-8022876d8e87", contact_full_name: "", contact_relationship: nil},
-  {camp_application_id: "56c97f81-fbd6-4799-beb0-88e1cf44eeec", contact_full_name: "", contact_relationship: nil}
-])
-CampApplicationMatchnp.create!([
-  {camp_application_matching_id: "dfdcfdef-9a78-4813-b062-787397afb7df", name_type: nil, first_name: "Patrick", last_name: nil},
-  {camp_application_matching_id: "dfdcfdef-9a78-4813-b062-787397afb7df", name_type: nil, first_name: "ThatWeirdGuy", last_name: nil},
-  {camp_application_matching_id: "38088b31-1276-4ffe-b674-d1ed72f83c7a", name_type: nil, first_name: "asdfas", last_name: nil}
-])
 
-Profile.create!([
-  {first_name: "Patrick", last_name: "Vellia", gender_string: nil, pronouns: nil, user_id: "01552077-3621-4194-897a-3939f9919450"},
-  {first_name: "Riss", last_name: "Leitzke", gender_string: nil, pronouns: nil, user_id: "90cde579-644b-4f81-9eab-1ed35d4154d0"},
-  {first_name: "James Paul", last_name: "Beldon III", gender_string: nil, pronouns: nil, user_id: "29917995-bd7e-4abd-a5f0-44c5d9aafe48"},
-  {first_name: "Jesse", last_name: "Stanley", gender_string: nil, pronouns: nil, user_id: "8ad9410a-131b-4c43-af7e-82ce4626db64"},
-  {first_name: "Patrick", last_name: "Vellia", gender_string: nil, pronouns: nil, user_id: "1a8895ed-0666-4cb9-9a2c-bf841d930ad5"},
-  {first_name: "Erin", last_name: "Bradford", gender_string: nil, pronouns: nil, user_id: "9f50d956-41bb-4a9e-ae6f-2fd6a6939b6e"},
-  {first_name: "Julie", last_name: "Pleski", gender_string: nil, pronouns: nil, user_id: "2647d211-602a-41af-a8f0-56ed75653e28"},
-  {first_name: "Anne", last_name: "Anderson", gender_string: nil, pronouns: nil, user_id: "7acb56f6-f4c5-421f-a072-92334fd7ec46"},
-  {first_name: "Anna", last_name: "Testersđóttir", gender_string: nil, pronouns: nil, user_id: "92c862d7-e076-46a0-a4af-3b2b92c7f481"},
-  {first_name: "asdf", last_name: "asdf", gender_string: nil, pronouns: nil, user_id: "da8fdca1-91dd-4b71-b973-839266da0d82"}
-])
-VirtualSpace.create!([
-  {event_id: "423778b9-dc81-4183-9363-95106f8fb645"},
-  {event_id: "5ae59ebc-dbd6-4206-8a8a-61de0c01508c"},
-  {event_id: "15ea4c46-b995-4c70-bf26-35f1e7dee753"}
-])
-CampApplicationBi.create!([
-  {about_you: nil, past_camps: nil, active_community: "NCDBA", interests: nil, other_comments: "", camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629"},
-  {about_you: nil, past_camps: nil, active_community: "Yes, including members of DBSAN", interests: nil, other_comments: "n/a", camp_application_id: "38ebd91e-e274-44c2-8191-24b1092c5918"},
-  {about_you: nil, past_camps: nil, active_community: "test", interests: nil, other_comments: "", camp_application_id: "bdfd97c4-c694-403e-af6a-8022876d8e87"},
-  {about_you: nil, past_camps: nil, active_community: "", interests: nil, other_comments: "", camp_application_id: "56c97f81-fbd6-4799-beb0-88e1cf44eeec"}
-])
-CampApplicationMatching.create!([
-  {camp_application_id: "bdfd97c4-c694-403e-af6a-8022876d8e87", work_with_type: nil, height: nil, describe_self: nil, activity_type: nil},
-  {camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629", work_with_type: nil, height: nil, describe_self: nil, activity_type: nil},
-  {camp_application_id: "38ebd91e-e274-44c2-8191-24b1092c5918", work_with_type: nil, height: nil, describe_self: nil, activity_type: nil},
-  {camp_application_id: "8a6429cb-bbfa-4fcc-8630-882f0b5cec2e", work_with_type: nil, height: nil, describe_self: nil, activity_type: nil},
-  {camp_application_id: "56c97f81-fbd6-4799-beb0-88e1cf44eeec", work_with_type: nil, height: nil, describe_self: nil, activity_type: nil}
-])
-CampApplicationPermission.create!([
-  {camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629", agree: true},
-  {camp_application_id: "bdfd97c4-c694-403e-af6a-8022876d8e87", agree: true},
-  {camp_application_id: "56c97f81-fbd6-4799-beb0-88e1cf44eeec", agree: false}
-])
-CampApplicationMeal.create!([
-  {camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629", dietary_lifestyle: nil, allergens: nil, dietary_restrictions: nil},
-  {camp_application_id: "bdfd97c4-c694-403e-af6a-8022876d8e87", dietary_lifestyle: "omnivore", allergens: nil, dietary_restrictions: nil},
-  {camp_application_id: "38ebd91e-e274-44c2-8191-24b1092c5918", dietary_lifestyle: "omnivore", allergens: nil, dietary_restrictions: nil},
-  {camp_application_id: "56c97f81-fbd6-4799-beb0-88e1cf44eeec", dietary_lifestyle: "omnivore", allergens: nil, dietary_restrictions: nil}
-])
-SocialNetwork.create!([
-  {name: "Twitter", icon_class: "bi bi-twitter", url: "https://twitter.com/official_dbsan"},
-  {name: "Facebook", icon_class: "bi bi-facebook", url: "https://www.facebook.com/groups/deafblindsupportandaccessnetwork/"},
-  {name: "TikTok", icon_class: "bi bi-tiktok", url: "https://www.tiktok.com/@official.dbsan"},
-  {name: "Instagram", icon_class: "bi bi-instagram", url: "https://www.instagram.com/official.dbsan/"}
-])
+
 CampApplicationPi.create!([
   {camp_application_id: "0329ad6a-500d-407e-a4c4-16eb0b652629", first_name: "Erin", last_name: "Bradford", gender: nil, pronouns: nil, dob: nil},
   {camp_application_id: "38ebd91e-e274-44c2-8191-24b1092c5918", first_name: "Anne", last_name: "Anderson", gender: nil, pronouns: nil, dob: nil},
