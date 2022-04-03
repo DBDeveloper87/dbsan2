@@ -1,0 +1,20 @@
+- counties = @counties
+.form-floating.county{ data:{select:{filter:{target: "counties"}}} }
+	-#- if counties.empty?
+		-#%select.form-select.form-select-lg.border.border-dark{required: "required", name: "camp_application_pi[address_attributes][county_id]",  id: "camp_application_pi_address_attributes_county_id", disabled: "true"}
+	-#- if !pi.nil? and !pi.address.nil?
+		-#- current_state = pi.address.county.state_province_id
+		-#- current_state = StateProvince.find(current_state)
+		-#- counties = current_state.counties.all
+		
+	%select.form-select.form-select-lg.border.border-dark{required: "required", name: "camp_application_pi[address_attributes][county_id]",  id: "camp_application_pi_address_attributes_county_id"}
+		- if !counties.empty?
+			%option{value: ""} Choose One. . . 
+			- counties.each do |c|
+				-#- if c.id == pi.address.county
+					-#%option{value: county.id, selected: true} #{county.name}
+				-#- else
+				%option{value: c.id} #{c.name}
+					
+
+	%label{for: "camp_application_pi_address_attributes_county_id"} County

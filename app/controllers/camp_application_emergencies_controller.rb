@@ -4,7 +4,11 @@ class CampApplicationEmergenciesController < ApplicationController
 	before_action :set_emergency, only: [:edit, :update]
 
 	def new
-		@contact = @application.build_camp_application_emergency
+		if !@application.camp_application_emergency.nil?
+			redirect_to edit_camp_camp_application_camp_application_emergency_path(@camp, @application, @application.camp_application_emergency)
+		else
+			@contact = @application.build_camp_application_emergency
+		end
 	end
 
 	def edit
@@ -15,7 +19,7 @@ class CampApplicationEmergenciesController < ApplicationController
 
 		respond_to do |format|
 			if @contact.save
-				format.html {redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application)}
+				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
 			else
 				render :new
 			end
@@ -25,11 +29,7 @@ class CampApplicationEmergenciesController < ApplicationController
 	def update
 		respond_to do |format|
 			if @contact.update(emergency_params)
-				if !@application.camp_application_c3.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application, @application.camp_application_c3)}
-				elsif @application.camp_application_c3.nil? 
-					format.html {redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application)}
-				end
+				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
 			else
 				render :edit
 			end
@@ -49,6 +49,6 @@ class CampApplicationEmergenciesController < ApplicationController
 		end
 
 		def emergency_params
-			params.require(:camp_application_emergency).permit(:contact_full_name)
+			params.require(:camp_application_emergency).permit(:contact_full_name, :contact_relationship)
 		end
 end

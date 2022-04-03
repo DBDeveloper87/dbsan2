@@ -1,0 +1,7 @@
+- if current_user.profile.addresses.where(address_type: "Primary Address").present?
+	- this_method = pi.address
+- else
+	- this_method = pi.build_address
+	
+= render "/admin/addresses/address", f: f, states: @states, counties: @counties, this_method: this_method, pi: pi
+

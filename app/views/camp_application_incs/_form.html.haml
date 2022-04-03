@@ -3,7 +3,7 @@
 		%h1 Identity and Communication
 
 		= form_with(model: [camp, application, inc]) do |f|
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend What describes you best? Select all the apply to you.
 
 				.row.mb-4
@@ -12,7 +12,7 @@
 							= f.check_box :identity, { multiple: true, class: "btn-check" }, identity, false
 							= f.label :identity, identity, value: identity, class: "btn btn-outline-dark btn-lg text-start"
 
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend How do you prefer to communicate?  (You can select more than one)
 
 				.row.mb-4
@@ -21,7 +21,7 @@
 							= f.check_box :communication_pref, { multiple: true, class: "btn-check" }, pref.first, false
 							= f.label :communication_pref, pref.last, value: pref.first, class: "btn btn-outline-dark btn-lg text-start"
 	
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend When using tactile or ProTactile sign language, which hand do you primarily receive signs with?
 
 				.row.mb-4
@@ -31,7 +31,7 @@
 							- symlabel = ("receiv_signs_" + hand.downcase).to_sym
 							= f.label symlabel, hand, class: "btn btn-outline-dark btn-lg text-start"
 
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Which hand do you primarily use as your dominant sign hand?
 
 				.row.mb-4
@@ -44,7 +44,7 @@
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_camp_application_bi_path(@camp, @application, @application.camp_application_bi), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_bi_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"

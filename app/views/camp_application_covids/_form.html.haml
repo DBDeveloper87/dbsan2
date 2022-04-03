@@ -1,31 +1,67 @@
 .container.mt-4
-	.col-md-8.mx-auto
+	.col-md-8.mx-auto{data:{controller: "covid"}}
 		%h1 COVID-19 Vaccination
 
 		%p For the health and safety of all people at the Retreat, only people that are full vaccinated will be allowed to be on Isola Bella. Fully vaccinated means having one shot of Johnson & Johnson OR two shots of either Moderna or Pfizer. Upon being accepted, we will schedule a video meeting over Facetime, Zoom, or VP to verify your vaccination status.
 		
 		= form_with(model: [camp, application, covid]) do |f|
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Have you been vaccinated against COVID-19?
 
 				.row.mb-4
-					- yes_no.each do |tof|
-						.col-6.d-grid.d-block.mb-2
-							- value = nil
-							- if tof.first == "true"
-								- value = true
-							- else
-								- value = false
-							= f.radio_button :vaccinated,  value, class: "btn-check"
-							- symlabel = ("vaccinated_" + tof.first).to_sym
-							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+					.col-6.d-grid.d-block.mb-2
+						= f.radio_button :vaccinated,  true, class: "btn-check", data:{action: 'covid#showVaccinationTypes'}
+						= f.label :vaccinated_true, "Agree", class: "btn btn-outline-dark btn-lg text-start"
+				
+					.col-6.d-grid.d-block.mb-2
+						= f.radio_button :vaccinated,  false, class: "btn-check" , data:{action: 'covid#hideVaccinationTypes'}
+						= f.label :vaccinated_false, "Disagree", class: "btn btn-outline-dark btn-lg text-start"
 			
+			.d-none{data:{covid:{target: "vaccinationtypes"}}}
+				.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+					%legend What vaccinations have you received?
+					.row.mb-4
+						.col-12.d-grid.d-block.mb-2
+							= f.check_box :vaccination_type, { multiple: true, class: "btn-check", data:{action: 'covid#showFirstShot'}  }, "One shot of Johnson & Johnson", false
+							= f.label :vaccination_type, "One shot of Johnson & Johnson", value: "One shot of Johnson & Johnson", class: "btn btn-outline-dark btn-lg text-start"
+					
+						.col-12.d-grid.d-block.mb-2
+							= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "One shot of Pfizer or Moderna", false
+							= f.label :vaccination_type, "One shot of Pfizer or Moderna", value: "One shot of Pfizer or Moderna", class: "btn btn-outline-dark btn-lg text-start"
+					
+						.col-12.d-grid.d-block.mb-2
+							= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "Two shots of Pfizer or Moderna", false
+							= f.label :vaccination_type, "Two shots of Pfizer or Moderna", value: "Two shots of Pfizer or Moderna", class: "btn btn-outline-dark btn-lg text-start"
+					
+						.col-12.d-grid.d-block.mb-2
+							= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "Booster shot", false
+							= f.label :vaccination_type, "Booster shot", value: "Booster shot", class: "btn btn-outline-dark btn-lg text-start"
+				
+				.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+					%legend Date of first shot
+
+					.input-group.mb-4
+						= f.date_select :first_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+				
+				.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+					%legend Date of second shot
+
+					.input-group.mb-4
+						= f.date_select :second_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+				
+				.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+					%legend Date of booster shot
+
+					.input-group.mb-4
+						= f.date_select :booster_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+					
 			
+		
 
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_camp_application_permission_path(@camp, @application, @application.camp_application_permission), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_permission_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"

@@ -1,0 +1,12 @@
+.form-floating.mb-4
+	- current_country = pi.address.state_province.country_id
+		
+	%select.form-select.form-select-lg.border.border-dark{required: "required", id: "camp_application_pi_address_attributes_country_id", data:{action: "select-filter#updateStates"}}
+		%option{value: " "} Choose One. . . 
+		- Country.all.each do |c|
+			- if c.id == current_country
+				%option{value: c.id, selected: true} #{sanitize(c.unicode_flag)} #{c.name} (#{c.country_code})
+			- else
+				%option{value: c.id} #{sanitize(c.unicode_flag)} #{c.name} (#{c.country_code})
+	%label{for: "camp_application_pi_address_attributes_country_id" } Country / Region
+	

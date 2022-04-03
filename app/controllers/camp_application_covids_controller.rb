@@ -4,7 +4,11 @@ class CampApplicationCovidsController < ApplicationController
 	before_action :set_covid, only: [:edit, :update]
 
 	def new
-		@covid = @application.build_camp_application_covid
+		if !@application.camp_application_covid.nil?
+			redirect_to edit_camp_camp_application_camp_application_covid_path(@camp, @application, @application.camp_application_covid)
+		else
+			@covid = @application.build_camp_application_covid
+		end
 	end
 
 	def edit
@@ -14,8 +18,12 @@ class CampApplicationCovidsController < ApplicationController
 		@covid = @application.build_camp_application_covid(covid_params)
 
 		respond_to do |format|
-			if @covid.save
+			if @covid.save and !@covid.vaccinated?
 				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+			elsif @covid and @covid.vaccinated?
+				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
+			elsif @covid.save
+				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
 			else
 				render :new
 			end
@@ -24,8 +32,12 @@ class CampApplicationCovidsController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @covid.update(covid_params)
+			if @covid.update(covid_params) and !@covid.vaccinated?
 				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+			elsif @covid.update(covid_params) and @covid.vaccinated?
+				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
+			elsif covid.update(covid_params)
+				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
 			else
 				render :edit
 			end
@@ -45,6 +57,6 @@ class CampApplicationCovidsController < ApplicationController
 		end
 
 		def covid_params
-			params.require(:camp_application_covid).permit(:vaccinated)
+			params.require(:camp_application_covid).permit(:vaccinated, :first_shot, :second_shot, :booster_shot, vaccination_type: [])
 		end
 end

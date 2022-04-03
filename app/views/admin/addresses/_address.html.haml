@@ -1,0 +1,42 @@
+.nested-fields
+	%div{data:{controller: "select-filter", select:{filter:{url: "#{filter_address_path}", parvalue: nil}} }}
+		
+		.div
+			= a.hidden_field :profile_id, value: current_user.profile.id
+			= a.hidden_field :address_type, value: "Primary Address"
+					
+		= render "/admin/addresses/country", pi: pi
+			
+
+		.form-floating.required.mb-4
+			= a.text_field :address_l1, placeholder: "Address Line 1", class: "border border-dark form-control", required: true
+			= a.label :address_l1, "Address Line 1"
+
+		.form-floating.mb-4
+			= a.text_field :address_l2, placeholder: "Address Line 2", class: "border border-dark form-control"
+			= a.label :address_l2, "Address Line 2"
+
+		.row
+			.col-md-6.mb-4
+				.form-floating.required
+					= a.text_field :city, placeholder: "City/Town", class: "border border-dark form-control", required: true
+					= a.label :city, "City/Town"
+
+			.col-md-6.mb-4.required
+				= render "/admin/addresses/state_province", pi: pi
+			
+		.row
+			.col-md-6.mb-4.required
+				= render "admin/addresses/county", counties: counties, pi: pi
+					
+			.col-md-3.mb-4
+				.form-floating.required
+					%input.border.border-dark.form-control{type: "text", required: "required", maxlength: 5, placeholder: "Zipcode", name: "camp_application_pi[address_attributes][zippostal]", id: "camp_application_pi_address_attributes_zippostal_prefix"}
+					%label{for: "camp_application_pi_address_attributes_zippostal_prefix"} Zipcode
+				
+			.col-md-3.mb-4
+				.form-floating
+					%input.border.border-dark.form-control{type: "text", maxlength: 4, placeholder: "Zip+4", name: "camp_application_pi[address_attributes][zip4code]", id: "camp_application_pi_address_attributes_zippostal_suffix"}
+					%label{for: "camp_application_pi_address_attributes_zippostal_suffix"} Zip+4
+						
+	

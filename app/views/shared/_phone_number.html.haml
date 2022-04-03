@@ -1,0 +1,18 @@
+.nested-fields
+	.row
+		= pn.hidden_field :profile_id, value: current_user.profile.id
+		= pn.hidden_field :phone_type, value: "#{phone_type}"
+		
+	- id_phone = phone_type.split(" ")
+	- id_phone = "#{id_phone[0].downcase + id_phone[1].titleize}"
+		
+	.form-floating.required.mb-4
+		= pn.text_field :number, maxlength: 16, placeholder: "#{phone_type}", class: "border border-dark form-control", id: id_phone
+		= pn.label :phone_number, phone_type
+
+	.row.mb-4
+		- phone_service_types.each do |serv_type|
+			.col-md-4.d-grid.d-block.mb-2
+				= pn.check_box :service_type, { multiple: true, class: "btn-check", id: "#{serv_type + id_phone}" }, serv_type, false
+				= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start", for: "#{serv_type + id_phone}"
+	

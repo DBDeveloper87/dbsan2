@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_25_130133) do
+ActiveRecord::Schema.define(version: 2022_04_03_194015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -32,13 +32,14 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
     t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "state_province_id", null: false
-    t.uuid "country_id", null: false
-    t.uuid "camp_application_pi_id", null: false
-    t.uuid "profile_id", null: false
+    t.uuid "camp_application_pi_id"
+    t.uuid "profile_id"
     t.string "zippostal"
+    t.uuid "state_province_id"
+    t.uuid "county_id"
+    t.string "zip4code"
     t.index ["camp_application_pi_id"], name: "index_addresses_on_camp_application_pi_id"
-    t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["county_id"], name: "index_addresses_on_county_id"
     t.index ["profile_id"], name: "index_addresses_on_profile_id"
     t.index ["state_province_id"], name: "index_addresses_on_state_province_id"
   end
@@ -128,6 +129,10 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
     t.boolean "vaccinated"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "vaccination_type"
+    t.date "first_shot"
+    t.date "second_shot"
+    t.date "booster_shot"
     t.index ["camp_application_id"], name: "index_camp_application_covids_on_camp_application_id"
   end
 
@@ -222,7 +227,7 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
     t.uuid "camp_application_id", null: false
     t.string "first_name"
     t.string "last_name"
-    t.string "gender"
+    t.text "gender"
     t.text "pronouns"
     t.date "dob"
     t.datetime "created_at", precision: 6, null: false
@@ -260,6 +265,14 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "counties", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "state_province_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["state_province_id"], name: "index_counties_on_state_province_id"
+  end
+
   create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "unicode_flag"
     t.string "country_code"
@@ -290,17 +303,15 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
   end
 
   create_table "phone_numbers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "camp_application_pi_id"
     t.string "phone_type"
     t.string "phone_number"
-    t.string "service_type"
-    t.uuid "camp_application_pi_id", null: false
-    t.uuid "profile_id", null: false
+    t.text "service_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "camp_application_emergency_id"
-    t.index ["camp_application_emergency_id"], name: "index_phone_numbers_on_camp_application_emergency_id"
     t.index ["camp_application_pi_id"], name: "index_phone_numbers_on_camp_application_pi_id"
-    t.index ["profile_id"], name: "index_phone_numbers_on_profile_id"
+    t.index ["user_id"], name: "index_phone_numbers_on_user_id"
   end
 
   create_table "policies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -389,7 +400,7 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
   end
 
   add_foreign_key "addresses", "camp_application_pis"
-  add_foreign_key "addresses", "countries"
+  add_foreign_key "addresses", "counties"
   add_foreign_key "addresses", "profiles"
   add_foreign_key "addresses", "state_provinces"
   add_foreign_key "bylaw_article_sections", "bylaw_articles"
@@ -413,11 +424,11 @@ ActiveRecord::Schema.define(version: 2022_03_25_130133) do
   add_foreign_key "camp_applications", "camp_application_types"
   add_foreign_key "camp_applications", "camps"
   add_foreign_key "camp_applications", "users"
+  add_foreign_key "counties", "state_provinces"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
-  add_foreign_key "phone_numbers", "camp_application_emergencies"
   add_foreign_key "phone_numbers", "camp_application_pis"
-  add_foreign_key "phone_numbers", "profiles"
+  add_foreign_key "phone_numbers", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "virtual_spaces", "events"

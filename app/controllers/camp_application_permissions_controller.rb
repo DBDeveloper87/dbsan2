@@ -4,7 +4,11 @@ class CampApplicationPermissionsController < ApplicationController
 	before_action :set_permission, only: [:edit, :update]
 
 	def new
-		@permission = @application.build_camp_application_permission
+		if !@application.camp_application_permission.nil?
+			redirect_to edit_camp_camp_application_camp_application_permission_path(@camp, @application, @application.camp_application_permission)
+		else
+			@permission = @application.build_camp_application_permission
+		end
 	end
 
 	def edit
@@ -14,7 +18,11 @@ class CampApplicationPermissionsController < ApplicationController
 		@permission = @application.build_camp_application_permission(permission_params)
 
 		respond_to do |format|
-			if @permission.save
+			if @permission.save && @permission.agree?
+				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
+			elsif @permissionsave && !@permission.agree?
+				format.html {redirect_to new_camp_camp_application_camp_application_covid_path(@camp, @application)}
+			elsif @permission.save
 				format.html {redirect_to new_camp_camp_application_camp_application_covid_path(@camp, @application)}
 			else
 				render :new
@@ -24,12 +32,12 @@ class CampApplicationPermissionsController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @permission.update(permission_params)
-				if !@application.camp_application_covid.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_covid_path(@camp, @application, @application.camp_application_covid)}
-				elsif @application.camp_application_covid.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_covid_path(@camp, @application)}
-				end
+			if @permission.update(permission_params) and !@permission.agree?
+				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+			elsif @permission.update(permission_params) and @permission.agree?
+				format.html {redirect_to new_camp_camp_application_camp_application_covid_path(@camp, @application)}
+			elsif @permission.update(permission_params)
+				format.html {redirect_to new_camp_camp_application_camp_application_covid_path(@camp, @application)}
 			else
 				render :edit
 			end

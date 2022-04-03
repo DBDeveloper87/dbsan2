@@ -4,7 +4,11 @@ class CampApplicationIncsController < ApplicationController
 	before_action :set_inc, only: [:edit, :update]
 
 	def new
-		@inc = @application.build_camp_application_inc
+		if !@application.camp_application_inc.nil?
+			redirect_to edit_camp_camp_application_camp_application_inc_path(@camp, @application, @application.camp_application_inc)
+		else
+			@inc = @application.build_camp_application_inc
+		end
 	end
 
 	def edit
@@ -25,11 +29,7 @@ class CampApplicationIncsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @inc.update(inc_params)
-				if !@application.camp_application_matching.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_matching_path(@camp, @application, @application.camp_application_matching) }
-				elsif @application.camp_application_matching.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_matching_path(@camp, @application) }
-				end
+				format.html {redirect_to new_camp_camp_application_camp_application_matching_path(@camp, @application) }
 			else
 				render :edit
 			end
@@ -49,6 +49,6 @@ class CampApplicationIncsController < ApplicationController
 		end
 
 		def inc_params
-			params.require(:camp_application_inc).permit(:dominant_hand)
+			params.require(:camp_application_inc).permit(:dominant_hand, :receiv_signs, communication_pref: [], identity: [])
 		end
 end

@@ -1,0 +1,10 @@
+- states = @states
+.form-floating.required{ data:{select:{filter:{target: "states", parameter: "state", static_target: "counties"}}} }
+	%select.form-select.form-select-lg.border.border-dark{required: "required",  id: "camp_application_pi_address_attributes_state_province_id", name: "camp_application_pi[address_attributes][state_province_id]", data:{action: "select-filter#updateCounties"} }
+		%option{value: " "} Choose One. . . 
+		- unless states.empty?
+			- states.each do |s|
+				%option{value: s.id} #{s.code} #{s.name}
+
+	%label{for: "camp_application_pi_address_attributes_state_province_id"} State / Province
+	

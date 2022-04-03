@@ -1,4 +1,15 @@
 module ApplicationHelper
+	
+
+	def vaccination_types
+		[
+			"One shot of Johnson & Johnson",
+			"One shot of Pfizer or Moderna",
+			"Two shots of Pfizer or Moderna",
+			"Booster shot"
+		]
+	end
+
 	def agree_or_decline
 		[
 			["true", "Agree"],
@@ -6,11 +17,31 @@ module ApplicationHelper
 		]
 	end
 
+	def gender_identities
+		[
+			"Male",
+			"Female",
+			"Non-binary",
+			"Gender-fluid",
+			"Gender-neutral",
+			"Prefer not to disclose"
+		]
+	end
+
+	def basic_pronoun_list
+		[
+			"He / Him / His",
+			"She / Her / Hers",
+			"They / Them / Their",
+			"Prefer not to disclose"			
+		]
+	end
+
 	def mobility_aids
 		[
 			["none", "None"],
 			["walker", "Walker"],
-			["Wheelchair", "Wheelchair"],
+			["wheelchair", "Wheelchair"],
 			["both", "Both Wheelchair and Walker"]
 		]
 	end

@@ -1,0 +1,11 @@
+.form-floating.required.mb-4
+	%select.form-select.form-select-lg.border.border-dark{required: true, id: "camp_application_pi_address_attributes_country_id", data:{action: "select-filter#updateStates"}}
+		%option{value: ""} Choose One. . . 
+		- Country.all.each do |c|
+			- unless pi.id.nil?
+				%option{value: c.id, selected: pi.address.state_province.country_id} #{sanitize(c.unicode_flag)} #{c.name} (#{c.country_code})
+			- else
+				%option{value: c.id} #{sanitize(c.unicode_flag)} #{c.name} (#{c.country_code})
+	
+	%label{for: "camp_application_pi_address_attributes_country_id" } Country / Region
+	

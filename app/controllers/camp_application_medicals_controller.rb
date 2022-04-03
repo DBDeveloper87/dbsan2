@@ -4,7 +4,11 @@ class CampApplicationMedicalsController < ApplicationController
 	before_action :set_medical, only: [:edit, :update]
 
 	def new
-		@medical = @application.build_camp_application_medical
+		if !@application.camp_application_medical.nil?
+			redirect_to edit_camp_camp_application_camp_application_medical_path(@camp, @application, @application.camp_application_medical)
+		else
+			@medical = @application.build_camp_application_medical
+		end
 	end
 
 	def edit
@@ -25,11 +29,7 @@ class CampApplicationMedicalsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @medical.update(medical_params)
-				if !@application.camp_application_emergency.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_emergency_path(@camp, @application, @application.camp_application_emergency)}
-				elsif @application.camp_application_emergency.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_emergency_path(@camp, @application)}
-				end
+				format.html {redirect_to new_camp_camp_application_camp_application_emergency_path(@camp, @application)}
 			else
 				render :edit
 			end
@@ -49,6 +49,6 @@ class CampApplicationMedicalsController < ApplicationController
 		end
 
 		def medical_params
-			params.require(:camp_application_medical).permit(:other_health)
+			params.require(:camp_application_medical).permit(:other_health, :medical_policy, :bring_assistant, :smoke, :medical_allergies, medical_conditions: [])
 		end
 end

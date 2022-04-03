@@ -1,0 +1,9 @@
+%legend #{legend}
+- unless helper_text.nil?
+	%p.text-muted #{helper_text}
+.row.mb-4
+	- this_method.each do |object|
+		.d-grid.d-block.mb-2{class: "#{cols}"}
+			= f.check_box attribute.to_sym, { multiple: true, class: "btn-check" }, object, false
+			= f.label attribute.to_sym, object, value: object, class: "btn btn-outline-dark btn-lg text-start"
+		

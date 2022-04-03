@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-counties = County.create([
+County.create([
 
 	# Alabama
 	{state_province_id: "aa55464b-ced9-4d4b-9a26-80a101f75b94", name: "Autauga"},

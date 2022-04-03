@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :camps do
     resources :camp_applications do
-      resources :camp_application_pis
+      resources :camp_application_pis do
+        get 'phone', to: 'camp_application_pis#phone_number'
+        post 'phone', to: 'camp_application_pis#create_phone'
+      end
       resources :camp_application_bis
       resources :camp_application_incs
       resources :camp_application_matchings
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     end
     resources :camp_application_types
   end
+  resources :phone_numbers
   
   # Get Time Zone
   post 'events/set_time_zone', to: 'events#set_time_zone'
@@ -52,6 +56,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  post 'filter_address', to: 'admin/addresses#filter_address'
   
   # Events
   resources :events, shallow: true do 

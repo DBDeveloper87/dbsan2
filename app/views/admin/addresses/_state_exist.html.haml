@@ -1,0 +1,18 @@
+- pi = @pi
+- states = @states
+.form-floating{ data:{select:{filter:{target: "states", parameter: "state", static_target: "counties"}}} }
+	- if !pi.address.nil?
+		- current_country = pi.address.state_province.country_id
+		- current_country = Country.find(current_country)
+		- states = current_country.state_provinces.all
+		%select.form-select.form-select-lg.border.border-dark{required: "required",  id: "camp_application_pi_address_attributes_state_province_id", name: "camp_application_pi[address_attributes][state_province_id]", data:{action: "select-filter#updateCounties"} }
+			%option{value: " "} Choose One. . . 
+			
+			- states.each do |s|
+				- if s.id == pi.address.state_province_id
+					%option{value: s.id, selected: true} #{s.code} #{s.name}
+				- else
+					%option{value: s.id} #{s.code} #{s.name}
+	
+	%label{for: "camp_application_pi_address_attributes_state_province_id"} State / Province
+	

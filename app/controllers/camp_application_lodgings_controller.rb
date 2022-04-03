@@ -4,7 +4,11 @@ class CampApplicationLodgingsController < ApplicationController
 	before_action :set_lodging, only: [:edit, :update]
 
 	def new
-		@lodging = @application.build_camp_application_lodging
+		if !@application.camp_application_lodging.nil?
+			redirect_to edit_camp_camp_application_camp_application_lodging_path(@camp, @application, @application.camp_application_lodging)
+		else
+			@lodging = @application.build_camp_application_lodging
+		end
 	end
 
 	def edit
@@ -25,11 +29,7 @@ class CampApplicationLodgingsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @lodging.update(lodging_params)
-				if !@application.camp_application_meal.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_meal_path(@camp, @application, @application.camp_application_meal) }
-				elsif @application.camp_application_meal.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_meal_path(@camp, @application) }
-				end
+				format.html {redirect_to new_camp_camp_application_camp_application_meal_path(@camp, @application) }
 			else
 				render :edit
 			end
@@ -49,6 +49,6 @@ class CampApplicationLodgingsController < ApplicationController
 		end
 
 		def lodging_params
-			params.require(:camp_application_lodging).permit(:service_animal)
+			params.require(:camp_application_lodging).permit(:difficulty_stairs, :difficulty_walking, :medical_device_charging, :mobility_aids, :on_premises, :service_animal, :share_service_animal, :share_smoker)
 		end
 end

@@ -4,7 +4,11 @@ class CampApplicationMatchingsController < ApplicationController
 	before_action :set_matching, only: [:edit, :update]
 
 	def new
-		@match = @application.build_camp_application_matching
+		if !@application.camp_application_matching.nil?
+			redirect_to edit_camp_camp_application_camp_application_matching_path(@camp, @application, @application.camp_application_matching)
+		else
+			@match = @application.build_camp_application_matching
+		end
 	end
 
 	def edit
@@ -24,12 +28,8 @@ class CampApplicationMatchingsController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @match.save
-				if !@application.camp_application_lodging.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_lodging_path(@camp, @application, @application.camp_application_lodging) }
-				elsif @application.camp_application_lodging.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
-				end
+			if @match.update(matching_params)
+				format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
 			else
 				render :edit
 			end
@@ -54,8 +54,12 @@ class CampApplicationMatchingsController < ApplicationController
 
 		def matching_params
 			params.require(:camp_application_matching).permit(
+				:describe_self,
+				:height,
+				activity_type: [],
+				work_with_type: [],
 				camp_application_matchnps_attributes: [
-					:id, :_destroy, :first_name
+					:id, :_destroy, :first_name, :last_name, :name_type
 					]
 				)
 		end		

@@ -1,0 +1,12 @@
+.mb-4{data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }}
+	%template{data:{nested:{form:{target: "template"}}}}
+		= f.fields_for :camp_application_matchnps, CampApplicationMatchnp.new, child_index: "NEW_RECORD" do |name_preference_fields|
+			= render "work_with_form", f: name_preference_fields
+
+	= f.fields_for :camp_application_matchnps do |name_preference_fields|
+		= render "work_with_form", f: name_preference_fields
+
+	%div{data:{nested:{form:{target: "target"}}}}
+
+	%button{type: "button", class: "btn btn-primary btn-lg", data:{action: "nested-form#add"}} Add Name
+  

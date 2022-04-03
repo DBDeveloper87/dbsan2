@@ -7,7 +7,7 @@
 				= f.text_field :contact_full_name, placeholder: "Contact Full Name", class: "border border-dark form-control"
 				= f.label :contact_full_name, "Contact Full Name"
 
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend What is the contact person's relationship to you?
 
 				.row.mb-4
@@ -17,7 +17,7 @@
 							- symlabel = ("contact_relationship_" + relationship.first).to_sym
 							= f.label symlabel, relationship.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				= f.fields_for :phone_number, PhoneNumber.new do |pn|
 					%legend Emergency Contact Phone
 
@@ -25,7 +25,7 @@
 						= pn.hidden_field :phone_type, value: "Emergency Phone"
 
 					.form-floating.mb-4
-						= pn.text_field :phone_number, maxlength: 16, placeholder: "Primary Phone", class: "border border-dark form-control", id: "primaryPhone"
+						= pn.text_field :phone_number, maxlength: 16, placeholder: "Primary Phone", class: "border border-dark form-control", id: "emergencyPhone"
 						= pn.label :phone_number, "Emergency Contact Phone"
 
 					.row.mb-4
@@ -37,7 +37,7 @@
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_camp_application_medical_path(@camp, @application, @application.camp_application_medical), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_medical_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"
@@ -80,12 +80,7 @@
 		else if(input.length > 0){event.target.value = `(${areaCode}`;}
 	};
 
-	const inputElement1 = document.getElementById('primaryPhone');
+	const inputElement1 = document.getElementById('emergencyPhone');
 	inputElement1.addEventListener('keydown',enforceFormat);
 	inputElement1.addEventListener('keyup',formatToPhone);
-
-	const inputElement2 = document.getElementById('alternatePhone');
-	inputElement2.addEventListener('keydown',enforceFormat);
-	inputElement2.addEventListener('keyup',formatToPhone);
-
 									

@@ -1,0 +1,8 @@
+.container
+	= form_with(model: @phone) do |pn|
+		.form-floating
+			= pn.text_field :phone_number, placeholder: "Phone Number", class: "form-control"
+			= pn.label :phone_number, "Phone Number"
+		.row
+			= pn.hidden_field :user_id, value: current_user.id
+			= pn.submit "save"

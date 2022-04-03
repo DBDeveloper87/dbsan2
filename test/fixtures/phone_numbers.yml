@@ -1,15 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  user: one
+  camp_application_pi: one
+  camp_application_emergency: one
   phone_type: MyString
   phone_number: MyString
-  service_type: MyString
-  camp_application_pi: one
-  profile: one
+  service_type: MyText
+  country: one
 
 two:
+  user: two
+  camp_application_pi: two
+  camp_application_emergency: two
   phone_type: MyString
   phone_number: MyString
-  service_type: MyString
-  camp_application_pi: two
-  profile: two
+  service_type: MyText
+  country: two

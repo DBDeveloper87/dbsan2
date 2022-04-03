@@ -4,7 +4,11 @@ class CampApplicationMealsController < ApplicationController
 	before_action :set_meal, only: [:edit, :update]
 
 	def new
-		@meal = @application.build_camp_application_meal
+		if !@application.camp_application_meal.nil?
+			redirect_to edit_camp_camp_application_camp_application_meal_path(@camp, @application, @application.camp_application_meal)
+		else
+			@meal = @application.build_camp_application_meal
+		end
 	end
 
 	def edit
@@ -45,7 +49,7 @@ class CampApplicationMealsController < ApplicationController
 		end
 
 		def meal_params
-			params.require(:camp_application_meal).permit(:dietary_lifestyle)
+			params.require(:camp_application_meal).permit(:dietary_restrictions, :dietary_lifestyle, allergens: [])
 		end
 
 

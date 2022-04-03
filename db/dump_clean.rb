@@ -60,5 +60,13 @@ BylawArticleSubsection.create!([
   {id: "b9982590-695e-4eac-a6b5-dc110ecb5905", subsec_num: 4, title: "Treasurer", content: "The Treasurer shall be responsible for conducting the financial affairs of the organization as directed and authorized by the Board of Directors, and shall make reports of corporate finances as required, but no less often than at each meeting of the Board of Directors.\n", bylaw_article_section_id: "46726b0b-22ec-43dd-9fd0-67cd9aba253d", bylaw_article_id: "93d06a15-8a73-4bf7-9e5a-a6c9aa972970"}
 ])
 
+SocialNetwork.create!([
+  {id: "f218f6ca-3a23-4fe7-8710-2b5e086230e7", name: "Twitter", icon_class: "bi bi-twitter", url: "https://twitter.com/official_dbsan"},
+  {id: "1e2dba51-e52d-462c-a7d1-452bb08a6686", name: "Facebook", icon_class: "bi bi-facebook", url: "https://www.facebook.com/groups/deafblindsupportandaccessnetwork/"},
+  {id: "ab69c8a9-17fa-4977-9204-15f3dbf4dccd", name: "TikTok", icon_class: "bi bi-tiktok", url: "https://www.tiktok.com/@official.dbsan"},
+  {id: "8f192591-b825-402e-b9e0-f05d9fc2520e", name: "Instagram", icon_class: "bi bi-instagram", url: "https://www.instagram.com/official.dbsan/"}
+])
+
+
 
 

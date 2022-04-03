@@ -4,7 +4,11 @@ class CampApplicationBisController < ApplicationController
 	before_action :set_bi, only: [:edit, :update]
 
 	def new
-		@bi = @application.build_camp_application_bi
+		if !@application.camp_application_bi.nil?
+			redirect_to edit_camp_camp_application_camp_application_bi_path(@camp, @application, @application.camp_application_bi)
+		else
+			@bi = @application.build_camp_application_bi
+		end
 	end
 
 	def create
@@ -12,7 +16,6 @@ class CampApplicationBisController < ApplicationController
 
 		respond_to do |format|
 			if @bi.save
-				id = @application.id
 				format.html {redirect_to new_camp_camp_application_camp_application_inc_path(@camp, @application) }
 			else
 				render :new
@@ -23,11 +26,7 @@ class CampApplicationBisController < ApplicationController
 	def update
 		respond_to do |format|
 			if @bi.update(bi_params)
-				if !@application.camp_application_inc.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_inc_path(@camp, @application, @application.camp_application_inc) }
-				elsif @application.camp_application_inc.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_inc_path(@camp, @application) }
-				end
+				format.html {redirect_to new_camp_camp_application_camp_application_inc_path(@camp, @application) }
 			else
 				render :edit
 			end
@@ -47,6 +46,6 @@ class CampApplicationBisController < ApplicationController
 		end
 
 		def bi_params
-			params.require(:camp_application_bi).permit(:active_community, :other_comments, interests: [])
+			params.require(:camp_application_bi).permit(:about_you, :past_camps, :active_community, :other_comments, interests: [])
 		end
 end

@@ -1,0 +1,22 @@
+.nested-form-wrapper.border.border-dark.p-2.mb-4{data:{new:{record: "#{ f.object.new_record? }"}}}
+  .form-floating.mb-4
+    = f.select :name_type, options_for_select(["Preferred", "Not Work With"]), {prompt: "Choose One. . . "}, class: "border border-dark form-select"
+    = f.label :name_type, "Preference Type"
+
+  .row  
+    .col-6.me-0.pe-0
+      .form-floating
+        = f.text_field :first_name, placeholder: "First Name", class: "border border-dark form-control"
+        = f.label :first_name, "First Name"
+    
+    .col-5.ms-0.ps-0
+      .form-floating
+        = f.text_field :last_name, placeholder: "Last Name", class: "border border-dark form-control"
+        = f.label :last_name, "Last Name"
+    
+    .col-1.ms-0.ps-0
+      .row.h-100.me-1
+        %button{type: "button", class: "btn btn-primary btn-lg", data:{action: "nested-form#remove", bs:{toggle: "tooltip", placement: "top"}}, aria:{label: "Remove"}, title: "Remove"} 
+          %i.bi.bi-trash{aria:{hidden: "true"}}
+  
+  = f.hidden_field :_destroy

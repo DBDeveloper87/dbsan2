@@ -3,7 +3,7 @@
 		%h1 Lodging Information
 
 		= form_with(model: [camp, application, lodging]) do |f|
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you be staying on the property or commuting each day? 
 
 				.row.mb-4
@@ -18,7 +18,7 @@
 							- symlabel = ("on_premises_" + soc.first).to_sym
 							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
 
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you share a cabin with a smoker?
 
 				.row.mb-4
@@ -33,7 +33,7 @@
 							- symlabel = ("share_smoker_" + tof.first).to_sym
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Do you have difficulty walking?
 
 				.row.mb-4
@@ -48,7 +48,7 @@
 							- symlabel = ("difficulty_walking_" + tof.first).to_sym
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Do you have difficulty with stairs?
 
 				.row.mb-4
@@ -63,7 +63,7 @@
 							- symlabel = ("difficulty_stairs_" + tof.first).to_sym
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you bring your hearing or guide dog?
 
 				.row.mb-4
@@ -78,7 +78,7 @@
 							- symlabel = ("service_animal_" + tof.first).to_sym
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you share a cabin with a hearing or guide dog?
 
 				.row.mb-4
@@ -93,7 +93,7 @@
 							- symlabel = ("share_service_animal_" + tof.first).to_sym
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Do you use any mobility aids?
 
 				.row.mb-4
@@ -103,7 +103,7 @@
 							- symlabel = ("mobility_aids_" + aid.first).to_sym
 							= f.label symlabel, aid.last, class: "btn btn-outline-dark btn-lg text-start"
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Do you have medical devices that need to be plugged in overnight? (e.g. respirator)
 
 				.row.mb-4
@@ -121,7 +121,7 @@
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_camp_application_matching_path(@camp, @application, @application.camp_application_matching), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_matching_path(@camp), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"

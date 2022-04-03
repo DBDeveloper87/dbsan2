@@ -12,7 +12,7 @@
 			.mb-4
 				- camp.camp_application_types.each do |kind|
 					.d-grid.d-block.mb-2
-						= f.radio_button :camp_application_type_id, kind.id, class: "btn-check"
+						= f.radio_button :camp_application_type_id, kind.id, class: "btn-check", required: " "
 						- label = "camp_application_type_id_#{kind.id}".to_sym
 						= f.label label, "I want to apply as a #{kind.kind}", class: "btn btn-outline-dark btn-lg text-start"
 

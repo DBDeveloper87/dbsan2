@@ -4,7 +4,12 @@ class CampApplicationC3sController < ApplicationController
 	before_action :set_c3, only: [:edit, :update]
 
 	def new
-		@c3 = @application.build_camp_application_c3
+		if !@application.camp_application_c3.nil?
+			redirect_to edit_camp_camp_application_camp_application_c3_path(@camp, @application, @application.camp_application_c3)
+		else
+			@c3 = @application.build_camp_application_c3
+		end
+		
 	end
 
 	def edit
@@ -14,7 +19,11 @@ class CampApplicationC3sController < ApplicationController
 		@c3 = @application.build_camp_application_c3(c3_params)
 
 		respond_to do |format|
-			if @c3.save
+			if @c3.save and !@c3.agree?
+				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+			elsif @c3.save and @c3.agree?
+				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
+			elsif @c3.save
 				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
 			else
 				render :new
@@ -24,12 +33,12 @@ class CampApplicationC3sController < ApplicationController
 
 	def update
 		respond_to do |format|
-			if @c3.update(c3_params)
-				if !@application.camp_application_permission.nil?
-					format.html {redirect_to edit_camp_camp_application_camp_application_permission_path(@camp, @application, @application.camp_application_permission)}
-				elsif @application.camp_application_permission.nil?
-					format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
-				end
+			if @c3.update(c3_params) and !@c3.agree?
+				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+			elsif @c3.update(c3_params) and @c3.agree?
+				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
+			elsif @c3.update(c3_params)
+				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
 			else
 				render :edit
 			end

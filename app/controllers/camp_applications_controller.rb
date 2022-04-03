@@ -27,7 +27,7 @@ class CampApplicationsController < ApplicationController
 
 		respond_to do |format|
       		if @application.save
-      			format.html {redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
+      			format.html {redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application) }
         	else
         		format.html { render :new }
         	end
@@ -37,11 +37,8 @@ class CampApplicationsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @application.update(application_params)
-				if !@application.camp_application_pi.nil?
-      				format.html { redirect_to edit_camp_camp_application_camp_application_pi_path(@camp, @application, @application.camp_application_pi) }
-      			elsif @application.camp_application_pi.nil?
-      				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
-      			end
+				format.html { redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application) }
+      			
       		else
 				render 'edit'
 			end

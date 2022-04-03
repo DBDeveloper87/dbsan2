@@ -7,7 +7,7 @@ class CampApplication < ApplicationRecord
   has_one :camp_application_bi, dependent: :destroy
   has_one :camp_application_inc, dependent: :destroy
   has_one :camp_application_matching, dependent: :destroy
-  has_many :camp_application_matchnps, through: :camp_application_matchings
+  has_many :camp_application_matchnps, through: :camp_application_matching
   has_one :camp_application_lodging, dependent: :destroy
   has_one :camp_application_meal, dependent: :destroy
   has_one :camp_application_medical, dependent: :destroy

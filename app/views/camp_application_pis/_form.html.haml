@@ -4,178 +4,79 @@
 
 		= form_with(model: [camp, application, pi]) do |f|
 			.row
-				.col.md-6.mb-4
-					.form-floating.mb-4
+				.col-6.mb-4
+					.form-floating.required
 						= f.text_field :first_name, placeholder: "First (Preferred) Name (e.g. Jane)", required: true, class: "border border-dark form-control", value: current_user.profile.first_name
-						= f.label :first_name, "First (Preferred) Name (e.g. Jane)"
-				.col-md-6.mb-4
-					.form-floating
+						= f.label :first_name, "First (Preferred) Name (e.g. Jane)", aria:{hidden: "true"}
+						
+				.col-6.mb-4
+					.form-floating.required
 						= f.text_field :last_name, placeholder: "Last Name (e.g. Smith)", required: true, class: "border border-dark form-control", value: current_user.profile.last_name
-						= f.label :last_name, "Last Name (e.g. Smith)"
+						= f.label :last_name, "Last Name (e.g. Smith)", aria:{hidden: "true"}
 
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				%legend What is your gender? (Select one)
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				= render '/shared/check_box_group', f: f, inst: @pi, legend: "What is your gender?", helper_text: "If your gender is not listed, please enter your own in the \"Other Gender\" text field.  You may select more than one gender identity.", this_method: gender_identities, attribute: "gender", cols: "col-6"
+				
+				- a1 = []
+				- if !pi.gender.nil?
+					- pi.gender.each do |g|
+						- if !gender_identities.include?(g)
+							- a1 << g
+				- gender_value = a1.join(" ")
 
-				.row.mb-4
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "male", class: "btn-check"
-						= f.label :gender_male, "Male", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "female", class: "btn-check"
-						= f.label :gender_female, "Female", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "nb", class: "btn-check"
-						= f.label :gender_nb, "Non-Binary", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "gf", class: "btn-check"
-						= f.label :gender_gf, "Gender-Fluid", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "gn", class: "btn-check"
-						= f.label :gender_gn, "Gender-Neutral", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-4.d-grid.d-block.mb-2
-						= f.radio_button :gender, "pnd", class: "btn-check"
-						= f.label :gender_pnd, "Prefer Not to Disclose", class: "btn btn-outline-dark btn-lg text-start"
-
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				%legend What are your pronouns? (Select one)
-
-				.row.mb-4
-					.col-md-6.d-grid.d-block.mb-2
-						= f.radio_button :pronouns, "hehimhis", class: "btn-check"
-						= f.label :pronouns_hehimhis, "He / Him / His", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-6.d-grid.d-block.mb-2
-						= f.radio_button :pronouns, "sheherhers", class: "btn-check"
-						= f.label :pronouns_sheherhers, "She / Her / Hers", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-6.d-grid.d-block.mb-2
-						= f.radio_button :pronouns, "theythemtheirs", class: "btn-check"
-						= f.label :pronouns_theythemtheirs, "They / Them / Theirs", class: "btn btn-outline-dark btn-lg text-start"
-					.col-md-6.d-grid.d-block.mb-2
-						= f.radio_button :pronouns, "pnd", class: "btn-check"
-						= f.label :pronouns_pnd, "Prefer Not to Disclose", class: "btn btn-outline-dark btn-lg text-start"
+				.form-floating.mb-4
+					- if a1.empty?
+						%input.border.border-dark.form-control{type: "text", name: "camp_application_pi[gender][]", id: "camp_application_pi_gender_other", placeholder: "Other Gender"}
+					- else
+						%input.border.border-dark.form-control{type: "text", name: "camp_application_pi[gender][]", id: "camp_application_pi_gender_other", placeholder: "Other Gender", value: gender_value}
+					%label{for: "camp_application_pi_gender_other"} Other Gender
 			
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				= render "/shared/check_box_group", f: f, inst: @pi, legend: "What are your pronouns?", helper_text: "If your pronouns are not listed, please indicate in the \"Other Pronouns\" text field.  You may select more than one set of pronouns.", attribute: "pronouns", cols: "col-6 col-md-6", this_method: basic_pronoun_list
+
+				- a2 = []
+				- if !pi.pronouns.nil?
+					- pi.pronouns.each do |p|
+						- if !basic_pronoun_list.include?(p)
+							- a2 << p
+				- pronoun_value = a2.join(" ")
+
+				.form-floating.mb-4
+					- if a2.empty?
+						%input.border.border-dark.form-control{type: "text", name: "camp_application_pi[pronouns][]", id: "camp_application_pi_pronoun_other", placeholder: "Other Pronouns"}
+					- else
+						%input.border.border-dark.form-control{type: "text", name: "camp_application_pi[pronouns][]", id: "camp_application_pi_pronoun_other", placeholder: "Other Pronouns", value: pronoun_value}
+					%label{for: "camp_application_pi_pronoun_other"} Other Pronouns
+			
+
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend What is your Date of Birth?
 
 				.input-group.mb-4
-					= f.date_select :dob, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year - 18), end_year: (Date.today.year - 110)}, {class: "form-select form-select-lg border border-dark"}
+					= f.date_select :dob, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year - 18), end_year: (Date.today.year - 110)}, {class: "form-select form-select-lg border border-dark", required: true}
+			
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Primary Address
 				
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				= f.fields_for :address, Address.new do |a|	
-					%legend Primary Address
+				- if @pi.address.nil?
+					= f.fields_for :address, @pi.build_address do |a|
+						= render "/admin/addresses/address", a: a, pi: @pi, counties: @counties
+				- else
+					- a = pi.address
+							
+					%address
+						#{a.address_l1} <br>
+						#{a.address_l2} <br>
+						#{a.city}, #{a.state_province.code} #{a.zippostal} <br>
+						#{a.county.name}, #{a.state_province.country.name} <br>
+			
+			-#= render "phone_number"
 
-					.div
-						= a.hidden_field :profile_id, value: current_user.profile.id
-						= a.hidden_field :address_type, value: "Primary Address"
-					
-					.form-floating.mb-4
-						= a.text_field :address_l1, placeholder: "Address Line 1", class: "border border-dark form-control"
-						= a.label :address_l1, "Address Line 1"
-
-					.form-floating.mb-4
-						= a.text_field :address_l2, placeholder: "Address Line 2", class: "border border-dark form-control"
-						= a.label :address_l2, "Address Line 2"
-
-					.row
-						.col-md-4.mb-4
-							.form-floating
-								= a.text_field :city, placeholder: "City/Town", class: "border border-dark form-control"
-								= a.label :city, "City/Town"
-
-						.col-md-4.mb-4
-							.form-floating
-								= a.text_field :state_province, placeholder: "State/Province", class: "border border-dark form-control"
-								= a.label :state_provnce, "State/Province"
-
-						.col-md-4.mb-4
-							.form-floating
-								= a.text_field :zippostal, placeholder: "Postal Code", class: "border border-dark form-control"
-								= a.label :zippostal, "Postal Code"
-
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				= f.fields_for :phone_number, PhoneNumber.new do |pn|
-					%legend Primary Phone
-
-					.row
-						= pn.hidden_field :phone_type, value: "Primary Phone"
-
-					.form-floating.mb-4
-						= pn.text_field :phone_number, maxlength: 16, placeholder: "Primary Phone", class: "border border-dark form-control", id: "primaryPhone"
-						= pn.label :phone_number, "Primary Phone"
-
-					.row.mb-4
-						- phone_service_types.each do |serv_type|
-							.col-md-4.d-grid.d-block.mb-2
-								= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
-								= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
-	
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				= f.fields_for :phone_number, PhoneNumber.new do |pn|
-					%legend Alternate Phone
-
-					.row
-						= pn.hidden_field :phone_type, value: "Primary Phone"
-
-					.form-floating.mb-4
-						= pn.text_field :phone_number, maxlength: 16, placeholder: "Alternate Phone", class: "border border-dark form-control", id: "alternatePhone"
-						= pn.label :phone_number, "Alternate Phone"
-
-					.row.mb-4
-						- phone_service_types.each do |serv_type|
-							.col-md-4.d-grid.d-block.mb-2
-								= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
-								= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
-
+			
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_covid_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"
-:javascript
-	const isNumericInput = (event) => {
-	const key = event.keyCode;
-		return ((key >= 48 && key <= 57) || // Allow number line
-		(key >= 96 && key <= 105) // Allow number pad
-	);
-	};
-
-	const isModifierKey = (event) => {
-		const key = event.keyCode;
-		return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
-			(key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
-			(key > 36 && key < 41) || // Allow left, up, right, down
-			(
-				(event.ctrlKey === true || event.metaKey === true) &&
-				(key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
-			)
-	};
-
-	const enforceFormat = (event) => {
-		if(!isNumericInput(event) && !isModifierKey(event)){
-			event.preventDefault();
-		}
-	};
-
-	const formatToPhone = (event) => {
-		if(isModifierKey(event)) {return;}
-
-		const input = event.target.value.replace(/\D/g,'').substring(0,10); // First ten digits of input only
-		const areaCode = input.substring(0,3);
-		const middle = input.substring(3,6);
-		const last = input.substring(6,10);
-
-		if(input.length > 6){event.target.value = `(${areaCode}) ${middle} - ${last}`;}
-		else if(input.length > 3){event.target.value = `(${areaCode}) ${middle}`;}
-		else if(input.length > 0){event.target.value = `(${areaCode}`;}
-	};
-
-	const inputElement1 = document.getElementById('primaryPhone');
-	inputElement1.addEventListener('keydown',enforceFormat);
-	inputElement1.addEventListener('keyup',formatToPhone);
-
-	const inputElement2 = document.getElementById('alternatePhone');
-	inputElement2.addEventListener('keydown',enforceFormat);
-	inputElement2.addEventListener('keyup',formatToPhone);
-
-						

@@ -11,5 +11,6 @@ class User < ApplicationRecord
   has_many :events, through: :event_attendees
   has_many :camp_applications
   has_many :camps, through: :camp_applications
+  has_many :phone_numbers
   
 end

@@ -2,6 +2,7 @@
   .row.mb-2
     %div
       = f.hidden_field :name_type, value: name_type
+      %strong (#{name_type})
     .col-md-5
       .form-floating
         = f.text_field :first_name, placeholder: "First Name", class: "border border-dark form-control"

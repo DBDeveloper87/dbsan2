@@ -7,3 +7,11 @@ p {
 li {
 	margin-bottom: 1.5rem;
 }
+.form-floating.required label:after {
+	content: '*';
+	color: red;
+}
+.fieldset.required legend:after {
+	content: '*';
+	color: 'red';
+}

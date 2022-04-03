@@ -9,7 +9,7 @@
 		%p I hereby irrevocably authorize the above mentioned business to edit, alter, copy, exhibit, publish, or distribute any photos, images, videos, or audio recordings for any lawful purpose. I waive any claims or any right to royalties or other compensation arising or related to the use of the photos, images, videos, or audio recordings.
 		
 		= form_with(model: [camp, application, permission]) do |f|
-			%fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend I have read and grant DBRIB permission.
 
 				.row.mb-4
@@ -27,7 +27,7 @@
 			.row
 				.col-6
 					.row.p-2
-						= link_to "Go Back", edit_camp_camp_application_camp_application_c3_path(@camp, @application, @application.camp_application_c3), class: "btn btn-secondary btn-lg", role: "button"
+						= link_to "Go Back", new_camp_camp_application_camp_application_c3_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"
