@@ -1,0 +1,8 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		- unless @application.camp_application_covid.vaccinated?
+			%h1 Sorry, #{@application.user.profile.first_name}!
+			%p Due to working in close proximity and using touch based communication, we prefer all our volunteers, participants, and staff to be vaccinated to keep everyone safe and healthy. You are welcome to apply again when you have been vaccinated.
+
+			.row.mb-4
+				= link_to "Go Back", :back, class: "btn btn-secondary btn-lg", role: "button"

@@ -1,0 +1,2 @@
+module CampApplicationCommitmentsHelper
+end

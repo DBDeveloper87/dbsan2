@@ -1,0 +1,20 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Shifts
+
+		%p Daily Breaks will be provided to everyone
+
+		%p All volunteers will be working a maximum of 2 shifts per day with the 3rd shift being off for your pleasure.
+
+		= form_with(model: [camp, application, shift]) do |f|
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				= render '/shared/check_box_group', f: f, inst: @shift, legend: "Please select which two shifts you are able to work", helper_text: nil, this_method: camp_shifts, attribute: "shifts", cols: nil
+				
+					
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", new_camp_camp_application_camp_application_ca_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

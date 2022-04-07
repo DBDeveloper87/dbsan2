@@ -1,0 +1,33 @@
+- if current_user.phone_numbers.where(phone_type: "Alternate Phone").present?
+	%p You already have an Alternate Phone on file with the DeafBlind Support and Access Network (DBSAN).  Below is what we have.  You may update it.
+
+	- @alternate = current_user.phone_numbers.where(phone_type: "Alternate Phone")
+	= f.fields_for :phone_numbers, @alternate do |pn|
+					
+		.form-floating.mb-4
+			= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "alternatePhone"
+			= pn.label :phone_number, "Phone Number", for: "alternatePhone"
+
+		.row.mb-4
+			- phone_service_types.each do |serv_type|
+				.col-md-4.d-grid.d-block.mb-2
+					= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+					= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+		.d-none
+			= pn.hidden_field :user_id, value: current_user.id
+							
+- else
+	= f.fields_for :phone_numbers, pi.phone_numbers.build do |pn|
+					
+		.form-floating.mb-4
+			= pn.text_field :phone_number,maxlength: 16,  placeholder: "Phone Number", class: "border border-dark form-control", id: "alternatePhone"
+			= pn.label :phone_number, "Phone Number", for: "alternatePhone"
+
+		.row.mb-4
+			- phone_service_types.each do |serv_type|
+				.col-md-4.d-grid.d-block.mb-2
+					= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+					= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+		.d-none
+			= pn.hidden_field :user_id, value: current_user.id
+			= pn.hidden_field :phone_type, value: "Alternate Phone"

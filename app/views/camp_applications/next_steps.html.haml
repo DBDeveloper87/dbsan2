@@ -1,10 +1,21 @@
 .container.mt-4
 	.col-md-8.mx-auto
-		%h1 Next Steps
+		- if @application.status == "Ready to Submit"
+			%p The Retreat Team will meet in February/ March to discuss all the applicants. Please understand we will have a max of 20 DeafBlind participants, but it may be less depending on the COVID-19 restrictions that are set by the state. If you have not been accepted, you will be put on the waiting list for the next retreat. 
+
+			%p Upon approval, we will: 
+
+			%p Set up a meeting on FaceTime, Zoom, or VP for you to show us your vaccination card.  Please do not email us a picture. 
+
+			%p Send you the transportation form
+
+			%p Send you information to pay for the retreat. 
+
 		.row
 			.col-6
 				.row.p-2
 					= link_to "Go Back", :back, class: "btn btn-secondary btn-lg", role: "button"
-				-#.col-6
-					-#.row.p-2
-						-#= f.submit "Continue", class: "btn btn-primary btn-lg"
+			.col-6
+				.row.p-2
+					= button_to "Submit Application", camp_camp_application_submit_application_path(@application.camp, @application), method: :post, class: "btn btn-primary btn-lg d-block"
+      

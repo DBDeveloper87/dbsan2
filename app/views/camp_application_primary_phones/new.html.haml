@@ -1,0 +1,24 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Primary Phone (requird)
+
+		%p Your primary phone normally would be on the previous screen; however, due to technical issues we had to put it on a seperate screen for now.  Please provide your primary phone.
+
+		
+		= form_with(url: camp_camp_application_camp_application_primary_phone_new_path(@camp, @application), method: :post) do |f|
+			.form-floating.mb-4
+				= f.text_field :phone_number, placeholder: "Phone Number", class: "border border-dark form-control"
+				= f.label :phone_number, "Phone Number"
+
+			.row.mb-4
+				- phone_service_types.each do |serv_type|
+					.col-md-4.d-grid.d-block.mb-2
+						= f.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+						= f.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+	
+
+			.row
+				= f.hidden_field :phone_type, value: "Primary Phone"
+				= f.hidden_field :camp_application_pi_id, value: @application.camp_application_pi.id
+				= f.hidden_field :user_id, value: current_user.id
+				= f.submit "save", class: "btn btn-primary btn-lg"

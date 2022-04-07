@@ -1,0 +1,8 @@
+.mt-2
+	= form_with(model: phone, url: camp_camp_application_primary_phone_path(camp, application)) do |pn|
+		.form-floating.mb-4
+			= pn.text_field :phone_number, placeholder: "Phone Number", class: "border border-dark form-control"
+			= pn.label :phone_number, "Phone Number"
+		.row
+			= pn.hidden_field :user_id, value: current_user.id
+			= pn.submit "save"

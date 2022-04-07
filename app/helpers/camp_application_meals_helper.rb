@@ -4,8 +4,8 @@ module CampApplicationMealsHelper
 			["omnivore", "Omnivore (Can eat anything)"],
 			["vegetarian", "Vegetarian (No meat)"],
 			["vegan", "Vegan (No eggs, dairy, or any product derived from an animal)"],
-			["paleo", "Paleo"],
-			["keto", "Keto"]
+			["paleo", "Paleo (a diet similar to 10,000 years ago)"],
+			["keto", "Keto (low carb)"]
 		]
 	end
 

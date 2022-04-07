@@ -19,7 +19,11 @@ class CampApplicationMatchingsController < ApplicationController
 
 		respond_to do |format|
 			if @match.save
-				format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
+				if @application.camp_application_type.kind == "Volunteer"
+					format.html { redirect_to new_camp_camp_application_camp_application_ceu_path(@camp, @application) }
+				elsif @application.camp_application_type.kind == "Participant"
+					format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
+				end
 			else
 				render :new
 			end
@@ -29,7 +33,11 @@ class CampApplicationMatchingsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @match.update(matching_params)
-				format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
+				if @application.camp_application_type.kind == "Volunteer"
+					format.html { redirect_to new_camp_camp_application_camp_application_ceu_path(@camp, @application) }
+				elsif @application.camp_application_type.kind == "Participant"
+					format.html {redirect_to new_camp_camp_application_camp_application_lodging_path(@camp, @application) }
+				end
 			else
 				render :edit
 			end

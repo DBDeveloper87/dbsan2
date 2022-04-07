@@ -1,0 +1,41 @@
+.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+	%legend What vaccinations have you received?
+	.row.mb-4
+		.col-12.d-grid.d-block.mb-2
+			= f.check_box :vaccination_type, { multiple: true, class: "btn-check", data:{action: 'covid#showFirstShot'}  }, "One shot of Johnson & Johnson", false
+			= f.label :vaccination_type, "One shot of Johnson & Johnson", value: "One shot of Johnson & Johnson", class: "btn btn-outline-dark btn-lg text-start"
+					
+		.col-12.d-grid.d-block.mb-2
+			= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "One shot of Pfizer or Moderna", false
+			= f.label :vaccination_type, "One shot of Pfizer or Moderna", value: "One shot of Pfizer or Moderna", class: "btn btn-outline-dark btn-lg text-start"
+					
+		.col-12.d-grid.d-block.mb-2
+			= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "Two shots of Pfizer or Moderna", false
+			= f.label :vaccination_type, "Two shots of Pfizer or Moderna", value: "Two shots of Pfizer or Moderna", class: "btn btn-outline-dark btn-lg text-start"
+					
+		.col-12.d-grid.d-block.mb-2
+			= f.check_box :vaccination_type, { multiple: true, class: "btn-check" }, "Booster shot", false
+			= f.label :vaccination_type, "Booster shot", value: "Booster shot", class: "btn btn-outline-dark btn-lg text-start"
+				
+.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+	%legend Date of first shot
+
+	.input-group.mb-4
+		= f.date_select :first_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+				
+.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+	%legend Date of second shot
+
+	.input-group.mb-4
+		= f.date_select :second_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+				
+.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+	%legend Date of booster shot
+
+	.input-group.mb-4
+		= f.date_select :booster_shot, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: (Date.today.year), end_year: (2020)}, {class: "form-select form-select-lg border border-dark"}
+					
+			
+		
+
+			

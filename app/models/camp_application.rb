@@ -15,4 +15,9 @@ class CampApplication < ApplicationRecord
   has_one :camp_application_c3, dependent: :destroy
   has_one :camp_application_permission, dependent: :destroy
   has_one :camp_application_covid, dependent: :destroy
+  has_one :camp_application_ceu, dependent: :destroy
+  has_one :camp_application_training, dependent: :destroy
+  has_one :camp_application_ca, dependent: :destroy
+  has_one :camp_application_shift, dependent: :destroy
+  has_one :camp_application_commitment, dependent: :destroy
 end

@@ -3,17 +3,19 @@
 		.justify-content-start
 			%button.navbar-toggler{type: "button", data:{bs:{toggle: "offcanvas", target: "#offcanvasNavbar"}}, aria:{controls: "offcanvasNavbar", label: "Menu"}}
 				%span.navbar-toggler-icon
-			%a.navbar-brand{href: "#"} DBSAN
+			= link_to "DBSAN", root_path, class: "navbar-brand"
 			.offcanvas.offcanvas-start{tabindex: "-1", id: "offcanvasNavbar", aria:{labelledby: "offcanvasNavbarLabel"}}
 				.offcanvas-header
 					%span.offcanvas-title.text-dark{id: "offcanvasNavbarLabel"} DBSAN Menu
 					%button.btn-close.text-reset{type: "button", data:{bs:{dismiss: "offcanvas"}}, aria:{label: "Close"}}
 				.offcanvas-body
 					%ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+						-#%li.nav-item.mb-0
+							-#= link_to "Events", root_path, class: "nav-link text-dark"
+						-#%li.nav-item.mb-0
+							-#= link_to "Videos", root_path, class: "nav-link text-dark"
 						%li.nav-item.mb-0
-							= link_to "Events", root_path, class: "nav-link text-dark"
-						%li.nav-item.mb-0
-							= link_to "Videos", root_path, class: "nav-link text-dark"
+							= link_to "Camps", camps_path(view: "all"), class: "nav-link text-dark"
 						%li.nav-item.mb-0
 							= link_to "About", about_path, class: "nav-link text-dark"
 						%li.nav-item.mb-0
@@ -25,6 +27,8 @@
 					%li.nav-item.dropdown.mb-0
 						%a.nav-link.dropdown-toggle.text-light{data:{bs:{toggle: "dropdown"}}, href: "#", role: "button", aria:{expanded: "false"}} #{current_user.profile.first_name}
 						%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+							%li.mb-1
+								= link_to "My Camps", camps_path(view: "current_user"), class: "nav-link text-dark"
 							%li.mb-1
 								= button_to "Edit Account", edit_user_registration_path(current_user), class: "dropdown-item border", method: :get
 							%li.mb-1
@@ -53,13 +57,15 @@
 %nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top.d-print-none.d-none.d-sm-none.d-md-block
 	.container
 		.justify-content-start
-			%a.navbar-brand{href: "#"} DBSAN
+			= link_to "DBSAN", root_path, class: "navbar-brand"
 		.justify-content-center.mx-auto
 			%ul.navbar-nav
+				-#%li.nav-item.mb-0
+					-#= link_to "Events", root_path, class: "nav-link text-light"
+				-#%li.nav-item.mb-0
+					-#= link_to "Videos", root_path, class: "nav-link text-light"
 				%li.nav-item.mb-0
-					= link_to "Events", root_path, class: "nav-link text-light"
-				%li.nav-item.mb-0
-					= link_to "Videos", root_path, class: "nav-link text-light"
+					= link_to "Camps", camps_path(view: "all"), class: "nav-link text-light"
 				%li.nav-item.mb-0
 					= link_to "About", about_path, class: "nav-link text-light"
 				%li.nav-item.mb-0
@@ -71,6 +77,9 @@
 					%li.nav-item.dropdown.mb-0
 						%a.nav-link.dropdown-toggle.text-light{data:{bs:{toggle: "dropdown"}}, href: "#", role: "button", aria:{expanded: "false"}} #{current_user.profile.first_name}
 						%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+							
+							%li.mb-0
+								= link_to "My Camps", camps_path(view: "current_user"), class: "nav-link text-dark"
 							%li.mb-1
 								= button_to "Edit Account", edit_user_registration_path(current_user), class: "dropdown-item border", method: :get
 							%li.mb-1

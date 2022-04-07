@@ -70,13 +70,99 @@
 						#{a.city}, #{a.state_province.code} #{a.zippostal} <br>
 						#{a.county.name}, #{a.state_province.country.name} <br>
 			
-			-#= render "phone_number"
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Primary Phone
+				- if current_user.phone_numbers.count == 0
+					= f.fields_for :phone_numbers, pi.phone_numbers.build do |pn|
+					
+						.form-floating.mb-4
+							= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "primaryPhone"
+							= pn.label :phone_number, "Phone Number", for: "primaryPhone"
 
+						.row.mb-4
+							- phone_service_types.each do |serv_type|
+								.col-md-4.d-grid.d-block.mb-2
+									= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+									= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+						.d-none
+							= pn.hidden_field :user_id, value: current_user.id
+							= pn.hidden_field :phone_type, value: "Primary Phone"
+
+				- elsif current_user.phone_numbers.count > 0
+					= render 'edit_primary_phone', f: f, camp: camp, application: application, pi: pi
 			
-			.row
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Alternate Phone
+				- if current_user.phone_numbers.count == 0
+					= f.fields_for :phone_numbers, pi.phone_numbers.build do |pn|
+					
+						.form-floating.mb-4
+							= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "alternatePhone"
+							= pn.label :phone_number, "Phone Number", for: "alternatePhone"
+
+						.row.mb-4
+							- phone_service_types.each do |serv_type|
+								.col-md-4.d-grid.d-block.mb-2
+									= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+									= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+						.d-none
+							= pn.hidden_field :user_id, value: current_user.id
+							= pn.hidden_field :phone_type, value: "Alternate Phone"
+				- elsif current_user.phone_numbers.count > 0
+					= render "edit_alternate_phone", f: f, camp: camp, application: application, pi: pi
+
+			.row	
 				.col-6
 					.row.p-2
 						= link_to "Go Back", new_camp_camp_application_camp_application_covid_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"
+
+:javascript
+	const isNumericInput = (event) => {
+	const key = event.keyCode;
+		return ((key >= 48 && key <= 57) || // Allow number line
+		(key >= 96 && key <= 105) // Allow number pad
+	);
+	};
+
+	const isModifierKey = (event) => {
+		const key = event.keyCode;
+		return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
+			(key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
+			(key > 36 && key < 41) || // Allow left, up, right, down
+			(
+				(event.ctrlKey === true || event.metaKey === true) &&
+				(key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+			)
+	};
+
+	const enforceFormat = (event) => {
+		if(!isNumericInput(event) && !isModifierKey(event)){
+			event.preventDefault();
+		}
+	};
+
+	const formatToPhone = (event) => {
+		if(isModifierKey(event)) {return;}
+
+		const input = event.target.value.replace(/\D/g,'').substring(0,10); // First ten digits of input only
+		const areaCode = input.substring(0,3);
+		const middle = input.substring(3,6);
+		const last = input.substring(6,10);
+
+		if(input.length > 6){event.target.value = `(${areaCode}) ${middle} - ${last}`;}
+		else if(input.length > 3){event.target.value = `(${areaCode}) ${middle}`;}
+		else if(input.length > 0){event.target.value = `(${areaCode}`;}
+	};
+
+	const inputElement1 = document.getElementById('primaryPhone');
+	inputElement1.addEventListener('keydown',enforceFormat);
+	inputElement1.addEventListener('keyup',formatToPhone);
+
+	const inputElement2 = document.getElementById('alternatePhone');
+	inputElement2.addEventListener('keydown',enforceFormat);
+	inputElement2.addEventListener('keyup',formatToPhone);
+
+						

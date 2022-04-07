@@ -16,24 +16,28 @@
 							= f.radio_button :contact_relationship,  relationship.first, class: "btn-check"
 							- symlabel = ("contact_relationship_" + relationship.first).to_sym
 							= f.label symlabel, relationship.last, class: "btn btn-outline-dark btn-lg text-start"
-			
 			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				= f.fields_for :phone_number, PhoneNumber.new do |pn|
-					%legend Emergency Contact Phone
+				%legend Emergency Contact Phone
+				- if current_user.phone_numbers.count == 0
+					= f.fields_for :phone_number, contact.build_phone_number do |pn|
+					
+						.form-floating.mb-4
+							= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "emergencyPhone"
+							= pn.label :phone_number, "Phone Number", for: "emergencyPhone"
 
-					.row
-						= pn.hidden_field :phone_type, value: "Emergency Phone"
+						.row.mb-4
+							- phone_service_types.each do |serv_type|
+								.col-md-4.d-grid.d-block.mb-2
+									= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+									= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+						.d-none
+							= pn.hidden_field :user_id, value: current_user.id
+							= pn.hidden_field :phone_type, value: "Emergency Contact Phone"
+				- elsif current_user.phone_numbers.count > 0
+					= render "edit_emergency_phone", f: f, camp: camp, application: application, contact: contact
 
-					.form-floating.mb-4
-						= pn.text_field :phone_number, maxlength: 16, placeholder: "Primary Phone", class: "border border-dark form-control", id: "emergencyPhone"
-						= pn.label :phone_number, "Emergency Contact Phone"
-
-					.row.mb-4
-						- phone_service_types.each do |serv_type|
-							.col-md-4.d-grid.d-block.mb-2
-								= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
-								= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
 			
+
 			.row
 				.col-6
 					.row.p-2

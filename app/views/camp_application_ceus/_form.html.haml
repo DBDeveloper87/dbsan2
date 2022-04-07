@@ -1,0 +1,25 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Continuing Education
+
+		%p CEUs may be offered but not guaranteed. For work related CEUs, please discuss with your HR department.
+
+		= form_with(model: [@camp, @application, @ceu]) do |f|
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Are you certified by one of the following? (optional)
+
+				.row.mb-4
+					.d-grid.d-block.mb-2
+						= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", false
+						= f.label :certifications, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", value: "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", class: "btn btn-outline-dark btn-lg text-start"
+					.d-grid.d-block.mb-2
+						= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Board for the Evaluation of Interpreters (BEI)", false
+						= f.label :certifications, "Board for the Evaluation of Interpreters (BEI)", value: "Board for the Evaluation of Interpreters (BEI)", class: "btn btn-outline-dark btn-lg text-start"
+			
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", new_camp_camp_application_camp_application_matching_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

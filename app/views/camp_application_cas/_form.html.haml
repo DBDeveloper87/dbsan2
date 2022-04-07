@@ -1,0 +1,98 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1 Communication Access
+
+		= form_with(model: [camp, application, ca]) do |f|
+
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Please rate your Sign Language skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+
+				.row.mb-4
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "0", class: "btn-check"
+						= f.label :sign_language_0, "0", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "1", class: "btn-check"
+						= f.label :sign_language_1, "1", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "2", class: "btn-check"
+						= f.label :sign_language_2, "2", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "3", class: "btn-check"
+						= f.label :sign_language_3, "3", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "4", class: "btn-check"
+						= f.label :sign_language_4, "4", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :sign_language,  "5", class: "btn-check"
+						= f.label :sign_language_5, "5", class: "btn btn-outline-dark btn-lg text-start"
+
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Please rate your Tactile (TASL) skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+
+				.row.mb-4
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "0", class: "btn-check"
+						= f.label :tactile_0, "0", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "1", class: "btn-check"
+						= f.label :tactile_1, "1", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "2", class: "btn-check"
+						= f.label :tactile_2, "2", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "3", class: "btn-check"
+						= f.label :tactile_3, "3", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "4", class: "btn-check"
+						= f.label :tactile_4, "4", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :tactile,  "5", class: "btn-check"
+						= f.label :tactile_5, "5", class: "btn btn-outline-dark btn-lg text-start"
+			
+			.fieldset.required.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Please rate your ProTactile (PT) skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+				
+				.row.mb-4
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "0", class: "btn-check"
+						= f.label :pt_0, "0", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "1", class: "btn-check"
+						= f.label :pt_1, "1", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "2", class: "btn-check"
+						= f.label :pt_2, "2", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "3", class: "btn-check"
+						= f.label :pt_3, "3", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "4", class: "btn-check"
+						= f.label :pt_4, "4", class: "btn btn-outline-dark btn-lg text-start"
+
+					.col-1.d-grid.d-block.mx-auto
+						= f.radio_button :pt,  "5", class: "btn-check"
+						= f.label :pt_5, "5", class: "btn btn-outline-dark btn-lg text-start"
+					
+
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", new_camp_camp_application_camp_application_training_path(@camp, @application), class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= f.submit "Continue", class: "btn btn-primary btn-lg"

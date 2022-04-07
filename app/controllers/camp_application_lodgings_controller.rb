@@ -49,6 +49,6 @@ class CampApplicationLodgingsController < ApplicationController
 		end
 
 		def lodging_params
-			params.require(:camp_application_lodging).permit(:difficulty_stairs, :difficulty_walking, :medical_device_charging, :mobility_aids, :on_premises, :service_animal, :share_service_animal, :share_smoker)
+			params.require(:camp_application_lodging).permit(:tent_or_cabin, :bring_tent, :difficulty_stairs, :difficulty_walking, :medical_device_charging, :mobility_aids, :on_premises, :service_animal, :share_service_animal, :share_smoker, share_with: [])
 		end
 end

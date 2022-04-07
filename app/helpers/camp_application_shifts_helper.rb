@@ -1,0 +1,2 @@
+module CampApplicationShiftsHelper
+end

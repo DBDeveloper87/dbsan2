@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
-	belongs_to :profile
-	belongs_to :camp_application_pi
-	belongs_to :state_province
-	belongs_to :county
+	belongs_to :profile, optional: true
+	belongs_to :camp_application_pi, optional: true
+	belongs_to :state_province, optional: true
+	belongs_to :county, optional: true
 end

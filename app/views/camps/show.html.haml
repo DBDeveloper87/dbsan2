@@ -3,27 +3,24 @@
 		%h1 #{@camp.title}
 
 		- Time.use_zone("Eastern Time (US & Canada)") do
-			%p.text-muted 
-				= @camp.start.strftime("%A, %B %d, %Y %l:%M %p")
-				to 
-				= @camp.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")
-		%p #{notice}
-		= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+			%p.text-muted From #{@camp.start.strftime("%A, %B %d, %Y %l:%M %p")} to #{@camp.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")}
+		
+		.row.mb-4
+			.col-md-4.d-grid.d-block
+				= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+			.col-md-4.d-grid.d-block
+				= link_to "Edit", edit_camp_path(@camp), class: "btn btn-secondary btn-lg"
+			.col-md-4.d-grid.d-block
+				= button_to "Delete", camp_path(@camp), form: { data: { turbo:false }}, method: :delete, class: "btn btn-danger btn-lg"
 
-		%h2.mt-4 Description
+		
+
+		%h2 Description
 		%p #{@camp.description}
 
 		%h2 Application Types
-		= link_to "Add Type", new_camp_camp_application_type_path(@camp)
 		- @camp.camp_application_types.each do |type|
-			%p #{type.kind}
-		%h2 Applications
-		- @applications.each do |app|
-			.row
-				.col-md-4
-					= app.status
-				.col-md-6
-					= app.user.profile.first_name
-					= app.user.profile.last_name
-				.col-md-2
-					= app.camp_application_type.kind
+			%h3 #{type.kind} -- #{number_to_currency((type.cost.to_f / 100), {precision: 0})} #{link_to "Edit", edit_camp_camp_application_type_path(type.camp, type)}
+
+			%p #{type.description}
+			

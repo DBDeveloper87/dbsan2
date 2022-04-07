@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_194015) do
+ActiveRecord::Schema.define(version: 2022_04_06_200218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -116,12 +116,30 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
     t.index ["camp_application_id"], name: "index_camp_application_c3s_on_camp_application_id"
   end
 
+  create_table "camp_application_cas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "sign_language"
+    t.string "tactile"
+    t.string "pt"
+    t.uuid "camp_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_cas_on_camp_application_id"
+  end
+
   create_table "camp_application_ceus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "camp_application_id", null: false
     t.text "certifications"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["camp_application_id"], name: "index_camp_application_ceus_on_camp_application_id"
+  end
+
+  create_table "camp_application_commitments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "camp_application_id", null: false
+    t.boolean "commit"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_commitments_on_camp_application_id"
   end
 
   create_table "camp_application_covids", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -168,6 +186,9 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
     t.boolean "medical_device_charging"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "tent_or_cabin"
+    t.boolean "bring_tent"
+    t.text "share_with"
     t.index ["camp_application_id"], name: "index_camp_application_lodgings_on_camp_application_id"
   end
 
@@ -235,12 +256,30 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
     t.index ["camp_application_id"], name: "index_camp_application_pis_on_camp_application_id"
   end
 
+  create_table "camp_application_shifts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "shifts"
+    t.uuid "camp_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_shifts_on_camp_application_id"
+  end
+
+  create_table "camp_application_trainings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "available"
+    t.text "training_history"
+    t.uuid "camp_application_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_id"], name: "index_camp_application_trainings_on_camp_application_id"
+  end
+
   create_table "camp_application_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "kind"
     t.text "description"
     t.uuid "camp_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "cost"
     t.index ["camp_id"], name: "index_camp_application_types_on_camp_id"
   end
 
@@ -305,11 +344,13 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
   create_table "phone_numbers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "camp_application_pi_id"
+    t.uuid "camp_application_emergency_id"
     t.string "phone_type"
     t.string "phone_number"
     t.text "service_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["camp_application_emergency_id"], name: "index_phone_numbers_on_camp_application_emergency_id"
     t.index ["camp_application_pi_id"], name: "index_phone_numbers_on_camp_application_pi_id"
     t.index ["user_id"], name: "index_phone_numbers_on_user_id"
   end
@@ -374,6 +415,9 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_salt"
+    t.boolean "admin"
+    t.boolean "tos"
+    t.datetime "tos_aggreed_at", precision: 6
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -409,7 +453,9 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
   add_foreign_key "bylaw_articles", "bylaws"
   add_foreign_key "camp_application_bis", "camp_applications"
   add_foreign_key "camp_application_c3s", "camp_applications"
+  add_foreign_key "camp_application_cas", "camp_applications"
   add_foreign_key "camp_application_ceus", "camp_applications"
+  add_foreign_key "camp_application_commitments", "camp_applications"
   add_foreign_key "camp_application_covids", "camp_applications"
   add_foreign_key "camp_application_emergencies", "camp_applications"
   add_foreign_key "camp_application_incs", "camp_applications"
@@ -420,6 +466,8 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
   add_foreign_key "camp_application_medicals", "camp_applications"
   add_foreign_key "camp_application_permissions", "camp_applications"
   add_foreign_key "camp_application_pis", "camp_applications"
+  add_foreign_key "camp_application_shifts", "camp_applications"
+  add_foreign_key "camp_application_trainings", "camp_applications"
   add_foreign_key "camp_application_types", "camps"
   add_foreign_key "camp_applications", "camp_application_types"
   add_foreign_key "camp_applications", "camps"
@@ -427,6 +475,7 @@ ActiveRecord::Schema.define(version: 2022_04_03_194015) do
   add_foreign_key "counties", "state_provinces"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
+  add_foreign_key "phone_numbers", "camp_application_emergencies"
   add_foreign_key "phone_numbers", "camp_application_pis"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "profiles", "users"

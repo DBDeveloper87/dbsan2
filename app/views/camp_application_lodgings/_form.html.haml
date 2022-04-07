@@ -2,6 +2,12 @@
 	.col-md-8.mx-auto
 		%h1 Lodging Information
 
+		We have two options for staying on Isola Bella. As this is mainly a camp, we want to give people the full camping experience. 
+
+		%p Staying in a cabin - these cabins have 7 bunk beds, with a total of 14 beds. There are two sets of three cabins. Each set of cabins has a shared bath house with bathrooms and showers.
+
+		%p We also have space to set up tents. Please understand that if you select to stay in a tent, you will be committing to staying there for the duration of the retreat. Space is limited, and if you agree to stay in a tent, you can't change to a bed later.
+
 		= form_with(model: [camp, application, lodging]) do |f|
 			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you be staying on the property or commuting each day? 
@@ -17,6 +23,42 @@
 							= f.radio_button :on_premises,  value, class: "btn-check"
 							- symlabel = ("on_premises_" + soc.first).to_sym
 							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Would you prefer to stay in a cabin or tent?
+
+				.row.mb-4
+					- tent_or_cabin.each do |toc|
+						.col-md-6.d-grid.d-block.mb-2
+							= f.radio_button :tent_or_cabin,  toc.downcase, class: "btn-check"
+							- symlabel = ("tent_or_cabin_" + toc.downcase).to_sym
+							= f.label symlabel, toc, class: "btn btn-outline-dark btn-lg text-start"
+
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend If preferring to stay in a tent, would you bring your own, or have us provide the tent for you? 
+
+				.row.mb-4
+					- bring_tent.each do |soc|
+						.d-grid.d-block.mb-2
+							- value = nil
+							- if soc.first == "true"
+								- value = true
+							- else
+								- value = false
+							= f.radio_button :bring_tent,  value, class: "btn-check"
+							- symlabel = ("bring_tent_" + soc.first).to_sym
+							= f.label symlabel, soc.last, class: "btn btn-outline-dark btn-lg text-start"
+
+			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+				%legend Please select the types of people you would be willing to share with.
+
+				.row.mb-4
+					- matchup_types.each do |object|
+						.col-md-4.d-grid.d-block.mb-2
+							= f.check_box :share_with, { multiple: true, class: "btn-check" }, object, false
+							= f.label :share_with, object, value: object, class: "btn btn-outline-dark btn-lg text-start"
+		
+			
 
 			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Will you share a cabin with a smoker?
@@ -119,9 +161,15 @@
 							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
 			.row
-				.col-6
-					.row.p-2
-						= link_to "Go Back", new_camp_camp_application_camp_application_matching_path(@camp), class: "btn btn-secondary btn-lg", role: "button"
+				- if application.camp_application_type.kind == "Volunteer"
+					.col-6
+						.row.p-2
+							= link_to "Go Back", new_camp_camp_application_camp_application_commitment_path(@camp), class: "btn btn-secondary btn-lg", role: "button"
+				-else
+					.col-6
+						.row.p-2
+							= link_to "Go Back", new_camp_camp_application_camp_application_matching_path(@camp), class: "btn btn-secondary btn-lg", role: "button"
+
 				.col-6
 					.row.p-2
 						= f.submit "Continue", class: "btn btn-primary btn-lg"

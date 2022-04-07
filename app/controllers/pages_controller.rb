@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
 	def home
 		@meta_title = "Home | DBSAN"
+		@camps = Camp.all
 	end
 
 	def who_we_are

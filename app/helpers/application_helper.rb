@@ -1,5 +1,40 @@
 module ApplicationHelper
 	
+	def tent_or_cabin
+		[
+			"Tent",
+			"Cabin"
+		]
+	end
+
+	def bring_tent
+		[
+			["true", "I will bring my own tent"],
+			["false", "I wish DBRIB to provide my tent"]
+		]
+	end
+
+	def camp_shifts
+		[
+			"1st shift - 8 am to 12:30 pm",
+			"2nd shift - 12:30 pm to 5 pm",
+			"3rd shift - 6 pm to 10 pm",
+			"Flexible (can work any shift, the scheduling team will determine which 2 shifts to work)"
+		]
+	end
+
+	def training_history
+		[
+			"Support Service Provider training",
+			"CoNavigator training",
+			"Communication Facilitator training",
+			"Haptics",
+			"ProTactile (basics)",
+			"ProTactile (advanced)",
+			"Tactile ASL  (TASL)",
+			"DeafBlind Workshops",
+		]
+	end
 
 	def vaccination_types
 		[
@@ -120,7 +155,7 @@ module ApplicationHelper
 		[
 			["5_4_or_shorter", "5\' 4\" or shorter"],
 			["5_5_to_5_10", "5\' 5\" to 5\' 10\""],
-			["5_10_to_6_2", "5\' 10\" to 6\' 2\""],
+			["5_11_to_6_2", "5\' 11\" to 6\' 2\""],
 			["6_3_or_taller", "6\' 3\" or taller"]
 		]
 	end

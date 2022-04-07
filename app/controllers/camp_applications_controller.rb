@@ -20,6 +20,26 @@ class CampApplicationsController < ApplicationController
 	end
 
 	def next_steps
+		@application = CampApplication.find(params[:camp_application_id])
+	end
+
+	def c3_error
+		@application = CampApplication.find(params[:camp_application_id])
+	end
+
+	def covid_error
+		@application = CampApplication.find(params[:camp_application_id])
+	end
+
+	def submit_application
+		@application = CampApplication.find(params[:camp_application_id])
+		@application.status = "Submitted"
+
+		respond_to do |format|
+			if @application.save
+				format.html { redirect_to root_path }
+			end
+		end
 	end
 
 	def create
@@ -27,6 +47,7 @@ class CampApplicationsController < ApplicationController
 
 		respond_to do |format|
       		if @application.save
+      			CampApplicationMailer.with(camp_application: @application).application_started.deliver_now
       			format.html {redirect_to new_camp_camp_application_camp_application_c3_path(@camp, @application) }
         	else
         		format.html { render :new }

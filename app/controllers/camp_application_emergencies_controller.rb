@@ -16,6 +16,8 @@ class CampApplicationEmergenciesController < ApplicationController
 
 	def create
 		@contact = @application.build_camp_application_emergency(emergency_params)
+		@application.status = "Ready to Submit"
+		@application.save
 
 		respond_to do |format|
 			if @contact.save
@@ -27,6 +29,8 @@ class CampApplicationEmergenciesController < ApplicationController
 	end
 
 	def update
+		@application.status = "Ready to Submit"
+
 		respond_to do |format|
 			if @contact.update(emergency_params)
 				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
@@ -49,6 +53,6 @@ class CampApplicationEmergenciesController < ApplicationController
 		end
 
 		def emergency_params
-			params.require(:camp_application_emergency).permit(:contact_full_name, :contact_relationship)
+			params.require(:camp_application_emergency).permit(:contact_full_name, :contact_relationship, phone_number_attributes: [:user_id, :camp_application_emergency_id, :phone_type, :phone_number, service_type: []])
 		end
 end

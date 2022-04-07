@@ -1,15 +1,15 @@
-.container.mb-4
-  - if user_signed_in?
-    %h1 Hello #{current_user.profile.first_name}
-  - else
-    %h1 Hello World
-  
-  - if user_signed_in?
-    = button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo: "false" }
-    = button_to "Edit Account", edit_user_registration_path(current_user), method: :get
+.container.mt-4
+  .col-md-8.mx-auto
+    %h1.text-center DeafBlind Support and Access Network
 
-  %p <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Link with href</a>
-  .collapse#collapseExample
-    .card.card-body
-      Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
-  
+    %p The DeafBlind Support and Access Network was founded with one simple goal – as a way to connect the DeafBlind community across the US. Since then, it has expanded the programs to educate the mainstream community to DeafBlind people and our culture.
+
+    %p At DBSAN, we’re dedicated to making a difference. Since 2020, we have provided support meetings, workshops, panels, and contests. Our goal is simple: is to provide the DeafBlind community with access, education, support, and networking. To do this, we need your help.   
+
+    %h2 Upcoming Camps and Retreats
+    - @camps.each do |c|
+      %h3 #{link_to c.title, camp_path(c)}
+
+      - Time.use_zone("Eastern Time (US & Canada)") do
+        %p.text-muted From #{c.start.strftime("%A, %B %d, %Y %l:%M %p")} to #{c.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")}
+    

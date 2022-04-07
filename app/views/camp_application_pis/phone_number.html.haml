@@ -1,8 +1,0 @@
-.container
-	= form_with(model: [@camp, @application, @phone], url: camp_camp_application_camp_application_pi_phone_path(@camp, @application, @application.camp_application_pi)) do |pn|
-		.form-floating
-			= pn.text_field :phone_number, placeholder: "Phone Number", class: "form-control"
-			= pn.label :phone_number, "Phone Number"
-		.row
-			= pn.hidden_field :camp_application_pi, value: @application.camp_application_pi.id
-			= pn.submit "save"

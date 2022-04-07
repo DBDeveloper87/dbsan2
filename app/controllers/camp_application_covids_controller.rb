@@ -19,7 +19,7 @@ class CampApplicationCovidsController < ApplicationController
 
 		respond_to do |format|
 			if @covid.save and !@covid.vaccinated?
-				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+				format.html {redirect_to camp_camp_application_covid_error_path(@camp, @application)}
 			elsif @covid and @covid.vaccinated?
 				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
 			elsif @covid.save
@@ -33,7 +33,7 @@ class CampApplicationCovidsController < ApplicationController
 	def update
 		respond_to do |format|
 			if @covid.update(covid_params) and !@covid.vaccinated?
-				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+				format.html {redirect_to camp_camp_application_covid_error_path(@camp, @application)}
 			elsif @covid.update(covid_params) and @covid.vaccinated?
 				format.html { redirect_to new_camp_camp_application_camp_application_pi_path(@camp, @application) }
 			elsif covid.update(covid_params)

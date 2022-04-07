@@ -20,7 +20,7 @@ class CampApplicationC3sController < ApplicationController
 
 		respond_to do |format|
 			if @c3.save and !@c3.agree?
-				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+				format.html {redirect_to camp_camp_application_c3_error_path(@camp, @application)}
 			elsif @c3.save and @c3.agree?
 				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
 			elsif @c3.save
@@ -34,7 +34,7 @@ class CampApplicationC3sController < ApplicationController
 	def update
 		respond_to do |format|
 			if @c3.update(c3_params) and !@c3.agree?
-				format.html {redirect_to camp_camp_application_next_steps_path(@camp, @application)}
+				format.html {redirect_to camp_camp_application_c3_error_path(@camp, @application)}
 			elsif @c3.update(c3_params) and @c3.agree?
 				format.html {redirect_to new_camp_camp_application_camp_application_permission_path(@camp, @application)}
 			elsif @c3.update(c3_params)
