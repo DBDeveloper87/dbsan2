@@ -2,7 +2,7 @@ class CampApplicationsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :get_camp, only: [:new, :create]
 	before_action :get_application, only: [:next_steps]
-	before_action :set_application, only: [:edit, :update]
+	before_action :set_application, only: [:edit, :update, :show]
 
 	def index
 	end
@@ -10,13 +10,18 @@ class CampApplicationsController < ApplicationController
 	def new
 		@application = @camp.camp_applications.build
 		@camp.camp_applications.each do |app|
-			if app.user_id == current_user.id
+			if app.user_id == current_user.id and app.status == "Submitted"
+				redirect_to camp_camp_application_path(@camp, app.id)
+			elsif app.user_id == current_user.id
 				redirect_to edit_camp_camp_application_path(@camp, app.id)
 			end
 		end
 	end
 
 	def edit	
+	end
+
+	def show
 	end
 
 	def success
