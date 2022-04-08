@@ -12,10 +12,10 @@
       %button{type: "button", class: "btn btn-primary", data:{bs:{toggle: "modal", target: "#updatePassword"}}} Update Password
       = render partial: 'users/registrations/modal', locals: {modal_id: "updatePassword", modal_title: "Update Password", local_partial: "update_password"}
     
-    .mt-2
-      %h2 Cancel Account
-      %p We are sorry to see you go, but you can always re-register at a later time. 
+    -#.mt-2
+      -#%h2 Cancel Account
+      -#%p We are sorry to see you go, but you can always re-register at a later time. 
 
-      .row
-        = button_to "Cancel my account", registration_path(resource_name), form: { data: { turbo:false }}, method: :delete, class: "btn btn-danger btn-lg d-block"
+      -#.row
+        -#= button_to "Cancel my account", registration_path(resource_name), form: { data: { turbo:false }}, method: :delete, class: "btn btn-danger btn-lg d-block"
       

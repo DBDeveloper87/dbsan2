@@ -5,8 +5,13 @@
 		%p.text-muted From #{@camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{@camp.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")}
 		
 		.row.mb-4
-			.col-md-4.d-grid.d-block
-				= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+			- if signed_in?
+				- unless @camp.camp_applications.map { |m| m.user_id == current_user&.id }
+					%p test
+			- else
+				.col-md-4.d-grid.d-block
+					= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+			
 			- if current_user&.admin?
 				.col-md-4.d-grid.d-block
 					= link_to "Edit", edit_camp_path(@camp), class: "btn btn-secondary btn-lg"
