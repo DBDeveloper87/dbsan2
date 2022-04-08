@@ -18,6 +18,9 @@
 		%p #{@camp.description}
 
 		%h2 Application Types
+		- if current_user&.admin?
+			.row.mb-4
+				= link_to "New Type", new_camp_camp_application_type_path(@camp), class: "btn btn-primary btn-lg", role: "button"
 		- @camp.camp_application_types.each do |type|
 			%h3 #{type.kind} -- #{number_to_currency((type.cost.to_f / 100), {precision: 0})} #{link_to "Edit", edit_camp_camp_application_type_path(type.camp, type)}
 
