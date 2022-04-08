@@ -52,7 +52,7 @@ class CampApplicationCeusController < ApplicationController
 		end
 
 		def ceu_params
-			params.require(:camp_application_ceu).permit(certifications: [])
+			params.require(:camp_application_ceu).permit(:certifications)
 		end
 
 end
