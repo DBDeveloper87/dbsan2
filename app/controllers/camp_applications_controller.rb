@@ -19,6 +19,10 @@ class CampApplicationsController < ApplicationController
 	def edit	
 	end
 
+	def success
+		@application = CampApplication.find(params[:camp_application_id])
+	end
+
 	def next_steps
 		@application = CampApplication.find(params[:camp_application_id])
 	end
@@ -37,7 +41,9 @@ class CampApplicationsController < ApplicationController
 
 		respond_to do |format|
 			if @application.save
-				format.html { redirect_to root_path }
+				CampApplicationMailer.with(camp_application: @application).submission_notification.deliver_now
+				CampApplicationMailer.with(camp_application: @application).submission_receipt.deliver_now
+				format.html { redirect_to camp_camp_application_success_path(@application.camp, @application) }
 			end
 		end
 	end

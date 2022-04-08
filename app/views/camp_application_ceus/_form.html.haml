@@ -10,11 +10,22 @@
 
 				.row.mb-4
 					.d-grid.d-block.mb-2
-						= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", false
-						= f.label :certifications, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", value: "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", class: "btn btn-outline-dark btn-lg text-start"
+						= f.radio_button :certifications,  "rid", class: "btn-check"
+						= f.label :certifications_rid, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", class: "btn btn-outline-dark btn-lg text-start"
 					.d-grid.d-block.mb-2
-						= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Board for the Evaluation of Interpreters (BEI)", false
-						= f.label :certifications, "Board for the Evaluation of Interpreters (BEI)", value: "Board for the Evaluation of Interpreters (BEI)", class: "btn btn-outline-dark btn-lg text-start"
+						= f.radio_button :certifications,  "bei", class: "btn-check"
+						= f.label :certifications_bei, "Board for the Evaluation of Interpreters (BEI)", class: "btn btn-outline-dark btn-lg text-start"
+					.d-grid.d-block.mb-2
+						= f.radio_button :certifications,  "none", class: "btn-check"
+						= f.label :certifications_none, "None of the above", class: "btn btn-outline-dark btn-lg text-start"
+					
+			
+
+						-#= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", false
+						-#= f.label :certifications, "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", value: "Registry of Interpreters for the Deaf (RID) -- CI/CT, CDI, NIC", class: "btn btn-outline-dark btn-lg text-start"
+					-#.d-grid.d-block.mb-2
+					-#	= f.check_box :certifications, { multiple: true, class: "btn-check" }, "Board for the Evaluation of Interpreters (BEI)", false
+						-#= f.label :certifications, "Board for the Evaluation of Interpreters (BEI)", value: "Board for the Evaluation of Interpreters (BEI)", class: "btn btn-outline-dark btn-lg text-start"
 			
 			.row
 				.col-6

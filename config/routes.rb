@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       post 'submit_application', to: 'camp_applications#submit_application'
       get 'c3_error', to: 'camp_applications#c3_error'
       get 'covid_error', to: 'camp_applications#covid_error'
+      get 'success', to: 'camp_applications#success'
     end
     resources :camp_application_types
   end

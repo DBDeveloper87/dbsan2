@@ -4,12 +4,12 @@
 
 		= form_with(model: [camp, application, pi]) do |f|
 			.row
-				.col-6.mb-4
+				.col-md-6.mb-4
 					.form-floating.required
 						= f.text_field :first_name, placeholder: "First (Preferred) Name (e.g. Jane)", required: true, class: "border border-dark form-control", value: current_user.profile.first_name
 						= f.label :first_name, "First (Preferred) Name (e.g. Jane)", aria:{hidden: "true"}
 						
-				.col-6.mb-4
+				.col-md-6.mb-4
 					.form-floating.required
 						= f.text_field :last_name, placeholder: "Last Name (e.g. Smith)", required: true, class: "border border-dark form-control", value: current_user.profile.last_name
 						= f.label :last_name, "Last Name (e.g. Smith)", aria:{hidden: "true"}
@@ -91,25 +91,25 @@
 				- elsif current_user.phone_numbers.count > 0
 					= render 'edit_primary_phone', f: f, camp: camp, application: application, pi: pi
 			
-			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				%legend Alternate Phone
-				- if current_user.phone_numbers.count == 0
-					= f.fields_for :phone_numbers, pi.phone_numbers.build do |pn|
-					
-						.form-floating.mb-4
-							= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "alternatePhone"
-							= pn.label :phone_number, "Phone Number", for: "alternatePhone"
+			-#.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			-#	%legend Alternate Phone
+			-#	- if current_user.phone_numbers.count == 0
+			-#		= f.fields_for :phone_numbers, pi.phone_numbers.build do |pn|
+			-#		
+			-#			.form-floating.mb-4
+			-#				= pn.text_field :phone_number, maxlength: 16, placeholder: "Phone Number", class: "border border-dark form-control", id: "alternatePhone"
+			-#				= pn.label :phone_number, "Phone Number", for: "alternatePhone"
 
-						.row.mb-4
-							- phone_service_types.each do |serv_type|
-								.col-md-4.d-grid.d-block.mb-2
-									= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
-									= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
-						.d-none
-							= pn.hidden_field :user_id, value: current_user.id
-							= pn.hidden_field :phone_type, value: "Alternate Phone"
-				- elsif current_user.phone_numbers.count > 0
-					= render "edit_alternate_phone", f: f, camp: camp, application: application, pi: pi
+			-#			.row.mb-4
+			-#				- phone_service_types.each do |serv_type|
+			-#					.col-md-4.d-grid.d-block.mb-2
+			-#						= pn.check_box :service_type, { multiple: true, class: "btn-check" }, serv_type, false
+			-#						= pn.label :service_type, serv_type, value: serv_type, class: "btn btn-outline-dark btn-lg text-start"
+			-#			.d-none
+			-#				= pn.hidden_field :user_id, value: current_user.id
+			-#				= pn.hidden_field :phone_type, value: "Alternate Phone"
+			-#	- elsif current_user.phone_numbers.count > 0
+			-#		= render "edit_alternate_phone", f: f, camp: camp, application: application, pi: pi
 
 			.row	
 				.col-6

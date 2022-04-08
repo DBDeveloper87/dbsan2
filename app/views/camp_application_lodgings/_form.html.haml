@@ -60,20 +60,21 @@
 		
 			
 
-			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
-				%legend Will you share a cabin with a smoker?
+			-#.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
+			-#	%legend Will you share a cabin with a smoker?
 
-				.row.mb-4
-					- yes_no.each do |tof|
-						.col-6.d-grid.d-block.mb-2
-							- value = nil
-							- if tof.first == "true"
-								- value = true
-							- else
-								- value = false
-							= f.radio_button :share_smoker,  value, class: "btn-check"
-							- symlabel = ("share_smoker_" + tof.first).to_sym
-							= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
+			-#	.row.mb-4
+					-#- yes_no.each do |tof|
+					-#	.col-6.d-grid.d-block.mb-2
+					-#		- value = nil
+					-#		- if tof.first == "true"
+					-#			- value = true
+					-#		- else
+					-#
+					-#			- value = false
+					-#		= f.radio_button :share_smoker,  value, class: "btn-check"
+					-#		- symlabel = ("share_smoker_" + tof.first).to_sym
+					-#		= f.label symlabel, tof.last, class: "btn btn-outline-dark btn-lg text-start"
 			
 			.fieldset.border.border-dark.ps-4.pe-4.pt-4.mb-4
 				%legend Do you have difficulty walking?
