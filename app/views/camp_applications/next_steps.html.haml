@@ -1,21 +1,30 @@
 .container.mt-4
 	.col-md-8.mx-auto
-		- if @application.status == "Ready to Submit"
-			%p The Retreat Team will meet in February/ March to discuss all the applicants. Please understand we will have a max of 20 DeafBlind participants, but it may be less depending on the COVID-19 restrictions that are set by the state. If you have not been accepted, you will be put on the waiting list for the next retreat. 
+		- unless current_user&.confirmed_at.nil?
+			- if @application.status == "Ready to Submit"
+				%p The Retreat Team will meet in February/ March to discuss all the applicants. Please understand we will have a max of 20 DeafBlind participants, but it may be less depending on the COVID-19 restrictions that are set by the state. If you have not been accepted, you will be put on the waiting list for the next retreat. 
 
-			%p Upon approval, we will: 
+				%p Upon approval, we will: 
 
-			%p Set up a meeting on FaceTime, Zoom, or VP for you to show us your vaccination card.  Please do not email us a picture. 
+				%p Set up a meeting on FaceTime, Zoom, or VP for you to show us your vaccination card.  Please do not email us a picture. 
 
-			%p Send you the transportation form
+				%p Send you the transportation form
 
-			%p Send you information to pay for the retreat. 
+				%p Send you information to pay for the retreat. 
 
-		.row
-			.col-6
-				.row.p-2
-					= link_to "Go Back", :back, class: "btn btn-secondary btn-lg", role: "button"
-			.col-6
-				.row.p-2
-					= button_to "Submit Application", camp_camp_application_submit_application_path(@application.camp, @application), method: :post, class: "btn btn-primary btn-lg d-block"
-      
+			.row
+				.col-6
+					.row.p-2
+						= link_to "Go Back", :back, class: "btn btn-secondary btn-lg", role: "button"
+				.col-6
+					.row.p-2
+						= button_to "Submit Application", camp_camp_application_submit_application_path(@application.camp, @application), method: :post, class: "btn btn-primary btn-lg d-block"
+
+		- else
+			%h1 Next Steps
+
+			%p Congratuations!  You have successfully gotten this far.  You are almost ready to submit.
+
+			%p Our records show that you have not yet confirmed your email address.  Please go to your inbox and find an email from DBSAN Support with subject line "Confirmation instructions".  In that email is a link to confirm your email.
+
+			%p Once that is complete, come back here and refresh this page.
