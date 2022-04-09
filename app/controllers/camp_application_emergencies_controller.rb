@@ -30,6 +30,7 @@ class CampApplicationEmergenciesController < ApplicationController
 
 	def update
 		@application.status = "Ready to Submit"
+		@application.save
 
 		respond_to do |format|
 			if @contact.update(emergency_params)
