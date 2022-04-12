@@ -2,7 +2,7 @@
 	.col-md-8.mx-auto
 		%h1 #{@camp.title}
 
-		%p.text-muted From #{@camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{@camp.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")}
+		%p.text-muted From #{@camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{@camp.end.strftime("%A, %B %d, %Y %l:%M %p (EST)")}
 		
 		.row.mb-4
 			- if signed_in?

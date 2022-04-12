@@ -10,5 +10,5 @@
     - @camps.each do |c|
       %h3 #{link_to c.title, camp_path(c)}
 
-      %p.text-muted From #{c.start.strftime("%A, %B %d, %Y %l:%M %p")} to #{c.end.strftime("%A, %B %d, %Y %l:%M %p (%Z)")}
+      %p.text-muted From #{c.start.strftime("%A, %B %d, %Y %l:%M %p")} to #{c.end.strftime("%A, %B %d, %Y %l:%M %p (EST)")}
     
