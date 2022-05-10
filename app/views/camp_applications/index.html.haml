@@ -18,6 +18,10 @@
 					%p 
 						%strong Applicant Type:
 						= app.camp_application_type.kind
+				- if app.user.confirmed_at.present?
+					%p 
+						%strong Confirmed At:
+						= app.user.confirmed_at
 				- if app.status.present?
 					%p 
 						%strong Status:
