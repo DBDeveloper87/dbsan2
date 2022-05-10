@@ -1,10 +1,13 @@
 class CampApplicationsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_camp, only: [:new, :create]
+	before_action :get_camp, only: [:new, :create, :index]
 	before_action :get_application, only: [:next_steps]
 	before_action :set_application, only: [:edit, :update, :show]
 
 	def index
+		if params[:filter] == "all"
+			@apps = @camp.camp_applications.all
+		end
 	end
 
 	def new
