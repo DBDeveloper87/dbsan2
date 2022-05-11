@@ -74,8 +74,10 @@
 			%h3.mt-4 Primary Address
 			- if @pi.address.present?
 				%address
-					= @pi.address.address_l1
-					= @pi.address.address_l2
+					#{@pi.address.address_l1} <br>
+					#{@pi.address.address_l2} <br>
+					#{@pi.address.city}, #{@pi.address.state_province.code} #{@pi.address.zippostal} <br>
+					
 
 				
 			
