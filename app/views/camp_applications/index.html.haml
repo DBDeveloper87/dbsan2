@@ -26,6 +26,8 @@
 					%p 
 						%strong Status:
 						= app.status
+				.d-grid.d-block
+					= link_to "View Application", camp_camp_application_path(@camp, app), class: "btn btn-primary btn-lg"
 				
 				
 					
