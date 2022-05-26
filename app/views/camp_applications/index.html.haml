@@ -2,9 +2,22 @@
 	.col-md-8.mx-auto
 		%h1 Camp Applications
 
-		.col-4.d-grid.d-block
-			= link_to "All (#{@apps.count})", camp_camp_applications_path(@camp, filter: "all"), class: "btn btn-primary btn-lg"
-
+		.row
+			.col-4.d-grid.d-block
+				= link_to "All (#{@apps.count})", camp_camp_applications_path(@camp, filter: "all"), class: "btn btn-primary btn-lg"
+			.col-4.d-grid.d-block
+				- vols = []
+				- @apps.each do |app|
+					- if app.camp_application_type.kind == "Volunteer"
+						- vols.append(app)
+				= link_to "Volunteers (#{vols.count})", camp_camp_applications_path(@camp, filter: "volunteers"), class: "btn btn-primary btn-lg"
+			.col-4.d-grid.d-block
+				- campers = []
+				- @apps.each do |app|
+					- if app.camp_application_type.kind == "Participant"
+						- campers.append(app)
+				= link_to "Campers (#{campers.count})", camp_camp_applications_path(@camp, filter: "participants"), class: "btn btn-primary btn-lg"
+			
 		- @apps.each do |app|
 			.border.border-dark.p-4.mb-4
 				%p 

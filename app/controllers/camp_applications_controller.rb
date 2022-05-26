@@ -8,7 +8,24 @@ class CampApplicationsController < ApplicationController
 	def index
 		if params[:filter] == "all"
 			@apps = @camp.camp_applications.all
+		elsif params[:filter] == 'volunteers'
+			@all = @camp.camp_applications.all
+			@apps = []
+			@all.each do |app|
+				if app.camp_application_type.kind == "Volunteer"
+					@apps.append(app)
+				end
+			end
+		elsif params[:filter] == 'participants'
+			@all = @camp.camp_applications.all
+			@apps = []
+			@all.each do |app|
+				if app.camp_application_type.kind == "Volunteer"
+					@apps.append(app)
+				end
+			end
 		end
+
 	end
 
 	def new
