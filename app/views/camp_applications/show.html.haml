@@ -46,13 +46,16 @@
 								%li #{type}
 					.col-3.border.border-dark.p-4.text-center
 						%strong First Shot</br>
-						= @covid.first_shot.strftime("%B %e, %Y")
+						- unless @covid.first_shot.nil?
+							= @covid.first_shot.strftime("%B %e, %Y")
 					.col-3.border.border-dark.p-4.text-center
 						%strong Second Shot</br>
-						= @covid.second_shot.strftime("%B %e, %Y")
+						- unless @covid.second_shot.nil?
+							= @covid.second_shot.strftime("%B %e, %Y")
 					.col-3.border.border-dark.p-4.text-center
 						%strong Booster Shot</br>
-						= @covid.booster_shot.strftime("%B %e, %Y")
+						- unless @covid.booster.shot.nil?
+							= @covid.booster_shot.strftime("%B %e, %Y")
 
 			-#----------------
 			%h2 Personal Information
@@ -78,6 +81,9 @@
 					#{@pi.address.address_l2} <br>
 					#{@pi.address.city}, #{@pi.address.state_province.code} #{@pi.address.zippostal} <br>
 					#{@pi.address.county.name}, #{@pi.address.state_province.country.name}
+
+			%h3 Primary Phone
+			
 
 
 				
