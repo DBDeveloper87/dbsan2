@@ -54,7 +54,7 @@
 							= @covid.second_shot.strftime("%B %e, %Y")
 					.col-3.border.border-dark.p-4.text-center
 						%strong Booster Shot</br>
-						- unless @covid.booster.shot.nil?
+						- unless @covid.booster_shot.nil?
 							= @covid.booster_shot.strftime("%B %e, %Y")
 
 			-#----------------
