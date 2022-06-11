@@ -97,6 +97,29 @@
 
 				%h3 Primary Phone
 
+			-#-----Background Info
+			- if @bi.nil?
+				%p This user did not fill out a Background Info form
+			- else
+				%h2 Background Info
+				- unless @bi.about_you.nil?
+					%h3 Please tell us a little more about yourself: How did you find out about this DeafBlind Retreat? Through friends, internet, or DB/Deaf service?
+					%p #{@bi.about_you}
+				- unless @bi.past_camps.nil?
+					%h3 Have you joined other DB Retreats or camps before? If yes, where?
+					%p #{@bi.past_camps}
+				- unless @bi.active_community.nil?
+					$h3 Do you have an active DB community in your area? If yes, please describe the community.
+					%p #{@bi.active_community}
+				- unless @bi.interests.nil?
+					%h3 What are your interests? 
+					%p #{@bi.interests.join(", ")}
+				- unless @bi.other_comments.nil?
+					%h3 Any other comments you would like to add?
+					%p #{@bi.other_comments}
+
+			-#-------INC
+			
 			
 
 
