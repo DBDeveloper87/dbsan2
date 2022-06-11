@@ -51,7 +51,9 @@ class CampApplicationsController < ApplicationController
 		@c3 = @application.camp_application_c3
 		@permission = @application.camp_application_permission
 		@covid = @application.camp_application_covid
-		@aug_15 = ((Date.parse("Aug 15 2022") - @pi.dob) / 365).round
+		unless @pi.nil?
+			@aug_15 = ((Date.parse("Aug 15 2022") - @pi.dob) / 365).round
+		end
 		@bi = @application.camp_application_bi
 	end
 
