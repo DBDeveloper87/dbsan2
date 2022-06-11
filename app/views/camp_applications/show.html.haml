@@ -22,44 +22,54 @@
 				%strong Application Status:
 				= @status
 
+			
 			.row.mb-4
 				.col-6.border.border-dark.p-4
-					%h2 Communication and Code of Conduct
-					- if @c3.agree?
-						.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
-							AGREED
+					- if @c3.nil?
+						%p This user did not fill out a Communication and Code of Conduct form.
+					- else
+						%h2 Communication and Code of Conduct
+						- if @c3.agree?
+							.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
+								AGREED
 				.col-6.border.border-dark.p-4
-					%h2 Permissions
-					- if @permission.agree?
-						.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
-							AGREED
+					- if @permission.nil?
+						%p This user did not fill out a Permission form.
+					- else
+						%h2 Permissions
+						- if @permission.agree?
+							.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
+								AGREED
 			
 			-#-----------
-			%h COVID-19
-			- if @covid.vaccinated?
-				.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
-					VACCINATED
-				.row.mb-4
-					.col-3.border.border-dark.p-4
-						%ul
-							- @covid.vaccination_type.each do |type|
-								%li #{type}
-					.col-3.border.border-dark.p-4.text-center
-						%strong First Shot</br>
-						- unless @covid.first_shot.nil?
-							= @covid.first_shot.strftime("%B %e, %Y")
-					.col-3.border.border-dark.p-4.text-center
-						%strong Second Shot</br>
-						- unless @covid.second_shot.nil?
-							= @covid.second_shot.strftime("%B %e, %Y")
-					.col-3.border.border-dark.p-4.text-center
-						%strong Booster Shot</br>
-						- unless @covid.booster_shot.nil?
-							= @covid.booster_shot.strftime("%B %e, %Y")
+			- if @covid.nil?
+				%p This user did not fill out a COVID-19 form.
+			- else
+				%h2 COVID-19
+				- if @covid.vaccinated?
+					.d-grid.d-block.text-center.p-4{style: "background: green; color: white;"}
+						VACCINATED
+					.row.mb-4
+						.col-3.border.border-dark.p-4
+							%ul
+								- @covid.vaccination_type.each do |type|
+									%li #{type}
+						.col-3.border.border-dark.p-4.text-center
+							%strong First Shot</br>
+							- unless @covid.first_shot.nil?
+								= @covid.first_shot.strftime("%B %e, %Y")
+						.col-3.border.border-dark.p-4.text-center
+							%strong Second Shot</br>
+							- unless @covid.second_shot.nil?
+								= @covid.second_shot.strftime("%B %e, %Y")
+						.col-3.border.border-dark.p-4.text-center
+							%strong Booster Shot</br>
+							- unless @covid.booster_shot.nil?
+								= @covid.booster_shot.strftime("%B %e, %Y")
 
 			-#----------------
 			- if @pi.nil?
-				%p This user did not move beyond selecting an application type.
+				%p This user did not fill out a Personal Info form.
 			- else
 				%h2 Personal Information
 				%p 
