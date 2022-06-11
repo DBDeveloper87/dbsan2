@@ -209,8 +209,17 @@
 							- @shift.shifts.each do |shift|
 								%li #{shift}
 
-				
+				- if @commitment.nil?
+					%p This user did not fill out a commitment form
+				- else
+					%h3 Commitment
+					- unless @commitment.commit.nil?
+						- if @commitment.commit == true
+							%p I am committed to volunteer my time to DBRIB during this retreat.
+						- else
+							%p I am NOT committed to volunteer my time to DBRIB during this retreat.
 
+				
 
 			
 
