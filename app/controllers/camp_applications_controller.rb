@@ -61,6 +61,7 @@ class CampApplicationsController < ApplicationController
 		@ceu = @application.camp_application_ceu
 		@training = @application.camp_application_training
 		@ca = @application.camp_application_ca
+		@shift = @application.camp_application_shift
 	end
 
 	def success

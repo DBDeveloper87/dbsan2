@@ -199,7 +199,18 @@
 						%h4 Please rate your ProTactile (PT) skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
 						%p #{@ca.pt}
 
+				-if @shift.nil?
+					%p The user did not fill out a Shift form
+				-else
+					%h3 Shifts
+					-unless @shift.shifts.nil?
+						%h4 Please select which two shifts you are able to work
+						%ul
+							- @shift.shifts.each do |shift|
+								%li #{shift}
+
 				
+
 
 			
 
