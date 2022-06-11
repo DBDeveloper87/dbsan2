@@ -135,7 +135,29 @@
 				- unless @inc.dominant_hand.nil?
 					%h3 Which hand do you primarily use as your dominant sign hand?
 					%p #{@inc.dominant_hand}
-				
+
+			- if @matching.nil?
+				%p This user did not fill out a Matching form
+			- else
+				%h2 Matching
+				- unless @matching.work_with_type.nil?
+					%h3 Work With Type
+					%p #{@matching.work_with_type.join(", ")}
+				- unless @matching.height.nil?
+					%h3 Height
+					%p #{@matching.height}
+				- unless @matching.describe_self.nil?
+					%h3 How would you generally describe yourself?
+					%p #{@matching.describe_self}
+				- unless @matching.activity_type.nil?
+					%h3 What activities do you like?
+					%p #{@matching.activity_type.join(", ")}
+				- if @matching.camp_application_matchnps.count > 0
+					%h3 Name Preferences
+					%p There are #{@matching.camp_application_matchnps.count}
+					- @matching.camp_application_matchnps.each do |name|
+						%ul
+							%li #{name.first_name} #{name.last_name}, #{name.name_type}
 
 			
 
