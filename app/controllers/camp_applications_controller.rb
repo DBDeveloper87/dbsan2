@@ -57,6 +57,8 @@ class CampApplicationsController < ApplicationController
 		@bi = @application.camp_application_bi
 		@inc = @application.camp_application_inc
 		@matching = @application.camp_application_matching
+		@type = @application.camp_application_type
+		@ceu = @application.camp_application_ceu
 	end
 
 	def success
