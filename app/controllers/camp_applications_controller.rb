@@ -60,6 +60,7 @@ class CampApplicationsController < ApplicationController
 		@type = @application.camp_application_type
 		@ceu = @application.camp_application_ceu
 		@training = @application.camp_application_training
+		@ca = @application.camp_application_ca
 	end
 
 	def success

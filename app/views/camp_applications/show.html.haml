@@ -185,6 +185,20 @@
 						%h4 Are you available to attend the Volunteer Orientation and Training? The training is on August 13, 14, and 15.
 						%p #{@training.available}
 
+				-if @ca.nil?
+					%p The user did not fill out a Communication Access form
+				-else
+					%h3 Communication Access
+					-unless @ca.sign_language.nil?
+						%h4 Please rate your Sign Language skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+						%p #{@ca.sign_language}
+					-unless @ca.tactile.nil?
+						%h4 Please rate your Tactile (TASL) skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+						%p #{@ca.tactile}
+					-unless @ca.pt.nil?
+						%h4 Please rate your ProTactile (PT) skills. 1 - Beginner, 3 - Intermediate, 5 - Fluent
+						%p #{@ca.pt}
+
 				
 
 			
