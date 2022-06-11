@@ -59,6 +59,7 @@ class CampApplicationsController < ApplicationController
 		@matching = @application.camp_application_matching
 		@type = @application.camp_application_type
 		@ceu = @application.camp_application_ceu
+		@training = @application.camp_application_training
 	end
 
 	def success

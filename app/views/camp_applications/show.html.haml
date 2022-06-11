@@ -168,7 +168,25 @@
 					- unless @ceu.certifications.nil?
 						%h4 Certifications
 						%p #{@ceu.certifications.count}
-						
+
+				- if @training.nil?
+					%p The user did not fill out a training form
+				- else
+					%h3 Training
+					- unless @training.training_history.nil?
+						%h4 Please select all relevant trainings you have taken regarding DeafBlind.
+						%ul
+							- @training.training_history.each do |history|
+								- unless history == ""
+									%li #{history}
+								- else
+									%li None
+					- unless @training.available.nil?
+						%h4 Are you available to attend the Volunteer Orientation and Training? The training is on August 13, 14, and 15.
+						%p #{@training.available}
+
+				
+
 			
 
 
