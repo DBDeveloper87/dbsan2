@@ -55,6 +55,7 @@ class CampApplicationsController < ApplicationController
 			@aug_15 = ((Date.parse("Aug 15 2022") - @pi.dob) / 365).round
 		end
 		@bi = @application.camp_application_bi
+		@inc = @application.camp_application_inc
 	end
 
 	def success

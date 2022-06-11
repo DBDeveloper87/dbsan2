@@ -119,7 +119,24 @@
 					%p #{@bi.other_comments}
 
 			-#-------INC
-			
+			- if @inc.nil?
+				%p This user did not fill out an Identity and Communication form
+			- else
+				%h2 Identity and Communication
+				- unless @inc.identity.nil?
+					%h3 What describes you best? Select all the apply to you.
+					%p #{@inc.identity.join(", ")}
+				- unless @inc.communication_pref.nil?
+					%h3 How do you prefer to communicate?  (You can select more than one)
+					%p #{@inc.communication_pref.join(", ")}
+				- unless @inc.receiv_signs.nil?
+					%h3 When using tactile or ProTactile sign language, which hand do you primarily receive signs with?
+					%p #{@inc.receiv_signs}
+				- unless @inc.dominant_hand.nil?
+					%h3 Which hand do you primarily use as your dominant sign hand?
+					%p #{@inc.dominant_hand}
+				
+
 			
 
 
