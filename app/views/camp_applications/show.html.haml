@@ -58,31 +58,35 @@
 							= @covid.booster_shot.strftime("%B %e, %Y")
 
 			-#----------------
-			%h2 Personal Information
-			%p 
-				%strong Applicant Name:
-				= @pi.first_name + " " + @pi.last_name
-			%p 
-				%strong Gender Identity:
-				= @pi.gender.join(" ")
-			%p 
-				%strong Pronouns:
-				= @pi.pronouns.join(" ")
-			%p
-				%strong Date of Birth:
-				= @pi.dob.strftime("%B %e, %Y")
-			%p
-				%strong Age on August 15, 2022:
-				= @aug_15
-			%h3.mt-4 Primary Address
-			- if @pi.address.present?
-				%address
-					#{@pi.address.address_l1} <br>
-					#{@pi.address.address_l2} <br>
-					#{@pi.address.city}, #{@pi.address.state_province.code} #{@pi.address.zippostal} <br>
-					#{@pi.address.county.name}, #{@pi.address.state_province.country.name}
+			- if @pi.nil?
+				%p This user did not move beyond selecting an application type.
+			- else
+				%h2 Personal Information
+				%p 
+					%strong Applicant Name:
+					= @pi.first_name + " " + @pi.last_name
+				%p 
+					%strong Gender Identity:
+					= @pi.gender.join(" ")
+				%p 
+					%strong Pronouns:
+					= @pi.pronouns.join(" ")
+				%p
+					%strong Date of Birth:
+					= @pi.dob.strftime("%B %e, %Y")
+				%p
+					%strong Age on August 15, 2022:
+					= @aug_15
+				%h3.mt-4 Primary Address
+				- if @pi.address.present?
+					%address
+						#{@pi.address.address_l1} <br>
+						#{@pi.address.address_l2} <br>
+						#{@pi.address.city}, #{@pi.address.state_province.code} #{@pi.address.zippostal} <br>
+						#{@pi.address.county.name}, #{@pi.address.state_province.country.name}
 
-			%h3 Primary Phone
+				%h3 Primary Phone
+
 			
 
 

@@ -52,6 +52,7 @@ class CampApplicationsController < ApplicationController
 		@permission = @application.camp_application_permission
 		@covid = @application.camp_application_covid
 		@aug_15 = ((Date.parse("Aug 15 2022") - @pi.dob) / 365).round
+		@bi = @application.camp_application_bi
 	end
 
 	def success
