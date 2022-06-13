@@ -161,13 +161,13 @@
 
 			- if @type.kind == "Volunteer"
 				%h2 For Volunteers Only
-				- if @ceu.nil?
-					%p This user did not fill out a CEU form
-				- else
-					%h3 Continuing Education Units
-					- unless @ceu.certifications.nil?
-						%h4 Certifications
-						%p #{@ceu.certifications.count}
+				-#- if @ceu.nil?
+				-#	%p This user did not fill out a CEU form
+				-#- else
+				-#	%h3 Continuing Education Units
+				-#	- unless @ceu.certifications.nil?
+				-#		%h4 Certifications
+				-#		%p #{@ceu.certifications.count}
 
 				- if @training.nil?
 					%p The user did not fill out a training form
@@ -219,6 +219,11 @@
 						- else
 							%p I am NOT committed to volunteer my time to DBRIB during this retreat.
 
+			-#----Lodging
+			- if @lodging.nil?
+				%p The user did not complete a Lodging form
+			- else
+				%h2 Lodging
 				
 
 			

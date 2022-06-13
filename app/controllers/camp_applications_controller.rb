@@ -63,7 +63,7 @@ class CampApplicationsController < ApplicationController
 		@ca = @application.camp_application_ca
 		@shift = @application.camp_application_shift
 		@commitment = @application.camp_application_commitment
-		
+		@lodging = @application.camp_application_lodging
 	end
 
 	def success
