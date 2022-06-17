@@ -233,6 +233,48 @@
 				%p The user did not complete a Lodging form
 			- else
 				%h2 Lodging
+				- if @lodging.nil?
+					%p The User did not fill out a Lodging Form
+				- else
+					- unless @lodging.on_premises.nil?
+						%h3 Will you be staying on the property or commuting each day? 
+						%p #{@lodging.on_premises}
+
+					- unless @lodging.tent_or_cabin.nil?
+						%h3 Would you prefer to stay in a cabin or tent?
+						%p #{@lodging.tent_or_cabin}
+
+					- unless @lodging.bring_tent.nil?
+						%h3 If preferring to stay in a tent, would you bring your own, or have us provide the tent for you? 
+						%p #{@lodging.bring_tent}
+
+					- unless @lodging.share_with.nil?
+						%h3 Please select the types of people you would be willing to share with.
+						%p #{@lodging.share_with.join(", ")}
+
+					- unless @lodging.difficulty_walking.nil?
+						%h3 Do you have difficulty walking?
+						%p #{@lodging.difficulty_walking}
+
+					- unless @lodging.difficulty_stairs.nil?
+						%h3 Do you have difficulty with stairs?
+						%p #{@lodging.difficulty_stairs}
+
+					- unless @lodging.service_animal.nil?
+						%h3 Will you bring your hearing or guide dog?
+						%p #{@lodging.service_animal}
+
+					- unless @lodging.share_service_animal.nil?
+						%h3 Will you share a cabin with a hearing or guide dog?
+						%p #{@lodging.share_service_animal}
+
+					- unless @lodging.mobility_aids.nil?
+						%h3 Do you use any mobility aids?
+						%p #{@lodging.mobility_aids}
+
+					- unless @lodging.medical_device_charging.nil?
+						%h3 Do you have medical devices that need to be plugged in overnight? (e.g. respirator)
+						%p #{@lodging.medical_device_charging}
 
 				
 
