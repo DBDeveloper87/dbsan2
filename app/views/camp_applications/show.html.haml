@@ -99,7 +99,11 @@
 				- unless @pi.phone_numbers.nil?
 					- @pi.phone_numbers.each do |phone|
 						- if phone.phone_type == "Primary Phone"
-							%p #{phone.phone_number + " (" + phone.service_type.join(", ") + ")"}
+							%p 
+								unless phone.phone_number.nil?
+									#{phone.phone_number}
+								unless phone.service_type.nil?
+									(#{phone.service_type.join(", ")})
 
 
 			-#-----Background Info
