@@ -276,6 +276,22 @@
 						%h3 Do you have medical devices that need to be plugged in overnight? (e.g. respirator)
 						%p #{@lodging.medical_device_charging}
 
+				%h2 Meals
+				- if @meal.nil?
+					Tp The user did not fill out a Meal Form
+				- else
+					- unless @meal.dietary_lifestyle.nil?
+						%h3 What dietary lifestyle do you follow?
+						%p #{@meal.dietary_lifestyle}
+
+					- unless @meal.allergens.nil?
+						%h3 Do you have any of the following food allergens or sensitivities?  (You can select more than one)
+						%p #{@meal.allergens.join(", ")}
+
+					- unless @meal.dietary_restrictions.nil?
+						%h3 Do you have any other dietary restrictions?  If yes, please explain.
+						%p #{@meal.dietary_restrictions}
+
 				
 
 			

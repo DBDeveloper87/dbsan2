@@ -64,6 +64,7 @@ class CampApplicationsController < ApplicationController
 		@shift = @application.camp_application_shift
 		@commitment = @application.camp_application_commitment
 		@lodging = @application.camp_application_lodging
+		@meal = @application.camp_application_meal
 	end
 
 	def success
