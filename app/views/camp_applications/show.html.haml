@@ -292,11 +292,33 @@
 						%h3 Do you have any other dietary restrictions?  If yes, please explain.
 						%p #{@meal.dietary_restrictions}
 
-				
+				%h2 Medical
+				- if @medical.nil?
+					%p The user did not complete a Medical Form
+				- else
+					- unless @medical.medical_policy.nil?
+						%h3 DBRIB does not provide a nurse. You may store medications in the refrigerator. You are responsible to bring and take your medicines. We cannot administer prescription medications whatsoever. Do you understand? 
+						%p #{@medical.medical_policy}
 
-			
+					- unless @medical.bring_assistant.nil?
+						%h3 Will you be bringing an Assistant? The Retreat does not provide personal care such as bathing, grooming, feeding, and others. Furthermore the assistant will not be a dual role and will be required to pay the full amount of the participant fee as well.
+						%p #{@medical.bring_assistant}
 
+					- unless @medical.smoke.nil?
+						%h3 Do you smoke?
+						%p #{@medical.smoke}
+					
+					- unless @medical.medical_conditions.nil?
+						%h3 Please check any of the following you may have
+						%p #{@medical.medical_conditions.join(", ")}
 
+					- unless @medical.other_health.nil?
+						%h3 Describe any other health conditions 
+						%p #{@medical.other_health}
+
+					- unless @medical.medical_allergies.nil?
+						%h3 Name any medical or environmental allergies (e.g. latex, aspirin, dogs, etc)
+						%p #{@medical.medical_allergies}
 				
 			
 			
