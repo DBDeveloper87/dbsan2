@@ -10,13 +10,13 @@
 
 			%h2 #{type.kind.pluralize} (#{app_by_type.count})
 			%div.table-responsive
-				%table.table.border.border-dark
+				%table.table.border.border-dark{style: "width: 20in"}
 					%thead
 						%tr.table-dark
-							%th.text-center{scope: "col", style: "width: 30%"} Name
-							%th.text-center{scope: "col"} Email
-							%th.text-center{scope: "col", style: "width: 25%"} Primary Phone
-							%th.text-center{scope: "col"} Service Types
+							%th.text-center{scope: "col", style: "width: 10%"} Name
+							%th.text-center{scope: "col", style: "width: 15%"} Email
+							%th.text-center{scope: "col", style: "width: 10%"} Primary Phone
+							%th.text-center{scope: "col", style: "width: 65%"} Service Types
 					%tbody
 						- app_by_type.each do |app|
 							- if app.status == "Ready to Submit" or app.status == "Submitted"
@@ -30,8 +30,5 @@
 												- if phone.phone_type == "Primary Phone"
 													%td #{phone.phone_number}
 													- unless phone.service_type.nil?
-														%td 
-															%ul
-																- phone.service_type.each do |service|
-																	%li #{service}
+														%td #{phone.service_type.join(", ")}
 												
