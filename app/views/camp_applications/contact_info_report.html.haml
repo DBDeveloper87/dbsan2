@@ -19,7 +19,7 @@
 							%th.text-center{scope: "col"} Service Types
 					%tbody
 						- app_by_type.each do |app|
-							- if app.status == "Ready to Submit" or app.submit == "Submitted"
+							- if app.status == "Ready to Submit" or app.status == "Submitted"
 								%tr.bord.border-dark
 									- unless app.camp_application_pi.nil?
 										- pi = app.camp_application_pi
