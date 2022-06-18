@@ -10,13 +10,13 @@
 
 			%h2 #{type.kind.pluralize} (#{app_by_type.count})
 			%div.table-responsive
-				%table.table.border.border-dark{style: "width: 20in"}
+				%table.table.border.border-dark{style: "width: 15in"}
 					%thead
 						%tr.table-dark
-							%th.text-center{scope: "col", style: "width: 10%"} Name
-							%th.text-center{scope: "col", style: "width: 15%"} Email
-							%th.text-center{scope: "col", style: "width: 10%"} Primary Phone
-							%th.text-center{scope: "col", style: "width: 65%"} Service Types
+							%th.text-center{scope: "col", style: "width: 15%"} Name
+							%th.text-center{scope: "col", style: "width: 25%"} Email
+							%th.text-center{scope: "col", style: "width: 15%"} Primary Phone
+							%th.text-center{scope: "col", style: "width: 45%"} Service Types
 					%tbody
 						- app_by_type.each do |app|
 							- if app.status == "Ready to Submit" or app.status == "Submitted"
