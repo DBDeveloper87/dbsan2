@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
     resources :camp_application_types
     get 'contact_info_report', to: 'camp_applications#contact_info_report'
+    get 'meal_summary_report', to: 'camp_applications#meal_summary_report'
   end
   resources :phone_numbers
   

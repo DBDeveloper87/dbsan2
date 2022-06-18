@@ -1,0 +1,41 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1.text-center Meal Summary Report
+
+		- dietary_lifestyle.each do |lifestyle|
+			- app_by_dietary = []
+			- @apps.each do |app|
+				- unless app.camp_application_meal.nil?
+					- unless app.camp_application_pi.nil?
+						- if app.camp_application_meal.dietary_lifestyle == lifestyle.first
+							- app_by_dietary.append(app) 
+
+			%h2 #{lifestyle.first.titleize.pluralize} (#{app_by_dietary.count})
+			%div.table-responsive
+				%table.table
+					%thead
+						%tr.table-dark
+							%th.text-center{scope: "col"} Name
+							%th.text-center{scope: "col"} Allergens
+							%th.text-center{scope: "col"} Restrictions
+					%tbody
+						- app_by_dietary.each do |a|
+							- pi = a.camp_application_pi
+							- meal = a.camp_application_meal
+
+							%tr
+								%th{scope: "row"} #{pi.first_name} #{pi.last_name}
+								%td 
+									- unless meal.allergens.nil?
+										%ul
+											- meal.allergens.each do |allergen|
+												%li #{allergen.titleize}
+									- else
+										.text-center None
+								%td
+									- unless meal.dietary_restrictions.empty?
+										= meal.dietary_restrictions
+									- else
+										None
+							
+							

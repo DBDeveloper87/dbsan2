@@ -20,6 +20,8 @@
 				.col-md-4.d-grid.d-block
 					= link_to "Contact Info Report", camp_contact_info_report_path(@camp), class: "btn btn-secondary btn-lg"
 				.col-md-4.d-grid.d-block
+					= link_to "Meal Summary Report", camp_meal_summary_report_path(@camp), class: "btn btn-secondary btn-lg"
+				.col-md-4.d-grid.d-block
 					= button_to "Delete", camp_path(@camp), form: { data: { turbo:false }}, method: :delete, class: "btn btn-danger btn-lg"
 
 		
