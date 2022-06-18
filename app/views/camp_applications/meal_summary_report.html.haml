@@ -16,7 +16,7 @@
 					%thead
 						%tr.table-dark
 							%th.text-center{scope: "col", style: "wideth: 25%"} Name
-							%th.text-center{scope: "col", style: "wideth: 25%} Allergens
+							%th.text-center{scope: "col", style: "wideth: 25%"} Allergens
 							%th.text-center{scope: "col"} Restrictions
 					%tbody
 						- app_by_dietary.each do |a|
@@ -31,7 +31,7 @@
 											- meal.allergens.each do |allergen|
 												%li #{allergen.titleize}
 									- else
-										.text-center None
+										None
 								%td
 									- unless meal.dietary_restrictions.empty?
 										= meal.dietary_restrictions
