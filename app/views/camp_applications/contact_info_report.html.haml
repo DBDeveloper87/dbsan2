@@ -1,0 +1,36 @@
+.container.mt-4
+	.col-md-8.mx-auto
+		%h1.text-center Contact Info Report
+
+		- @camp.camp_application_types.each do |type|
+			- app_by_type = []
+			- @apps.each do |app|
+				- if app.camp_application_type.kind == type.kind and !app.camp_application_pi.nil?
+					- app_by_type.append(app)
+
+			%h2 #{type.kind.pluralize} (#{app_by_type.count})
+			%div.table-responsive
+				%table.table.border.border-dark
+					%thead
+						%tr.table-dark
+							%th.text-center{scope: "col", style: "width: 30%"} Name
+							%th.text-center{scope: "col"} Email
+							%th.text-center{scope: "col", style: "width: 25%"} Primary Phone
+							%th.text-center{scope: "col"} Service Types
+					%tbody
+						- app_by_type.each do |app|
+							%tr.bord.border-dark
+								- unless app.camp_application_pi.nil?
+									- pi = app.camp_application_pi
+									%th{scope: "row"} #{pi.first_name} #{pi.last_name}
+									%td #{app.user.email}
+									- unless pi.phone_numbers.nil?
+										- pi.phone_numbers.each do |phone|
+											- if phone.phone_type == "Primary Phone"
+												%td #{phone.phone_number}
+												- unless phone.service_type.nil?
+													%td 
+														%ul
+															- phone.service_type.each do |service|
+																%li #{service}
+												

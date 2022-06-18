@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       get 'success', to: 'camp_applications#success'
     end
     resources :camp_application_types
+    get 'contact_info_report', to: 'camp_applications#contact_info_report'
   end
   resources :phone_numbers
   

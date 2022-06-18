@@ -1,6 +1,6 @@
 class CampApplicationsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :get_camp, only: [:new, :create, :index]
+	before_action :get_camp, only: [:new, :create, :index, :contact_info_report, :meal_summary_report]
 	before_action :get_application, only: [:next_steps]
 	before_action :set_application, only: [:edit, :update, :show]
 	before_action :require_admin, only: [:index, :show]
@@ -66,6 +66,16 @@ class CampApplicationsController < ApplicationController
 		@lodging = @application.camp_application_lodging
 		@meal = @application.camp_application_meal
 		@medical = @application.camp_application_medical
+	end
+
+	def contact_info_report
+		@apps = @camp.camp_applications.all
+		
+	end
+
+	def meal_summary_report
+		@apps = @camp.camp_applications.all
+		
 	end
 
 	def success
