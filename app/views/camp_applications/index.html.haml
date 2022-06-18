@@ -39,10 +39,13 @@
 					%p 
 						%strong Status:
 						= app.status
-				- unless app.camp_application_inc.nil?
+				- if app.camp_application_inc.present?
 					%p
 						%strong Self Identification:
-						= app.camp_application_inc.identity.join(", ")
+						- unless app.camp_application_inc.identity.nil?
+							= app.camp_application_inc.identity.join(", ")
+						- else
+							N/A
 				.d-grid.d-block
 					= link_to "View Application", camp_camp_application_path(@camp, app), class: "btn btn-primary btn-lg"
 				
