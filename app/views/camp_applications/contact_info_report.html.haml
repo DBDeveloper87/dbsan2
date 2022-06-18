@@ -19,18 +19,19 @@
 							%th.text-center{scope: "col"} Service Types
 					%tbody
 						- app_by_type.each do |app|
-							%tr.bord.border-dark
-								- unless app.camp_application_pi.nil?
-									- pi = app.camp_application_pi
-									%th{scope: "row"} #{pi.first_name} #{pi.last_name}
-									%td #{app.user.email}
-									- unless pi.phone_numbers.nil?
-										- pi.phone_numbers.each do |phone|
-											- if phone.phone_type == "Primary Phone"
-												%td #{phone.phone_number}
-												- unless phone.service_type.nil?
-													%td 
-														%ul
-															- phone.service_type.each do |service|
-																%li #{service}
+							- if app.status == "Ready to Submit" or app.submit == "Submitted"
+								%tr.bord.border-dark
+									- unless app.camp_application_pi.nil?
+										- pi = app.camp_application_pi
+										%th{scope: "row"} #{pi.first_name} #{pi.last_name}
+										%td #{app.user.email}
+										- unless pi.phone_numbers.nil?
+											- pi.phone_numbers.each do |phone|
+												- if phone.phone_type == "Primary Phone"
+													%td #{phone.phone_number}
+													- unless phone.service_type.nil?
+														%td 
+															%ul
+																- phone.service_type.each do |service|
+																	%li #{service}
 												
