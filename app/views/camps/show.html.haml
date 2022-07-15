@@ -10,7 +10,7 @@
 					%p test
 			- else
 				.col-md-4.d-grid.d-block
-					= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
+					-#= link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
 			
 			- if current_user&.admin?
 				.col-md-4.d-grid.d-block

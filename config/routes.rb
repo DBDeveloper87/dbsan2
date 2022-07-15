@@ -87,7 +87,7 @@ Rails.application.routes.draw do
   # Get Pages
   get 'about', to: 'pages#who_we_are'
   get 'bylaws', to: "pages#bylaws"
-
+  get "game_board", to: "pages#game_board"
   # Video
   get 'video_layout', to: "pages#video_layout"
 

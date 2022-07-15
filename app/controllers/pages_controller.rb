@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
+	def game_board
+		render layout: "game_board"
+	end
+
 	def bylaws
 		@bylaws = Bylaw.first
 	end
