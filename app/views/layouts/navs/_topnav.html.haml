@@ -18,8 +18,8 @@
 							= link_to "Camps", camps_path(view: "all"), class: "nav-link text-dark"
 						%li.nav-item.mb-0
 							= link_to "About", about_path, class: "nav-link text-dark"
-						%li.nav-item.mb-0
-							= link_to "Contact", contact_path, class: "nav-link text-dark"
+						-#%li.nav-item.mb-0
+						-#	= link_to "Contact", contact_path, class: "nav-link text-dark"
 	
 		.justify-content-end
 			- if user_signed_in?
@@ -68,8 +68,8 @@
 					= link_to "Camps", camps_path(view: "all"), class: "nav-link text-light"
 				%li.nav-item.mb-0
 					= link_to "About", about_path, class: "nav-link text-light"
-				%li.nav-item.mb-0
-					= link_to "Contact", contact_path, class: "nav-link text-light"
+				-#%li.nav-item.mb-0
+					-#= link_to "Contact", contact_path, class: "nav-link text-light"
 	
 		.justify-content-end
 			- if user_signed_in?

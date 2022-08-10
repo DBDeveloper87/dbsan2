@@ -80,9 +80,9 @@ Rails.application.routes.draw do
   
 
   # Contact Form
-  get 'contact', to: 'contacts#new'
-  post 'contact', to: 'contacts#create'
-  get 'message_sent', to: 'contacts#message_sent'
+  #get 'contact', to: 'contacts#new'
+  #post 'contact', to: 'contacts#create'
+  #get 'message_sent', to: 'contacts#message_sent'
   
   # Get Pages
   get 'about', to: 'pages#who_we_are'

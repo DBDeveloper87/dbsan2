@@ -33,9 +33,7 @@ class Admin::AboutsController < Admin::AdminConsoleController
         	end
     	end
     end
-
     
-
     private
 
     	def section_params
