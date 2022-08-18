@@ -4,29 +4,38 @@
 
 		%p Please fill out the form below and we will get back to you as soon as possible.  Thank you in advance.
 
+		- content_for :recaptcha_js do
+			= include_recaptcha_js
+
 		= form_with(url: contact_path, model: @contact) do |f|
 			.row
-				.col-md-6.form-group.mb-4
-					= f.label :first_name, "First Name"
-					= f.text_field :first_name, placeholder: "John", class: "form-control border border-dark"
-
-				.col-md-6.form-group.mb-4
-					= f.label :last_name, "Last Name"
-					= f.text_field :last_name, placeholder: "Doe", class: "form-control border border-dark"
-
-			.form-group.mb-4
+				.col-md-6
+					.form-floating.mb-4
+						= f.text_field :first_name, placeholder: "First Name", class: "form-control border border-dark"
+						= f.label :first_name, "First Name"
+					
+				.col-md-6
+					.form-floating.mb-4
+						= f.text_field :last_name, placeholder: "Last Name", class: "form-control border border-dark"
+						= f.label :last_name, "Last Name"
+						
+			.form-floating.mb-4
+				= f.email_field :email, placeholder: "Your Email Address", class: "form-control border border-dark"
 				= f.label :email, "Your Email Address"
-				= f.email_field :email, placeholder: "you@example.com", class: "form-control border border-dark"
-
-			.foorm-group.mb-4
+				
+			.form-floating.mb-4
+				= f.text_field :message_subject, placeholder: "Subject", limit: 200, class: "form-control border border-dark"
 				= f.label :message_subject, "Subject"
-				= f.text_field :message_subject, placeholder: "What can we help you with?", limit: 200, class: "form-control border border-dark"
-
-			.foorm-group.mb-4
+				
+			.form-group.mb-4
 				= f.label :message, "Your Message"
-				= f.text_area :message, rows: 10, placeholder: "Please place your message here.", limit: 200, class: "form-control border border-dark"
-
+				= f.text_area :message, class: "border border-dark form-control", placeholder: "Please place your message here.", data:{controller: "textarea-autogrow"}
+				
 			= f.hidden_field :nickname
+
+			
 
 			.row
 				= f.submit "Send Message", class: "btn btn-primary"
+
+			= recaptcha_execute('contact')
