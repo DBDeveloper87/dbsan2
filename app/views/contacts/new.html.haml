@@ -4,7 +4,7 @@
 
 		%p Please fill out the form below and we will get back to you as soon as possible.  Thank you in advance.
 
-		= form_with(url: contact_path, model: @contact) do |f|
+		= form_with(url: contact_path, model: @contact, data: {turbo: "false"}) do |f|
 			.row
 				.col-md-6
 					.form-floating.mb-4
@@ -30,7 +30,7 @@
 				
 			= f.hidden_field :nickname
 
-			= recaptcha_v3(action: 'contact')
+			= recaptcha_v3(action: 'contact', noscript: "false")
 
 			.row
 				= f.submit "Send Message", class: "btn btn-primary"
