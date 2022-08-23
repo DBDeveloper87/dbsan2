@@ -127,6 +127,7 @@ GEM
       activesupport (>= 5.0.0)
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
+    json (2.6.2)
     jwt (2.4.1)
     local_time (2.1.0)
     loofah (2.18.0)
@@ -199,6 +200,8 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    recaptcha (5.10.0)
+      json
     redis (4.7.1)
     regexp_parser (2.5.0)
     reline (0.3.1)
@@ -283,6 +286,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.1)
+  recaptcha
   redis (~> 4.0)
   seed_dump
   selenium-webdriver

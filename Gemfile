@@ -97,3 +97,4 @@ gem 'haml-rails'
 
 # seed dump
 gem 'seed_dump'
+gem "recaptcha"
