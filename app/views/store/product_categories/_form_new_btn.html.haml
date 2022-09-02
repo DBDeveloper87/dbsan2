@@ -1,0 +1,7 @@
+.row
+	.col
+		.row
+			= f.submit "Add Product Category", class: "btn btn-dark btn-lg"
+	.col
+		.row
+			%a.btn.btn-secondary.btn-lg{href: department_path(@department), data:{turbo:{frame: "content"}}} Cancel

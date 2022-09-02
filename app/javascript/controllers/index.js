@@ -8,6 +8,9 @@ import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 import SelectFilterController from "./select_filter_controller.js"
 application.register("select-filter", SelectFilterController)
+import StoreManagerController from "./store/manager_controller.js"
+application.register("storemanager", StoreManagerController)
+
 import TextareaAutogrow from "stimulus-textarea-autogrow"
 application.register("textarea-autogrow", TextareaAutogrow)
 import NestedForm from "stimulus-rails-nested-form"

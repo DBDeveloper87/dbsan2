@@ -1,0 +1,7 @@
+.row
+	.col
+		.row
+			= f.submit "Update Department" , class: "btn btn-dark btn-lg"
+	.col
+		.row
+			%a.btn.btn-secondary.btn-lg{href: departments_path, data:{turbo:{frame: @department.id}}} Cancel

@@ -1,0 +1,17 @@
+= form_with(model: category) do |f|
+	.p-4
+		.form-floating.mb-4
+			= f.text_field :name, class: "form-control border border-dark", placeholder: "Product Category Name"
+			= f. label :name, "Product Category Name"
+
+		.form-floating.mb-4
+			= f.text_field :slug, class: "form-control border border-dark", placeholder: "Product Category Slug"
+			= f. label :slug, "Product Category Slug"
+			%span.text-muted A slug is an unique name used in the URL path in place of the ID of the item.  So departments can be found at https://store.dbsan.org/product_categoriess/[slug]. 
+
+	.container
+		= f.hidden_field :department_id, value: department.id
+	- if form_action == "new"
+		= render 'form_new_btn', f: f
+	- else
+		= render 'form_edit_btn', f: f, department: @category.department

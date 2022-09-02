@@ -1,4 +1,37 @@
 Rails.application.routes.draw do
+  require 'store_domain'
+  require 'channel_domains'
+
+  constraints(StoreDomain) do
+    get '/', to: "store/front#index"
+    get 'manage', to: 'store/manage#index'
+    resources :products, controller: "store/products"
+    resources :departments, controller: "store/departments"
+    resources :product_categories, controller: "store/product_categories"
+    resources :product_image_sets, controller: "store/product_image_sets"
+  end
+
+  constraints(ChannelDomains) do
+    get "/", to: "channels/my_channel#show"
+  end
+
+  #namespace :store do
+   # get '/', to: "front#index"
+   # get 'manage', to: 'manage#index'
+   # namespace :manage do
+   #   resources :departments
+   #   resources :product_categories
+   #   resources :products
+   #   resources :product_image_sets
+   #   resources :orders
+   # end
+  #end
+  get 'contenteditable', to: "pages#contenteditable"
+  namespace :photos do
+    get 'new', to: "images#new"
+    post 'new', to: 'images#create'
+  end
+
   resources :camps do
     resources :camp_applications do
       resources :camp_application_pis

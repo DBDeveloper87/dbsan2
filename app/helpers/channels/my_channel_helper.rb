@@ -1,0 +1,2 @@
+module Channels::MyChannelHelper
+end

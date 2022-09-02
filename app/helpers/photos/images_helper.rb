@@ -1,0 +1,2 @@
+module Photos::ImagesHelper
+end

@@ -1,0 +1,32 @@
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.row.bg-dark.text-light
+		.d-flex
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_category_path(category), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Product Category"}}, aria:{label: "Back to Department"}}
+					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
+			.flex-grow-1.p-2
+				%h2 Product
+	.container.p-4
+		.d-flex.border.border-dark.mb-4
+			.flex.col.p-2.m-2
+				%strong Name:
+			.flex.col.p-2.m-2
+				= product.name
+		.d-flex.border.border-dark.mb-4
+			.flex.col.p-2.m-2
+				%strong Department, Category:
+			.flex.col.p-2.m-2
+				= department.name + "," + category.name
+		.d-flex.flex-column.border.border-dark.mb-4
+			.flex.p-2.m-2.mb-0
+				%strong Description
+			.flex.p-2.m-2.mt-0
+				= product.description
+		.d-flex.border.border-dark.mb-4
+			.flex-grow-1.p-2.m-2
+				%a.nav-link{href: product_image_sets_path(product: product, manage: true), data:{turbo:{frame: "content"}}} Image Sets
+			.flex.p-2.m-2.text-end
+				%span.badge.rounded-pill.bg-dark.text-white
+					= image_sets.count
+			
+		

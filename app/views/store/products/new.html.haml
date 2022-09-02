@@ -1,0 +1,3 @@
+%turbo-frame{id: "new_product", data:{turbo:{action: "advance"}}}
+	.ps-2.pe-2.mb-4.border.border-dark
+		= render partial: "form", locals: {product: @product, category: @category, form_action: "new"}

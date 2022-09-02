@@ -1,0 +1,15 @@
+= form_with(model: department) do |f|
+	.p-4
+		.form-floating.mb-4
+			= f.text_field :name, class: "form-control border border-dark", placeholder: "Department Name"
+			= f.label :name, "Department Name"
+
+		.form-floating.mb-4
+			= f.text_field :slug, class: "form-control border border-dark", placeholder: "Department Slug"
+			= f.label :slug, "Department Slug"
+			%span.text-muted A slug is an inique name used in the URL path in place of the ID of the item.  So departments can be found at https://store.dbsan.org/departments/[slug].
+	- if form_action == "new"
+		= render 'form_new_btn', f: f
+	- else
+		= render 'form_edit_btn', f: f
+			

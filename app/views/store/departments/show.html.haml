@@ -1,0 +1,26 @@
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.row.bg-dark.text-light
+		.d-flex
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: departments_path, data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Departments"}}, aria:{label: "Back to Departments"}}
+					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
+			.flex-grow-1.p-2
+				%h2 Department
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: new_product_category_path(department_id: @department.id), data:{turbo:{frame: "new_category"}, bs:{toggle: "tooltip", placement: "bottom", title: "New Category"}}, aria:{label: "New Category"}}
+					%i.bi.bi-plus{aria:{hidden: "true"}}
+	.container.p-4
+		.d-flex.border.border-dark.mb-4
+			.flex.col.p-2.m-2
+				%strong Name:
+			.flex.col.p-2.m-2
+				= @department.name
+		.d-flex.border.border-dark
+			.flex.col.p-2.m-2
+				%strong Slug:
+			.flex.col.p-2.m-2
+				= @department.slug
+		.text-muted.mb-4
+			%span A slug is an inique name used in the URL path in place of the ID of the item.  So departments can be found at https://store.dbsan.org/departments/[slug].  
+
+		= render partial: "store/product_categories/product_categories", locals: {categories: @categories}

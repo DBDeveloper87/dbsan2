@@ -1,0 +1,6 @@
+%h3 Product Categories
+%turbo-frame{id: "new_category", data:{turbo:{action: "advance"}}}
+		
+%turbo-frame{id: "product_categories"}
+	- categories.each do |c|
+		= render partial: "store/product_categories/product_category", locals: {c: c}	

@@ -1,0 +1,3 @@
+%turbo-frame{id: "products"}
+	- products.each do |p|
+		= render partial: "store/products/product", locals: {p: p}

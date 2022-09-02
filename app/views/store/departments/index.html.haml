@@ -1,0 +1,14 @@
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.row.bg-dark.text-light
+		.d-flex
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: manage_path, data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Dashboard"}}, aria:{label: "Back to Dashboard"}}
+					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
+			.flex-grow-1.p-2
+				%h2 Departments
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: new_department_path, data:{turbo:{frame: "new_department"}, bs:{toggle: "tooltip", placement: "bottom", title: "New Department"}}, aria:{label: "New Department"}}
+					%i.bi.bi-plus{aria:{hidden: "true"}}
+	.container.p-4
+		%turbo-frame{id: "new_department"}
+		= render partial: "departments", locals: { departments: @departments }

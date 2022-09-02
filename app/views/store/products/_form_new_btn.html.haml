@@ -1,0 +1,7 @@
+.row
+	.col
+		.row
+			= f.submit "Add Product", class: "btn btn-dark btn-lg"
+	.col
+		.row
+			%a.btn.btn-secondary.btn-lg{href: product_category_path(@category.id), data:{turbo:{frame: "content"}}} Cancel

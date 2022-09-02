@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+	def contenteditable
+	end
+
 	def game_board
 		render layout: "game_board"
 	end

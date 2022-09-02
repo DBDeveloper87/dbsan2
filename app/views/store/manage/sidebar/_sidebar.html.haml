@@ -1,0 +1,25 @@
+.col-3.bg-dark.text-light
+	.accordion.mt-4#sidebarMenu
+		.accordion-item
+			%h2.accordion-header#sidebarProductsMenu
+				%button.accordion-button{ type: "button", data:{bs:{toggle: "collapse", target: "#collapseProducts"}}, aria:{expanded: "true", controls: "collapseOrders"} }
+					Products
+		.accordion-collapse.collapse.show#collapseProducts{aria:{labelledby: "sidebarProductsMenu"}, data:{bs:{parent: "#sidebarMenu"}}}
+			.accordion-body
+				All Products<br>
+				Product Categories<br>
+				Departments<br>
+
+		.accordion-item
+			%h2.accordion-header#sidebarOrdersMenu
+				%button.accordion-button{ type: "button", data:{bs:{toggle: "collapse", target: "#collapseOrders"}}, aria:{expanded: "true", controls: "collapseOrders"} }
+					Orders
+		.accordion-collapse.collapse.show#collapseOrders{aria:{labelledby: "sidebarOrdersMenu"}, data:{bs:{parent: "#sidebarMenu"}}}
+			.accordion-body
+				%ul.nav.flex-column
+					%li.nav-item.mb-0.mt-0
+						%a.nav-link.text-light{href: "#", data:{action: "storemanager#renderOrders"}} Orders
+				
+				Open Orders<br>
+				Preorders<br>
+				Completed Orders

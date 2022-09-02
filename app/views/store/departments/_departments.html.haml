@@ -1,0 +1,3 @@
+%turbo-frame{id: "departments", data:{turbo:{action: "advance"}}}
+	- departments.each do |d|
+		= render partial: "department", locals: {d: d}

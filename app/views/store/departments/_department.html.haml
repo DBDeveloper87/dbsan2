@@ -1,0 +1,7 @@
+%turbo-frame{id: d.id, data:{turbo:{action: "advance"}}}
+	.d-flex.border.border-dark.mb-4
+		.flex-grow-1.p-2
+			%a.nav-link{href: department_path(d.id), data:{turbo:{frame: "content"}}} #{d.name}
+		.p-2
+			%a.btn.btn-light.border.border-dark{href: edit_department_path(d.id), aria:{label: "Edit"}}
+				%i.bi.bi-pencil{aria:{hidden: "true"}}

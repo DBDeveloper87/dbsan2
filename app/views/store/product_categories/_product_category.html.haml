@@ -1,0 +1,8 @@
+%turbo-frame{id: c.id, data:{turbo:{action: "advance"}}}
+	.d-flex.border.border-dark.mb-4
+		.flex-grow-1.p-2
+			%a.nav-link{href: product_category_path(c), data:{turbo:{frame: "content"}}}
+				= c.name
+		.p-2
+			%a.btn.btn-light.border.border-dark{href: edit_product_category_path(c), aria:{label: "Edit"}}
+				%i.bi.bi-pencil{aria:{hidden: "true"}}
