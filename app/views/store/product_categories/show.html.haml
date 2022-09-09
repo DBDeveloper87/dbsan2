@@ -2,7 +2,7 @@
 	.row.bg-dark.text-light
 		.d-flex
 			.p-2
-				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: department_path(@category.department), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Department"}}, aria:{label: "Back to Department"}}
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: department_path(@category.department.slug), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Department"}}, aria:{label: "Back to Department"}}
 					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
 			.flex-grow-1.p-2
 				%h2 Product Category

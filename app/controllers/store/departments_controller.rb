@@ -46,7 +46,7 @@ class Store::DepartmentsController < ApplicationController
 		end
 
 		def set_department
-			@department = Department.find_by(params[:slug])
+			@department = Department.find_by(slug: params[:slug])
 		end
 
 end

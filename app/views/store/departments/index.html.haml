@@ -9,6 +9,7 @@
 			.p-2
 				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: new_department_path, data:{turbo:{frame: "new_department"}, bs:{toggle: "tooltip", placement: "bottom", title: "New Department"}}, aria:{label: "New Department"}}
 					%i.bi.bi-plus{aria:{hidden: "true"}}
+
 	.container.p-4
 		%turbo-frame{id: "new_department"}
 		= render partial: "departments", locals: { departments: @departments }

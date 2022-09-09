@@ -27,6 +27,7 @@ class Store::ProductsController < ApplicationController
 			@category = @product.product_category
 			@department = @category.department
 			@image_sets = @product.product_image_sets
+			
 
 			respond_to do |f|
 				f.html { redirect_to product_path(@product) }

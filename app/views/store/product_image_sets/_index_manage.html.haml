@@ -6,8 +6,12 @@
 					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
 			.flex-grow-1.p-2
 				%h2 Image Sets
-			
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: new_product_image_set_path(product: product.id, manage: true), data:{turbo:{frame: "new_image_set"}, bs:{toggle: "tooltip", placement: "bottom", title: "New Image Set"}}, aria:{label: "New Image Set"}}
+					%i.bi.bi-plus{aria:{hidden: "true"}}
+	
 	.container.p-4
+		%turbo-frame{id: "new_image_set", data:{turbo:{action: "advance"}}}
 		- image_sets.each do |set|
 			.d-flex.border.border-dark.mb-4
 				.flex-grow-1.p-2.m-2

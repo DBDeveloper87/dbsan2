@@ -1,11 +1,17 @@
-.container.mx-auto.mt-4
-	%h1 New Image Set
+%turbo-frame{id: "new_image_set", data:{turbo: {action: "advance"}}}
+	.ps-2.pe-2.mb-4.border.border-dark
+		= form_with(model: @image_set) do |f|
+			.p-4
+				.form-floating.mb-4
+					= f.text_field :label, placeholder: "Label", class: "form-control border border-dark"
+					= f.label :label, "Label"
 
-	= form_with(model: [:store, :manage, @image_set]) do |f|
-		.form-floating.mb-4
-			= f.text_field :label, placeholder: "Label", class: "form-control border border-dark"
-			= f.label :label, "Label"
-
-		.row
-			= f.hidden_field :product_id, value: @product.id
-			= f.submit "Create", class: "btn btn-primary btn-lg"
+			.container
+				= f.hidden_field :product_id, value: @product.id
+			.row
+				.col
+					.row
+						= f.submit "Create Image Set", class: "btn btn-dark btn-lg"
+				.col
+					.row
+						%a.btn.btn-secondary.btn-lg{href: product_image_sets_path(product: @product, manage: true), aria:{turbo:{frame: "content"}}} Cancel

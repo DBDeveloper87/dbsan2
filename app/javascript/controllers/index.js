@@ -6,14 +6,21 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
 import SelectFilterController from "./select_filter_controller.js"
 application.register("select-filter", SelectFilterController)
+
 import StoreManagerController from "./store/manager_controller.js"
 application.register("storemanager", StoreManagerController)
 
 import TextareaAutogrow from "stimulus-textarea-autogrow"
 application.register("textarea-autogrow", TextareaAutogrow)
+
 import NestedForm from "stimulus-rails-nested-form"
 application.register("nested-form", NestedForm)
+
 import CovidController from "./covid_controller.js"
 application.register("covid", CovidController)
+
+import BootstrapController from "./bootstrap_controller.js"
+application.register("bootstrap", BootstrapController)

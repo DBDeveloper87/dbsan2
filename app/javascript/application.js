@@ -8,8 +8,8 @@ LocalTime.start();
 //import Quill from 'quill';
 //var quill = new Quill('.quill-editor', {})
 
-
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl)
+	return new bootstrap.Tooltip(tooltipTriggerEl)
 })
+

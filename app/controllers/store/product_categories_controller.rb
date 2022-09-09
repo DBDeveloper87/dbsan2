@@ -12,12 +12,12 @@ class Store::ProductCategoriesController < ApplicationController
 	end
 
 	def show
-		@products = @category.products.all
+		@products = @category.products.ordered
 	end
 
 	def create
 		@department = Department.find(category_params[:department_id])
-		@categories = @department.product_categories
+		@categories = @department.product_categories.ordered
 		@category = ProductCategory.new(category_params)
 
 		respond_to do |f|
@@ -48,6 +48,6 @@ class Store::ProductCategoriesController < ApplicationController
 		end
 
 		def set_category
-			@category = ProductCategory.find_by(params[:slug])
+			@category = ProductCategory.find_by(slug: params[:slug])
 		end
 end

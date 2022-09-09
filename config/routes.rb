@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     get '/', to: "store/front#index"
     get 'manage', to: 'store/manage#index'
     resources :products, controller: "store/products"
-    resources :departments, controller: "store/departments"
-    resources :product_categories, controller: "store/product_categories"
+    resources :departments, controller: "store/departments", param: :slug
+    resources :product_categories, controller: "store/product_categories", param: :slug
     resources :product_image_sets, controller: "store/product_image_sets"
   end
 
