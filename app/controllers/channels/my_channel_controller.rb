@@ -1,11 +1,12 @@
 class Channels::MyChannelController < ApplicationController
-	before_action :subdomain
+	before_action :set_channel, :only: :show
 
-	def index
+	def show
 	end
 
 	private
-		def subdomain
+		def set_channel
 			@subdomain = Subdomain.find_by(slug: request.subdomain)
+			@channel = @subdomain.channel
 		end
 end
