@@ -1,5 +1,5 @@
 class Channels::MyChannelController < ApplicationController
-	before_action :set_channel, :only: :show
+	before_action :set_channel, only: :show
 
 	def show
 	end
