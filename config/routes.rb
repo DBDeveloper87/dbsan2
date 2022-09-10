@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  require 'store_domain'
-  require 'channel_domains'
-
-  constraints(StoreDomain) do
+  #require 'store_domain'
+  #require 'channel_domains'
+  
+  constraints subdomain: "store" do
     get '/', to: "store/front#index"
     get 'manage', to: 'store/manage#index'
     resources :products, controller: "store/products"
@@ -11,9 +11,12 @@ Rails.application.routes.draw do
     resources :product_image_sets, controller: "store/product_image_sets"
   end
 
-  constraints(ChannelDomains) do
+  constraints subdomain: "dbrib" do
     get "/", to: "channels/my_channel#show"
   end
+
+  root "pages#home"
+  
 
   #namespace :store do
    # get '/', to: "front#index"
@@ -125,5 +128,5 @@ Rails.application.routes.draw do
   get 'video_layout', to: "pages#video_layout"
 
   # Defines the root path route ("/")
-  root "pages#home"
+  
 end
