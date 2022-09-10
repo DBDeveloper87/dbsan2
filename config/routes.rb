@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   constraints subdomain: "dbrib" do
-    get "/", to: "channels/my_channel#show"
+    get "/", to: "pages#game_board"
   end
 
   root "pages#home"
