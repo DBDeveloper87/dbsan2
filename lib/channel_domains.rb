@@ -1,13 +1,11 @@
 class ChannelDomains
-	channels = Channel.all
-	subdomains = []
-	channels.each do |c|
-		subdomains.append(c.subdomain.slug)
-	end
-
-	subdomains.each do |s|
-		if self.request.subdomain == s
-			return s
+	def self.matches? request
+		channels = Channel.all
+		subdomains = []
+		channels.each do |c|
+			subdomains.append(c.subdomain.slug)
 		end
+
+		request.subdomain.in?(subdomains)
 	end
 end

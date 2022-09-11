@@ -1,35 +1,25 @@
 Rails.application.routes.draw do
-  #require 'store_domain'
-  #require 'channel_domains'
+  require "channel_domains"
+
   
+  constraints(ChannelDomains) do
+    root "channels/my_channel#show", as: :channel_root
+  end
+
   constraints subdomain: "store" do
-    get '/', to: "store/front#index"
-    get 'manage', to: 'store/manage#index'
+    root "store/front#index", as: :store_root
+    resources :manage, controller: "store/manage", only: :index
     resources :products, controller: "store/products"
     resources :departments, controller: "store/departments", param: :slug
     resources :product_categories, controller: "store/product_categories", param: :slug
     resources :product_image_sets, controller: "store/product_image_sets"
   end
 
-  constraints subdomain: "dbrib" do
-    get "/", to: "channels/my_channel#show"
-  end
-
   root "pages#home"
   
+  
 
-  #namespace :store do
-   # get '/', to: "front#index"
-   # get 'manage', to: 'manage#index'
-   # namespace :manage do
-   #   resources :departments
-   #   resources :product_categories
-   #   resources :products
-   #   resources :product_image_sets
-   #   resources :orders
-   # end
-  #end
-  get 'contenteditable', to: "pages#contenteditable"
+  #get 'contenteditable', to: "pages#contenteditable"
   namespace :photos do
     get 'new', to: "images#new"
     post 'new', to: 'images#create'
@@ -112,8 +102,6 @@ Rails.application.routes.draw do
       resources :zoom_meetings
     end
   end
-  
-  
 
   # Contact Form
   get 'contact', to: 'contacts#new'
@@ -126,7 +114,4 @@ Rails.application.routes.draw do
   get "game_board", to: "pages#game_board"
   # Video
   get 'video_layout', to: "pages#video_layout"
-
-  # Defines the root path route ("/")
-  
 end

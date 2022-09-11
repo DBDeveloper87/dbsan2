@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
 	#require 'net/https'
 	before_action :set_social
+	#before_action :ensure_subdomain
 	helper_method :admin?
-	#RECAPTCHA_MINIMUM_SCORE = 0.5
-	
+	helper_method :current_channel
 
 	def admin?
 		current_user&.admin == true
@@ -23,12 +23,14 @@ class ApplicationController < ActionController::Base
 		@networks = SocialNetwork.all
 	end	
 	
-	#def verify_recaptcha?(token, recaptcha_action)
-    #	secret_key = Rails.application.credentials.recaptcha[:SECRET_KEY]
-#
-    #	uri = URI.parse("https://www.google.com/recaptcha/api/siteverify?secret=#{secret_key}&response=#{token}")
-    #	response = Net::HTTP.get_response(uri)
-    #	json = JSON.parse(response.body)
-    #	json['success'] && json['score'] > RECAPTCHA_MINIMUM_SCORE && json['action'] == recaptcha_action
-    #end	
+	def current_channel
+		subdomain = Subdomain.find_by(slug: request.subdomain)
+		@current_channel = subdomain.channel
+	end
+
+	private
+		def ensure_subdomain
+			redirect_to root_url(subdomain: :www) unless current_channel.present?
+		end
+
 end
