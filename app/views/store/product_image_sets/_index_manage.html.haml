@@ -1,8 +1,8 @@
-%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+%turbo-frame{id: "content", data:{controller: "bootstrap", turbo:{action: "advance"}}}
 	.row.bg-dark.text-light
 		.d-flex
 			.p-2
-				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_path(product), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Product"}}, aria:{label: "Back to Product"}}
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_path(product, manage: true), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to #{product.name}"}}, aria:{label: "Back to #{product.name}"}}
 					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
 			.flex-grow-1.p-2
 				%h2 Image Sets
@@ -12,11 +12,4 @@
 	
 	.container.p-4
 		%turbo-frame{id: "new_image_set", data:{turbo:{action: "advance"}}}
-		- image_sets.each do |set|
-			.d-flex.border.border-dark.mb-4
-				.flex-grow-1.p-2.m-2
-					= set.label
-				.flex.p-2.m-2.text-end
-					%span.badge.rounded-pill.bg-dark.text-white
-						0 of 0
-				
+		= render partial: "store/product_image_sets/image_sets", locals: {image_sets: image_sets, product: product}

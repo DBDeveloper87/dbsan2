@@ -1,0 +1,35 @@
+%turbo-frame{id: "content", data:{controller: "bootstrap", turbo:{action: "advance"}}}
+	.row.bg-dark.text-light
+		.d-flex
+			.p-2
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_image_sets_path(product: image_set.product, manage: true), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Image Sets"}}, aria:{label: "Back to Image Sets"}}
+					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
+			.flex-grow-1.p-2
+				%h2 Image Set (#{@image_set.label})
+			-#.p-2
+				-#%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: new_product_image_set_path(product: product.id, manage: true), data:{turbo:{frame: "new_image_set"}, bs:{toggle: "tooltip", placement: "bottom", title: "New Image Set"}}, aria:{label: "New Image Set"}}
+					-#%i.bi.bi-plus{aria:{hidden: "true"}}
+	
+	- if image_set.photos.count == 0
+		.row.h-100{style: "background: #bfbfbf"}
+			.align-self-center.text-center
+				%p You currently have no images in this set.
+				= form_with(model: @image_set) do |f|
+					= f.fields_for :photos, Photo.new do |p|
+						.image-upload
+							%label.btn.btn-dark.btn-lg.text-light{for: "image_upload"} Add Image to Set
+							= p.file_field :file, id: "image_upload", onChange: "requestSubmit()"
+	- else
+		.p-4
+			%h3 Testing
+			%p You have #{image_set.photos.count} of 8 photos in this set.
+			.row
+				- image_set.photos.each do |p|
+					.col-3
+						%img.w-100{src: url_for(p.file)}
+			.row
+				- image_set.photos.each do |p|
+					%p <strong>Shot on: </strong>#{p.shot_on}
+					%p <strong>Latitude: </strong>#{p.latitude[:humanize].html_safe} or #{p.latitude[:float]}
+					%p <strong>Longitude: </strong>#{p.longitude[:humanize].html_safe} or #{p.longitude[:float]}
+					%p <strong>Altitude: </strong>#{p.altitude}

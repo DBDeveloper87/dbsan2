@@ -3,7 +3,9 @@ import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
 	connect() {
-		
-		console.log("Bootstrap Tooltips should be working")
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})	
 	}
 }

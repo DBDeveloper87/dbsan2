@@ -1,0 +1,4 @@
+.container.mt-4
+	- @videos.each do |v|
+		.container
+			= link_to v.id, video_path(v)

@@ -1,8 +1,8 @@
-%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+%turbo-frame{id: "content", data:{controller: "bootstrap", turbo:{action: "advance"}}}
 	.row.bg-dark.text-light
 		.d-flex
 			.p-2
-				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_category_path(category), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Product Category"}}, aria:{label: "Back to Department"}}
+				%a.btn.btn-dark.btn-lg.text-light.border.border-light{href: product_category_path(slug: category.slug, manage: true), data:{turbo:{frame: "content"}, bs:{toggle: "tooltip", placement: "bottom", title: "Back to Product Category"}}, aria:{label: "Back to Department"}}
 					%i.bi.bi-arrow-left-circle-fill{aria:{hidden: "true"}}
 			.flex-grow-1.p-2
 				%h2 Product

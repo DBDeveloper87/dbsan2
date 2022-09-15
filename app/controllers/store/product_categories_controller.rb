@@ -49,5 +49,6 @@ class Store::ProductCategoriesController < ApplicationController
 
 		def set_category
 			@category = ProductCategory.find_by(slug: params[:slug])
+			@department = @category.department
 		end
 end

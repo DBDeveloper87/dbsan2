@@ -8,13 +8,14 @@ Rails.application.routes.draw do
 
   constraints subdomain: "store" do
     root "store/front#index", as: :store_root
-    resources :manage, controller: "store/manage", only: :index
+    get "manage", to: "store/manage#index", as: :store_management
     resources :products, controller: "store/products"
     resources :departments, controller: "store/departments", param: :slug
     resources :product_categories, controller: "store/product_categories", param: :slug
     resources :product_image_sets, controller: "store/product_image_sets"
   end
 
+  resources :videos
   root "pages#home"
   
   

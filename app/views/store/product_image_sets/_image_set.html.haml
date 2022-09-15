@@ -1,0 +1,8 @@
+%turbo-frame{id: set.id, data:{turbo:{action: "advance"}}}
+	.d-flex.border.border-dark.mb-4
+		.flex-grow-1.p-2.m-2
+			%a.nav-link{href: product_image_set_path(set, manage: true), data:{turbo:{frame: "content"}}} #{set.label}
+		.flex.p-2.m-2.mb-2.text-end
+			%span.badge.rounded-pill.bg-dark.text-white
+				0 of 0
+		

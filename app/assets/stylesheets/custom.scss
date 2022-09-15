@@ -15,3 +15,10 @@ li {
 	content: '*';
 	color: 'red';
 }
+
+.image-upload > input {
+	display: none
+}
+.image-upload > label {
+	cursor: pointer
+}
