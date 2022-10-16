@@ -1,0 +1,16 @@
+%turbo-frame{id: "content", data:{uploads_target: "contentFrame", turbo:{action: "advance"}}}
+	.container-fluid.pt-4
+		.row
+			- videos.each do |video|
+				.col-sm-6.col-md-3
+					.card.border.border-dark
+						.card-img-top.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
+							.position-absolute.top-0.start-0.bottom-0.end-0.border.border-dark
+								.row.h-100
+									.align-self-center.text-center
+										.display-6 Awaiting Upload
+						.card-body
+							.card-title #{video.title}
+							.row
+								%a.btn.btn-dark.btn-lg.stretched-link{href: edit_video_path(video), data:{turbo:{frame: "content"}}} Edit Details
+

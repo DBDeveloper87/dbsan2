@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   constraints(ChannelDomains) do
     root "channels/my_channel#show", as: :channel_root
+    get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
+    patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
   end
 
   constraints subdomain: "store" do
@@ -15,7 +17,10 @@ Rails.application.routes.draw do
     resources :product_image_sets, controller: "store/product_image_sets"
   end
 
+  resources :uploads
+  post "uploads/close", to: "uploads#close"
   resources :videos
+  
   root "pages#home"
   
   

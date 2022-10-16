@@ -1,0 +1,16 @@
+%turbo-frame{id: upload_frame, data:{controller: "uploads", uploads_grab: "item", uploads_item: fl[:list_index], uploads_input: input_id}}
+	.card.w-100
+		.card-body
+			.d-flex.border.border-dark
+				.p-2
+					%i.bi.bi-camera-video
+				.flex-grow-1.p-2
+					.card-title #{fl[:name].split(".")[0].truncate(20) + fl[:name].split(".")[1]}
+					.card-subtitle.text-muted{data:{uploads_target: "size_progress"}} 0 Bytes / #{humanize_bytes(fl[:size])}
+					.progress.border.border-dark.mb-3{style: "height: 20%", data:{uploads_target: "progress_text", bs:{toggle: "tooltip", placement: "top", title: "Waiting. . . "}}}
+						.progress-bar{data:{uploads_target: "progressbar"}}
+			.d-none
+				= form_with(model: uploads) do |f|
+					= f.hidden_field :blob_info, data:{uploads_target: "blob_info"}
+					= f.submit "update", data:{uploads_target: "submit"}
+			

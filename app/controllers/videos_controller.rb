@@ -1,10 +1,16 @@
 class VideosController < ApplicationController
+	layout "videos"
+
 	def index
 		@videos = Video.all
 	end
 
 	def new
-		@video = Video.new
+		@upload = Upload.new	
+	end
+
+	def edit
+		@video = Video.find(params[:id])
 	end
 
 	def show
@@ -23,6 +29,18 @@ class VideosController < ApplicationController
 
 	private
 		def video_params
-			params.require(:video).permit(:original_upload)
+			params.require(:video).permit(:title, :content_type, :upload_size, :original_upload)
 		end	
+
+		def success_json(video)
+			[
+				video: [
+					id: video.id,
+					title: video.title,
+					content_type: video.content_type,
+					upload_size: video.upload_size
+				]
+			]
+		end
+
 end

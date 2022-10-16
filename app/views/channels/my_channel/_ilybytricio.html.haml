@@ -1,0 +1,6 @@
+.container.pt-4
+	- if channel.brand_logo.attached?
+		.text-center
+			%img{src: url_for(channel.brand_logo), width: "50%", alt: "ILY by Tricio Logo"}
+	%h1 Products
+	

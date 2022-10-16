@@ -1,4 +1,19 @@
 module ApplicationHelper
+	def humanize_bytes(value)
+		case 
+		when value >= 1099511627776
+			"#{number_with_precision((value / 1099511627776.00).round(2), precision: 2, delimiter: ",")} TB"
+		when value.between?(1073741824, 1099511627775)
+			"#{number_with_precision((value / 1073741824.00).round(2), precision: 2, delimiter: ",")} GB"
+		when value.between?(1048576, 1073741823)
+			"#{number_with_precision((value / 1048576.00).round(2), precision: 2, delimiter: ",")} MB"
+		when value.between?(1024, 1048575)
+			"#{number_with_precision((value / 1024.00).round(2), precision: 2, delimiter: ",")} KB"
+		else
+			"#{number_with_delimiter(value, delimiter: ",")} Bytes"
+		end
+	end
+
 	def tent_or_cabin
 		[
 			"Tent",

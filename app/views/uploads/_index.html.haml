@@ -1,0 +1,17 @@
+%turbo-frame{id: "uploads_quenue", data:{turbo:{action: "advance"}}}
+	.col-sm-12.col-md-6.col-lg-4.col-xl-3.position-absolute.bottom-0.end-0.border.border-dark{style: "z-index: 10; background: white", data:{controller: "uploads", uploads_grab: "input", uploads_input_id: uploads.input_id}}
+		.d-flex.border.border-dark.bg-dark.text-light
+			.flex-grow-1.p-2
+				%h2 Uploads
+			.p-2.pt-3
+				%button.btn.btn-dark.p-0{type: "button", data:{action: "click->uploads#expandCollapse", bs:{toggle: "collapse", target:"#uploadsList"}}}
+					%i.bi.bi-chevron-compact-up{title: "Expand", data:{uploads_target: "collapseButtonIcon", bs:{toggle: "tooltip", placement: "top"}}}
+			
+			.p-2.pt-3
+				= button_to uploads_close_path, class: "btn btn-dark p-0" do
+					%i.border.border-light.bi.bi-x{style: "border-radius: 50%", data:{bs:{toggle: "tooltip", placement: "top", title: "Close"}}}
+		#uploadsList.collapse
+			.d-none{data:{uploads_target: "inputFields"}}
+			.d-flex.flex-column.overflow-auto{style: "max-height: 30vh"}
+				- uploads.file_list.each_with_index do |fl, i|
+					= render partial: "uploads/upload", locals: {upload_frame: "#{uploads.id}_f#{i}", fl: fl, i: i, input_id: uploads.input_id, uploads: uploads}

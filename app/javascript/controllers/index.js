@@ -25,5 +25,5 @@ application.register("covid", CovidController)
 import BootstrapController from "./bootstrap_controller.js"
 application.register("bootstrap", BootstrapController)
 
-import UploadProgressController from "./upload_progress_controller.js"
-application.register("upload-progress", UploadProgressController)
+import UploadsController from "./uploads_controller.js"
+application.register("uploads", UploadsController)

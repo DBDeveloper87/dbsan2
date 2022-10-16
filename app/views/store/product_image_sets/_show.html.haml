@@ -25,8 +25,13 @@
 			%p You have #{image_set.photos.count} of 8 photos in this set.
 			.row
 				- image_set.photos.each do |p|
-					.col-3
+					.col-4
 						%img.w-100{src: url_for(p.file)}
+					.col-4
+						%img.w-100{src: url_for(p.file)}
+					.col-4
+						%img.w-100{src: url_for(p.file)}
+			
 			.row
 				- image_set.photos.each do |p|
 					%p <strong>Shot on: </strong>#{p.shot_on}

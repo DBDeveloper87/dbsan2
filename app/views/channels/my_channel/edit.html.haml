@@ -1,0 +1,15 @@
+.container.pt-4
+	%h1 Edit Channel
+
+	= form_with(model: @channel, url: channel_settings_url) do |f|
+
+		.form-floating.mb-4
+			= f.text_field :name, class: "form-control border border-dark", placeholder: "Channel Name"
+			= f.label :name, "Channel Name"
+
+		.form-floating.mb-4
+			= f.file_field :brand_logo
+
+
+		.mt-4
+			= f.submit "Update"

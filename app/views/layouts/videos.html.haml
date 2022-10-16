@@ -1,0 +1,27 @@
+!!!
+%html{lang: "en"}
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+		%title #{@meta_title.present? ? @meta_title : 'DBSAN'}
+		%meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}
+		= csrf_meta_tags
+		= csp_meta_tag
+		= stylesheet_link_tag "application", "data-turbo-track": "reload"
+		= javascript_include_tag "application", data:{turbo:{track: "reload"}}, defer: true
+    
+	%body.d-flex.flex-column.min-vh-100
+		%turbo-frame{id: "main_frame", data:{turbo:{action: "advance"}}}
+			.container-fluid.position-relative
+				.row.flex-nowrap
+					.col-auto.col-md-3.col-xl-2.px-sm-2.px-0.bg-dark
+						%turbo-frame{id: "sidebar", data:{turbo:{action: "advance"}}}
+							.d-flex.flex-column.align-items-center.align-items-sm-start.px-3.pt-2.text-white.min-vh-100
+								-#%a.d-flex.align-items-center.pb-3.mb-md-0.me-md-auto.text-white.text-decoration-none{href: products_path(manage: true), data:{turbo:{frame: "content"}}} Products
+								-#%ul.nav.flex-column
+									-#%li.mb-0.nav-item
+										-#%a.text-white.nav-link{href: departments_path(manage: true), data:{turbo:{frame: "content"}}} Departments
+					.col
+						%turbo-frame{id: "right_side", data:{turbo:{action: "advance"}}}
+							= yield
+				%turbo-frame{id: "uploads_quenue"}
+						
