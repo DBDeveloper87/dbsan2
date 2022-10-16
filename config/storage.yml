@@ -15,23 +15,7 @@ local:
 #   bucket: your_own_bucket-<%= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
-google_dev:
-  service: GCS
-  project: <%= Rails.application.credentials.google_storage[:project_id] %>
-  credentials: 
-    type: <%= Rails.application.credentials.google_storage[:type] %>
-    project_id: <%= Rails.application.credentials.google_storage[:project_id] %>
-    private_key_id: <%= Rails.application.credentials.google_storage[:private_key_id] %>
-    private_key: <%= Rails.application.credentials.google_storage[:private_key] %>
-    client_email: <%= Rails.application.credentials.google_storage[:client_email] %>
-    client_id: <%= Rails.application.credentials.google_storage[:client_id] %>
-    auth_uri: <%= Rails.application.credentials.google_storage[:auth_uri] %>
-    token_uri: <%= Rails.application.credentials.google_storage[:token_uri] %>
-    auth_provider_x509_cert_url: <%= Rails.application.credentials.google_storage[:auth_provider_x509_cert_url] %>
-    client_x509_cert_url: <%= Rails.application.credentials.google_storage[:client_x509_cert_url] %>
-  bucket: <%= Rails.application.credentials.google_storage[:bucket] %>
-
-google_prod:
+google:
   service: GCS
   project: <%= Rails.application.credentials.google_storage[:project_id] %>
   credentials: 
