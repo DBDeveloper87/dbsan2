@@ -1,4 +1,4 @@
-%turbo-frame{id: "main", data:{turbo:{frame: "advance"}}}
-	.container.mt-4
-		%video.w-100{src: url_for(video.original_upload), controls: true}
-		
+.container
+	%video{src: "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.mp4", controls: "true"}
+		%track{src: "/captions-en.vtt", srclang: "en", label: "English (CC)", kind: "captions"}
+	%h1 #{video.title}	

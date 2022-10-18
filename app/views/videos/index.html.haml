@@ -1,4 +1,5 @@
-.container.mt-4
+.container.pt-4
+	%h1 Videos
+
 	- @videos.each do |v|
-		.container
-			= link_to v.id, video_path(v)
+		= link_to v.title, video_path(v)

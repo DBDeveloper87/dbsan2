@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+	belongs_to :channel
+
 	has_one_attached :original_upload
 	attribute :content_type
 	#validate :valid_format?

@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
-	layout "videos"
+	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
+	layout "application", only: [:index, :show]
 
 	def index
 		@videos = Video.all
@@ -32,15 +33,6 @@ class VideosController < ApplicationController
 			params.require(:video).permit(:title, :content_type, :upload_size, :original_upload)
 		end	
 
-		def success_json(video)
-			[
-				video: [
-					id: video.id,
-					title: video.title,
-					content_type: video.content_type,
-					upload_size: video.upload_size
-				]
-			]
-		end
+		
 
 end

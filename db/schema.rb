@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_232816) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_014639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -524,6 +524,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_232816) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "channel_id"
+    t.index ["channel_id"], name: "index_videos_on_channel_id"
   end
 
   create_table "virtual_spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -589,6 +591,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_232816) do
   add_foreign_key "products", "product_categories"
   add_foreign_key "profiles", "users"
   add_foreign_key "state_provinces", "countries"
+  add_foreign_key "videos", "channels"
   add_foreign_key "virtual_spaces", "events"
   add_foreign_key "zoom_meetings", "virtual_spaces"
 end
