@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
 
 	def default_meta_tags
 		@meta_title = "DBSAN"
+		@meta_og_type = nil
+		@meta_og_url = nil
+		@meta_og_image = nil
 	end
 
 	def set_social

@@ -16,6 +16,10 @@ class VideosController < ApplicationController
 
 	def show
 		@video = Video.find(params[:id])
+		@meta_title = "#{@video.title} | #{@video.channel.name}"
+		@meta_og_type = "video.movie"
+		@meta_og_url = video_url(@video)
+		@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
 	end
 
 	def create
