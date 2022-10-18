@@ -6,7 +6,8 @@ class Channels::MyChannelController < ApplicationController
 	end
 
 	def show
-		
+		@meta_title = @channel.name
+		@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
 	end
 
 	def update
