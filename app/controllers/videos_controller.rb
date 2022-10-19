@@ -1,9 +1,11 @@
 class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
-	layout "application", only: [:index, :show]
+	layout "channel", only: [:index, :show]
 
 	def index
-		@videos = Video.all
+		@subdomain = Subdomain.find_by(slug: request.subdomain)
+		@channel = @subdomain.channel
+		@videos = @channel.videos.all
 	end
 
 	def new
@@ -15,6 +17,7 @@ class VideosController < ApplicationController
 	end
 
 	def show
+		
 		@video = Video.find(params[:id])
 		@meta_title = "#{@video.title} | #{@video.channel.name}"
 		@meta_og_type = "video.movie"

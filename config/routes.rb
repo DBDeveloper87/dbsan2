@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     root "channels/my_channel#show", as: :channel_root
     get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
     patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
+    resources :videos
   end
 
   constraints subdomain: "store" do
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
 
   resources :uploads
   post "uploads/close", to: "uploads#close"
-  resources :videos
+  
   
   root "pages#home"
   
