@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
-  require "channel_domains"
+  require "domain_hosts"
+  require "channel_subdomains"
 
   
-  constraints(ChannelDomains) do
-    root "channels/my_channel#show", as: :channel_root
-    get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
-    patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
-    resources :videos
+  constraints(DomainHosts) do
+    constraints(ChannelSubdomains) do
+      root "channels/my_channel#show", as: :channel_root
+      get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
+      patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
+      resources :videos
+    end
   end
 
   constraints subdomain: "store" do

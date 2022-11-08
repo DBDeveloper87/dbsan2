@@ -1,4 +1,4 @@
-class ChannelDomains
+class ChannelSubdomains
 	def self.matches? request
 		channels = Channel.all
 		subdomains = []
