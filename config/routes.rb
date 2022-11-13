@@ -130,8 +130,7 @@ Rails.application.routes.draw do
   get 'video_layout', to: "pages#video_layout"
 
   resources :challenges do
-    get "register", to: "challenge_participants#new"
-    post "register", to: "challenge_participants#create"
+    resources :participants, controller: "challenge_participants"
   end
 
 end

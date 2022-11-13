@@ -11,7 +11,8 @@
 			%strong End Date and Time
 		.col-6.p-2
 			= local_time(@challenge.end)
-	.mt-4
-		= link_to "Register Now", challenge_register_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+	- unless @challenge.challenge_participants.map { |p| p.user_id == current_user.id}
+		.mt-4
+			= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
 	.mt-4
 		= simple_format(@challenge.description)

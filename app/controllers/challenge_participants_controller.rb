@@ -17,9 +17,23 @@ class ChallengeParticipantsController < ApplicationController
 		end
 	end
 
+	def create
+		@user = current_user.id
+		@registrant = @challenge.challenge_participants.build(register_params)
+
+		if @registrant.save
+			redirect_to challenges_path
+		end
+	end
+
 	private
 		def get_challenge
 			@challenge = Challenge.find(params[:challenge_id])
+		end
+
+		def register_params
+			params.require(:challenge_participant).permit(:first_name, :last_name, :line_1, :line_2, 
+				:city, :state, :zip, :country, :user_id)
 		end
 
 end
