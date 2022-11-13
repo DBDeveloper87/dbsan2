@@ -12,5 +12,7 @@ class User < ApplicationRecord
   has_many :camp_applications
   has_many :camps, through: :camp_applications
   has_many :phone_numbers
+  has_many :challenge_participants
+  has_many :challenges, through: :challenge_participants
   
 end

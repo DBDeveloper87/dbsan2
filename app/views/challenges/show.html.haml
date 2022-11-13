@@ -8,8 +8,10 @@
 			= local_time(@challenge.start)
 	.row.border.border-dark
 		.col-6.p-2
-			%strong Start Date and Time
+			%strong End Date and Time
 		.col-6.p-2
 			= local_time(@challenge.end)
+	.mt-4
+		= link_to "Register Now", challenge_register_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
 	.mt-4
 		= simple_format(@challenge.description)

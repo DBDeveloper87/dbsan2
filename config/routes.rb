@@ -28,7 +28,10 @@ Rails.application.routes.draw do
   resources :uploads
   post "uploads/close", to: "uploads#close"
   
-  resources :challenges
+  resources :challenges do
+    get "register", to: "challenge_participants#new"
+    post "register", to: "challenge_participants#create"
+  end
   root "pages#home"
   
   

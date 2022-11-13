@@ -19,12 +19,12 @@
 						
 			.col-md-6.border.border-dark
 				%fieldset.p-2.mb-2
-					%legend Start Date
+					%legend End Date
 					.input-group
 						= f.date_select :end, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: Date.today.year, end_year: (Date.today.year + 1)}, {class: "form-select form-select-lg border border-dark"}
 			.col-md-6.border.border-dark
 				%fieldset.p-2.mb-2
-					%legend Start Time
+					%legend End Time
 					.input-group
 						= f.time_select :end, {ignore_date: true, minute_step: 15, prompt: true, ampm: true}, {class: "form-select form-select-lg border border-dark ms-2 me-2"}
 						

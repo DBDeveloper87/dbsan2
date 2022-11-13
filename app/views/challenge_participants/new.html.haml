@@ -1,0 +1,36 @@
+.col-xl-6.mx-auto.p-4
+	%h1 Challenge Registration
+
+	= form_with(model: @challenge, url: challenge_register_path) do |f|
+		.row.mt-4
+			.col-6
+				.form-floating.mb-4
+					= f.text_field :first_name, placeholder: "First Name", value: @first_name, class: "form-control border border-dark"
+					= f.label :first_name, "First Name"
+			.col-6
+				.form-floating.mb-4
+					= f.text_field :last_name, placeholder: "Last Name", value: @first_name, class: "form-control border border-dark"
+					= f.label :last_name, "Last Name"
+		.form-floating.mb-4
+			= f.text_field :line_1, placeholder: "Address Line 1", value: @line_1, class: "form-control border border-dark"
+			= f.label :line_1, "Address Line 1"
+		.form-floating.mb-4
+			= f.text_field :line_2, placeholder: "Address Line 2", value: @line_2, class: "form-control border border-dark"
+			= f.label :line_2, "Address Line 2"
+		.row
+			.col-md-6
+				.form-floating.mb-4
+					= f.text_field :city, placeholder: "City", value: @city, class: "form-control border border-dark"
+					= f.label :city, "City"
+			.col-md-3
+				.form-floating.mb-4
+					= f.text_field :state, placeholder: "State", value: @state, class: "form-control border border-dark"
+					= f.label :state, "State"
+			.col-md-3
+				.form-floating.mb-4
+					= f.text_field :zip, placeholder: "Zipcode", value: @zip, class: "form-control border border-dark"
+					= f.label :zip, "Zipcode"
+		.form-floating.mb-4
+			= f.text_field :country, placeholder: "Country", value: @country, class: "form-control border border-dark"
+			= f.label :country, "Country"
+		
