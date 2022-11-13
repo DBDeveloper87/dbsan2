@@ -28,10 +28,7 @@ Rails.application.routes.draw do
   resources :uploads
   post "uploads/close", to: "uploads#close"
   
-  resources :challenges do
-    get "register", to: "challenge_participants#new"
-    post "register", to: "challenge_participants#create"
-  end
+  
   root "pages#home"
   
   
@@ -131,4 +128,10 @@ Rails.application.routes.draw do
   get "game_board", to: "pages#game_board"
   # Video
   get 'video_layout', to: "pages#video_layout"
+
+  resources :challenges do
+    get "register", to: "challenge_participants#new"
+    post "register", to: "challenge_participants#create"
+  end
+
 end
