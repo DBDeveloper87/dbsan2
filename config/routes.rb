@@ -9,6 +9,10 @@ Rails.application.routes.draw do
       get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
       patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
       resources :videos
+      resources :surveys do
+        resources :sections, controller: "survey_sections"
+        post "sections/new", to: "survey_sections#create"
+      end
     end
   end
 
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
   resources :uploads
   post "uploads/close", to: "uploads#close"
   
-  
+  resources :challenges
   root "pages#home"
   
   

@@ -1,0 +1,23 @@
+.container.pt-4
+	.d-flex
+		.flex-grow-1.p-2
+			%h1 #{@survey.title}
+		.p-2
+			.row.p-2
+				= link_to "View", survey_path(@survey), class: "btn btn-lg btn-dark", role: "button"
+	.row
+		= render partial: "surveys/sidebar", locals: {survey: @survey}
+		.col-md-9.p-4
+			= form_with(model: @section, url: survey_section_path(@survey)) do |f|
+				%h2 #{@section.section_number}. #{@section.title}
+				.form-floating.mb-4
+					= f.text_field :title, placeholder: "Section Title", class: "form-control border border-dark"
+					= f.label :title, "Section Title"
+
+				.form-group.mb-4
+					= f.label :content, "Section Description"
+					= f.text_area :content, data:{controller: "textarea-autogrow"}, class: "form-control border border-dark"
+
+				.row.p-2
+					= f.submit "Save Changes", class: "btn btn-dark btn-lg"
+			

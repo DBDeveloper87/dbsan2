@@ -1,0 +1,12 @@
+.container.pt-4
+	%h1 Create a Survey for #{@channel.name}
+
+	= form_with(model: @survey) do |f|
+		.form-floating.mb-4
+			= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"
+			= f.label :title, "Title"
+
+		= f.hidden_field :channel_id, value: @channel.id
+
+		.row.p-2
+			= f.submit "Continue", class: "btn btn-dark btn-lg"

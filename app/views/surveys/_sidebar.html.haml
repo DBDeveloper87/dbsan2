@@ -1,0 +1,9 @@
+.col-md-3.bg-dark.text-light
+	= link_to "Basic Info", edit_survey_path(survey), class: "d-block p-2 text-light nav-link border border-light m-2 w-100"
+	- if survey.sections.count > 0
+		- survey.sections.each do |s|
+			= link_to "#{s.section_number}. #{s.title}", edit_survey_section_path(@survey, s), class: "d-block p-2 text-light nav-link border border-light m-2 w-100"
+	
+
+	= button_to "Add Section", survey_sections_new_path(survey.id), class: "d-block p-2 text-light nav-link border border-light m-2 w-100 bg-dark text-light text-start"
+			

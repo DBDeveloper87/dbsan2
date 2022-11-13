@@ -1,0 +1,6 @@
+.container.pt-4
+	%h1 Surveys for #{@channel.name}
+	= link_to "New Survey", new_survey_path(subdomain: @channel.subdomain.slug), class: "btn btn-lg btn-dark", role: "button"
+
+	- @surveys.each do |s|
+		%p #{link_to s.title, edit_survey_path(s, subdomain: @subdomain)}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_08_045229) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_13_115943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -331,6 +331,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_045229) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "challenges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "channels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "subdomain_id"
@@ -482,6 +491,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_045229) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "survey_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.integer "section_number"
+    t.uuid "survey_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_survey_sections_on_survey_id"
+  end
+
+  create_table "surveys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.uuid "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_surveys_on_channel_id"
+  end
+
   create_table "uploads", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "file_list"
     t.string "for"
@@ -592,6 +620,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_08_045229) do
   add_foreign_key "products", "product_categories"
   add_foreign_key "profiles", "users"
   add_foreign_key "state_provinces", "countries"
+  add_foreign_key "survey_sections", "surveys"
+  add_foreign_key "surveys", "channels"
   add_foreign_key "videos", "channels"
   add_foreign_key "virtual_spaces", "events"
   add_foreign_key "zoom_meetings", "virtual_spaces"
