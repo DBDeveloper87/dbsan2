@@ -1,0 +1,36 @@
+.col-xl-6.mx-auto.p-4
+	%h1 New Challenge
+
+	= form_with(model: challenge) do |f|
+		.row.form-floating
+			= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"
+			= f.label :title, "Title"
+		.row
+			.col-md-6.border.border-dark
+				%fieldset.p-2.mb-2
+					%legend Start Date
+					.input-group
+						= f.date_select :start, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: Date.today.year, end_year: (Date.today.year + 1)}, {class: "form-select form-select-lg border border-dark"}
+			.col-md-6.border.border-dark
+				%fieldset.p-2.mb-2
+					%legend Start Time
+					.input-group
+						= f.time_select :start, {ignore_date: true, minute_step: 15, prompt: true, ampm: true}, {class: "form-select form-select-lg border border-dark ms-2 me-2"}
+						
+			.col-md-6.border.border-dark
+				%fieldset.p-2.mb-2
+					%legend End Date
+					.input-group
+						= f.date_select :end, {order: [:month, :day, :year], month_format_string: "%<number>02d %{name}", prompt: true, start_year: Date.today.year, end_year: (Date.today.year + 1)}, {class: "form-select form-select-lg border border-dark"}
+			.col-md-6.border.border-dark
+				%fieldset.p-2.mb-2
+					%legend End Time
+					.input-group
+						= f.time_select :end, {ignore_date: true, minute_step: 15, prompt: true, ampm: true}, {class: "form-select form-select-lg border border-dark ms-2 me-2"}
+						
+		.row.form-floating.mb-4
+			= f.text_area :description, class: "form-control border border-dark", data:{controller: "textarea-autogrow"}, style: "min-height: 30vh"
+			= f.label :description, "Description"
+			
+		.row.mt-4.p-2
+			= f.submit "Create Challenge", class: "btn btn-lg btn-dark"
