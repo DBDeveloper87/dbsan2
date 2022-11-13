@@ -5,6 +5,7 @@ class ChallengesController < ApplicationController
 
 	def index
 		@challenges = Challenge.all
+
 	end
 
 	def new
@@ -12,6 +13,12 @@ class ChallengesController < ApplicationController
 	end
 
 	def show
+		@participants = @challenge.challenge_participants
+		@users = []
+		@participants.each do |p|
+			@users.append(p.user_id)
+		end
+		
 	end
 
 	def create
