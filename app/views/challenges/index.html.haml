@@ -1,0 +1,4 @@
+.container.pt-4
+	%h1 Challenges
+	- if current_user&.admin?
+		= link_to "New Challenge", new_challenge_path
