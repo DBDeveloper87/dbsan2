@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
 	before_action :authenticate_user!, only: :new
-	before_action :require_admin, only: :new
-	before_action :set_challenge, only: [:show, :edit]
+	before_action :require_admin, only: [:new, :edit, :update]
+	before_action :set_challenge, only: [:show, :edit, :update]
 
 	def index
 		@challenges = Challenge.all
@@ -31,6 +31,15 @@ class ChallengesController < ApplicationController
 		@challenge.save
 
 		if @challenge.save
+			redirect_to challenge_path(@challenge)
+		end
+	end
+
+	def update
+		if @challenge.update(create_params)
+			@challenge.start = @challenge.start + 5.hours
+			@challenge.end = @challenge.end + 5.hours
+			@challenge.save
 			redirect_to challenge_path(@challenge)
 		end
 	end
