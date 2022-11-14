@@ -33,7 +33,7 @@ class ChallengeParticipantsController < ApplicationController
 
 		def register_params
 			params.require(:challenge_participant).permit(:first_name, :last_name, :line_1, :line_2, 
-				:city, :state, :zip, :country, :user_id)
+				:city, :state, :zip, :country, :shirt_size, :user_id)
 		end
 
 end
