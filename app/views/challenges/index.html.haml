@@ -3,6 +3,16 @@
 	- if current_user&.admin?
 		= link_to "New Challenge", new_challenge_path
 
-	- @challenges.each do |c|
-		.border.border-dark.p-2
-			= link_to c.title, challenge_path(c)
+	.row
+		- @challenges.each do |c|
+			.col-6.col-md-4
+				.card.border.border-dark
+					.card-img-top.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
+						.position-absolute.top-0.start-0.bottom-0.end-0.border.border-dark
+							.row.h-100
+								%img{src: "https://storage.googleapis.com/dbsan-public/Banner4Challenge.png", alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
+					.card-body
+						%a.stretched-link.card-title{href: challenge_path(c)} #{c.title}
+						.text-muted Starts: #{local_time(c.start)}
+						.text-muted Ends: #{local_time(c.end)}
+						

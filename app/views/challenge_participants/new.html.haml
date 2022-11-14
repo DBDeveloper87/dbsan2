@@ -23,17 +23,42 @@
 				.form-floating.mb-4
 					= f.text_field :city, placeholder: "City", value: @city, class: "form-control border border-dark"
 					= f.label :city, "City"
-			.col-md-3
+			.col-6.col-md-3
 				.form-floating.mb-4
 					= f.text_field :state, placeholder: "State", value: @state, class: "form-control border border-dark"
 					= f.label :state, "State"
-			.col-md-3
+			.col-6.col-md-3
 				.form-floating.mb-4
 					= f.text_field :zip, placeholder: "Zipcode", value: @zip, class: "form-control border border-dark"
 					= f.label :zip, "Zipcode"
 		.form-floating.mb-4
 			= f.text_field :country, placeholder: "Country", value: @country, class: "form-control border border-dark"
 			= f.label :country, "Country"
+
+		%fieldset.fieldset.border.border-dark.p-2
+			%legend T-shirt size
+			.row.mb-2
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "s", class: "btn-check"
+					= f.label :shirt_size_s, "S", class: "btn btn-outline-dark btn-lg"
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "m", class: "btn-check"
+					= f.label :shirt_size_m, "M", class: "btn btn-outline-dark btn-lg"
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "l", class: "btn-check"
+					= f.label :shirt_size_l, "L", class: "btn btn-outline-dark btn-lg"
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "xl", class: "btn-check"
+					= f.label :shirt_size_xl, "XL", class: "btn btn-outline-dark btn-lg"
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "2xl", class: "btn-check"
+					= f.label :shirt_size_2xl, "2XL", class: "btn btn-outline-dark btn-lg"
+				.col-4.col-md-2.d-grid.d-block.mb-2
+					= f.radio_button :shirt_size, "3xl", class: "btn-check"
+					= f.label :shirt_size_3xl, "3XL", class: "btn btn-outline-dark btn-lg"
+			.d-grid.d-block.mb-2
+				= f.radio_button :shirt_size, "none", class: "btn-check"
+				= f.label :shirt_size_none, "No shirt, thank you.", class: "btn btn-outline-dark btn-lg text-start"
 
 		.row.mt-4
 			= f.submit"Register", class: "btn btn-lg btn-dark"

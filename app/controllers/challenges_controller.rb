@@ -1,15 +1,17 @@
 class ChallengesController < ApplicationController
 	before_action :authenticate_user!, only: :new
 	before_action :require_admin, only: :new
-	before_action :set_challenge, only: :show
+	before_action :set_challenge, only: [:show, :edit]
 
 	def index
 		@challenges = Challenge.all
-
 	end
 
 	def new
 		@challenge = Challenge.new
+	end
+
+	def edit
 	end
 
 	def show
