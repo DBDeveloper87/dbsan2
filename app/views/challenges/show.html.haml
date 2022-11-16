@@ -18,6 +18,8 @@
 	.mt-4
 		- unless current_user&.id.in?(@users)
 			= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+		- else
+			= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
 		- if current_user&.admin?
 			= link_to "Edit", edit_challenge_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
 	

@@ -1,0 +1,32 @@
+%p Hello #{@first_name}!
+
+%p Thank you for your contribution.  Below is your Tax Deductible Receipt for your records.
+
+%p 
+	%strong TAX DEDUCTIBLE RECEIPT
+	%br
+	%strong DeafBlind Support and Access Network
+	%br
+	%strong Tax ID: [insert]
+
+%p
+	%strong Donor’s Name:
+	%br
+	= @name
+
+%p
+	%strong Type of Contribution:
+	%br 
+	Cash
+
+%p
+	%strong Amount:
+	%br
+	= number_to_currency(@amount / 100.0)
+
+%p The DeafBlind Support and Access Network is a registered 501(c)(3) non-profit organization.
+
+%p
+	Patrick Vellia<br>
+	DBSAN Treasurer<br>
+	%a{href: "mailto:patrick.vellia@gmail.com"} patrick.vellia@gmail.com

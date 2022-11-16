@@ -16,6 +16,7 @@ class ChallengesController < ApplicationController
 
 	def show
 		@participants = @challenge.challenge_participants
+		@participant = @challenge.challenge_participants.find_by(user_id: current_user&.id)
 		@users = []
 		@participants.each do |p|
 			@users.append(p.user_id)

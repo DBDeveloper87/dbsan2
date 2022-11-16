@@ -4,26 +4,26 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller.js"
-application.register("hello", HelloController)
-
-import SelectFilterController from "./select_filter_controller.js"
-application.register("select-filter", SelectFilterController)
-
-import StoreManagerController from "./store/manager_controller.js"
-application.register("storemanager", StoreManagerController)
-
-import TextareaAutogrow from "stimulus-textarea-autogrow"
-application.register("textarea-autogrow", TextareaAutogrow)
-
-import NestedForm from "stimulus-rails-nested-form"
-application.register("nested-form", NestedForm)
-
-import CovidController from "./covid_controller.js"
-application.register("covid", CovidController)
-
-import BootstrapController from "./bootstrap_controller.js"
+import BootstrapController from "./bootstrap_controller"
 application.register("bootstrap", BootstrapController)
 
-import UploadsController from "./uploads_controller.js"
+import ControllerController from "./controller_controller"
+application.register("controller", ControllerController)
+
+import CovidController from "./covid_controller"
+application.register("covid", CovidController)
+
+import DonationOtherAmountController from "./donation_other_amount_controller"
+application.register("donation-other-amount", DonationOtherAmountController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+
+import SelectFilterController from "./select_filter_controller"
+application.register("select-filter", SelectFilterController)
+
+import Store__ManagerController from "./store/manager_controller"
+application.register("store--manager", Store__ManagerController)
+
+import UploadsController from "./uploads_controller"
 application.register("uploads", UploadsController)

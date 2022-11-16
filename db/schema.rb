@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_13_144637) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_043045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -385,6 +385,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_144637) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "donations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "program"
+    t.string "amount"
+    t.string "name"
+    t.string "email"
+    t.boolean "paid"
+    t.string "zip"
+    t.text "thank_you_note"
+    t.datetime "tyn_sent_at"
+    t.uuid "user_id"
+    t.uuid "challenge_participant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_participant_id"], name: "index_donations_on_challenge_participant_id"
+    t.index ["user_id"], name: "index_donations_on_user_id"
+  end
+
   create_table "event_attendees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "event_id", null: false
     t.uuid "user_id", null: false
@@ -624,6 +641,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_144637) do
   add_foreign_key "challenge_participants", "users"
   add_foreign_key "channels", "subdomains"
   add_foreign_key "counties", "state_provinces"
+  add_foreign_key "donations", "challenge_participants"
+  add_foreign_key "donations", "users"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
   add_foreign_key "phone_numbers", "camp_application_emergencies"

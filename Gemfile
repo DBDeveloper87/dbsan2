@@ -100,5 +100,7 @@ gem 'haml-rails'
 gem 'seed_dump'
 gem "recaptcha"
 
+gem 'stripe'
+
 # Google Cloud Storage
 gem "google-cloud-storage", "~> 1.8", require: false

@@ -1,4 +1,5 @@
 class ChallengeParticipant < ApplicationRecord
+  has_many :donations
   belongs_to :challenge
   belongs_to :user
   before_save :serialize_address
@@ -10,6 +11,10 @@ class ChallengeParticipant < ApplicationRecord
   attribute :state
   attribute :zip
   attribute :country
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
 
   def serialize_address
     self.address = {line_1: self.line_1, line_2: self.line_2,

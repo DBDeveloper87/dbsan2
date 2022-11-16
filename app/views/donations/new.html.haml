@@ -1,0 +1,39 @@
+.col-xl-6.mx-auto.pt-4
+	%h1 DBSAN Donations
+
+	%p We appreciate your contribution to the DeafBlind Support and Access Network (DBSAN), which is a 501(c)(3) non-profit organization.  Please choose program and an amount below, then you will be taken to our payment provider.
+
+	= form_with(model: @donation, html: {data: { turbo: false}}) do |f|
+		.form-floating.mt-4.mb-4
+			= f.text_field :program, value: @program, placeholder: "Program", readonly: true, class: "form-control border border-dark"
+			= f.label :program, "Program"
+
+		.fieldset.border.border-dark.p-2{data:{controller: "donation-other-amount"}}
+			%legend Donation amount
+			.row.mb-2
+				.col-6.col-md-3.d-grid.d-block.mb-2
+					= f.radio_button :amount, "1000", class: "btn-check", data:{donation_other_amount_target: "radio10", action: "change->donation-other-amount#removeOther"}
+					= f.label :amount_1000, "$10.00", class: "btn btn-outline-dark btn-lg"
+				.col-6.col-md-3.d-grid.d-block.mb-2
+					= f.radio_button :amount, "2500", class: "btn-check", data:{donation_other_amount_target: "radio25", action: "change->donation-other-amount#removeOther"}
+					= f.label :amount_2500, "$25.00", class: "btn btn-outline-dark btn-lg"
+				.col-6.col-md-3.d-grid.d-block.mb-2
+					= f.radio_button :amount, "5000", class: "btn-check", data:{donation_other_amount_target: "radio50", action: "change->donation-other-amount#removeOther"}
+					= f.label :amount_5000, "$50.00", class: "btn btn-outline-dark btn-lg"
+				.col-6.col-md-3.d-grid.d-block.mb-2
+					= f.radio_button :amount, "10000", class: "btn-check", data:{donation_other_amount_target: "radio100", action: "change->donation-other-amount#removeOther"}
+					= f.label :amount_10000, "$100.00", class: "btn btn-outline-dark btn-lg"
+			.form-floating
+				= f.number_field :other_amount, placeholder: "Other Amount", min: 0, step: 0.01, class: "form-control border border-dark", data:{action: "click->donation-other-amount#uncheckRadios", donation_other_amount_target: "input_other"}
+				= f.label :other_amount, "Other Amount"
+
+		.form-floating.mb-4
+			= f.email_field :email, placeholder: "Email Address", class: "form-control border border-dark"
+			= f.label :email, "Email Address"
+
+		.row.p-4
+			= f.hidden_field :challenge_participant_id, value: @participant.id
+			- if signed_in?
+				= f.hidden_field :user_id, value: current_user.id
+			= javascript_include_tag "https://js.stripe.com/v3"
+			= f.submit "Continue", class: "btn btn-dark btn-lg"

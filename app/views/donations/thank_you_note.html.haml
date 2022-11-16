@@ -1,0 +1,9 @@
+.col-xl-4.mx-auto.pt-4
+	%h1 Send your Donor a personalized Thank you note.
+
+	= form_with(model: @donation) do |f|
+		.form-floating.mb-4
+			= f.text_area :thank_you_note, placeholder: "Your Personalized thank You Note", value: "Hi #{@donation.name},\n\nI'd like to take the time to . . . \n\nThank you.\n#{@participant_name}", data:{controller: "textarea-autogrow"}, class: "form-control border border-dark", style: "min-height: 20vh"
+			= f.label :thank_you_note, "Your Personalized Note"
+		.row.p-4
+			= f.submit "Send Note", class: "btn btn-lg btn-dark"

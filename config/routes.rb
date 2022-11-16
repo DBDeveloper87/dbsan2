@@ -129,6 +129,11 @@ Rails.application.routes.draw do
   # Video
   get 'video_layout', to: "pages#video_layout"
 
+  resources :donations do
+    get "thank_you_note", to: "donations#thank_you_note"
+  end
+  get "donations_success", to: "donations#success"
+  get "donations_thank_you", to: "donations#thank_you"
   resources :challenges do
     resources :participants, controller: "challenge_participants"
   end

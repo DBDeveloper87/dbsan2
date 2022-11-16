@@ -14,5 +14,6 @@ class User < ApplicationRecord
   has_many :phone_numbers
   has_many :challenge_participants
   has_many :challenges, through: :challenge_participants
+  has_many :donations
   
 end

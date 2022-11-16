@@ -1,6 +1,7 @@
 class ChallengeParticipantsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create]
 	before_action :get_challenge, only: [:new, :create]
+	before_action :set_participant, only: :show
 
 	def new
 		@registrant = ChallengeParticipant.new
@@ -17,11 +18,15 @@ class ChallengeParticipantsController < ApplicationController
 		end
 	end
 
+	def show
+	end
+
 	def create
 		@user = current_user.id
 		@registrant = @challenge.challenge_participants.build(register_params)
 
 		if @registrant.save
+			ChallengeMailer.with(registrant: @registrant).registered.deliver_now
 			redirect_to challenges_path
 		end
 	end
@@ -34,6 +39,11 @@ class ChallengeParticipantsController < ApplicationController
 		def register_params
 			params.require(:challenge_participant).permit(:first_name, :last_name, :line_1, :line_2, 
 				:city, :state, :zip, :country, :shirt_size, :user_id)
+		end
+
+		def set_participant
+			@participant = ChallengeParticipant.find(params[:id])
+			@challenge = @participant.challenge
 		end
 
 end

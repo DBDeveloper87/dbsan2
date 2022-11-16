@@ -1,0 +1,7 @@
+.container.pt-4
+	%h1 #{@challenge.title}
+	%p
+		%strong: Participant: 
+		#{@participant.full_name}
+
+	= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"

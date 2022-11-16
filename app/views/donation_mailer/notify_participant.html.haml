@@ -1,0 +1,9 @@
+%p Hi #{@participant_name}!
+
+%p Great news! #{@donor_name} just donated #{number_to_currency(@amount / 100.0)} toward your #{@challenge.title}.
+
+%p Send them a <a href="#{donation_thank_you_note_url(@donation.id)}">thank you note</a>!
+
+%p Keep up the good work!
+
+%p The DBSAN Team

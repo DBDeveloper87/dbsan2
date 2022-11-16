@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  program: MyString
+  string: MyString
+  amount: MyString
+  string: MyString
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  address: MyText
+  thank_you_note: MyText
+  tyn_sent_at: 2022-11-15 23:30:45
+  user: one
+  challenge_participant: one
+
+two:
+  program: MyString
+  string: MyString
+  amount: MyString
+  string: MyString
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  address: MyText
+  thank_you_note: MyText
+  tyn_sent_at: 2022-11-15 23:30:45
+  user: two
+  challenge_participant: two

@@ -12,6 +12,7 @@ class CampApplicationPermissionsController < ApplicationController
 	end
 
 	def edit
+		@challenge = @participant.challenge
 	end
 
 	def create
