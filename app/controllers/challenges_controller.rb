@@ -21,7 +21,16 @@ class ChallengesController < ApplicationController
 		@participants.each do |p|
 			@users.append(p.user_id)
 		end
-		
+		@donor_count = []
+		@challenge.donations.each do |d|
+			@donor_count.append(d.email)
+		end
+		@donor_count = @donor_count.uniq.count
+		@raised = []
+		@challenge.donations.each do |d|
+			@raised.append(d.amount.to_i / 100.0)
+		end
+		@raised = @raised.sum
 	end
 
 	def create

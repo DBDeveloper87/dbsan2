@@ -4,17 +4,22 @@ class ChallengeParticipantsController < ApplicationController
 	before_action :set_participant, only: :show
 
 	def new
-		@registrant = ChallengeParticipant.new
-		@first_name = current_user.profile.first_name
-		@last_name = current_user.profile.last_name
-		@address = current_user.profile.addresses.find_by(address_type: "Primary Address")
-		unless @address.nil?
-			@line_1 = @address.address_l1
-			@line_2 = @address.address_l2
-			@city = @address.city
-			@state = @address.state_province.code
-			@zip = @address.zippostal
-			@country = @address.state_province.country.name
+		if @challenge.challenge_participants.map { |i| i.id == current_user.id }
+			@participant = @challenge.challenge_participants.find_by(user_id: current_user.id)
+			redirect_to challenge_participant_path(@challenge, @participant)
+		else
+			@registrant = ChallengeParticipant.new
+			@first_name = current_user.profile.first_name
+			@last_name = current_user.profile.last_name
+			@address = current_user.profile.addresses.find_by(address_type: "Primary Address")
+			unless @address.nil?
+				@line_1 = @address.address_l1
+				@line_2 = @address.address_l2
+				@city = @address.city
+				@state = @address.state_province.code
+				@zip = @address.zippostal
+				@country = @address.state_province.country.name
+			end
 		end
 	end
 
