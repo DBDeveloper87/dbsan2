@@ -1,7 +1,48 @@
 .container.pt-4
-	%h1 #{@challenge.title}
-	%p
-		%strong: Participant: 
-		#{@participant.full_name}
+	.d-flex
+		.flex.p-2
+			%a{href: challenge_path(@challenge), aria:{label: "Back to Challenge"}}
+				%i.h1.bi.bi-arrow-left-circle{aria:{hidden: "true"}}
+		.flex-grow-1.p-2
+			%h1 #{@challenge.title}
+	.d-flex
+		.flex.p-2.fw-bolder Participant: 
+		.flex-grow-1.p-2 #{@participant.full_name}
 
-	= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
+	.row
+		.col-lg-8.order-2.order-lg-1
+			.row.mb-4.mt-4
+				.col-6.col-md-5.mx-auto
+					.card
+						.card-body.position-relative.w-100{style: "padding-top: 100%"}
+							.position-absolute.top-0.start-0.bottom-0.end-0.p-4{style: "border: 0.5rem solid black; border-radius: 50%"} 
+								.row.h-100
+									.align-self-center.text-center
+										.display-4.fw-bolder 0
+										.display-6.fw-bolder Minutes		
+				.col-md-7.mx-auto
+					.card
+						.card-body.position-relative.w-100{style: "padding-top: 70%"}
+							.position-absolute.top-0.start-0.bottom-0.end-0.p-4
+								.row.h-100
+									.align-self-center.text-center.p-4
+										%h2 Badges
+										.text-muted.fw-folder You haven't earned any badges yet!		
+		
+		.col-lg-4.order-1
+			.progress.border.border-dark
+				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
+			.mt-2.text-center.text-muted.fw-bolder #{number_to_currency(@raised)} / $150.00 Raised
+			.row.p-4
+				= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
+			%h2 My Donors
+			- @donations.each do |d|
+				.d-flex.border.border-dark
+					.flex-grow-1.p-2
+						- if @participant.user_id == current_user&.id
+							= d.name
+						- else
+							- name = d.name.split(" ")
+							= name[0] + " " + name[1].split("")[0] + "."
+					.flex.p-2
+						= number_to_currency(d.amount.to_i / 100.0, precision: 0)

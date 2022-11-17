@@ -24,6 +24,14 @@ class ChallengeParticipantsController < ApplicationController
 	end
 
 	def show
+		@donations = @participant.donations.where(paid: true).all
+		@raised = []
+		@donations.each do |d|
+			@raised.append(d.amount.to_i / 100.0)
+		end
+		@raised = @raised.sum
+		@percent = @raised * 100 / 150
+
 	end
 
 	def create
