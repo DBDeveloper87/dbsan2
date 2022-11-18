@@ -32,7 +32,6 @@ class DonationMailer < ApplicationMailer
 		@note = @donation.thank_you_note
 		mail(
 			to: @email, 
-			bcc: "<info@dbsan.org>",
 			subject: "A personalized thank you from #{@participant_name}")
 	end
 end

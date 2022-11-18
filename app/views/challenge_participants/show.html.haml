@@ -29,7 +29,8 @@
 										%h2 Badges
 										.text-muted.fw-folder You haven't earned any badges yet!		
 		
-		.col-lg-4.order-1
+		
+		.col-lg-4.order-1{tabindex: -1}
 			.progress.border.border-dark
 				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
 			.mt-2.text-center.text-muted.fw-bolder #{number_to_currency(@raised)} / $150.00 Raised
