@@ -7,10 +7,10 @@
 			%h1 #{@challenge.title}
 	.d-flex
 		.flex.p-2.fw-bolder Participant: 
-		.flex-grow-1.p-2 #{@participant.full_name}
+		.flex-grow-1.p-2{aria:{flowto: "rightSide"}} #{@participant.full_name}
 
 	.row
-		.col-lg-8.order-2.order-lg-1
+		#leftSide.col-lg-8.order-2.order-lg-1
 			.row.mb-4.mt-4
 				.col-6.col-md-5.mx-auto
 					.card
@@ -30,7 +30,7 @@
 										.text-muted.fw-folder You haven't earned any badges yet!		
 		
 		
-		.col-lg-4.order-1{tabindex: -1}
+		#rightSide.col-lg-4.order-1{aria:{flowto: "leftSide"}}
 			.progress.border.border-dark
 				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
 			.mt-2.text-center.text-muted.fw-bolder #{number_to_currency(@raised)} / $150.00 Raised
