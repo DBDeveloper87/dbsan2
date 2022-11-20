@@ -47,9 +47,6 @@ class ChallengesController < ApplicationController
 
 	def update
 		if @challenge.update(create_params)
-			@challenge.start = @challenge.start + 5.hours
-			@challenge.end = @challenge.end + 5.hours
-			@challenge.save
 			redirect_to challenge_path(@challenge)
 		end
 	end
