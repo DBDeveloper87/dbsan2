@@ -6,12 +6,15 @@
 		.flex-grow-1.p-2
 			%h1 #{@challenge.title}
 	.row
-		.col-6.col-md-2.fw-bolder Participant: 
-		.col-6.col-md-10.p-2{aria:{flowto: "rightSide"}} #{@participant.full_name}
+		.col-6.col-lg-2
+			%strong Participant: 
+		.col-6.col-lg-10.p-2 #{@participant.full_name}
 
 	.row
-		.col-6.col-md-2.fw-bolder Page URL:
-		.col-12.col-md-10 #{challenge_participant_url(@challenge, @participant)}
+		.col-6.col-lg-2 
+			%strong Page URL:
+		.col-12.col-lg-10{aria:{flowto: "rightSide"}}
+			%span #{challenge_participant_url(@challenge, @participant)}
 
 	.row
 		#leftSide.col-lg-8.order-2.order-lg-1
