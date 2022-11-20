@@ -4,7 +4,7 @@ class ChallengeParticipantsController < ApplicationController
 	before_action :set_participant, only: :show
 
 	def new
-		if @challenge.challenge_participants.map { |i| i.id == current_user.id }
+		if current_user.id.in?(@challenge.challenge_participants.map { |i| i.user_id})
 			@participant = @challenge.challenge_participants.find_by(user_id: current_user.id)
 			redirect_to challenge_participant_path(@challenge, @participant)
 		else
@@ -39,8 +39,9 @@ class ChallengeParticipantsController < ApplicationController
 		@registrant = @challenge.challenge_participants.build(register_params)
 
 		if @registrant.save
+			@challenge = @registrant.challenge
 			ChallengeMailer.with(registrant: @registrant).registered.deliver_now
-			redirect_to challenges_path
+			redirect_to challenge_participant_path(@challenge, @registrant)
 		end
 	end
 
