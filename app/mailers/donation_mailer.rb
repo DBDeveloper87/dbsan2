@@ -29,9 +29,11 @@ class DonationMailer < ApplicationMailer
 		@donation = Donation.find_by(id: params[:donation])
 		@email = @donation.email
 		@participant_name = @donation.challenge_participant.full_name
+		@participant_email = @donation.challenge_participant.user.email
 		@note = @donation.thank_you_note
 		mail(
 			to: @email, 
+			bcc: @participant_email,
 			subject: "A personalized thank you from #{@participant_name}")
 	end
 end
