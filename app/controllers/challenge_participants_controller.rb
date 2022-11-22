@@ -1,7 +1,11 @@
 class ChallengeParticipantsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create]
-	before_action :get_challenge, only: [:new, :create]
+	before_action :get_challenge, only: [:index, :new, :create]
 	before_action :set_participant, only: :show
+
+	def index
+		@participants = @challenge.challenge_participants.all.order(last_name: :asc)
+	end
 
 	def new
 		if current_user.id.in?(@challenge.challenge_participants.map { |i| i.user_id})

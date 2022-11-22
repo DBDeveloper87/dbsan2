@@ -3,10 +3,23 @@
 		.position-absolute.top-0.start-0.bottom-0.end-0
 			.row.h-100
 				%img{src: "https://storage.googleapis.com/dbsan-public/Banner4Challenge.png", alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
-	%h1 #{@challenge.title}
-
-	.row
-		.col-md-8
+	.d-flex
+		.flex-grow-1.p-2
+			%h1 #{@challenge.title}
+		- if current_user&.id.in?(@users) and current_user&.admin?
+			.p-2
+				.dropdown
+					%button.btn.btn-dark.btn-lg.dropdown-toggle{type: "button", data:{bs:{toggle: "dropdown"}}, aria:{expanded: "false"}} 
+						%i.bi.bi-gear-fill
+					%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+						%li.mb-0
+							= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "dropdown-item", role: "button"
+						%li.mb-0
+							= link_to "Edit Challenge", edit_challenge_path(@challenge), class: "dropdown-item", role: "button"
+						%li.mb-0
+							= link_to "Participants (#{@participants.count})", challenge_participants_path(@challenge), class: "dropdown-item", role: "button"
+	.row.p-2
+		.col-md-6
 			.row.mt-4.border.border-dark
 				.col-6.p-2
 					%strong Start Date and Time
@@ -17,14 +30,16 @@
 					%strong End Date and Time
 				.col-6.p-2
 					= local_time(@challenge.end)
-		.col-md-4.text-end
-			.mt-4
-				- unless current_user&.id.in?(@users)
-					= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
-				- else
+		- unless current_user&.id.in?(@users)
+			.d-md-none.col-12.text-center.p-4
+				= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+		- else
+			- unless current_user&.admin?
+				.d-md-none.col-12.text-center.p-4	
 					= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
-				- if current_user&.admin?
-					= link_to "Edit", edit_challenge_path(@challenge), class: "btn btn-lg btn-dark", role: "button"	
+				.d-none.d-md-block.col-md-6.text-end		
+					= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
+								
 	.row.mb-4.mt-4
 		.col-6.col-md-3.mx-auto
 			.card
