@@ -10,4 +10,10 @@ class Donation < ApplicationRecord
       self.amount = (self.other_amount.to_i * 100).to_s
     end
   end
+
+  def amount_deci
+    self.amount.to_i / 100.0
+  end
+
+  
 end
