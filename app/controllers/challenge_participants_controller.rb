@@ -34,7 +34,7 @@ class ChallengeParticipantsController < ApplicationController
 		@donations.each do |d|
 			@raised.append(d.amount.to_i / 100.0)
 		end
-		@raised = 2325
+		@raised = @raised.sum
 		if @raised.between?(0, 150)
 			@percent = @raised * 100 / 150
 		elsif @raised.between?(151, 300)
