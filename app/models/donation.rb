@@ -4,6 +4,7 @@ class Donation < ApplicationRecord
   attribute :other_amount
 
   before_create :update_amount
+  before_create :update_deci
 
   def update_amount
     if self.amount.nil?
@@ -11,9 +12,7 @@ class Donation < ApplicationRecord
     end
   end
 
-  def amount_deci
-    self.amount.to_i / 100.0
+  def update_deci
+    self.amount_deci = self.amount.to_i / 100.0
   end
-
-  
 end

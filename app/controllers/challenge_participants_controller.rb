@@ -29,13 +29,11 @@ class ChallengeParticipantsController < ApplicationController
 	end
 
 	def show
-		@donations = @participant.donations.where(paid: true).all
+		@donations = @participant.donations.where(paid: true).all.order(amount_deci: :desc)
 		@raised = []
 		@donations.each do |d|
-			d.amount = d.amount.to_i / 100.0
 			@raised.append(d.amount)
 		end
-		@donations.order(amount: :desc)
 		@raised = @raised.sum
 		if @raised.between?(0, 150)
 			@percent = @raised * 100 / 150
