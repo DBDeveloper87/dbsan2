@@ -1,5 +1,6 @@
 class ChallengeParticipantsController < ApplicationController
-	before_action :authenticate_user!, only: [:new, :create]
+	before_action :authenticate_user!, only: [:index, :new, :create]
+	before_action :require_admin, only: :index
 	before_action :get_challenge, only: [:index, :new, :create]
 	before_action :set_participant, only: :show
 
@@ -33,8 +34,17 @@ class ChallengeParticipantsController < ApplicationController
 		@donations.each do |d|
 			@raised.append(d.amount.to_i / 100.0)
 		end
-		@raised = @raised.sum
-		@percent = @raised * 100 / 150
+		@raised = 2325
+		if @raised.between?(0, 150)
+			@percent = @raised * 100 / 150
+		elsif @raised.between?(151, 300)
+			@percent = @raised * 100 / 300
+		elsif @raised.between?(301, 1000)
+			@percent = @raised * 100 / 1000
+		elsif @raised > 1000
+			@percent = @raised * 100 / 5000
+		end
+
 
 	end
 

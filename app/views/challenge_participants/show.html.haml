@@ -40,7 +40,17 @@
 		#rightSide.col-lg-4.order-1{aria:{flowto: "leftSide"}}
 			.progress.border.border-dark
 				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
-			.mt-2.text-center.text-muted.fw-bolder #{number_to_currency(@raised)} / $150.00 Raised
+			.mt-2.text-center.text-muted.fw-bolder 
+				#{number_to_currency(@raised)} / 
+				- if @raised.between?(0, 150)
+					$150.00
+				- elsif @raised.between?(151, 300)
+					$300.00
+				- elsif @raised.between?(301, 1000)
+					$1,000.00
+				- elsif @raised > 1000
+					$5,000.00
+				Raised
 			.row.p-4
 				= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
 			%h2 My Donors
