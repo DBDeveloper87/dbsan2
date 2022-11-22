@@ -1,0 +1,10 @@
+.col-xl-8.mx-auto.pt-4
+	%h1 Milestones
+
+	%h2.text-center Fundraising Milestones
+	.row
+		- @fundraising.each do |f|
+			.col-md-6.card.mb-4
+				.card-body.text-center
+					%h3.card-title #{f.name}
+					%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
