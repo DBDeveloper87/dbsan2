@@ -22,3 +22,50 @@ li {
 .image-upload > label {
 	cursor: pointer
 }
+
+
+
+
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bs-dark-rgb: 250, 250, 250;
+		--bs-light-rgb: 32, 32, 41;
+	}
+	body {
+		background: black;
+		color: white;
+	}
+	.card {
+		background: black;
+		color: white;
+	}
+	.btn-dark {
+		--bs-btn-bg: gray;
+		--bs-btn-color: black;
+		--bs-btn-hover-bg: gray;
+		--bs-btn-hover-color: black;
+	}
+	.btn-outline-dark {
+		--bs-btn-bg: black;
+		--bs-btn-color: #fff;
+		--bs-btn-hover-bg: black;
+		--bs-btn-hover-color: #fff;
+		--bs-btn-border-color: #fff;
+		--bs-btn-hover-border-color: #fff;
+		--bs-btn-active-bg: gray;
+		--bs-btn-active-color: black;
+		--bs-btn-active-border-color: #fff;
+	}
+	.form-control {
+		background-color: #212529;
+		color: #fff;
+	}
+	.form-control:focus {
+		background: #212529;
+		color: #fff;
+	}
+	.progress {
+		--bs-progress-bg: black
+	}
+}

@@ -6,9 +6,9 @@
 	.row
 		- @challenges.each do |c|
 			.col-6.col-md-4
-				.card
-					.card-img-top.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
-						.position-absolute.top-0.start-0.bottom-0.end-0.border.border-dark
+				.card.border.border-dark
+					.card-img-top.position-relative.w-100{style: "padding-top: 56.25%"}
+						.position-absolute.top-0.start-0.bottom-0.end-0
 							.row.h-100
 								%img{src: "https://storage.googleapis.com/dbsan-public/Banner4Challenge.png", alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
 					.card-body
