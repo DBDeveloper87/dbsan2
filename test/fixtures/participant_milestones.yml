@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  challenge_participant: one
+  challenge_milestone: one
+  earned_milestone_sent_at: 2022-11-22 14:20:00
+  accept_prize: false
+  shipped: false
+  shipping_tracking: MyString
+  shipped_notification_sent_at: 2022-11-22 14:20:00
+
+two:
+  challenge_participant: two
+  challenge_milestone: two
+  earned_milestone_sent_at: 2022-11-22 14:20:00
+  accept_prize: false
+  shipped: false
+  shipping_tracking: MyString
+  shipped_notification_sent_at: 2022-11-22 14:20:00

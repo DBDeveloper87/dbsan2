@@ -35,6 +35,9 @@
 		- unless current_user&.id.in?(@users)
 			.d-md-none.col-12.text-center.p-4
 				= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+			.d-none.d-md-block.col-md-6.text-end.p-4
+				= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+		
 		- else
 			- unless current_user&.admin?
 				.d-md-none.col-12.text-center.p-4	

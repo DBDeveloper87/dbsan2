@@ -5,4 +5,5 @@
 		.card.border.border-dark
 			.card-body
 				%h2.card-title #{p.last_name}, #{p.first_name}
+				%p #{number_to_currency(p.total_raised)}
 				= link_to "View", challenge_participant_path(@challenge, p)

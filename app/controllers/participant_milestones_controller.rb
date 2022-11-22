@@ -1,0 +1,2 @@
+class ParticipantMilestonesController < ApplicationController
+end
