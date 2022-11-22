@@ -18,6 +18,8 @@
 							= link_to "Edit Challenge", edit_challenge_path(@challenge), class: "dropdown-item", role: "button"
 						%li.mb-0
 							= link_to "Participants (#{@participants.count})", challenge_participants_path(@challenge), class: "dropdown-item", role: "button"
+						%li.mb-0
+							= link_to "Milestones", challenge_milestones_path(@challenge), class: "dropdown-item", role: "button"
 	.row.p-2
 		.col-md-6
 			.row.mt-4.border.border-dark
@@ -39,7 +41,9 @@
 					= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
 				.d-none.d-md-block.col-md-6.text-end		
 					= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
-								
+	
+
+
 	.row.mb-4.mt-4
 		.col-6.col-md-3.mx-auto
 			.card
@@ -73,6 +77,17 @@
 							.align-self-center.text-center
 								.display-4.fw-bolder #{number_to_currency(@raised, precision: 0)}
 								.display-6.fw-bolder Raised				
-	.col-lg-8.mt-4.mx-auto
-		%h2 Description
+	.col-lg-8.mt-4.mb-4.mx-auto
+		%h2.text-center Description
 		= simple_format(@challenge.description)
+
+	- unless @fundraising.count == 0
+		%h2.text-center.mt-4 Fundraising Milestones
+		.row
+			- @fundraising.each do |f|
+				.col-md-6.card.mb-4
+					.card-body.text-center
+						%h3.card-title #{f.name}
+						%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
+
+		

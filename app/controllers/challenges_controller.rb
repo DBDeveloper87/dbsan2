@@ -31,6 +31,9 @@ class ChallengesController < ApplicationController
 			@raised.append(d.amount.to_i / 100.0)
 		end
 		@raised = @raised.sum
+		@exercise = @challenge.milestones.where(milestone_type: "Exercise").all
+		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
+	
 	end
 
 	def create

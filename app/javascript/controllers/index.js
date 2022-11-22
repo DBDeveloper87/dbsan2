@@ -7,9 +7,6 @@ import { application } from "./application"
 import BootstrapController from "./bootstrap_controller"
 application.register("bootstrap", BootstrapController)
 
-import ControllerController from "./controller_controller"
-application.register("controller", ControllerController)
-
 import CovidController from "./covid_controller"
 application.register("covid", CovidController)
 
@@ -24,6 +21,9 @@ application.register("select-filter", SelectFilterController)
 
 import Store__ManagerController from "./store/manager_controller"
 application.register("store--manager", Store__ManagerController)
+
+import TextareaAutogrow from 'stimulus-textarea-autogrow'
+application.register('textarea-autogrow', TextareaAutogrow)
 
 import UploadsController from "./uploads_controller"
 application.register("uploads", UploadsController)
