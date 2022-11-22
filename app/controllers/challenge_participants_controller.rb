@@ -32,7 +32,7 @@ class ChallengeParticipantsController < ApplicationController
 		@donations = @participant.donations.where(paid: true).all.order(amount_deci: :desc)
 		@raised = []
 		@donations.each do |d|
-			@raised.append(d.amount)
+			@raised.append(d.amount_deci)
 		end
 		@raised = @raised.sum
 		if @raised.between?(0, 150)
