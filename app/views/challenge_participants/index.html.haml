@@ -1,0 +1,7 @@
+.col-xl-8.mx-auto.pt-4
+	%h1 Participants
+
+	- @participants.each do |p|
+		.card.border.border-dark
+			.card-body
+				%h2.card-title #{p.full_name}
