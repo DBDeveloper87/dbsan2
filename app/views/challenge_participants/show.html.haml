@@ -5,18 +5,16 @@
 				%i.h1.bi.bi-arrow-left-circle{aria:{hidden: "true"}}
 		.flex-grow-1.p-2
 			%h1 #{@challenge.title}
-	.row
+	.row.p-2
 		.col-6.col-lg-2
 			%strong Participant: 
 		.col-6.col-lg-10.p-2 #{@participant.full_name}
 
-	.row
-		.col-6.col-lg-2 
-			%strong Page URL:
-		.col-12.col-lg-10{aria:{flowto: "rightSide"}}
-			%span #{challenge_participant_url(@challenge, @participant)}
+	.form-floating
+		%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
+		%label{for: "pageURL"} Page URL
 
-	.row
+	.row.mt-4
 		#leftSide.col-lg-8.order-2.order-lg-1
 			.row.mb-4.mt-4
 				.col-6.col-md-5.mx-auto
