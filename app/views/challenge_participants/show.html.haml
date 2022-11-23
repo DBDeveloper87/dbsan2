@@ -52,7 +52,7 @@
 				= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
 			- if @donations.count > 0
 				%h2 My Donors
-				- @donations.uniq{ |x| x.email }.each do |d|
+				- @donations.each do |d|
 					.d-flex.border.border-dark
 						.flex-grow-1.p-2
 							- if @participant.user_id == current_user&.id
@@ -61,8 +61,4 @@
 								- name = d.name.split(" ")
 								= name[0] + " " + name[1].split("")[0] + "."
 						.flex.p-2
-							- @donations = @donations.where(email: d.email).all
-							- total_amount = []
-							- @donations.each do |de|
-								- total_amount.append(de.amount_deci)
 							= number_to_currency(total_amount.sum, precision: 0)
