@@ -61,4 +61,4 @@
 								- name = d.name.split(" ")
 								= name[0] + " " + name[1].split("")[0] + "."
 						.flex.p-2
-							= number_to_currency(total_amount.sum, precision: 0)
+							= number_to_currency(d.amount_deci, precision: 0)
