@@ -61,7 +61,7 @@
 								- name = d.name.split(" ")
 								= name[0] + " " + name[1].split("")[0] + "."
 						.flex.p-2
-							- unique_donations = @donations.where(email: d.email).all
+							- unique_donations = @donations.where(email: e.email).all
 							- total_amount = []
 							- unique_donations.each do |d|
 								total_amount.append(d.amount_deci)
