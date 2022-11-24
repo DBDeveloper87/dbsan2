@@ -56,7 +56,7 @@ class ChallengesController < ApplicationController
 
 	private
 		def create_params
-			params.require(:challenge).permit(:title, :start, :end, :description)
+			params.require(:challenge).permit(:cover_image, :title, :start, :end, :description)
 		end
 
 		def set_challenge
