@@ -2,9 +2,10 @@
 	%h1 New Challenge
 
 	= form_with(model: challenge) do |f|
-		.row.form-floating
-			= f.file_field :cover_image
-			= f.label :cover_image, "Cover Image"
+		= f.fields_for :photo, Photo.new do |p|
+			.row.form-group
+				= p.file_field :file
+				= p.label :file, "Cover Image"
 
 		.row.form-floating
 			= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"

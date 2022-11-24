@@ -2,7 +2,8 @@
 	.position-relative.w-100.bg-dark.text-light{style: "padding-top: 37.5%"}
 		.position-absolute.top-0.start-0.bottom-0.end-0
 			.row.h-100
-				%img{src: "https://storage.googleapis.com/dbsan-public/Banner4Challenge.png", alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
+				- unless @challenge.photo.nil?
+					%img{src: url_for(@challenge.photo.file), alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
 	.d-flex
 		.flex-grow-1.p-2
 			%h1 #{@challenge.title}

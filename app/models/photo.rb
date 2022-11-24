@@ -2,7 +2,10 @@ class Photo < ApplicationRecord
   after_create_commit :set_exif
   serialize :exif
 
-  belongs_to :product_image_set
+  belongs_to :product_image_set, optional: true
+  belongs_to :challenge, optional: true
+  belongs_to :challenge_participant, optional: true
+  belongs_to :challenge_milestone, optional: true
   has_one_attached :file
   
   def shot_on

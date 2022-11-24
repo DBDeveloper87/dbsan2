@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_22_202000) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_24_033531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -473,6 +473,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_202000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "exif"
+    t.uuid "challenge_id"
+    t.uuid "challenge_participant_id"
+    t.uuid "challenge_milestone_id"
+    t.index ["challenge_id"], name: "index_photos_on_challenge_id"
+    t.index ["challenge_milestone_id"], name: "index_photos_on_challenge_milestone_id"
+    t.index ["challenge_participant_id"], name: "index_photos_on_challenge_participant_id"
     t.index ["product_image_set_id"], name: "index_photos_on_product_image_set_id"
   end
 
@@ -678,6 +684,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_22_202000) do
   add_foreign_key "phone_numbers", "camp_application_emergencies"
   add_foreign_key "phone_numbers", "camp_application_pis"
   add_foreign_key "phone_numbers", "users"
+  add_foreign_key "photos", "challenge_milestones"
+  add_foreign_key "photos", "challenge_participants"
+  add_foreign_key "photos", "challenges"
   add_foreign_key "photos", "product_image_sets"
   add_foreign_key "product_categories", "departments"
   add_foreign_key "product_image_sets", "products"

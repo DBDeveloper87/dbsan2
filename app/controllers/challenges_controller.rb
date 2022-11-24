@@ -12,6 +12,7 @@ class ChallengesController < ApplicationController
 	end
 
 	def edit
+		
 	end
 
 	def show
@@ -56,7 +57,8 @@ class ChallengesController < ApplicationController
 
 	private
 		def create_params
-			params.require(:challenge).permit(:cover_image, :title, :start, :end, :description)
+			params.require(:challenge).permit(:title, :start, :end, :description, 
+				photo_attributes: [ :id, :label, :image_type, :alt_text, :description, :file])
 		end
 
 		def set_challenge
