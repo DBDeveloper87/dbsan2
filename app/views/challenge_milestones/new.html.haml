@@ -2,26 +2,4 @@
 	%h1 New Milestone
 
 	= form_with(model: @milestone, url: challenge_milestones_path(@challenge)) do |f|
-		.form-floating.mb-4
-			= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
-			= f.label :milestone_type, "Type"
-		.form-floating.mb-4
-			= f.text_field :name, placeholder: "Name", class: "form-control border border-dark"
-			= f.label :name, "Name"
-		.form-floating.mb-4
-			= f.text_field :prize, placeholder: "Prize", class: "form-control border border-dark"
-			= f.label :prize, "Prize"
-		.row
-			.col-6.form-floating.mb-4
-				.form-floating.mb-4
-					= f.number_field :goal, placeholder: "Goal", min: 0, class: "form-control border border-dark"
-					= f.label :goal, "Goal"
-			.col-6.form-floating.mb-4
-				.form-floating.mb-4
-					= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
-					= f.label :goal_unit, "Goal Unit"
-		.row.p-4
-			= f.submit "Create", class: "btn btn-lg btn-dark"
-		
-			
-			
+		= render partial: "form", locals: {f: f}

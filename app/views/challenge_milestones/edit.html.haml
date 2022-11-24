@@ -1,0 +1,5 @@
+.col-md-4.mx-auto.pt-4
+	%h1 Edit Milestone
+
+	= form_with(model: @milestone, url: challenge_milestone_path(@challenge, @milestone)) do |f|
+		= render partial: "form", locals: {f: f}

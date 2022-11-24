@@ -89,7 +89,12 @@
 		%h2.text-center.mt-4 Fundraising Milestones
 		.row
 			- @fundraising.each do |f|
-				.col-md-6.card.mb-4
+				.col-6.col-md-3.card.mb-4
+					.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+						.position-absolute.top-0.start-0.bottom-0.end-0
+							.row.h-100
+								- unless f.photo.nil? 
+									%img{src: url_for(f.photo.file), alt: "", width: "100%", style: "height: 100%"}	
 					.card-body.text-center
 						%h3.card-title #{f.name}
 						%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.

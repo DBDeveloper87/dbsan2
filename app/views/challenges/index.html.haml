@@ -10,7 +10,8 @@
 					.card-img-top.position-relative.w-100{style: "padding-top: 56.25%"}
 						.position-absolute.top-0.start-0.bottom-0.end-0
 							.row.h-100
-								%img{src: "https://storage.googleapis.com/dbsan-public/Banner4Challenge.png", alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
+								- unless c.photo.nil?
+									%img{src: url_for(c.photo.file), alt: "", width: "100%", style: "height: 100%"}
 					.card-body
 						%a.h2.stretched-link.card-title.text-dark.text-decoration-none{href: challenge_path(c)} #{c.title}
 						.text-muted Starts: #{local_time(c.start)}
