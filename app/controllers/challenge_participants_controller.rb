@@ -44,8 +44,7 @@ class ChallengeParticipantsController < ApplicationController
 		elsif @raised > 1000
 			@percent = @raised * 100 / 5000
 		end
-
-
+		@unique_emails = @donations.uniq { |d| d.email }
 	end
 
 	def create
