@@ -64,6 +64,6 @@
 							- unique_donations = @donations.where(email: e.email).all
 							- total_amount = []
 							- unique_donations.each do |d|
-								total_amount.append(d.amount_deci)
+								- total_amount.append(d.amount_deci)
 							- total_amount = total_amount.sum
 							= number_to_currency(total_amount, precision: 0)
