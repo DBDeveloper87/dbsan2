@@ -35,4 +35,16 @@ class ChallengeParticipant < ApplicationRecord
     return total.sum
   end
 
+  def fms_ids
+    milestones = self.milestones
+    ids = []
+    milestones.each do |m|
+      if m.challenge_milestone.milestone_type == "Fundraising"
+        ids.append(m.challenge_milestone_id)
+      end
+    end
+
+    return ids
+  end
+
 end

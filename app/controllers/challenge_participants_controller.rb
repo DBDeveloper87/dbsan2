@@ -6,6 +6,7 @@ class ChallengeParticipantsController < ApplicationController
 
 	def index
 		@participants = @challenge.challenge_participants.all.order(last_name: :asc)
+		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
 	end
 
 	def new

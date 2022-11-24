@@ -1,9 +1,42 @@
-.col-xl-8.mx-auto.pt-4
+.container.pt-4
 	%h1 Participants
 
 	- @participants.each do |p|
-		.card.border.border-dark
+		.card.border.border-dark.mb-4.mt-4
 			.card-body
-				%h2.card-title #{p.last_name}, #{p.first_name}
-				%p #{number_to_currency(p.total_raised)}
-				= link_to "View", challenge_participant_path(@challenge, p)
+				.d-flex
+					.flex-grow-1.p-2
+						%h2.card-title #{p.last_name}, #{p.first_name}
+					.flex.p-2
+						= link_to "View", challenge_participant_path(@challenge, p), class: "btn btn-dark btn-lg"
+				%p Total Raised: #{number_to_currency(p.total_raised)}
+
+				.row
+					.col-md-4
+						%h3.text-center Fundraising Milestones
+						.row.bg-dark.p-2.text-center.fw-bolder.text-light
+							.col-6
+								Milestone
+							.col-3
+								Status
+							.col-3
+								Email
+				
+						- @fundraising.each do |f|
+							.row.border.border-dark.p-2
+								.col-6
+									= f.name
+								.col-3.text-center
+									- if f.id.in?(p.fms_ids)
+										Earned
+									- elsif p.total_raised >= f.goal
+										Eligible
+									- else
+										N/A
+								.col-3.text-center
+									- if f.id.in?(p.fms_ids)
+										- pm = p.milestones.find_by(challenge_milestone_id: f.id)
+										- if pm.earned_milestone_sent_at.nil?
+											Not Sent
+									
+				
