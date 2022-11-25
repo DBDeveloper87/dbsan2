@@ -38,7 +38,7 @@
 															.position-absolute.top-0.start-0.bottom-0.end-0
 																.row.h-100
 																	- unless m.challenge_milestone.photo.nil? 
-																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "", width: "100%", style: "height: 100%"}	
+																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "#{@milestone.challenge_milestone.name} #{@milestone.challenge_milestone.milestone_type} Badge", width: "100%", style: "height: 100%"}	
 
 			
 			
