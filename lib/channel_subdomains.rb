@@ -8,6 +8,8 @@ class ChannelSubdomains
 
 		if Rails.env == "development"
 			request.domain == "example.com" and request.subdomain.in?(subdomains)
+		else
+			request.domain == "dbsan.org" and request.subdomain.in?(subdomains)
 		end
 	end
 end
