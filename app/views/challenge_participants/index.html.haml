@@ -9,6 +9,7 @@
 						%h2.card-title #{p.last_name}, #{p.first_name}
 					.flex.p-2
 						= link_to "View", challenge_participant_path(@challenge, p), class: "btn btn-dark btn-lg"
+				= p.id
 				%p Total Raised: #{number_to_currency(p.total_raised)}
 
 				.row
@@ -30,7 +31,7 @@
 									- if f.id.in?(p.fms_ids)
 										Earned
 									- elsif p.total_raised >= f.goal
-										Eligible
+										= button_to "Eligible", challenge_participant_milestones_path(@challenge, method: :post, participant_milestone: {challenge_milestone_id: f.id, challenge_participant_id: p.id})
 									- else
 										N/A
 								.col-3.text-center
