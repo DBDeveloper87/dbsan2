@@ -26,7 +26,18 @@ class Channels::MyChannelController < ApplicationController
 
 		def set_channel
 			@subdomain = Subdomain.find_by(slug: request.subdomain)
-			@channel = @subdomain.channel
+			@channels = Channel.all
+			domains = []
+			@channels.each do |c|
+				domains.append(c.domain_host)
+			end
+			domains = domains.uniq
+
+			if request.domain == "dbsan.org" or request.domain == "example.com"
+				@channel = @subdomain.channel
+			elsif request.domain.in?(domains)
+				@channel = Channel.find_by(domain_host: request.domain)
+			end
 		end
 
 		def render_home
