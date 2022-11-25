@@ -21,14 +21,25 @@
 									.align-self-center.text-center
 										.display-4.fw-bolder 0
 										.display-6.fw-bolder Minutes		
-				.col-md-7.mx-auto
+				.col-12.col-md-7.mx-auto
 					.card
 						.card-body.position-relative.w-100{style: "padding-top: 70%"}
 							.position-absolute.top-0.start-0.bottom-0.end-0.p-4
 								.row.h-100
 									.align-self-center.text-center.p-4
 										%h2 Badges
-										.text-muted.fw-folder You haven't earned any badges yet!		
+										- if @milestones.nil?
+											.text-muted.fw-folder You haven't earned any badges yet!
+										- else
+											.row
+												- @milestones.each do |m|
+													.col-3.mx-auto.card.mb-4
+														.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+															.position-absolute.top-0.start-0.bottom-0.end-0
+																.row.h-100
+																	- unless m.challenge_milestone.photo.nil? 
+																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "", width: "100%", style: "height: 100%"}	
+
 			
 			
 		#rightSide.col-lg-4.order-1.p-2{aria:{flowto: "leftSide"}}
