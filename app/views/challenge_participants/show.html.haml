@@ -13,8 +13,9 @@
 	.row.mt-4
 		.col-lg-4.order-1.order-lg-2.p-2
 			.form-floating.mb-4
+				%label.visually-hidden{for: "pageURL"} Page URL
 				%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
-				%label{for: "pageURL"} Page URL
+				%label{for: "pageURL", aria:{hidden: "true"}} Page URL
 			.progress.border.border-dark
 				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
 			.mt-2.text-center.text-muted.fw-bolder 
