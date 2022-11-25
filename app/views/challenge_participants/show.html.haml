@@ -11,38 +11,7 @@
 		.col-6.col-lg-10.p-2 #{@participant.full_name}
 
 	.row.mt-4
-		#leftSide.col-lg-8.order-2.order-lg-1
-			.row.mb-4.mt-4
-				.col-6.col-md-5.mx-auto
-					.card
-						.card-body.position-relative.w-100{style: "padding-top: 100%"}
-							.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%"} 
-								.row.h-100
-									.align-self-center.text-center
-										.display-4.fw-bolder 0
-										.display-6.fw-bolder Minutes		
-				.col-12.col-md-7.mx-auto
-					.card
-						.card-body.position-relative.w-100{style: "padding-top: 70%"}
-							.position-absolute.top-0.start-0.bottom-0.end-0.p-4
-								.row.h-100
-									.align-self-center.text-center.p-4
-										%h2 Badges
-										- if @milestones.nil?
-											.text-muted.fw-folder You haven't earned any badges yet!
-										- else
-											.row
-												- @milestones.each do |m|
-													.col-3.mx-auto.card.mb-4
-														.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
-															.position-absolute.top-0.start-0.bottom-0.end-0
-																.row.h-100
-																	- unless m.challenge_milestone.photo.nil? 
-																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "#{m.challenge_milestone.name} #{m.challenge_milestone.milestone_type} Badge", width: "100%", style: "height: 100%"}	
-
-			
-			
-		#rightSide.col-lg-4.order-1.p-2{aria:{flowto: "leftSide"}}
+		.col-lg-4.order-1.p-2
 			.form-floating.mb-4
 				%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
 				%label{for: "pageURL"} Page URL
@@ -78,3 +47,37 @@
 								- total_amount.append(d.amount_deci)
 							- total_amount = total_amount.sum
 							= number_to_currency(total_amount, precision: 0)
+
+
+		.col-lg-8.order-2.order-lg-1
+			.row.mb-4.mt-4
+				.col-6.col-md-5.mx-auto
+					.card
+						.card-body.position-relative.w-100{style: "padding-top: 100%"}
+							.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%"} 
+								.row.h-100
+									.align-self-center.text-center
+										.display-4.fw-bolder 0
+										.display-6.fw-bolder Minutes		
+				.col-12.col-md-7.mx-auto
+					.card
+						.card-body.position-relative.w-100{style: "padding-top: 70%"}
+							.position-absolute.top-0.start-0.bottom-0.end-0.p-4
+								.row.h-100
+									.align-self-center.text-center.p-4
+										%h2 Badges
+										- if @milestones.nil?
+											.text-muted.fw-folder You haven't earned any badges yet!
+										- else
+											.row
+												- @milestones.each do |m|
+													.col-3.mx-auto.card.mb-4
+														.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+															.position-absolute.top-0.start-0.bottom-0.end-0
+																.row.h-100
+																	- unless m.challenge_milestone.photo.nil? 
+																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "#{m.challenge_milestone.name} #{m.challenge_milestone.milestone_type} Badge", width: "100%", style: "height: 100%"}	
+
+			
+			
+		
