@@ -38,6 +38,6 @@
 									- if f.id.in?(p.fms_ids)
 										- pm = p.milestones.find_by(challenge_milestone_id: f.id)
 										- if pm.earned_milestone_sent_at.nil?
-											Not Sent
+											= button_to "Send", challenge_participant_milestone_notify_path(@challenge, pm.id)
 									
 				

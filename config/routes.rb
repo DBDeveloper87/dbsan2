@@ -136,7 +136,11 @@ Rails.application.routes.draw do
   get "donations_thank_you", to: "donations#thank_you"
   resources :challenges do
     resources :participants, controller: "challenge_participants"
-    resources :participant_milestones, controller: "participant_milestones"
+    resources :participant_milestones, controller: "participant_milestones" do
+      post "notify", to: "participant_milestones#send_notification"
+      get "accept", to: "participant_milestones#accept_or_decline"
+      get "thanks", to: "participant_milestones#thanks"
+    end
     resources :milestones, controller: "challenge_milestones"
   end
 

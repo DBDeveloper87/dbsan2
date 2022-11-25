@@ -1,0 +1,24 @@
+%p Hey #{@name}!
+
+%p 
+	We wanted to congratuate you on reaching your #{@rank} #{@type.downcase} milestone after 
+	- if @type == "Fundraising"
+		raising
+	- else
+		exercising
+	at least
+	- if @units == "Dollars"
+		$#{@goal}!
+
+%p This has earned you the #{@rank_name} #{@type} Badge!
+
+%img{src: url_for(@badge), alt: "The #{@rank_name} #{@type} Badge", width: "100px"}
+
+- if @type == "Fundraising"
+	%p You are now eligible to earn a #{@prize}.
+
+	%p Please <a href="#{challenge_participant_milestone_accept_url(@challenge, @milestone)}">accept or decline</a> your prize.
+
+%p Thank you and keep up the good work!
+
+%p The DBSAN Team

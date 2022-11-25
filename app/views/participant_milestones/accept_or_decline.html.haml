@@ -1,0 +1,16 @@
+.col-12.col-xl-4.mx-auto.p-2.pt-4
+	%h1.text-center Accept or Decline Your Prize
+
+	%p Hey #{@name}!
+
+	%p With the #{@milestone_name} #{@type} Badge, you are now eligible to receive a #{@prize}.
+
+	%p Please accept or decline this prize and we'll notify you when it ships.
+
+	.row
+		.col-6
+			.row
+				= button_to "I accept my prize.", challenge_participant_milestone_path(@challenge, @milestone), method: :patch, params: {participant_milestone: {id: @milestone.id, accept_prize: true}}, class: "btn btn-dark btn-lg w-100"
+		.col-6
+			.row
+				= button_to "No thanks.", challenge_participant_milestone_path(@challenge, @milestone), method: :patch, params: {participant_milestone: {id: @milestone.id, accept_prize: false}}, class: "btn btn-dark btn-lg w-100"
