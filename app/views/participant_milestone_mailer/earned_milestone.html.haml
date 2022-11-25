@@ -12,7 +12,8 @@
 
 %p This has earned you the #{@rank_name} #{@type} Badge!
 
-%img{src: url_for(@badge), alt: "The #{@rank_name} #{@type} Badge", width: "100px"}
+- unless @badge.nil?
+	%img{src: url_for(@badge), alt: "The #{@rank_name} #{@type} Badge", width: "100px"}
 
 - if @type == "Fundraising"
 	%p You are now eligible to earn a #{@prize}.

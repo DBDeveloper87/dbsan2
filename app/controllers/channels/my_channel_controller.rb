@@ -1,13 +1,16 @@
 class Channels::MyChannelController < ApplicationController
 	before_action :set_channel, only: [:show, :edit, :update]
-	layout "channel"
+	before_action :render_home, only: :show
 
 	def edit
 	end
 
 	def show
 		@meta_title = @channel.name
-		@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
+		if @channel.name == "ILY by Tricio"
+			@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
+		end
+		@camps = Camps.all
 	end
 
 	def update
@@ -25,4 +28,14 @@ class Channels::MyChannelController < ApplicationController
 			@subdomain = Subdomain.find_by(slug: request.subdomain)
 			@channel = @subdomain.channel
 		end
+
+		def render_home
+			if @channel.name == "DeafBlind Support and Access Network"
+				render layout: "application"
+			else
+				render layout: "channel"
+			end
+		end
+
+			
 end

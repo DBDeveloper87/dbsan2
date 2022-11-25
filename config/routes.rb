@@ -2,20 +2,17 @@ Rails.application.routes.draw do
   require "domain_hosts"
   require "channel_subdomains"
 
-  
-  constraints(DomainHosts) do
-    constraints(ChannelSubdomains) do
-      root "channels/my_channel#show", as: :channel_root
-      get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
-      patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
-      resources :videos
-      resources :surveys do
-        resources :sections, controller: "survey_sections"
-        post "sections/new", to: "survey_sections#create"
-      end
+  constraints(ChannelSubdomains) do
+    root "channels/my_channel#show", as: :channel_root
+    get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
+    patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
+    resources :videos
+    resources :surveys do
+      resources :sections, controller: "survey_sections"
+      post "sections/new", to: "survey_sections#create"
     end
   end
-
+  
   constraints subdomain: "store" do
     root "store/front#index", as: :store_root
     get "manage", to: "store/manage#index", as: :store_management
@@ -29,7 +26,7 @@ Rails.application.routes.draw do
   post "uploads/close", to: "uploads#close"
   
   
-  root "pages#home"
+  root "channels/my_channel#show", subdomain: "www"
   
   
 

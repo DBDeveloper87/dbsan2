@@ -5,7 +5,7 @@ class Donation < ApplicationRecord
 
   before_create :update_amount
   before_create :update_deci
-  #after_update :check_milestones
+  after_update :check_milestones
 
   def update_amount
     if self.amount.nil?
@@ -40,19 +40,13 @@ class Donation < ApplicationRecord
       milestone_ids.each do |m|
         challenge_milestones.append(ChallengeMilestone.find(m))
       end
-      puts "\n\n-----\n\n"
-      puts challenge_milestones
-      puts "\n\n Number of Milestones" + challenge_milestones.count.to_s
-      puts total_raised
-
+      
       challenge_milestones.each do |m|
         if total_raised >= m.goal
           ParticipantMilestone.create({
             challenge_participant_id: participant.id,
             challenge_milestone_id: m.id
           })
-          puts "\n\n"
-          puts "A milestone has been successfully created"
         end
       end
     end

@@ -67,7 +67,7 @@
 								.row.h-100
 									.align-self-center.text-center.p-4
 										%h2 Badges
-										- if @milestones.nil?
+										- if @milestones.empty?
 											.text-muted.fw-folder You haven't earned any badges yet!
 										- else
 											.row

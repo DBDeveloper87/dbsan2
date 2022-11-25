@@ -27,7 +27,9 @@ class ParticipantMilestoneMailer < ApplicationMailer
 			end
 		end
 		@rank_name = @milestone_info.name
-		@badge = @milestone_info.photo.file
+		unless @milestone_info.photo.nil?
+			@badge = @milestone_info.photo.file
+		end
 		@prize = @milestone_info.prize
 		@email = @participant.user.email
 		@name = @participant.first_name

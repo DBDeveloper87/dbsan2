@@ -59,10 +59,8 @@ class DonationsController < ApplicationController
 		@donation.zip = @zip
 		@donation.save
 		
-		if Rails.env == "production"
-			DonationMailer.with(donation: @donation.id).tax_deductible.deliver_now
-			DonationMailer.with(donation: @donation.id).notify_participant.deliver_now
-		end
+		DonationMailer.with(donation: @donation.id).tax_deductible.deliver_now
+		DonationMailer.with(donation: @donation.id).notify_participant.deliver_now
 		redirect_to donations_thank_you_path(donation: @donation.id)
 	end
 
