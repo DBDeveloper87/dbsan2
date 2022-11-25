@@ -23,9 +23,21 @@ li {
 	cursor: pointer
 }
 
+.background-dark {
+	background: black;
+}
+.font-white {
+	color: white;
+}
 
-
-
+@media (inverted-colors: inverted) {
+	.background-dark {
+		background: white;
+	}
+	.font-white {
+		color: black
+	}
+}
 
 @media (prefers-color-scheme: dark) {
 	:root {

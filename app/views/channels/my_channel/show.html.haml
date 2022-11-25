@@ -2,6 +2,8 @@
 	= render partial: "channels/my_channel/ilybytricio", locals: {channel: @channel}
 - elsif @channel.name == "DeafBlind Support and Access Network"
 	= render partial: "dbsan"
+- elsif @channel.name == "The Road Without Barriers"
+	= render partial: "trwb"
 - else
 	.container.pt-4
 		%h1.text-center Hello World
