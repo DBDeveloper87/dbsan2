@@ -6,10 +6,11 @@ class Channels::MyChannelController < ApplicationController
 	end
 
 	def show
-		@meta_title = @channel.name
 		if @channel.name == "ILY by Tricio"
 			@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
+			@meta_title = @channel.name
 		end
+		
 		@camps = Camps.all
 	end
 
@@ -38,6 +39,7 @@ class Channels::MyChannelController < ApplicationController
 			elsif request.domain.in?(domains)
 				@channel = Channel.find_by(domain_host: request.domain)
 			end
+			@meta_title = @channel.name
 		end
 
 		def render_home
