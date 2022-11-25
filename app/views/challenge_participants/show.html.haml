@@ -34,7 +34,7 @@
 			- if @donations.count > 0
 				%h2 My Donors
 				- @unique_emails.each do |e|
-					.d-flex.border.border-dark
+					.d-flex.border.border-dark{role: "text"}
 						.flex-grow-1.p-2
 							- if @participant.user_id == current_user&.id
 								= e.name
