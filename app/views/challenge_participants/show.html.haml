@@ -11,7 +11,7 @@
 		.col-6.col-lg-10.p-2 #{@participant.full_name}
 
 	.row.mt-4
-		.col-lg-4.order-1.p-2
+		.col-lg-4.order-1.order-lg-2.p-2
 			.form-floating.mb-4
 				%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
 				%label{for: "pageURL"} Page URL
