@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
+	before_action :get_channel
 	layout "channel", only: [:index, :show]
 
 	def index
@@ -9,7 +10,7 @@ class VideosController < ApplicationController
 	end
 
 	def new
-		@upload = Upload.new	
+		@video = @channel.videos.build	
 	end
 
 	def edit
@@ -26,19 +27,35 @@ class VideosController < ApplicationController
 	end
 
 	def create
-		@video = Video.create(video_params)
+		@video = @channel.videos.create(video_params)
 
 		if @video.save
-			respond_to do |f|
-				f.turbo_stream
-			end
+			redirect_to video_path(@video)
 		end
 	end
 
 	private
 		def video_params
-			params.require(:video).permit(:title, :content_type, :upload_size, :original_upload)
+			params.require(:video).permit(:title, :original_upload)
 		end	
+
+		def get_channel
+			@subdomain = Subdomain.find_by(slug: request.subdomain)
+			@channels = Channel.all
+			domains = []
+			@channels.each do |c|
+				domains.append(c.domain_host)
+			end
+			domains = domains.uniq
+
+			if request.domain == "dbsan.org" or request.domain == "example.com"
+				@channel = @subdomain.channel
+			elsif request.domain.in?(domains)
+				@channel = Channel.find_by(domain_host: request.domain)
+			end
+			@meta_title = "Videos | #{@channel.name}"
+		end
+		
 
 		
 
