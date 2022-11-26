@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
-	layout "channel", only: [:index, :show]
+	before_action :set_video, only: :show
+	#layout "channel", only: [:index, :show]
 
 	def index
 		@subdomain = Subdomain.find_by(slug: request.subdomain)
@@ -19,11 +20,6 @@ class VideosController < ApplicationController
 
 	def show
 		
-		@video = Video.find(params[:id])
-		@meta_title = "#{@video.title} | #{@video.channel.name}"
-		@meta_og_type = "video.movie"
-		@meta_og_url = video_url(@video)
-		@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
 	end
 
 	def create
@@ -54,6 +50,15 @@ class VideosController < ApplicationController
 				@channel = Channel.find_by(domain_host: request.domain)
 			end
 			@meta_title = "Videos | #{@channel.name}"
+		end
+
+		def set_video
+			@video = Video.find(params[:id])
+			@meta_title = "#{@video.title} | #{@video.channel.name}"
+			@meta_og_type = "video.movie"
+			@meta_og_url = video_url(@video)
+			@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
+			@video_url = url_for(@video.original_upload)
 		end
 		
 
