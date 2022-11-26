@@ -1,17 +1,7 @@
-%turbo-frame{id: "upload_button", data:{controller: "uploads", uploads_target: "uploadButtonFrame", uploads_file_field: "file_field_1", uploads_for: "video"}}
-	.row.h-100{style: "background: #bfbfbf"}
-		.align-self-center.text-center
-			%p Please upload a video by clicking the button below.
-			.image-upload
-				%label.btn.btn-dark.btn-lg.text-light{for: "file_field_1"} Upload Video
-				%input{id: "file_field_1", type: "file", multiple: "true", data:{action: "change->uploads#createRecords", direct_upload_url: rails_direct_uploads_url }}
-	.d-none
-		= form_with(model: @upload) do |f|
-			= f.hidden_field :file_list, data:{uploads_target: "file_list"}
-			= f.hidden_field :for, data:{uploads_target: "for"}
-			= f.hidden_field :for_id, data:{uploads_target: "for_id"}
-			= f.hidden_field :input_id, data:{uploads_target: "inputId"}
-			= f.submit "create", data:{uploads_target: "submit"}
-
-%turbo-frame{id: "content", data:{uploads_target: "contentFrame", turbo:{action: "advance"}}}
-				
+= form_with(model: @video) do |f|
+	.form-floating
+		= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"
+		= f.label :title, "Title"
+		.form-group
+		= f.label :original_upload, "Video file"
+		= f.file_field :original_upload, direct_upload: true, onChange: "requestSubmit()"
