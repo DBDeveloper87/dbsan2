@@ -2,4 +2,4 @@
 	%h1 Videos
 
 	- @videos.each do |v|
-		= link_to v.title, video_path(v, subdomain: @subdomain)
+		%a{href: video_url(v), target: "_top"} #{v.title}

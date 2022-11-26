@@ -1,12 +1,12 @@
 class VideosController < ApplicationController
+	include ActiveStorage::Streaming
+
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
 	before_action :set_video, only: :show
 	#layout "channel", only: [:index, :show]
 
 	def index
-		@subdomain = Subdomain.find_by(slug: request.subdomain)
-		@channel = @subdomain.channel
 		@videos = @channel.videos.all
 	end
 
@@ -53,12 +53,11 @@ class VideosController < ApplicationController
 		end
 
 		def set_video
-			@video = Video.find(params[:id])
+			@video = @channel.videos.find(params[:id])
 			@meta_title = "#{@video.title} | #{@video.channel.name}"
 			@meta_og_type = "video.movie"
 			@meta_og_url = video_url(@video)
 			@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
-			@video_url = url_for(@video.original_upload)
 		end
 		
 

@@ -2,10 +2,5 @@
 	= render partial: "videos/ilybytricio", locals: {video: video}
 - else
 	.container-md.mb-4
-		.p-4{style: "background: silver"}
-			.position-relative.w-100{style: "padding-top: 56.25%"}
-				%video.position-absolute.top-0.start-0.bottom-0.end-0{style: "border-radius: 2rem", src: video_url, preload: "metadata", controls: "true", width: "100%"}
-				
-			
-			-#%track{src: "/captions-en.vtt", srclang: "en", label: "English (CC)", kind: "captions"}
+		%video{src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%"}
 		%h1.mb-4 #{video.title}	
