@@ -11,7 +11,7 @@ class VideosController < ApplicationController
 	end
 
 	def new
-		@video = @channel.videos.build	
+		@upload = Upload.new	
 	end
 
 	def edit
