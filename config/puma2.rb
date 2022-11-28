@@ -15,8 +15,11 @@ worker_timeout 3600 if ENV.fetch("RAILS_ENV", "development") == "development"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port ENV.fetch("PORT") { 3000 }
-
+if ENV.fetch("RAILS_ENV") == "development" or ENV.fetch("RAILS_ENV") == "video_processor"
+	rails_port = ENV.fetch("PORT") { 3000 }
+else
+	port ENV.fetch("PORT") { 3000 }
+end
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
@@ -37,7 +40,26 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+
+if Rails.env == "development"
+	ssl_bind(
+    	'127.0.0.1',
+    	rails_port,
+    	key: ENV.fetch('SSL_KEY_FILE', 'config/certs/example.com+4-key.pem'),
+    	cert: ENV.fetch('SSL_CERT_FILE', 'config/certs/example.com+4.pem'),
+    	verify_mode: 'none'
+  	)
+elsif Rails.env == "video_processor"
+	ssl_bind(
+    	'127.0.0.1',
+    	rails_port,
+    	key: ENV.fetch('SSL_KEY_FILE', 'config/certs/example.com+4-key.pem'),
+    	cert: ENV.fetch('SSL_CERT_FILE', 'config/certs/example.com+4.pem'),
+    	verify_mode: 'none'
+  	)
+end
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
+
+preload_app!
