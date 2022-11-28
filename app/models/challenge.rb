@@ -53,7 +53,7 @@ class Challenge < ApplicationRecord
 				end
 				milestones = []
 				milestone_ids.each do |mi|
-					milestones.append(ChallendMilestone.find(mi))
+					milestones.append(ChallengeMilestone.find(mi))
 				end
 				milestones = milestones.sort_by { |k| k[:goal]}
 				by_milestone.append(milestones[0].goal)
