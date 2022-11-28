@@ -59,10 +59,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_033531) do
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "state_province_id", null: false
     t.uuid "camp_application_pi_id"
     t.uuid "profile_id"
     t.string "zippostal"
-    t.uuid "state_province_id"
     t.uuid "county_id"
     t.string "zip4code"
     t.index ["camp_application_pi_id"], name: "index_addresses_on_camp_application_pi_id"

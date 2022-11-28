@@ -36,6 +36,9 @@
 /node_modules
 
 /config/credentials/production.key
-/google_cloud_keyfile.json
+/google-credentials.json
 /cors_dev.json
 /cors_prod.json
+/config/certs
+/config/credentials/video_processor.key
+/video_processor.sh

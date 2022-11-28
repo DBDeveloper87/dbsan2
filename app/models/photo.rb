@@ -1,5 +1,5 @@
 class Photo < ApplicationRecord
-  after_create_commit :set_exif
+  #after_create_commit :set_exif
   serialize :exif
 
   belongs_to :product_image_set, optional: true
@@ -7,7 +7,8 @@ class Photo < ApplicationRecord
   belongs_to :challenge_participant, optional: true
   belongs_to :challenge_milestone, optional: true
   has_one_attached :file
-  
+
+
   def shot_on
     if self.exif["Make"].present?
       "#{self.exif["Make"]} #{self.exif["Model"]}"
@@ -83,7 +84,9 @@ class Photo < ApplicationRecord
 
   private
     def set_exif
-      self.exif = MiniMagick::Image.open(self.file).exif
-      self.save
+      unless self.file.attached?
+        self.exif = MiniMagick::Image.open(self.file).exif
+        self.save
+      end
     end
 end

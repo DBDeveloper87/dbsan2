@@ -11,9 +11,15 @@ class ChallengeMilestonesController < ApplicationController
 
 	def new
 		@milestone = @challenge.milestones.build
+		@badge = @milestone.build_photo
 	end
 
 	def edit
+		if @milestone.photo.nil?
+			@badge = @milestone.build_photo
+		else
+			@badge = @milestone.photo
+		end
 	end
 
 	def create

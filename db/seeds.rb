@@ -3461,3 +3461,20 @@ County.create([
     {state_province_id: "7a2d6790-30c6-42ed-8c66-e2ab1bdb028e", name: "Saint John Island"},
     {state_province_id: "7a2d6790-30c6-42ed-8c66-e2ab1bdb028e", name: "Saint Thomas Island"}
 ])
+
+Subdomain.create([
+  {id: "daa35f7d-e051-4b77-89dc-0725b05b45de", slug: "store"},
+  {id: "1a7fdd26-200d-4f21-900a-2dc0f55a1caf", slug: "dbrib"},                                                  
+  {id: "1d0be2e9-5ec5-47f6-8e84-037b3a5a51da", slug: "ilybytricio"},                                            
+  {id: "7f0183fb-6b2b-4419-9008-329760dd6193", slug: "www"},                                                    
+  {id: "b73ba291-3139-42cf-b0ce-b6e5118445f7", slug: "trwb"}                                                  
+])
+
+Channel.create([
+  {id: "c1ed1d7e-7049-44e1-8152-55e343f39c9b", name: "DeafBlind Retreat of Isola Bella", subdomain_id: "1a7fdd26-200d-4f21-900a-2dc0f55a1caf", domain_host: "dbsan.org"},
+  {id: "75f92637-70eb-4836-bd1c-7b8b25c48908", name: "ILY by Tricio", subdomain_id: "1d0be2e9-5ec5-47f6-8e84-037b3a5a51da", domain_host: "dbsan.org"},                            
+  {id: "64859f4c-6a4c-42e5-8df6-bd3bf08f4b1d", name: "DeafBlind Support and Access Network", subdomain_id: "7f0183fb-6b2b-4419-9008-329760dd6193", domain_host: "dbsan.org"},     
+  {id: "b75d5d22-c42c-49f8-9229-c15aa8f67686", name: "The Road Without Barriers", subdomain_id: "b73ba291-3139-42cf-b0ce-b6e5118445f7", domain_host: "theroadwithoutbarriers.com"}
+])
+
+

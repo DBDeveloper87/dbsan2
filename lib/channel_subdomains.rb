@@ -9,7 +9,7 @@ class ChannelSubdomains
 		end
 		domains = domains.uniq
 
-		if Rails.env == "development"
+		if Rails.env == "development" or Rails.env == "video_processor"
 			request.domain == "example.com" and request.subdomain.in?(subdomains)
 		elsif Rails.env == "production"
 			if request.domain == "dbsan.org"

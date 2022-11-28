@@ -10,7 +10,7 @@ local:
 google_dev:
    service: GCS
    project: "dbsan_production"
-   credentials: <%= Rails.root.join("google_cloud_keyfile.json") %>
+   credentials: <%= Rails.root.join("google-credentials.json") %>
    bucket: "dbsan-dev"
 
 google_prod:
@@ -18,6 +18,7 @@ google_prod:
    project: "dbsan_production"
    credentials: <%= Rails.root.join("google-credentials.json") %>
    bucket: "dbsan-prod"
+
 
 # Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:

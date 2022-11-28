@@ -9,10 +9,15 @@ class ChallengesController < ApplicationController
 
 	def new
 		@challenge = Challenge.new
+		@banner = @challenge.photo.build
 	end
 
 	def edit
-		
+		if @challenge.photo.nil?
+			@banner = @challenge.photl.build
+		else
+			@banner = @challenge.photo
+		end
 	end
 
 	def show
@@ -22,11 +27,8 @@ class ChallengesController < ApplicationController
 		@participants.each do |p|
 			@users.append(p.user_id)
 		end
-		@donor_count = []
-		@challenge.donations.each do |d|
-			@donor_count.append(d.email)
-		end
-		@donor_count = @donor_count.uniq.count
+		@donor_count = @challenge.donations.count
+		@top_donors = @challenge.top_donors
 		@raised = []
 		@challenge.donations.each do |d|
 			@raised.append(d.amount.to_i / 100.0)

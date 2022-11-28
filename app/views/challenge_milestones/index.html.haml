@@ -3,13 +3,28 @@
 	= link_to "New Milestone", new_challenge_milestone_path(@challenge), class: "btn btn-dark btn-lg", role: "button"
 
 	%h2.text-center Fundraising Milestones
-	.row
+	.row.mb-4
 		- @fundraising.each do |f|
 			.col-6.col-md-3.card.mb-4
 				.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
 					.position-absolute.top-0.start-0.bottom-0.end-0
 						.row.h-100
-							- unless f.photo.nil? 
+							- if f.photo.file.attached? 
+								%img{src: url_for(f.photo.file), alt: "", width: "100%", style: "height: 100%"}	
+				.card-body.text-center
+					%h3.card-title #{f.name}
+					%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
+					= link_to "Edit", edit_challenge_milestone_path(@challenge, f)
+
+
+	%h2.text-center Exercise Milestones
+	.row
+		- @exercise.each do |f|
+			.col-6.col-md-3.card.mb-4
+				.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+					.position-absolute.top-0.start-0.bottom-0.end-0
+						.row.h-100
+							- if f.photo.file.attached?
 								%img{src: url_for(f.photo.file), alt: "", width: "100%", style: "height: 100%"}	
 				.card-body.text-center
 					%h3.card-title #{f.name}

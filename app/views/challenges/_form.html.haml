@@ -2,7 +2,10 @@
 	%h1 New Challenge
 
 	= form_with(model: challenge) do |f|
-		= f.fields_for :photo, Photo.new do |p|
+		= f.fields_for @banner do |p|
+			- if @banner.file.attached?
+				%img{src: url_for(@banner.file), alt: "", width: "100%"}
+
 			.row.form-group
 				= p.file_field :file
 				= p.label :file, "Cover Image"
@@ -38,4 +41,8 @@
 			= f.label :description, "Description"
 			
 		.row.mt-4.p-2
-			= f.submit "Create Challenge", class: "btn btn-lg btn-dark"
+			- if @challenge.nil?
+				= f.submit "Create Challenge", class: "btn btn-lg btn-dark"
+			- else
+				= f.submit "Update Challenge", class: "btn btn-lg btn-dark"
+			

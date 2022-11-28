@@ -1,6 +1,4 @@
 class VideosController < ApplicationController
-	include ActiveStorage::Streaming
-
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
 	before_action :set_video, only: :show

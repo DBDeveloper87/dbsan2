@@ -84,3 +84,9 @@ production:
   database: dbsan2_production
   username: dbsan2
   password: <%= ENV["DBSAN2_DATABASE_PASSWORD"] %>
+
+video_processor:
+  <<: *default
+  database: dbsan2_production
+  username: dbsan2
+  password: <%= ENV["DBSAN2_DATABASE_PASSWORD"] %>

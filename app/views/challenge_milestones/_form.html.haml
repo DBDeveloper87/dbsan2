@@ -1,24 +1,41 @@
 .form-floating.mb-4
-	= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
-	= f.label :milestone_type, "Type"
+	- if milestone.nil?
+		= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+		= f.label :milestone_type, "Type"
+	- else
+		= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]], selected: milestone.milestone_type), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+		= f.label :milestone_type, "Type"
+
 .form-floating.mb-4
 	= f.text_field :name, placeholder: "Name", class: "form-control border border-dark"
 	= f.label :name, "Name"
+
 .form-floating.mb-4
 	= f.text_field :prize, placeholder: "Prize", class: "form-control border border-dark"
 	= f.label :prize, "Prize"
+
 .row
 	.col-6.form-floating.mb-4
 		.form-floating.mb-4
 			= f.number_field :goal, placeholder: "Goal", min: 0, class: "form-control border border-dark"
 			= f.label :goal, "Goal"
+	
 	.col-6.form-floating.mb-4
 		.form-floating.mb-4
-			= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
-			= f.label :goal_unit, "Goal Unit"
-= f.fields_for :photo, Photo.new do |p|
+			- if milestone.nil?
+				= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+				= f.label :goal_unit, "Goal Unit"
+			- else
+				= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]], selected: milestone.goal_unit), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+				= f.label :goal_unit, "Goal Unit"
+
+= f.fields_for :photo, badge do |p|
 	.form-group
-		= p.label :file, "Badge Image"
+		- unless milestone.nil?
+			- if badge.file.attached?
+				%img{src: url_for(badge.file), alt: "", width: "100%"}
+				= p.label :file, "Change Badge Image"
+		= p.label :file, "Choose Badge Image"
 		= p.file_field :file
 		= p.hidden_field :image_type, value: "Badge Image"
 

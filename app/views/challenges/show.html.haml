@@ -4,6 +4,7 @@
 			.row.h-100
 				- unless @challenge.photo.nil?
 					%img{src: url_for(@challenge.photo.file), alt: "Banner Image of people exercising", width: "100%", style: "height: 100%"}
+	
 	.d-flex
 		.flex-grow-1.p-2
 			%h1 #{@challenge.title}
@@ -21,23 +22,24 @@
 							= link_to "Participants (#{@participants.count})", challenge_participants_path(@challenge), class: "dropdown-item", role: "button"
 						%li.mb-0
 							= link_to "Milestones", challenge_milestones_path(@challenge), class: "dropdown-item", role: "button"
-	.row.p-2
+	
+	.row.mb-4.p-2
 		.col-md-6
-			.row.mt-4.border.border-dark
+			.row.mt-4.border.border-dark{role: "text"}
 				.col-6.p-2
 					%strong Start Date and Time
 				.col-6.p-2
 					= local_time(@challenge.start)
-			.row.border.border-dark
+			.row.border.border-dark{role: "text"}
 				.col-6.p-2
 					%strong End Date and Time
 				.col-6.p-2
 					= local_time(@challenge.end)
 		- unless current_user&.id.in?(@users)
 			.d-md-none.col-12.text-center.p-4
-				= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+				= link_to "Register / Login", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
 			.d-none.d-md-block.col-md-6.text-end.p-4
-				= link_to "Register Now", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
+				= link_to "Register / Login", new_challenge_participant_path(@challenge), class: "btn btn-lg btn-dark", role: "button"
 		
 		- else
 			- unless current_user&.admin?
@@ -46,8 +48,27 @@
 				.d-none.d-md-block.col-md-6.text-end		
 					= link_to "View My Participant Page", challenge_participant_path(@challenge, @participant.id), class: "btn btn-lg btn-dark", role: "button"
 	
+	.row.mb-4
+		.col-12.col-md-8
+			%h2 Description
+			= simple_format(@challenge.description)
+		.col-12.col-md-4
+			- if @donor_count > 0
+				%h2 Top Donors
+				- @top_donors.each do |d|
+					.d-flex.border.border-dark{role: "text"}
+						.flex-grow-1.p-2
+							= d[:name]
+						.flex.p-2
+							= number_to_currency(d[:total], precision: 0)
 
-
+	%h2.text-center The Stats
+	.col-10.col-md-8.mx-auto.progress.border.border-dark{style: "height: 3rem"}
+		.progress-bar{role: "progressbar", style: "width: #{@challenge.overall_percent}%", aria:{label: "Percent Raised", valuenow: "#{@challenge.overall_percent}", valuemin: "0", valuemax: "100"}}
+	.col-10.col-md-8.mx-auto.mt-2.text-center.text-muted.fw-bolder 
+		#{number_to_currency(@challenge.total_raised, precision: 0)} / #{number_to_currency(@challenge.total_goal, precision: 0)} Raised
+				
+	
 	.row.mb-4.mt-4
 		.col-6.col-md-3.mx-auto
 			.card
@@ -63,28 +84,8 @@
 					.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%"}
 						.row.h-100
 							.align-self-center.text-center
-								.display-4.fw-bolder 0
-								.display-6.fw-bolder Minutes		
-		.col-6.col-md-3.mx-auto
-			.card
-				.card-body.position-relative.w-100{style: "padding-top: 100%"}
-					.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%"}
-						.row.h-100
-							.align-self-center.text-center
 								.display-4.fw-bolder #{@donor_count}
 								.display-6.fw-bolder Donors				
-		.col-6.col-md-3.mx-auto
-			.card
-				.card-body.position-relative.w-100{style: "padding-top: 100%"}
-					.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%"}
-						.row.h-100
-							.align-self-center.text-center
-								.display-4.fw-bolder #{number_to_currency(@raised, precision: 0)}
-								.display-6.fw-bolder Raised				
-	.col-lg-8.mt-4.mb-4.mx-auto
-		%h2.text-center Description
-		= simple_format(@challenge.description)
-
 	- unless @fundraising.count == 0
 		%h2.text-center.mt-4 Fundraising Milestones
 		.row
