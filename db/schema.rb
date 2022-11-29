@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_24_033531) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -436,6 +436,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_033531) do
     t.boolean "registration_required", default: false, null: false
   end
 
+  create_table "frequently_asked_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "challenge_id", null: false
+    t.string "question_group"
+    t.string "question"
+    t.text "answer"
+    t.integer "question_number"
+    t.integer "group_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_frequently_asked_questions_on_challenge_id"
+  end
+
   create_table "participant_milestones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "challenge_participant_id", null: false
     t.uuid "challenge_milestone_id", null: false
@@ -679,6 +691,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_24_033531) do
   add_foreign_key "donations", "users"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
+  add_foreign_key "frequently_asked_questions", "challenges"
   add_foreign_key "participant_milestones", "challenge_milestones"
   add_foreign_key "participant_milestones", "challenge_participants"
   add_foreign_key "phone_numbers", "camp_application_emergencies"

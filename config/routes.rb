@@ -139,6 +139,7 @@ Rails.application.routes.draw do
       get "thanks", to: "participant_milestones#thanks"
     end
     resources :milestones, controller: "challenge_milestones"
+    resources :faqs, controller: "fa_qs"
   end
 
 end

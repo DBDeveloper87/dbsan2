@@ -6,6 +6,11 @@ class Challenge < ApplicationRecord
 	has_many :users, through: :challenge_participants
 	has_many :donations, through: :challenge_participants
 	has_many :challenge_milestones
+	has_many :frequently_asked_questions
+
+	def faqs
+		self.frequently_asked_questions
+	end
 
 	def participants
 		self.challenge_participants
