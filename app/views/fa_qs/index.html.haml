@@ -2,10 +2,14 @@
 	%h1 FAQs
 	= link_to "New", new_challenge_faq_path(@challenge)
 	
-	- @faqs.each do |q|
-		- if q.group_number == 0
-			%h2 #{q.question_group}
-			= q.answer.html_safe
+	#faqs.accordion
+		- @faqs.each do |q|
+			- if q.group_number == 0
+				.accordion-item
+					%h2#faqIntro.accordion-header 
+						%button.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapseIntro"}}, aria:{expanded: "true", controls: "collapseIntro"} #{q.question_group}
+					#collapseIntro.accordion-collapse.collapse.show{aria:{labelledby: "headingIntro"}, data:{bs:{parent: "#faqs"}
+						= q.answer.html_safe
 
 	- @groups.each_with_index do |g, i|
 		%h2 #{g[:group]}
