@@ -1,0 +1,31 @@
+.col-12.col-md-4.mx-auto.pt-4
+	%h1 New Question
+
+	= form_with(model: @faq, url: challenge_faqs_path(@challenge)) do |f|
+		.row.mb-4
+			.col-3
+				.form-floating
+					= f.number_field :group_number, placeholder: "Group", class: "form-control border border-dark"
+					= f.label :group_number, "Group"
+
+			.col-9
+				.form-floating
+					= f.select :question_group, options_for_select([["Registration", "Registration"], ["Donations", "Donations"], ["Prizes", "Prizes"], ["About the Challenge", "About the Challenge"]]), {prompt: "Choose One. . . "}, class: "form-select form-select-lg border border-dark"
+		
+		.row.mb-4
+			.col-3
+				.form-floating
+					= f.number_field :question_number, placeholder: "Number", class: "form-control border border-dark"
+					= f.label :question_number, "Number"
+
+			.col-9
+				.form-floating
+					= f.text_field :question, placeholder: "Number", class: "form-control border border-dark"
+					= f.label :question, "Question Group"
+
+		.form-floating.mb-4
+			= f.text_area :answer, placeholder: "Answer", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}, style: "min-height: 10rem"
+			= f.label :answer, "Answer"
+
+		.row.mt-4.p-4
+			= f.submit "Save", class: "btn btn-dark btn-lg"
