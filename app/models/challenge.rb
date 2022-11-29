@@ -63,7 +63,7 @@ class Challenge < ApplicationRecord
 	end
 
 	def overall_percent
-		(self.total_raised * total_goal / 100).ceil
+		(self.total_raised * 100 / total_goal).ceil
 	end
 
 	def top_donors
