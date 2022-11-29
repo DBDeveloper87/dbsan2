@@ -7,8 +7,8 @@
 			- if q.group_number == 0
 				.accordion-item
 					%h2#faqIntro.accordion-header 
-						%button.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapseIntro"}}, aria:{expanded: "true", controls: "collapseIntro"} #{q.question_group}
-					#collapseIntro.accordion-collapse.collapse.show{aria:{labelledby: "headingIntro"}, data:{bs:{parent: "#faqs"}
+						%button.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapseIntro"}}, aria:{expanded: "true", controls: "collapseIntro"}} #{q.question_group}
+					#collapseIntro.accordion-collapse.collapse.show{aria:{labelledby: "faqIntro"}, data:{bs:{parent: "#faqs"}}}
 						= q.answer.html_safe
 
 	- @groups.each_with_index do |g, i|
