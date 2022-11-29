@@ -2,6 +2,11 @@
 	%h1 FAQs
 	= link_to "New", new_challenge_faq_path(@challenge)
 	
+	- @faqs.each do |q|
+		- if q.group_number == 0
+			%h2 #{q.question_group}
+			= q.answer.html_safe
+
 	- @groups.each_with_index do |g, i|
 		%h2 #{g[:group]}
 		- @faqs.each do |q|
