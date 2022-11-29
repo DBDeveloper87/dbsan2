@@ -12,9 +12,10 @@
 						= q.answer.html_safe
 
 	- @groups.each_with_index do |g, i|
-		%h2 #{g[:group]}
+		- if i > 0
+			%h2 #{g[:group]}
 		- @faqs.each do |q|
-			- if i + 1 == q.group_number
+			- if i == q.group_number
 				.ms-4.mb-4
 					%h3 #{q.question}
 					= q.answer.html_safe
