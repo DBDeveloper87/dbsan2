@@ -36,6 +36,12 @@ class ChallengesController < ApplicationController
 		@raised = @raised.sum
 		@exercise = @challenge.milestones.where(milestone_type: "Exercise").all
 		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
+		@faqs = @challenge.faqs.all.order(group_number: :asc).order(question_number: :asc)
+		@groups = []
+		@faqs.each do |f|
+			@groups.append({id: f.group_number, group: f.question_group})
+		end
+		@groups = @groups.uniq { |k| k[:id]}
 	
 	end
 

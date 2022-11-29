@@ -102,4 +102,22 @@
 						%h3.card-title #{f.name}
 						%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
 
+	.col-12.col-md-8.mx-auto.pt-4
+		%h2.text-center Frequently Asked Questions
 		
+		- @faqs.each do |q|
+			- if q.group_number == 0
+				%h3 #{q.question_group}
+				= q.answer.html_safe
+
+		- @groups.each_with_index do |g, i|
+			- if i > 0
+				%h3 #{g[:group]}
+			- @faqs.each do |q|
+				- if i == q.group_number and i > 0
+					.ms-4.mb-4
+						%details
+							%summary
+								%h4 #{q.question}
+							.ms-4.ps-4
+								= q.answer.html_safe		
