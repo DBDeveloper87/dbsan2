@@ -30,6 +30,10 @@ li {
 	color: white;
 }
 
+details summary > * {
+	display: inline
+}
+
 @media (inverted-colors: inverted) {
 	.background-dark {
 		background: white;
