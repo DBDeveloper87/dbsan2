@@ -105,6 +105,11 @@ call-bind@^1.0.2:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
+chart.js@^3.7.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.9.1.tgz#3abf2c775169c4c71217a107163ac708515924b8"
+  integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
+
 "chokidar@>=3.0.0 <4.0.0":
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
@@ -665,6 +670,13 @@ spark-md5@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"
   integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
+
+stimulus-chartjs@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-chartjs/-/stimulus-chartjs-4.0.0.tgz#e787de02ba2a844fccd9348e246e62614d0c900b"
+  integrity sha512-eBPjdh+iyzUyBjDHns4dTUNlT5gvHXrL0b3/DX4RMWnzd2BfS5WHVOYY8sxbsabPXY5WgrzWOwJL0TTbN/6YFQ==
+  dependencies:
+    chart.js "^3.7.0"
 
 stimulus-rails-nested-form@^4.0.0:
   version "4.0.0"

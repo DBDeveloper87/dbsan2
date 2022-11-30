@@ -9,11 +9,13 @@
 	at least
 	- if @units == "Dollars"
 		$#{@goal}!
+	- else
+		#{@goal} minutes during the Challenge!
 
-%p This has earned you the #{@rank_name} #{@type} Badge!
+%p This has earned you the #{@prize}!
 
 - unless @badge.nil?
-	%img{src: url_for(@badge), alt: "The #{@rank_name} #{@type} Badge", width: "100px"}
+	%img{src: url_for(@badge), alt: "The #{@prize}", width: "100px"}
 
 - if @type == "Fundraising"
 	%p You are now eligible to earn a #{@prize}.

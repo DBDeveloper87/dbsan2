@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  challenge_participant: one
+  activity: MyString
+  time: 2022-11-30 01:25:52
+  comment: MyText
+
+two:
+  challenge_participant: two
+  activity: MyString
+  time: 2022-11-30 01:25:52
+  comment: MyText

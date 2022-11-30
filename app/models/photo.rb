@@ -6,6 +6,7 @@ class Photo < ApplicationRecord
   belongs_to :challenge, optional: true
   belongs_to :challenge_participant, optional: true
   belongs_to :challenge_milestone, optional: true
+  belongs_to :exercise_tracker, optional: true
   has_one_attached :file
 
 

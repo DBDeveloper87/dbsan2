@@ -28,5 +28,5 @@
 								%img{src: url_for(f.photo.file), alt: "", width: "100%", style: "height: 100%"}	
 				.card-body.text-center
 					%h3.card-title #{f.name}
-					%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
+					%p.card-text When you reach #{f.goal} minutes, you are eligible to earn a #{f.prize}.
 					= link_to "Edit", edit_challenge_milestone_path(@challenge, f)

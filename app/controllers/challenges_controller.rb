@@ -2,7 +2,7 @@ class ChallengesController < ApplicationController
 	before_action :authenticate_user!, only: :new
 	before_action :require_admin, only: [:new, :edit, :update]
 	before_action :set_challenge, only: [:show, :edit, :update]
-
+	
 	def index
 		@challenges = Challenge.all
 	end
@@ -42,7 +42,58 @@ class ChallengesController < ApplicationController
 			@groups.append({id: f.group_number, group: f.question_group})
 		end
 		@groups = @groups.uniq { |k| k[:id]}
-	
+		@chart_data = {
+			labels: [
+				"Cycling (indoors)", 
+				"Cycling (outdoors)",
+				"Dancing",
+				"Elliptical", 			
+				"Hiking", 
+				"Martial arts", 
+				"Rowing", 
+				"Running (indoors)", 
+				"Running (outdoors)", 
+				"Skiing", 
+				"Swimming", 
+				"Walking (indoors)", 
+				"Walking (outdoors)", 
+				"Weight lifting", 
+				"Yoga", 
+				"Other"
+			],
+			datasets: [{
+				label: "Total Time By Activity",
+				backgroundColor: [
+					"red",
+					"blue",
+					"green",
+					"orange",
+					"purple",
+					"yellow",
+					"gold",
+					"bronze",
+					"platinum",
+					"silver",
+					"white",
+					"pink",
+					"lime",
+					"red",
+					"green",
+					"orange"
+				],
+				borderColor: '#3B82F6',
+				data: @challenge.activity_values
+			}]
+		}
+		@chart_options = {
+			plugins: {
+				legend: {
+					title: "Legend",
+					position: "right"
+				}
+
+			}
+		}
 	end
 
 	def create

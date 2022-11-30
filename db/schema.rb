@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_123602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -436,6 +436,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
     t.boolean "registration_required", default: false, null: false
   end
 
+  create_table "exercise_trackers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "challenge_participant_id", null: false
+    t.string "activity"
+    t.time "time"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_participant_id"], name: "index_exercise_trackers_on_challenge_participant_id"
+  end
+
   create_table "frequently_asked_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "challenge_id", null: false
     t.string "question_group"
@@ -488,9 +498,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
     t.uuid "challenge_id"
     t.uuid "challenge_participant_id"
     t.uuid "challenge_milestone_id"
+    t.uuid "exercise_tracker_id"
     t.index ["challenge_id"], name: "index_photos_on_challenge_id"
     t.index ["challenge_milestone_id"], name: "index_photos_on_challenge_milestone_id"
     t.index ["challenge_participant_id"], name: "index_photos_on_challenge_participant_id"
+    t.index ["exercise_tracker_id"], name: "index_photos_on_exercise_tracker_id"
     t.index ["product_image_set_id"], name: "index_photos_on_product_image_set_id"
   end
 
@@ -691,6 +703,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
   add_foreign_key "donations", "users"
   add_foreign_key "event_attendees", "events"
   add_foreign_key "event_attendees", "users"
+  add_foreign_key "exercise_trackers", "challenge_participants"
   add_foreign_key "frequently_asked_questions", "challenges"
   add_foreign_key "participant_milestones", "challenge_milestones"
   add_foreign_key "participant_milestones", "challenge_participants"
@@ -700,6 +713,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_034130) do
   add_foreign_key "photos", "challenge_milestones"
   add_foreign_key "photos", "challenge_participants"
   add_foreign_key "photos", "challenges"
+  add_foreign_key "photos", "exercise_trackers"
   add_foreign_key "photos", "product_image_sets"
   add_foreign_key "product_categories", "departments"
   add_foreign_key "product_image_sets", "products"

@@ -1,5 +1,6 @@
 class ChallengeParticipant < ApplicationRecord
   has_many :donations
+  has_many :exercise_trackers
   has_many :participant_milestones
   belongs_to :challenge
   belongs_to :user
@@ -12,6 +13,19 @@ class ChallengeParticipant < ApplicationRecord
   attribute :state
   attribute :zip
   attribute :country
+
+  def activities
+    self.exercise_trackers
+  end
+
+  def total_time
+    total = []
+    activities = self.activities.all
+    activities.each do |a|
+      total.append(a.time)
+    end
+    return total.inject(0) { |sum, t| sum + ((t.hour * 60 + t.min + t.sec / 60).round) }
+  end
 
   def full_name
     "#{self.first_name} #{self.last_name}"

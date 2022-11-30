@@ -1,4 +1,25 @@
 module ApplicationHelper
+	def exercise_activity_options
+		[
+			"Cycling (indoors)", 
+			"Cycling (outdoors)", 
+			"Dancing", 
+			"Elliptical", 
+			"Hiking", 
+			"Martial arts", 
+			"Rowing", 
+			"Running (indoors)", 
+			"Running (outdoors)", 
+			"Skiing", 
+			"Swimming", 
+			"Walking (indoors)", 
+			"Walking (outdoors)", 
+			"Weight lifting", 
+			"Yoga", 
+			"Other"
+		]
+	end
+
 	def humanize_bytes(value)
 		case 
 		when value >= 1099511627776

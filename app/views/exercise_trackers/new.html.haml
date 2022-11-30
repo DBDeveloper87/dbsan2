@@ -1,0 +1,41 @@
+.col-12.col-md-4.mx-auto.pt-4
+	%h1 Log New Activity
+
+	= form_with(model: @activity, url: challenge_participant_activities_path(@challenge, @participant)) do |f|
+		.form-floating.mb-4
+			= f.select :activity, options_for_select(exercise_activity_options), {prompt: "Choose One. . . "}, class: "form-select form-select-lg border border-dark"
+			= f.label :activity, "Activity"	
+
+		.fieldset.border.border-dark.p-2.mb-4
+			%legend Time
+			.input-group
+				.form-floating
+					= f.number_field :time_hour, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.label :time_hour, "Hours"
+				%span.input-group-text :
+				.form-floating
+					= f.number_field :time_minute, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.label :time_minute, "Minutes"
+				%span.input-group-text :
+				.form-floating
+					= f.number_field :time_second, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.label :time_second, "Seconds"
+
+		.form-floating.mb-4
+			= f.text_area :comment, placeholder: "Optional Note", class: "form-control border border-dark", data:{controller: "textarea-autogrow"}, style: "min-height: 10rem"
+			= f.label :comment, "Optional Note"
+
+		= f.fields_for :photo, @image do |p|
+			%p.text-muted (Optional) You can provide proof of your eercise by uploading a screenshot of the workout from your phone.
+			.form-group.mb-4
+				= p.label :file, "Upload Screenshot", class: "d-block"
+				= p.file_field :file
+
+			.form-floating
+				= p.text_field :alt_text, placeholder: "Alt Text", maxlength: 120, class: "form-control border border-dark"
+				= p.label :alt_text, "Alt Text"
+			.text-muted.mb-4
+				%em Limted to 120 characters.  Alt text should be concise.  Please use the comment box above to provide a full image description if desired. (This helps those with low vision that do not have access to screen readers).
+
+		.row.mt-4.p-4
+			= f.submit "Save", class: "btn btn-dark btn-lg"

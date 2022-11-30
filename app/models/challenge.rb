@@ -7,6 +7,57 @@ class Challenge < ApplicationRecord
 	has_many :donations, through: :challenge_participants
 	has_many :challenge_milestones
 	has_many :frequently_asked_questions
+	has_many :exercise_trackers, through: :challenge_participants
+	
+	def activities
+		self.exercise_trackers
+	end
+
+	def exercise_activity_options
+		[
+			"Cycling (indoors)", 
+			"Cycling (outdoors)", 
+			"Dancing", 
+			"Elliptical", 
+			"Hiking", 
+			"Martial arts", 
+			"Rowing", 
+			"Running (indoors)", 
+			"Running (outdoors)", 
+			"Skiing", 
+			"Swimming", 
+			"Walking (indoors)", 
+			"Walking (outdoors)", 
+			"Weight lifting", 
+			"Yoga", 
+			"Other"
+		]
+	end
+
+	def activity_values
+		values = []
+		self.exercise_activity_options.each do |ea|
+			total = []
+			activities = self.activities.where(activity: ea).all
+			activities.each do |a|
+				time = a.time
+				hour = time.hour
+				minute = time.min
+				second = time.sec
+				if second > 0
+					minute = minute + 1
+				end
+				if hour > 0
+					minutes = minute + (60 * hour)
+				else
+					minutes = minute
+				end
+				total.append(minutes)
+			end
+			values.append(total.sum)
+		end
+		return values
+	end
 
 	def faqs
 		self.frequently_asked_questions

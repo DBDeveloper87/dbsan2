@@ -47,6 +47,7 @@ class ChallengeParticipantsController < ApplicationController
 		end
 		@unique_emails = @donations.uniq { |d| d.email }
 		@milestones = @participant.milestones
+		@activities = @participant.exercise_trackers.all.order(created_at: :desc)
 	end
 
 	def create

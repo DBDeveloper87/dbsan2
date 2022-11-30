@@ -1,4 +1,4 @@
-.container.pt-4
+.col-12.col-xl-8.pt-4.mx-auto
 	.d-flex
 		.flex.p-2
 			%a{href: challenge_path(@challenge), aria:{label: "Back to Challenge"}}
@@ -12,7 +12,7 @@
 		.col-6.col-lg-10.p-2 #{@participant.full_name}
 
 	.row.mt-4
-		.col-lg-4.order-1.order-lg-2.p-2
+		.col-12.col-md-4.order-1.order-md-2.p-2
 			.form-floating.mb-4
 				%label.visually-hidden{for: "pageURL"} Page URL
 				%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
@@ -50,8 +50,7 @@
 							- total_amount = total_amount.sum
 							= number_to_currency(total_amount, precision: 0)
 
-
-		.col-lg-8.order-2.order-lg-1
+		.col-12.col-md-8.order-2.order-md-1
 			.row.mb-4.mt-4
 				.col-6.col-md-5.mx-auto
 					.card
@@ -80,6 +79,23 @@
 																	- unless m.challenge_milestone.photo.nil? 
 																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "#{m.challenge_milestone.name} #{m.challenge_milestone.milestone_type} Badge", width: "100%", style: "height: 100%"}	
 
-			
-			
-		
+			- if current_user&.admin?
+				.row.mt-4.mb-4.p-4
+					= link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
+			- @activities.each do |a|
+				.row.mb-4
+					.col-12.col-md-3
+						#{time_ago_in_words(a.created_at)} ago
+					.col-12.col-md-9
+						.d-flex.p-2
+							.flex-grow-1.p-2
+								= a.activity
+							.p-2
+								= a.time.strftime("%H:%M:%S")
+						= simple_format(a.comment)
+
+						- unless a.photo.nil?
+							- if a.photo.file.attached?
+								%figure
+									%img{src: url_for(a.photo.file), alt: "", width: "100%"}
+									%figcaption #{a.photo.alt_text}

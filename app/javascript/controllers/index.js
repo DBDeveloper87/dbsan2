@@ -7,6 +7,9 @@ import { application } from "./application"
 import BootstrapController from "./bootstrap_controller"
 application.register("bootstrap", BootstrapController)
 
+import Chart from 'stimulus-chartjs'
+application.register('chart', Chart)
+
 import CovidController from "./covid_controller"
 application.register("covid", CovidController)
 
