@@ -105,18 +105,27 @@
 	.col-12.col-md-8.mx-auto.pt-4
 		%h2.text-center Frequently Asked Questions
 		
-		- @faqs.each do |q|
-			- if q.group_number == 0
-				%h3 #{q.question_group}
-				= q.answer.html_safe
+		#faqs.accordion
+			- @faqs.each_with_index do |q, i|
+				- if q.group_number == 0
+					.accordion-item
+						%h3.accordion-header{id: "heading#{i}"} 
+							%button.h3.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapse#{i}", aria:{expanded: "true", controls: "collapse#{i}"}}}} #{q.question_group}
+						.ms-4.ps-4accordion-collapse.collapse.show{id: "collapse#{i}", aria:{labelledby: "heading#{i}"}, data:{bs:{parent: "#faqs"}}}
+							= q.answer.html_safe
 
-		- @groups.each_with_index do |g, i|
-			- if i > 0
-				%h3 #{g[:group]}
-			- @faqs.each do |q|
-				- if i == q.group_number and i > 0
-					.ms-4.mb-4
-						%details
-							%summary.h4 #{q.question}
-							.ms-4.ps-4
-								= q.answer.html_safe		
+			- @groups.each_with_index do |g, i|
+				- if i > 0
+					.accordion-item
+						%h3.accordion-header{id: "heading#{i}"}
+							%button.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapse#{i}", aria:{expanded: "false", controls: "collapse#{i}"}}}} #{g[:group]}
+						.ps-4.accordion-collapse.collapse{id: "collapse#{i}", aria:{labelledby: "heading#{i}"}, data:{bs:{parent: "#faqs"}}}
+							.accordion{id: "faqGroup#{i}"}
+								- @faqs.each_with_index do |q, qi|
+									- if i == q.group_number and i > 0
+										.mb-4
+											%h4.accordion-header{id: "heading#{i}_#{qi}"} 
+												%button.accordion-button{type: "button", data:{bs:{toggle: "collapse",  target: "#collapse#{i}_#{qi}", aria:{expanded: "false", controls: "collapse#{i}_#{qi}"}}}} #{q.question}
+												.ps-2.accordion-collapse.collapse{id: "collapse#{i}_#{qi}", aria:{labelledby: "heading#{i}_#{qi}"}, data:{bs:{parent: "#faqGroup#{i}"}}}
+													.ps-4
+														= q.answer.html_safe									
