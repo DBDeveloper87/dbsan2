@@ -80,6 +80,14 @@ class Challenge < ApplicationRecord
 		return total.sum
 	end
 
+	def total_time
+		total = []
+		self.participants.each do |p|
+			total.append(p.total_time)
+		end
+		return total.sum
+	end
+
 	def participant_count
 		self.participants.count
 	end
