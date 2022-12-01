@@ -88,6 +88,21 @@ class Challenge < ApplicationRecord
 		return total.sum
 	end
 
+	def total_time_in_words
+		total_time = self.total_time
+		hours = total_time / 60
+		minutes = total_time % 60
+		if hours > 0 and minutes == 0
+			return "#{hours} Hours"
+		elsif hours > 0 and minutes > 0
+			return "#{hours} Hours and #{minutes} Minutes"
+		elsif hours == 0 and minutes > 0
+			return "#{minutes} Minutes"
+		else
+			return "No Activity Logged Yet"
+		end
+	end
+
 	def participant_count
 		self.participants.count
 	end

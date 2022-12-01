@@ -42,6 +42,7 @@ class ChallengesController < ApplicationController
 			@groups.append({id: f.group_number, group: f.question_group})
 		end
 		@groups = @groups.uniq { |k| k[:id]}
+		@total_time = @challenge.total_time_in_words
 		@chart_data = {
 			labels: [
 				"Cycling (indoors)", 
