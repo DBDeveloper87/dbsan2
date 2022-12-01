@@ -94,8 +94,8 @@
 								= a.time.strftime("%H:%M:%S")
 							- if current_user&.id == @participant.user.id
 								.p-2
-									= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, class: "btn btn-dark btn-lg" do
-										%i.bi.bi-trash
+									= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, aria:{label: "Delete #{a.activity} for #{a.time.strftime("%H:%M:%S")}"}, class: "btn btn-dark btn-lg" do
+										%i.bi.bi-trash{aria: {hidden: "true"}}
 						
 						= simple_format(a.comment)
 
