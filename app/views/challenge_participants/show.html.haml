@@ -92,6 +92,11 @@
 								= a.activity
 							.p-2
 								= a.time.strftime("%H:%M:%S")
+							- if current_user&.id == @participant.user.id
+								.p-2
+									= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, class: "btn btn-dark btn-lg" do
+										%i.bi.bi-trash
+						
 						= simple_format(a.comment)
 
 						- unless a.photo.nil?

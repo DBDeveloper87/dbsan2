@@ -3,7 +3,7 @@ class ExerciseTracker < ApplicationRecord
   attribute :time_hour
   attribute :time_minute
   attribute :time_second
-  has_one :photo
+  has_one :photo, dependent: :destroy
   accepts_nested_attributes_for :photo
 
   before_validation :convert_time

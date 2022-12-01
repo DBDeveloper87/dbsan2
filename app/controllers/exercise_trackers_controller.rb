@@ -1,6 +1,6 @@
 class ExerciseTrackersController < ApplicationController
 	before_action :get_participant, only: [:new, :create]
-
+	before_action :set_activity, only: :destroy
 	def new
 		@activity = @participant.exercise_trackers.build
 		@image = @activity.build_photo
@@ -14,9 +14,22 @@ class ExerciseTrackersController < ApplicationController
 		end
 	end
 
+	def destroy
+		if current_user.id == @participant.user.id
+			@activity.destroy
+			redirect_to challenge_participant_path(@challenge, @participant)
+		end
+	end
+
 	private
 		def get_participant
 			@participant = ChallengeParticipant.find_by(id: params[:participant_id])
+			@challenge = @participant.challenge
+		end
+
+		def set_activity
+			@activity = ExerciseTracker.find_by(id: params[:id])
+			@participant = @activity.challenge_participant
 			@challenge = @participant.challenge
 		end
 
