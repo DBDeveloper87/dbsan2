@@ -79,7 +79,7 @@
 																	- unless m.challenge_milestone.photo.nil? 
 																		%img{src: url_for(m.challenge_milestone.photo.file), alt: "#{m.challenge_milestone.name} #{m.challenge_milestone.milestone_type} Badge", width: "100%", style: "height: 100%"}	
 
-			- if current_user&.admin?
+			- if current_user&.id == @participant.user.id
 				.row.mt-4.mb-4.p-4
 					= link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
 			- @activities.each do |a|

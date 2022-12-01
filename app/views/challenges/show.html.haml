@@ -88,22 +88,21 @@
 								.display-4.fw-bolder #{@donor_count}
 								.display-6.fw-bolder Donors				
 	
-	- if current_user&.admin?
-		%figure.col-12.col-md-8.mb-4.mt-4.mx-auto
-			.h3.text-center{aria:{hidden: "true"}} Total Time By Activity
-			%canvas{aria:{hidden: "true"}, data:{controller: "chart", chart:{data:{value: @chart_data.to_json}, type:{value: "pie"}, options: {value: @chart_options.to_json}}}}
-			%figcaption.text-center
-				A pie chart of "Total Time By Activity" showing 
-				- count = []
-				- @challenge.activity_values.each do |a|
-					- unless a == 0
-						- count.append(a)
-				= count.count 
-				activities exercised, in minutes: 
-				- exercise_activity_options.each_with_index do |e, ei|
-					- @challenge.activity_values.each_with_index do |a, ai|
-						- if ei == ai and a > 0 and ei < exercise_activity_options.length - 1
-							#{e} at #{a}.
+	%figure.col-12.col-md-8.mb-4.mt-4.mx-auto
+		.h3.text-center{aria:{hidden: "true"}} Total Time By Activity
+		%canvas{aria:{hidden: "true"}, data:{controller: "chart", chart:{data:{value: @chart_data.to_json}, type:{value: "pie"}, options: {value: @chart_options.to_json}}}}
+		%figcaption.text-center
+			A pie chart of "Total Time By Activity" showing 
+			- count = []
+			- @challenge.activity_values.each do |a|
+				- unless a == 0
+					- count.append(a)
+			= count.count 
+			activities exercised, in minutes: 
+			- exercise_activity_options.each_with_index do |e, ei|
+				- @challenge.activity_values.each_with_index do |a, ai|
+					- if ei == ai and a > 0 and ei < exercise_activity_options.length - 1
+						#{e} at #{a}.
 
 	- unless @fundraising.count == 0
 		%h2.text-center.mt-4 Fundraising Milestones
@@ -118,7 +117,7 @@
 					.card-body.text-center
 						%h3.card-title #{f.name}
 						%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
-	- unless @fundraising.count == 0
+	- unless @exercise.count == 0
 		%h2.text-center Exercise Milestones
 		.row
 			- @exercise.each do |f|

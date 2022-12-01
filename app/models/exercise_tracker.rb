@@ -6,8 +6,11 @@ class ExerciseTracker < ApplicationRecord
   has_one :photo
   accepts_nested_attributes_for :photo
 
-  before_create :convert_time
+  before_validation :convert_time
   after_create :check_milestones
+
+  validates :activity, presence: true
+  validates :time, presence: true
 
   def check_milestones
     total_time = self.challenge_participant.total_time
