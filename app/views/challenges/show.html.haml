@@ -101,7 +101,7 @@
 			activities exercised, in minutes: 
 			- exercise_activity_options.each_with_index do |e, ei|
 				- @challenge.activity_values.each_with_index do |a, ai|
-					- if ei == ai and a > 0 and ei < exercise_activity_options.length - 1
+					- if ei == ai and a > 0
 						#{e} at #{a}.
 
 	- unless @fundraising.count == 0
