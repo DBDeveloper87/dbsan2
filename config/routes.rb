@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   
   
 
-  #get 'contenteditable', to: "pages#contenteditable"
+  get 'contenteditable', to: "pages#contenteditable"
   namespace :photos do
     get 'new', to: "images#new"
     post 'new', to: 'images#create'

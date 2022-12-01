@@ -10,15 +10,15 @@
 			%legend Time
 			.input-group
 				.form-floating
-					= f.number_field :time_hour, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.number_field :time_hour, class: "form-control border border-dark", min: 0, max: 59
 					= f.label :time_hour, "Hours"
 				%span.input-group-text :
 				.form-floating
-					= f.number_field :time_minute, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.number_field :time_minute, class: "form-control border border-dark", min: 0, max: 59
 					= f.label :time_minute, "Minutes"
 				%span.input-group-text :
 				.form-floating
-					= f.number_field :time_second, class: "form-control border border-dark", min: 0, max: 59, value: 0
+					= f.number_field :time_second, class: "form-control border border-dark", min: 0, max: 59
 					= f.label :time_second, "Seconds"
 
 		.form-floating.mb-4
