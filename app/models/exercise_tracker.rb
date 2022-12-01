@@ -45,9 +45,19 @@ class ExerciseTracker < ApplicationRecord
   private
     def convert_time
       hours = self.time_hour
+      if hours == ""
+        hours = 0
+      end
       minutes = self.time_minute
+      if minutes == ""
+        minutes = 0
+      end
       seconds = self.time_second
+      if seconds == ""
+        seconds = 0
+      end
 
+      #self.time = Time.zone.strptime("0:5:0", "%H:%M:%S")
       self.time = Time.zone.strptime("#{hours}:#{minutes}:#{seconds}", "%H:%M:%S")
     end
 end
