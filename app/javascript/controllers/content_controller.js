@@ -8,10 +8,12 @@ export default class extends Controller {
 		this.createEditable()
 		alert("It's working")
 		var mainFrame = document.getElementById("contentEditable")
-		const blocks = this.blockJSON("contentEditable")
-		this.inputTarget.value = JSON.stringify({ blocks })
+		mainFrame.addEventListener("DOMCharacterDataModified", (event) => {
+			const blocks = this.blockJSON("contentEditable")
+			this.inputTarget.value = JSON.stringify({ blocks })
+		})
 		mainFrame.addEventListener("keyup", (event) => {
-			if (event.keyCode === 65) {
+			if(event.key === "Backspace") {
 				const blocks = this.blockJSON("contentEditable")
 				this.inputTarget.value = JSON.stringify({ blocks })
 			}
@@ -19,10 +21,9 @@ export default class extends Controller {
 	}
 
 	createEditable() {
-		const mainFrame = document.createElement("div")
+		const mainFrame = document.createElement("p")
 		mainFrame.id = "contentEditable"
-		mainFrame.setAttribute("contenteditable", true)
-		mainFrame.innerHTML = '<p class="border border-dark p-4">This is heaven</p>'
+		mainFrame.innerHTML = '<p class="border border-dark p-4" contenteditable="true">This is heaven</p>'
 		this.element.appendChild(mainFrame)
 	}
 	blockJSON(element) {
