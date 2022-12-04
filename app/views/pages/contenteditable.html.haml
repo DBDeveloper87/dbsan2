@@ -1,5 +1,28 @@
-.container.mt-4.mx-auto
-	.form-floating{data:{controller: "content"}}
-		%textarea#input.form-control.border.border-dark{placeholder: "Test", data:{content: {target: "input"}}}
-		%label{for: "input", data:{content: {target: "label"}}} Test	
+.row
+	.col-md-6.mt-4.mx-auto
+		.form-floating{data:{controller: "content-json"}}
+			%textarea#input.form-control.border.border-dark{placeholder: "Test", data:{content_json: {target: "input"}}}
+			%label{for: "input", data:{content_json: {target: "label"}}} Test	
+		
+	.col-md-6.mt-4.mx-auto
+		.border.border-dark.p-4
+			.position-relative.w-100{data: {controller: "content-block"}}
+				.position-absolute.bg-white{style: "right: 101%"}
+					%button.d-none.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbox", bs:{toggle: "collapse", target: "#toolbar1"}}}
+						%i.bi.bi-hammer
+			
+				#toolbar1.collapse.position-absolute.bottom-100.bg-white.btn-toolbar{role: "toolbar", aria:{label: "Toolbar with button groups"}, data:{content_block_target: "toolbar"}}
+					.btn-group.me-2{role: "group", aria:{label: "First group"}}
+						%button.btn.btn-outline-dark{type: "button", data: {action: "click->content-block#seth2", content_block_target: "toolbarH2 toolbarbtn"}} H2
+						%button.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbarH3"}} H3
+						%button.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbarH4"}} H4
+						%button.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbarH5"}} H5
+						%button.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbarH6"}} H6
+						%button.btn.btn-outline-dark{type: "button", data: {content_block_target: "toolbarP"}}
+							%i.bi.bi-paragraph
+					
+				%p{contenteditable: true, data: { content_block_target: "contentBlock"}} This is heaven
+
+		
+		
 		
