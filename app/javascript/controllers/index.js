@@ -13,8 +13,11 @@ application.register('chart', Chart)
 import CovidController from "./covid_controller"
 application.register("covid", CovidController)
 
-import ContentController from "./content_controller"
-application.register("content", ContentController)
+import ContentBlockController from "./content/block_controller"
+application.register("content-block", ContentBlockController)
+
+import ContentJsonController from "./content/json_controller"
+application.register("content-json", ContentJsonController)
 
 
 import DonationOtherAmountController from "./donation_other_amount_controller"

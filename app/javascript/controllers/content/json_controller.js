@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-	static targets = ["input"]
+	static targets = ["input", "toolbox", "contentBlock"]
+	static values = ["block"]
 
 	connect() {
 		//this.inputTarget.classList.add("d-none")
@@ -17,7 +18,7 @@ export default class extends Controller {
 				const blocks = this.blockJSON("contentEditable")
 				this.inputTarget.value = JSON.stringify({ blocks })
 			}
-		})
+		})	
 	}
 
 	createEditable() {
