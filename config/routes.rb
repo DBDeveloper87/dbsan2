@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     root "channels/my_channel#show", as: :channel_root
     get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
     patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
+    resources :portfolio, controller: "portfolios"
     resources :videos
     resources :surveys do
       resources :sections, controller: "survey_sections"

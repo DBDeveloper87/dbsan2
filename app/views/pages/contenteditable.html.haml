@@ -8,7 +8,11 @@
 		.border.border-dark.p-4
 			= render partial: "content/blocks/paragraph"
 .col-md-6.mx-auto
-	%pre.border.border-dark.p-4
+	- content_for :head do
+		= javascript_include_tag "prism.js", "data-turbo-track": "reload", defer: true
+	%pre.language-bash.line-numbers
 		%code
-			:preserve
-				%html
+			cd /.vin
+	
+	
+			
