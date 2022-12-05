@@ -7,4 +7,4 @@ LocalTime.start();
 
 import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
-
+//import Prism from 'prismjs';

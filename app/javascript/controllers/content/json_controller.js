@@ -5,6 +5,14 @@ export default class extends Controller {
 	static values = ["block"]
 
 	connect() {
+		// Create a media condition that targets viewports at least 768px wide
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+		// Check if the media query is true
+		if (mediaQuery.matches) {
+  			// Then trigger an alert
+  			alert('Media Query Matched!')
+		}
+
 		//this.inputTarget.classList.add("d-none")
 		this.createEditable()
 		alert("It's working")

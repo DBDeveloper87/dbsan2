@@ -20,7 +20,7 @@ export default class extends Controller {
 		if (event.key == "Enter") {
 			event.preventDefault()
 			const paragraph = document.createElement("P")
-			this.element.appendChild(paragraph)
+			this.contentBlockTarget.after(paragraph)
 			paragraph.style.background = "black"
 			paragraph.style.color = "white"
 			paragraph.innerText = "Hello, this is a new paragraph"
