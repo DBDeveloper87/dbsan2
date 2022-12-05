@@ -5,26 +5,101 @@
 	%h1.mt-4.text-center Patrick Vellia
 	%p.text-center.text-muted Portfolio of Work | Last Updated on Dec 5, 2022
 
-	%section.col-12.col-md-8.mx-auto
-		%h2 Introduction
-		
-		%p My name is Patrick Vellia.  Until recently, this website was built on WordPress, which I haven’t updated since 2017.  However, in October 2022 my contract was up with my hosting provider and thus, I decided to not renew, and build out the new site from the ground up.  This site is actually an extension of the DeafBlind Support and Access Network’s (DBSAN’s) Web application by adding two endpoints—one on their subdomain and one here at www.theroadwithoutbarriers.com and both are exactly the same point of entry.
-
-		%p DBSAN is a 501(c)(3) non-profit charity organization founded during the COVID-19 pandemic to help keep DeafBlind individuals connected in a period of darkness.  This portfolio documents much of my work done to build the DBSAN platform.
-
-
-
-
-
-
-	%section.col-12.col-md-8.mx-auto
-		%h2 Requirements
-		%ul
-			%li Develop a Website in conformance with the Web Content Accessibility Guidelines (WCAG) by generating a Ruby on Rails application
-			%li Develop an Admin Console only accessible to admins
-			%li Build an Exercise Challenge Portal Coupled with Donation Collection
-			%li Build a Camps and Camp Registration System
-			%li Build an Events Manager
-			%li Build a Video Player
+	.row.mb-4
+		- content_for :head do
+			= javascript_include_tag "prism.js", "data-turbo-track": "reload", defer: true
 	
+		.col-12.col-md-4.order-1.order-md-2.p5-4
+			.fw-bolder.h6
+				On This Page
+				%ul
+					%li Introduction
+					%li Requirements
+					%li Technologies
+					%li Tools
+		
+		.col-12.col-md-8.order-2.order-md-1.overflow-scroll.pt-4{style: "min-height: 95vh; max-height: 95vh"}
+			%section
+				%h2 Introduction
+		
+				%p My name is Patrick Vellia.  Until recently, this website was built on WordPress, which I haven’t updated since 2017.  However, in October 2022 my contract was up with my hosting provider and thus, I decided to not renew, and build out the new site from the ground up.  This site is actually an extension of the DeafBlind Support and Access Network’s (DBSAN’s) Web application by adding two endpoints—one on their subdomain and one here at www.theroadwithoutbarriers.com and both are exactly the same point of entry.
+
+				%p DBSAN is a 501(c)(3) non-profit charity organization founded during the COVID-19 pandemic to help keep DeafBlind individuals connected in a period of darkness.  This portfolio documents much of my work done to build the DBSAN platform.
+	
+			%section
+				%h2 Requirements
+				%ul
+					%li Develop a Website in conformance with the Web Content Accessibility Guidelines (WCAG) by generating a Ruby on Rails application
+					%li Develop an Admin Console only accessible to admins
+					%li Build an Exercise Challenge Portal Coupled with Donation Collection
+					%li Build a Camps and Camp Registration System
+					%li Build an Events Manager
+					%li Build a Video Player
+	
+			%section
+				%h2 Technologies
+				%p The following technologies are in use:
+				%ul
+					%li Ruby 3.1.2
+					%li Rails 7.0.1
+					%li Stimulus
+					%li Bootstrap 5
+					%li PostgreSQL
+					%li UUIDs as primary keys
+					%li HAML as the primary language instead of HTML for writing the actual files
+					%li Heroku as the PaaS hosting the Ruby Web app in a Linux environment dyno
+
+
+			%section
+				%h2 Tools
+				%p The following tools were utilized in the creation of this Website
+				%ul
+					%li Sublime Text—a text editor where I write my code
+					%li Terminal—a Bash interface which I use to run command line scripts
+					%li Git—for version control
+
+
+
+			%section
+				%h2 Project 1: Generate a Ruby on Rails Application
+				%p This project demonstrates the basic initial steps I take to start a new Rails project.  It includes the following:
+				%ul
+					%li Define Bootstrap 5 as the default front-end CSS3 and JavaScript framework for the asset pipeline
+					%li Define PostgresQL as the database used by ActiveRecord
+					%li Tell Rails to use UUIDs by default when generating new models
+					%li Convert all of the .erb files to .html.haml by way of the haml-rails gem.
+
+				%h3 Generate the app with Bootstrap and PostgreSQL
+				Rails makes it easy to generate new projects. Let's call this project <code class="language-bash">myapp</code>.  First, open a Terminal, Command Prompt or Powershell shell interface and navigate to the directory you would like to start your project in.
+
+				Then, run the following command:
+
+				%pre.mt-4.mb-4.language-bash.line-numbers
+					%code
+						rails new myapp -d postgresql --css bootstrap
+				%p After that's done, we want to move into our new directory by running:
+
+				%pre.mt-4.mb-4.language-bash.line-numbers
+					%code
+						cd myapp
+
+				%p Before we can start the server, we first need to tell Rails to actually create the database for us:
+
+				%pre.mt-4.mb-4.language-bash.line-numbers
+					%code
+						rails db:create
+
+				%p And we can tell the app is working by running:
+				%pre.mt-4.mb-4.language-bash.line-numbers
+					%code
+						rails s
+
+				%p Go to your favorite browser and type in the URL http://localhost:3000.  This takes you to port 3000 on your local machine.
+
+				%figure.mt-4.mb-4
+					%img{src: "https://storage.googleapis.com/dbsan-public/The%20Road%20Without%20Barriers/Screenshot%202022-12-05%20at%2010.17.38%20AM.png", alt: "", width: "100%"}
+					%figcaption.text-center A screenshot of the Safari wweb browser showing the Rails welcome screen.
+
+
+
 

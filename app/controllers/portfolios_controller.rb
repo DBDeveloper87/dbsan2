@@ -30,7 +30,7 @@ class PortfoliosController < ApplicationController
 
 		def set_portfolio
 			@portfolio = @channel.portfolio
-			#@meta_title = "#{@video.title} | #{@video.channel.name}"
+			@meta_title = "Portfolio | #{@channel.name}"
 			#@meta_og_type = "video.movie"
 			#@meta_og_url = video_url(@video)
 			#@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
