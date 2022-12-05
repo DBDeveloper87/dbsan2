@@ -30,7 +30,6 @@ li {
 	color: white;
 }
 
-
 @media (inverted-colors: inverted) {
 	.background-dark {
 		background: white;
@@ -45,6 +44,7 @@ li {
 		--bs-dark-rgb: 250, 250, 250;
 		--bs-light-rgb: 32, 32, 41;
 	}
+
 	body {
 		background: black;
 		color: white;
@@ -81,7 +81,6 @@ li {
 	.progress {
 		--bs-progress-bg: black
 	}
-	.navbar-dark {
-	--bs-navbar-color: rgb(0, 0, 0, 0.55);
-	}
+	
+		
 }
