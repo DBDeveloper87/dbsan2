@@ -14,66 +14,79 @@
 					.flex.p-2
 						= link_to "View", challenge_participant_path(@challenge, p), class: "btn btn-dark btn-lg"
 				%p Total Raised: #{number_to_currency(p.total_raised)}
+				%p Total Time: #{p.total_time} Minutes
 
 				.row
-					.col-12.col-md-6
+					.col-12.col-md-6.p-4
 						%h3.text-center Fundraising Milestones
 						.row.bg-dark.p-2.text-center.fw-bolder.text-light
 							.col-6
 								Milestone
-							.col-3
+							.col-2
 								Status
-							.col-3
+							.col-2
 								Email
+							.col-2
+								Revoke
 				
 						- @fundraising.each do |f|
 							.row.border.border-dark.p-2
 								.col-6
 									= f.name
-								.col-3.text-center
+								.col-2.text-center
 									- if f.id.in?(p.fms_ids)
 										Earned
 									- elsif p.total_raised >= f.goal
 										= button_to "Eligible", challenge_participant_milestones_path(@challenge, method: :post, participant_milestone: {challenge_milestone_id: f.id, challenge_participant_id: p.id})
 									- else
 										N/A
-								.col-3.text-center
+								.col-2.text-center
 									- if f.id.in?(p.fms_ids)
 										- pm = p.milestones.find_by(challenge_milestone_id: f.id)
 										- if pm.earned_milestone_sent_at.nil?
 											= button_to "Send", challenge_participant_milestone_notify_path(@challenge, pm.id)
 										- else
 											Sent
+								.col-2.text-center
+									- if f.id.in?(p.fms_ids)
+										- pm = p.milestones.find_by(challenge_milestone_id: f.id)
+										= button_to "Revoke", challenge_participant_milestone_path(@challenge, id: pm.id),  method: :delete
 									
-				
-
-					.col-12.col-md-6
+					.col-12.col-md-6.p-4
 						%h3.text-center Exercise Milestones
 						.row.bg-dark.p-2.text-center.fw-bolder.text-light
 							.col-6
 								Milestone
-							.col-3
+							.col-2
 								Status
-							.col-3
+							.col-2
 								Email
+							.col-2
+								Revoke
 				
 						- @exercise.each do |e|
 							.row.border.border-dark.p-2
 								.col-6
 									= e.name
-								.col-3.text-center
+								.col-2.text-center
 									- if e.id.in?(p.ems_ids)
 										Earned
 									- elsif p.total_time >= e.goal
 										= button_to "Eligible", challenge_participant_milestones_path(@challenge, method: :post, participant_milestone: {challenge_milestone_id: e.id, challenge_participant_id: p.id})
 									- else
 										N/A
-								.col-3.text-center
+								.col-2.text-center
 									- if e.id.in?(p.ems_ids)
 										- pm = p.milestones.find_by(challenge_milestone_id: e.id)
 										- if pm.earned_milestone_sent_at.nil?
 											= button_to "Send", challenge_participant_milestone_notify_path(@challenge, pm.id)
 										- else
 											Sent
+								.col-2.text-center
+									- if e.id.in?(p.ems_ids)
+										- pm = p.milestones.find_by(challenge_milestone_id: e.id)
+										= button_to "Revoke", challenge_participant_milestone_path(@challenge, id: pm.id),  method: :delete
+									
+					
 									
 				

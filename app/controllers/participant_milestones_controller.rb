@@ -1,7 +1,7 @@
 class ParticipantMilestonesController < ApplicationController
 	before_action :set_milestone, only: [:send_notification, :accept_or_decline, :thanks]
 	before_action :authenticate_user!, only: [:create, :send_notification, :accept_or_decline, :update, :thanks]
-	before_action :require_admin, only: [:create, :send_notification]
+	before_action :require_admin, only: [:create, :send_notification, :destroy]
 	before_action :check_current_user, only: :accept_or_decline
 	before_action :get_challenge_participant, only: :create
 	before_action :get_milestone, only: :update
@@ -38,6 +38,13 @@ class ParticipantMilestonesController < ApplicationController
 
 	def thanks
 		@name = @participant.first_name
+	end
+
+	def destroy
+		@milestone = ParticipantMilestone.find_by(id: params[:id])
+		@challenge = @milestone.challenge_participant.challenge
+		@milestone.destroy
+		redirect_to challenge_participants_path(@challenge)
 	end
 
 	private
