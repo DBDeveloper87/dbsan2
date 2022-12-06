@@ -61,4 +61,16 @@ class ChallengeParticipant < ApplicationRecord
     return ids
   end
 
+  def ems_ids
+    milestones = self.milestones
+    ids = []
+    milestones.each do |m|
+      if m.challenge_milestone.milestone_type == "Exercise"
+        ids.append(m.challenge_milestone_id)
+      end
+    end
+
+    return ids
+  end
+
 end

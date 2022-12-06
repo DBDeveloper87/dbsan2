@@ -7,6 +7,12 @@ class ChallengeParticipantsController < ApplicationController
 	def index
 		@participants = @challenge.challenge_participants.all.order(last_name: :asc)
 		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
+		@exercise = @challenge.milestones.where(milestone_type: "Exercise").all.order(goal: :asc)
+		@emails = []
+		@participants.each do |p|
+			@emails.append(p.user.email)
+		end
+		@emails = @emails.join(", ")
 	end
 
 	def new

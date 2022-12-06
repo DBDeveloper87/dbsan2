@@ -1,6 +1,10 @@
 .container.pt-4
 	%h1 Participants
 
+	.form-floating
+		%textarea.form-control.border.border-dark{placeholder: "Comma Seperated Email list.", id: "emails", data: {controller: "textarea-autogrow"}} #{@emails}
+		%label{for: "emails"} Comma Seperated Email list.
+
 	- @participants.each do |p|
 		.card.border.border-dark.mb-4.mt-4
 			.card-body
@@ -9,11 +13,10 @@
 						%h2.card-title #{p.last_name}, #{p.first_name}
 					.flex.p-2
 						= link_to "View", challenge_participant_path(@challenge, p), class: "btn btn-dark btn-lg"
-				= p.id
 				%p Total Raised: #{number_to_currency(p.total_raised)}
 
 				.row
-					.col-md-4
+					.col-12.col-md-6
 						%h3.text-center Fundraising Milestones
 						.row.bg-dark.p-2.text-center.fw-bolder.text-light
 							.col-6
@@ -37,6 +40,37 @@
 								.col-3.text-center
 									- if f.id.in?(p.fms_ids)
 										- pm = p.milestones.find_by(challenge_milestone_id: f.id)
+										- if pm.earned_milestone_sent_at.nil?
+											= button_to "Send", challenge_participant_milestone_notify_path(@challenge, pm.id)
+										- else
+											Sent
+									
+				
+
+					.col-12.col-md-6
+						%h3.text-center Exercise Milestones
+						.row.bg-dark.p-2.text-center.fw-bolder.text-light
+							.col-6
+								Milestone
+							.col-3
+								Status
+							.col-3
+								Email
+				
+						- @exercise.each do |e|
+							.row.border.border-dark.p-2
+								.col-6
+									= e.name
+								.col-3.text-center
+									- if e.id.in?(p.ems_ids)
+										Earned
+									- elsif p.total_time >= e.goal
+										= button_to "Eligible", challenge_participant_milestones_path(@challenge, method: :post, participant_milestone: {challenge_milestone_id: e.id, challenge_participant_id: p.id})
+									- else
+										N/A
+								.col-3.text-center
+									- if e.id.in?(p.ems_ids)
+										- pm = p.milestones.find_by(challenge_milestone_id: e.id)
 										- if pm.earned_milestone_sent_at.nil?
 											= button_to "Send", challenge_participant_milestone_notify_path(@challenge, pm.id)
 										- else
