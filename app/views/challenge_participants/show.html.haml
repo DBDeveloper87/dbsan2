@@ -31,7 +31,7 @@
 					$5,000.00
 				Raised
 			.row.p-4
-				= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
+				-# = link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
 			- if @donations.count > 0
 				%h2 My Donors
 				- @unique_emails.each do |e|
@@ -81,7 +81,7 @@
 
 			- if current_user&.id == @participant.user.id
 				.row.mt-4.mb-4.p-4
-					= link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
+					-# = link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
 			- @activities.each do |a|
 				.row.mb-4
 					.col-12.col-md-3
