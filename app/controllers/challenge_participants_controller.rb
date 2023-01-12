@@ -18,6 +18,7 @@ class ChallengeParticipantsController < ApplicationController
 	def shirts
 		@participants = @challenge.challenge_participants.all
 		@small_count = @challenge.challenge_participants.where(shirt_size: "s").count
+		@medium_count = @challenge.challenge_participants.where(shirt_size: "m").count
 	end
 
 
