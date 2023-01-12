@@ -15,6 +15,8 @@
 						= link_to "View", challenge_participant_path(@challenge, p), class: "btn btn-dark btn-lg"
 				%p Total Raised: #{number_to_currency(p.total_raised)}
 				%p Total Time: #{p.total_time} Minutes
+				- unless p.shirt_size.nil?
+					%p Shirt Size: #{p.shirt_size}
 
 				.row
 					.col-12.col-md-6.p-4
