@@ -133,6 +133,7 @@ Rails.application.routes.draw do
   get "donations_success", to: "donations#success"
   get "donations_thank_you", to: "donations#thank_you"
   resources :challenges do
+    get 'shirts', to: 'challenge_participants#shirts'
     resources :participants, controller: "challenge_participants" do
       resources :activities, controller: "exercise_trackers"
     end

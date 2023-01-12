@@ -1,7 +1,7 @@
 class ChallengeParticipantsController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :create]
 	before_action :require_admin, only: :index
-	before_action :get_challenge, only: [:index, :new, :create]
+	before_action :get_challenge, only: [:index, :shirts, :new, :create]
 	before_action :set_participant, only: :show
 
 	def index
@@ -14,6 +14,12 @@ class ChallengeParticipantsController < ApplicationController
 		end
 		@emails = @emails.join(", ")
 	end
+
+	def shirts
+		@participants = @challenge.challenge_participants.all
+		@small_count = @challenge.challenge_participants.where(shirt_size: "s").count
+	end
+
 
 	def new
 		if current_user.id.in?(@challenge.challenge_participants.map { |i| i.user_id})
