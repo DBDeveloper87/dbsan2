@@ -28,7 +28,7 @@
 		
 
 		%h2 Description
-		%p #{@camp.description}
+		%p #{simple_format(@camp.description)}
 
 		%h2 Application Types
 		- if current_user&.admin?
