@@ -3,10 +3,14 @@ class CampsController < ApplicationController
 	before_action :set_camp, only: [:show, :edit, :update, :destroy]
 
 	def index
-		if params[:view] == "all"
+		if params[:view].present?
+			if params[:view] == "all"
+				@camps = Camp.all
+			elsif params[:view] == "current_user"
+				@camps = current_user.camps.all
+			end
+		else
 			@camps = Camp.all
-		elsif params[:view] == "current_user"
-			@camps = current_user.camps.all
 		end
 	end
 
