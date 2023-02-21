@@ -9,7 +9,7 @@
 		= form_with(model: @upload, url: uploads_path) do |f|
 			= f.hidden_field :file_list, data:{uploads_target: "file_list"}
 			= f.hidden_field :for, data:{uploads_target: "for"}
-			= f.hidden_field :for_id, data:{uploads_target: "for_id"}
+			= f.hidden_field :for_id, value: @channel.id, data:{uploads_target: "for_id"}
 			= f.hidden_field :input_id, data:{uploads_target: "inputId"}
 			= f.submit "create", data:{uploads_target: "submit"}
 

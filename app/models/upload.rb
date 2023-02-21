@@ -15,7 +15,8 @@ class Upload < ApplicationRecord
 			videos = []
 			self.file_list.each do |f|
 				video = {
-					title: f[:name].split(".")[0]
+					title: f[:name].split(".")[0],
+					channel_id: self.for_id
 				}
 				videos.append(video)
 			end
