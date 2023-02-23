@@ -10,7 +10,7 @@
 									.align-self-center.text-center
 										.display-6 Awaiting Upload
 						.card-body
-							-#.card-title #{video.title}
+							.card-title #{video.title}
 							.row
-								-#%a.btn.btn-dark.btn-lg.stretched-link{href: edit_video_path(video), data:{turbo:{frame: "content"}}} Edit Details
+								%a.btn.btn-dark.btn-lg.stretched-link{href: edit_video_path(video), data:{turbo:{frame: "content"}}} Edit Details
 

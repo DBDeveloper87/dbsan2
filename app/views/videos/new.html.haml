@@ -16,10 +16,3 @@
 
 %turbo-frame{id: "content"}
 
-= form_with(model: @video) do |f|
-	.form-floating
-		= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"
-		= f.label :title, "Title"
-		.form-group
-		= f.label :original_upload, "Video file"
-		= f.file_field :original_upload, direct_upload: true, onChange: "requestSubmit()"
