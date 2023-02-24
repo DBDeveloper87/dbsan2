@@ -16,10 +16,7 @@
 					.col-auto.col-md-3.col-xl-2.px-sm-2.px-0.bg-dark
 						%turbo-frame{id: "sidebar", data:{turbo:{action: "advance"}}}
 							.d-flex.flex-column.align-items-center.align-items-sm-start.px-3.pt-2.text-white.min-vh-100
-								-#%a.d-flex.align-items-center.pb-3.mb-md-0.me-md-auto.text-white.text-decoration-none{href: products_path(manage: true), data:{turbo:{frame: "content"}}} Products
-								-#%ul.nav.flex-column
-									-#%li.mb-0.nav-item
-										-#%a.text-white.nav-link{href: departments_path(manage: true), data:{turbo:{frame: "content"}}} Departments
+								%a.d-flex.align-items-center.pb-3.mb-md-0.me-md-auto.text-white.text-decoration-none{href: videos_path(manage: true), data:{turbo:{frame: "content"}}} All Videos
 					.col
 						%turbo-frame{id: "right_side", data:{turbo:{action: "advance"}}}
 							= yield
