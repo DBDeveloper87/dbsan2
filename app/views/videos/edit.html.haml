@@ -1,4 +1,7 @@
 %turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
-	.container.pt-4
+	.pt-4
 		%h1 Settings for #{@video.title}
+
+		= form_with(model: @video) do |f|
+			%p Test
 		
