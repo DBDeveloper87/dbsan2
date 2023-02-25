@@ -1,6 +1,7 @@
-- if @channel.name == "ILY by Tricio"
-	= render partial: "videos/ilybytricio", locals: {video: video}
-- else
-	.container-md.mb-4
-		%video{src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%"}
-		%h1.mb-4 #{video.title}	
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	- if @channel.name == "ILY by Tricio"
+		= render partial: "videos/ilybytricio", locals: {video: video}
+	- else
+		.container-md.mb-4
+			%video{src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%"}
+			%h1.mb-4 #{video.title}	
