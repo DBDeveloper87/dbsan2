@@ -1,3 +1,23 @@
-%turbo-frame{id: "content", data:{uploads_target: "contentFrame", turbo:{action: "advance"}}}
-	.container-fluid.pt-4
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.p-4
+		%h1 Video Details
+
+		.row
+			.col-9
+				= form_with(model: video) do |f|
+					.form-floating.mb-4
+						= f.text_field :title, class: "form-control border border-dark", placeholder: "Video Title"
+						= f.label :title, "Video Title"
+					.row
+						= f.submit "Save", class: "btn btn-dark btn-lg"
 		
+			.col-3
+				.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
+					.position-absolute.top-0.start-0.bottom-0.end-0.border.border-dark
+						.row.h-100
+							.align-self-center.text-center
+								.display-6 No Thumbnail Available
+				.card.border.border-dark.mt-4
+					.card-body
+						%h2.card-title Video URL
+						%a{href: video_url(video)} #{video_url(video)}

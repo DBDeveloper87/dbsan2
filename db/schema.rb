@@ -405,6 +405,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.integer "position"
     t.integer "size"
     t.integer "align"
+    t.string "url"
+    t.string "link_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["text_track_id"], name: "index_cue_blocks_on_text_track_id"

@@ -1,13 +1,1 @@
-%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
-	.p-4
-		%h1 Video Details
-
-		.row
-			.col-9
-				= form_with(model: @video) do |f|
-					.form-floating.mb-4
-						= f.text_field :title, class: "form-control border border-dark", placeholder: "Video Title"
-						= f.label :title, "Video Title"
-					.row
-						= f.submit "Save", class: "btn btn-dark btn-lg"
-		
+= render partial: "edit", locals: {video: @video}

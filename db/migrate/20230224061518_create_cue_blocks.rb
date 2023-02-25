@@ -15,6 +15,8 @@ class CreateCueBlocks < ActiveRecord::Migration[7.0]
       t.integer :position
       t.integer :size
       t.integer :align
+      t.string :url
+      t.string :link_text
 
       t.timestamps
     end
