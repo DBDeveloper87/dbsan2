@@ -1,0 +1,42 @@
+%turbo-frame{id: "new_language"}
+	%h3 New Language
+	= form_with(model: [:admin, @language]) do |f|
+		.row
+			.col-12.col-md-6
+				.form-floating.mb-4
+					= f.text_field :name, placeholder: "Name", class: "form-control border border-dark"
+					= f.label :name, "Name"
+			
+			.col-12.col-md-6
+				.form-floating.mb-4
+					= f.text_field :dialect, placeholder: "Dialect", class: "form-control border border-dark"
+					= f.label :dialect, "Dialect"
+		
+		%fieldset.fieldset.border.border-dark.p-2.mb-4
+			%legend Language Type
+
+			.row
+				.d-grid.d-block.mb-2.col-12.col-md-4
+					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "text", false
+					= f.label :lang_type, "Text", value: "text", class: "btn btn-outline-dark btn-lg text-start"
+				.d-grid.d-block.mb-2.col-12.col-md-4
+					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "spoken", false
+					= f.label :lang_type, "Spoken", value: "spoken", class: "btn btn-outline-dark btn-lg text-start"
+				.d-grid.d-block.mb-2.col-12.col-md-4
+					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "signed", false
+					= f.label :lang_type, "Signed", value: "signed", class: "btn btn-outline-dark btn-lg text-start"
+		
+
+		.row
+			.col-12.col-md-6
+				.form-floating.mb-4
+					= f.text_field :short_code, placeholder: "Short Code", class: "form-control border border-dark"
+					= f.label :short_code, "Short Code"
+			.col-12.col-md-6
+				.form-floating.mb-4
+					= f.text_field :long_code, placeholder: "Long Code", class: "form-control border border-dark"
+					= f.label :long_code, "Long Code"
+		
+
+		.row
+			= f.submit "Add Language", class: "btn btn-lg btn-dark"

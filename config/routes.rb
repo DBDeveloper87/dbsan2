@@ -104,6 +104,7 @@ Rails.application.routes.draw do
         end
       end
     end
+    resources :languages
   end
   post 'filter_address', to: 'admin/addresses#filter_address'
   

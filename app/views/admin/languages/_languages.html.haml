@@ -1,0 +1,33 @@
+.row.p-2.bg-dark.text-light
+	.col-9
+		%strong Language
+	.col-1.text-center
+		%strong Text
+	.col-1.text-center
+		%strong Spoken
+	.col-1.text-center
+		%strong Signed
+- languages.each do |l|
+	.row.p-2.border.border-dark
+		.col-9 
+			%span 
+				#{l.name} 
+				- unless l.dialect.nil?
+					(#{l.dialect})
+			%br
+			%span.text-muted 
+				- if l.name.split(" ").include?(["Sign", "Language"])
+					Short: #{l.short_code}
+				- else
+					Short: #{l.short_code.upcase}
+				- unless l.long_code.nil?
+					, Long: #{l.long_code}
+		.col-1.text-center
+			- if l.lang_type.include?("text")
+				%span Yes
+		.col-1.text-center
+			- if l.lang_type.include?("spoken")
+				%span Yes
+		.col-1.text-center
+			- if l.lang_type.include?("signed")
+				%span Yes

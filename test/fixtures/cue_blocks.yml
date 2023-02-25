@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text_track: one
+  cue_num: 1
+  cue_type: 1
+  cue_comment: MyString
+  start: 2023-02-24 00:15:18
+  end: 2023-02-24 00:15:18
+  payload: MyText
+  sdh: false
+  vertical: 1
+  line: 1
+  line_type: 1
+  position: 1
+  size: 1
+  align: 1
+
+two:
+  text_track: two
+  cue_num: 1
+  cue_type: 1
+  cue_comment: MyString
+  start: 2023-02-24 00:15:18
+  end: 2023-02-24 00:15:18
+  payload: MyText
+  sdh: false
+  vertical: 1
+  line: 1
+  line_type: 1
+  position: 1
+  size: 1
+  align: 1

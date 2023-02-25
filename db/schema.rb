@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -390,6 +390,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cue_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "text_track_id", null: false
+    t.integer "cue_num"
+    t.integer "cue_type"
+    t.string "cue_comment"
+    t.time "start"
+    t.time "end"
+    t.text "payload"
+    t.boolean "sdh"
+    t.integer "vertical", default: 0, null: false
+    t.integer "line"
+    t.integer "line_type"
+    t.integer "position"
+    t.integer "size"
+    t.integer "align"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["text_track_id"], name: "index_cue_blocks_on_text_track_id"
+  end
+
   create_table "departments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
@@ -456,6 +476,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_frequently_asked_questions_on_challenge_id"
+  end
+
+  create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "dialect"
+    t.string "lang_type", default: "0", null: false
+    t.string "short_code"
+    t.string "long_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "participant_milestones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -611,6 +641,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
     t.index ["channel_id"], name: "index_surveys_on_channel_id"
   end
 
+  create_table "text_tracks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "video_id", null: false
+    t.string "label"
+    t.uuid "language_id", null: false
+    t.integer "status"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_text_tracks_on_language_id"
+    t.index ["video_id"], name: "index_text_tracks_on_video_id"
+  end
+
   create_table "uploads", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "file_list"
     t.string "for"
@@ -713,6 +755,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
   add_foreign_key "challenge_participants", "users"
   add_foreign_key "channels", "subdomains"
   add_foreign_key "counties", "state_provinces"
+  add_foreign_key "cue_blocks", "text_tracks"
   add_foreign_key "donations", "challenge_participants"
   add_foreign_key "donations", "users"
   add_foreign_key "event_attendees", "events"
@@ -737,6 +780,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_114004) do
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "survey_sections", "surveys"
   add_foreign_key "surveys", "channels"
+  add_foreign_key "text_tracks", "languages"
+  add_foreign_key "text_tracks", "videos"
   add_foreign_key "videos", "channels"
   add_foreign_key "virtual_spaces", "events"
   add_foreign_key "zoom_meetings", "virtual_spaces"

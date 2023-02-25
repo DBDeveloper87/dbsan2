@@ -1,0 +1,10 @@
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.p-4
+		%h2 Languages
+		%a.mb-4.btn.btn-dark.btn-lg{href: new_admin_language_path, data:{turbo:{frame: "new_language"}}} New Language
+
+		%turbo-frame{id: "new_language"}
+
+		%turbo-frame{id: "languages", data:{turbo:{action: "advance"}}}
+			= render partial: "languages", locals: {languages: @languages}
+

@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
-	before_action :set_video, only: :show
+	before_action :set_video, only: [:show, :edit, :update]
 	#layout "channel", only: [:index, :show]
 
 	def index
@@ -25,6 +25,15 @@ class VideosController < ApplicationController
 
 		if @video.save
 			redirect_to video_path(@video)
+		end
+	end
+
+	def update
+		if @video.update(video_params)
+			respond_to do |f|
+				@videos = @channel.videos.all
+				f.turbo_stream
+			end
 		end
 	end
 
