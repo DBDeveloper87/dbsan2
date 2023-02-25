@@ -1,7 +1,8 @@
 class Channels::MyChannelController < ApplicationController
 	before_action :set_channel, only: [:show, :edit, :update]
 	before_action :render_home, only: :show
-
+	before_action :camps, only: :show
+	
 	def edit
 	end
 
@@ -11,7 +12,7 @@ class Channels::MyChannelController < ApplicationController
 			@meta_title = @channel.name
 		end
 		
-		@camps = Camps.all
+		
 	end
 
 	def update
@@ -21,6 +22,10 @@ class Channels::MyChannelController < ApplicationController
 	end
 
 	private
+		def camps
+			@camps = Camp.all
+		end
+
 		def channel_params
 			params.require(:channel).permit(:name, :brand_logo)
 		end

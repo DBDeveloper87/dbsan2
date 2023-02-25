@@ -1,7 +1,7 @@
 - if @channel.name =="ILY by Tricio"
 	= render partial: "channels/my_channel/ilybytricio", locals: {channel: @channel}
 - elsif @channel.name == "DeafBlind Support and Access Network"
-	= render partial: "dbsan"
+	= render partial: "dbsan", locals: {camps: Camp.all}
 - elsif @channel.name == "The Road Without Barriers"
 	= render partial: "trwb", locals: {channel: @channel, meta: @meta_title}
 - else

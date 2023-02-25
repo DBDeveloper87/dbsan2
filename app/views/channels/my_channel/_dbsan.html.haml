@@ -1,10 +1,25 @@
-.container.mt-4
-  .col-md-8.mx-auto
+.container.pt-4
+  .col-8.mx-auto
     %h1.text-center DeafBlind Support and Access Network
 
     %p The DeafBlind Support and Access Network was founded with one simple goal – as a way to connect the DeafBlind community across the US. Since then, it has expanded the programs to educate the mainstream community to DeafBlind people and our culture.
 
     %p At DBSAN, we’re dedicated to making a difference. Since 2020, we have provided support meetings, workshops, panels, and contests. Our goal is simple: is to provide the DeafBlind community with access, education, support, and networking. To do this, we need your help.   
+  .col-8.mx-auto
+    %h2.text-center Camps and Retreats
+    .row.mb-4
+      - camps.each do |camp|
+        .col-6.border.border-dark.p-4
+          - if camp.start.year == 2023
+            %h3 #{link_to camp.title, camp_path(camp)}
+            %p.text-muted From #{camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{camp.end.strftime("%A, %B %d, %Y %l:%M %p (EST)")}
+    
 
+
+  .col-8.mx-auto.text-center
+    %h2 Thank You to our Sponsors
+    .row
+      .col-6.col-md-3.mx-auto
+        %img.w-100{src: "https://storage.googleapis.com/dbsan-public/sponsors/Spectrum_Logo_RGB%20(1).png", alt: "Spectrum"}
     
     
