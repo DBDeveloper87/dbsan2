@@ -486,8 +486,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.string "lang_type", default: "0", null: false
     t.string "short_code"
     t.string "long_code"
+    t.bigint "video_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_languages_on_video_id"
   end
 
   create_table "participant_milestones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -699,6 +701,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "channel_id"
+    t.text "description"
+    t.string "status"
+    t.integer "access"
+    t.integer "visibility"
+    t.boolean "chroma_keyed"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
   end
 
