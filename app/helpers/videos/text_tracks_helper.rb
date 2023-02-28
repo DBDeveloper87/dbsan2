@@ -1,0 +1,2 @@
+module Videos::TextTracksHelper
+end

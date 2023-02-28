@@ -483,7 +483,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "dialect"
-    t.string "lang_type", default: "0", null: false
+    t.boolean "text"
+    t.boolean "spoken"
+    t.boolean "signed"
     t.string "short_code"
     t.string "long_code"
     t.bigint "video_id"
@@ -649,7 +651,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.uuid "video_id", null: false
     t.string "label"
     t.uuid "language_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0, null: false
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

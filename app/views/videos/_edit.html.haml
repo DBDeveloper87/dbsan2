@@ -4,13 +4,96 @@
 
 		.row
 			.col-9
-				= form_with(model: video) do |f|
-					.form-floating.mb-4
-						= f.text_field :title, class: "form-control border border-dark", placeholder: "Video Title"
-						= f.label :title, "Video Title"
-					.row
-						= f.submit "Save", class: "btn btn-dark btn-lg"
+				%turbo-frame{id: "left-side", data:{turbo:{action: "advance"}}}
+					= form_with(model: video) do |f|
+						.input-group.input-group-lg.mb-4
+							.form-floating
+								= f.text_field :title, class: "form-control border border-dark", placeholder: "Video Title"
+								= f.label :title, "Video Title"
+							= f.submit "Save", class: "btn btn-dark"
 		
+					.card.border.border-dark.mb-4
+						.card-body
+							Description
+					.card.border.border-dark.mb-4
+						.card-body
+							Tags
+
+					.row
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Audio
+										
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												%a.heading-6.stretched-link.text-dark.text-decoration-none{href: video_text_tracks_path(video)} Text Tracks
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Aux Tracks
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 People
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Thumbnail
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Playlists
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Clips
+
+						.col-6.col-md-3.mb-4
+							.card.border.border-dark
+								.position-relative.w-100{style: "padding-top: 100%"}
+									.position-absolute.top-0.start-0.bottom-0.end-0
+										.row.h-100
+											.align-self-center.text-center
+												.display-1.bi.bi-music-note-beamed
+												.heading-6 Image Sequences
+
+
 			.col-3
 				.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
 					.position-absolute.top-0.start-0.bottom-0.end-0.border.border-dark

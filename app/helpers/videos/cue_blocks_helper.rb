@@ -1,0 +1,2 @@
+module Videos::CueBlocksHelper
+end

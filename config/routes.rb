@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
     patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
     resources :portfolio, controller: "portfolios"
-    resources :videos
+    resources :videos do
+      resources :text_tracks, controller: "videos/text_tracks"
+      resources :cue_blocks, controller: "videos/cue_blocks"
+    end
     resources :surveys do
       resources :sections, controller: "survey_sections"
       post "sections/new", to: "survey_sections#create"

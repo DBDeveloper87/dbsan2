@@ -25,7 +25,7 @@ class Admin::LanguagesController < Admin::AdminConsoleController
 
 	private
 		def language_params
-			params.require(:language).permit(:name, :dialect, :short_code, :long_code, lang_type: [])
+			params.require(:language).permit(:name, :dialect, :text, :spoken, :signed, :short_code, :long_code)
 		end
 
 		def set_language

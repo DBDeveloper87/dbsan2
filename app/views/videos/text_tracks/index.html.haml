@@ -1,0 +1,28 @@
+%turbo-frame{id: "left-side", data:{turbo:{action: "advance"}}}
+	.bg-dark.text-light.d-flex.mb-4
+		.p-2
+			%a.btn.btn-dark.btn-lg.border.border-light{href: edit_video_path(@video), data:{turbo:{frame: "content"}}} Back
+		.flex-grow-1.p-2.align-self-center
+			%h2 Text Tracks
+		.p-2
+			%a.btn.btn-dark.btn-lg.border.border-light{href: new_video_text_track_path(@video), data:{turbo:{frame: "new_track"}}} New
+
+	%turbo-frame{id: "new_track", data:{turbo:{action: "advance"}}}
+
+	- @tracks.each do |t|
+		.card.border.border-dark.col-12.col-md-6
+			.card-body
+				.card-title #{t.label}
+				.text-muted.mb-4
+					.d-flex.border.border-dark
+						.p-2.flex-grow-1
+							%strong: Language:
+						.p-2.text-end
+							%span #{t.language.name} (#{t.language.dialect})
+					.d-flex.border.border-dark
+						.p-2.flex-grow-1
+							%strong: Language:
+						.p-2.text-end
+							%span #{t.status.titleize}
+				.row
+					%a.btn.btn-dark.btn-lg{href: video_text_track_path(@video, t), data:{turbo:{frame: "_top"}}} View

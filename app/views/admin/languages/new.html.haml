@@ -17,14 +17,16 @@
 
 			.row
 				.d-grid.d-block.mb-2.col-12.col-md-4
-					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "text", false
-					= f.label :lang_type, "Text", value: "text", class: "btn btn-outline-dark btn-lg text-start"
+					= f.check_box :text, { class: "btn-check" }
+					= f.label :text, "Text", class: "btn btn-outline-dark btn-lg text-start"
+				
 				.d-grid.d-block.mb-2.col-12.col-md-4
-					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "spoken", false
-					= f.label :lang_type, "Spoken", value: "spoken", class: "btn btn-outline-dark btn-lg text-start"
+					= f.check_box :spoken, { class: "btn-check" }
+					= f.label :spoken, "Spoken", class: "btn btn-outline-dark btn-lg text-start"
+				
 				.d-grid.d-block.mb-2.col-12.col-md-4
-					= f.check_box :lang_type, { multiple: true, class: "btn-check" }, "signed", false
-					= f.label :lang_type, "Signed", value: "signed", class: "btn btn-outline-dark btn-lg text-start"
+					= f.check_box :signed, { class: "btn-check" }
+					= f.label :signed, "Signed", class: "btn btn-outline-dark btn-lg text-start"
 		
 
 		.row

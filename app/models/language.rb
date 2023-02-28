@@ -1,7 +1,11 @@
 class Language < ApplicationRecord
-	serialize :lang_type
-	before_validation :strip
 	
+
+	before_validation :strip
+	has_one :text_track
+	
+
+
 	private
 		def strip
 			unless self.name.nil?

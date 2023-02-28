@@ -1,0 +1,13 @@
+%turbo-frame{id: "new_track", data:{turbo:{action: "advance"}}}
+	.border.border-dark.p-2
+		%h3 New Text Track
+
+		= form_with(model: [@video, @track]) do |f|
+			.input-group.input-group-lg
+				.form-floating
+					= f.text_field :label, placeholder: "Label", class: "form-control border border-dark"
+					= f.label :label, "Label"
+				.form-floating
+					= f.select :language_id, Language.where(text: true).all.collect { |a| ["#{a.name} (#{a.dialect})", a.id] }, { prompt: "Choose One. . . " },  class: "form-select form-select-lg border border-dark"
+					= f.label :language_id, "Language"
+				= f.submit "Next", class: "btn btn-dark"

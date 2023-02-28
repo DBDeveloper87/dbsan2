@@ -16,18 +16,18 @@
 					(#{l.dialect})
 			%br
 			%span.text-muted 
-				- if l.name.split(" ").include?(["Sign", "Language"])
+				- if l.name.split(" ").include?(["Language"])
 					Short: #{l.short_code}
 				- else
 					Short: #{l.short_code.upcase}
 				- unless l.long_code.nil?
 					, Long: #{l.long_code}
 		.col-1.text-center
-			- if l.lang_type.include?("text")
+			- if l.text?
 				%span Yes
 		.col-1.text-center
-			- if l.lang_type.include?("spoken")
+			- if l.spoken?
 				%span Yes
 		.col-1.text-center
-			- if l.lang_type.include?("signed")
+			- if l.signed?
 				%span Yes

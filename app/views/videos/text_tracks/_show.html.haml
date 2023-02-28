@@ -1,0 +1,50 @@
+%turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
+	.d-flex.bg-dark.border.border-dark.text-light
+		.p-2
+			%a.btn.btn-dark.btn-lg.border.border-light{href: edit_video_path(track.video), style: "border-radius: 50%"}
+				%bi.bi-arrow-left-short.heading-1
+		.flex-grow-1.p-2
+			%h1 Text Track
+		.p-2.border.border-light
+			.text-start
+				%strong Label
+			.text-start
+				#{@track.label}
+		.p-2.border.border-light
+			.text-start
+				%strong Language
+			.text-start
+				#{@track.language.name} (#{track.language.dialect})
+		.p-2.border.border-light
+			.text-start
+				%strong Status
+			.text-start
+				#{@track.status.titleize}
+	.row{style: "max-height: 92vh"}
+		.col-8
+			%turbo-frame{id: "left-side"}
+				%turbo-frame{id: "video_player"}
+					.p-0{style: "max-height: 60vh"}
+						%video{src: "#{track.video.original_upload.url}", preload: "metadata", width: "100%", controls: "true"}
+					- unless track.cue_blocks.empty?
+						.p-2{style: "max-height: 32vh"}
+							%h2 Transcript
+							.p-2.overflow-auto.border.border-dark{style: "max-height: 25vh"}
+								- unless track.cue_blocks.empty?
+									%p
+										- track.cue_blocks.each do |b|
+											- b.payload.each do |p|
+												= p
+		.col-4.overflow-auto{style: "max-height: 92vh"}
+			%turbo-frame{id: "right", data:{turbo:{action: "advance"}}}
+				- if track.cue_blocks.empty?
+					.p-4
+						%p How would you like to begin adding text blocks to this track?
+
+						= form_with(model: [track.video, track]) do |f|
+							.row.image-upload.p-4
+								= f.file_field :file_import, accept: "text/vtt, text/srt", onChange: "requestSubmit()"
+								= f.label :file_import, "Import From File", class: "btn btn-dark btn-lg"
+				- else
+					.p-4
+						= render partial: "videos/cue_blocks/blocks", locals: {blocks: track.cue_blocks}		
