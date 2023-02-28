@@ -1,0 +1,3 @@
+%turbo-frame{id: "blocks", data:{turbo:{action: "advance"}}}
+	- blocks.order(cue_num: :asc).each do |b|
+		= render partial: "videos/cue_blocks/block", locals: {block: b}

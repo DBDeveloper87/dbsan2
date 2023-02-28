@@ -1,0 +1,20 @@
+%turbo-frame{id: "block_#{block.id}", data:{turbo:{action: "advance"}}}
+	.card.border.border-dark.mb-4
+		.card-body
+			.d-flex
+				.card-title.p-2.bg-dark.text-light.text-center{style: "min-width: 15%; max-width: 15%"}
+					%strong #{block.cue_num}
+				.card-title.p-2.flex-grow-1
+					%strong #{block.cue_type.titleize}
+				.pe-1
+					%a.btn.btn-outline-dark.btn-lg{href: edit_video_cue_block_path(block.video, block)}
+						%bi.bi-pencil
+				= render partial: "videos/cue_blocks/more_actions/show_more_actions", locals: {block: block}
+			.d-flex
+				.p-2.flex-grow-1
+					#{block.start.strftime("%H:%M:%S.%L")} to #{block.end.strftime("%H:%M:%S.%L")}
+				- if block.sdh?
+					.p-2.me-4
+						%span.badge.bg-dark SDH
+			- block.payload.each do |p|
+				%p #{p}
