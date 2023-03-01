@@ -37,3 +37,6 @@ application.register('textarea-autogrow', TextareaAutogrow)
 
 import UploadsController from "./uploads_controller"
 application.register("uploads", UploadsController)
+
+import VideoContainerController from "./video_container_controller"
+application.register("video-container", VideoContainerController)
