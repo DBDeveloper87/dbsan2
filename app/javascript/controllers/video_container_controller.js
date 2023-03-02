@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {
   }
 
-  setBackground() {
-  	this.containerTarget.style.background = "red"
+  setBackground({params: { color }}) {
+  	this.containerTarget.style.background = color
   }
 }

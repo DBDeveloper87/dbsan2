@@ -8,4 +8,14 @@
 			%h1.mb-4 #{video.title}	
 			- if video.chroma_keyed?
 				.d-flex
-					%button.btn-dark.btn.btn-lg{type: "button", data:{action: "click->video-container#setBackground"}} Red
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "red"}}}, action: "click->video-container#setBackground"} } Red
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "teal"}}}, action: "click->video-container#setBackground"} } Teal
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "brown"}}}, action: "click->video-container#setBackground"} } Brown
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "black"}}}, action: "click->video-container#setBackground"} } Black
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gray"}}}, action: "click->video-container#setBackground"} } Gray
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "blue"}}}, action: "click->video-container#setBackground"} } Blue
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gold"}}}, action: "click->video-container#setBackground"} } Gold
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "silver"}}}, action: "click->video-container#setBackground"} } Silver
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "purple"}}}, action: "click->video-container#setBackground"} } Purple
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "pink"}}}, action: "click->video-container#setBackground"} } Pink
+					
