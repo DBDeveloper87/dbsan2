@@ -4,8 +4,6 @@ export default class extends Controller {
   static targets = ["video", "container"]
 
   connect() {
-  	alert("Working")
-  	this.videoTarget.playbackRate = 2.0
   }
 
   setBackground() {
