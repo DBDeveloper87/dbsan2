@@ -4,7 +4,7 @@
 	- else
 		.container-md.mb-4{data:{controller: "video-container"}}
 			.container{data:{video:{container:{target: "container"}}}}
-				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%"}
+				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
 			%h1.mb-4 #{video.title}	
 			- if video.chroma_keyed?
 				.d-flex
