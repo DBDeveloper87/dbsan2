@@ -7,6 +7,16 @@
 				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
 			%h1.mb-4 #{video.title}	
 			- if video.chroma_keyed?
+				%h2 Speed
+				.d-flex
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 2.0}}}, action: "click->video-container#setSpeed"} } 2.0x
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 1.0}}}, action: "click->video-container#setSpeed"} } 1.0x
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.5}}}, action: "click->video-container#setSpeed"} } 0.5x
+					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.25}}}, action: "click->video-container#setSpeed"} } 0.25x
+					
+
+				%h2 Solid Backgrounds
 				.d-flex
 					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "red"}}}, action: "click->video-container#setBackground"} } Red
 					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "teal"}}}, action: "click->video-container#setBackground"} } Teal
@@ -19,3 +29,15 @@
 					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "purple"}}}, action: "click->video-container#setBackground"} } Purple
 					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "pink"}}}, action: "click->video-container#setBackground"} } Pink
 					
+
+				%h2 Curtain Backgrounds
+				%p Not yet developed
+
+				%h2 Color Wheel
+				%p If the solid color options we decide on aren't enough for the end user, they can choose it from the color wheel here.
+				.d-flex
+					%label.form-label{for: "colorPicker"} Color Picker
+					%input#colorPicker.form-control.form-control-color{type: "color", data:{video:{container:{target: "wheel", picker:{param: "changed"}}}, action: "input->video-container#setBackground"}}
+
+				%h2 Quality
+				%p Will incorporate once the rendering of speed and framerate is determined.  Available in 480p, 720p, 1080p and 4K, whichever is less than the original upload.  So if one uploads 1080p, then only 720p and 480p will also be produced.

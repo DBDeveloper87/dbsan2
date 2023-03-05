@@ -1,12 +1,21 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["video", "container"]
+  static targets = ["video", "container", "wheel"]
 
   connect() {
   }
 
-  setBackground({params: { color }}) {
-  	this.containerTarget.style.background = color
+  setBackground({params: { color, picker }}) {
+    if (picker === "changed") {
+      this.containerTarget.style.background = this.wheelTarget.value
+    }
+  	else {
+      this.containerTarget.style.background = color
+    }
+  }
+
+  setSpeed({params: { speed }}) {
+    this.videoTarget.playbackRate = speed
   }
 }
