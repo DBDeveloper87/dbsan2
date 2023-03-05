@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_020127) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -542,6 +542,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.index ["product_image_set_id"], name: "index_photos_on_product_image_set_id"
   end
 
+  create_table "playlists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "sort_by"
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "policies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -708,7 +717,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
     t.integer "access"
     t.integer "visibility"
     t.boolean "chroma_keyed"
+    t.uuid "playlist_id"
     t.index ["channel_id"], name: "index_videos_on_channel_id"
+    t.index ["playlist_id"], name: "index_videos_on_playlist_id"
   end
 
   create_table "virtual_spaces", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -794,6 +805,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_24_061518) do
   add_foreign_key "text_tracks", "languages"
   add_foreign_key "text_tracks", "videos"
   add_foreign_key "videos", "channels"
+  add_foreign_key "videos", "playlists"
   add_foreign_key "virtual_spaces", "events"
   add_foreign_key "zoom_meetings", "virtual_spaces"
 end

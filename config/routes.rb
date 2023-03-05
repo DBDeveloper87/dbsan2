@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
     patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
     resources :portfolio, controller: "portfolios"
+    resources :playlists, controller: "videos/playlists"
     resources :videos do
       resources :text_tracks, controller: "videos/text_tracks"
       resources :cue_blocks, controller: "videos/cue_blocks"

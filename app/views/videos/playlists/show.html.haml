@@ -1,0 +1,7 @@
+.container.pt-4
+	%h1 #{@playlist.name}
+
+	%ul
+		- @playlist.videos.each do |v|
+			%li
+				%a{href: video_path(v)} #{v.title}
