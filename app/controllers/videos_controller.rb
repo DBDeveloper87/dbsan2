@@ -2,7 +2,7 @@ class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
 	before_action :set_video, only: [:show, :edit, :update]
-	layout "channel", only: [:show]
+	#layout "channel", only: [:show]
 
 	def index
 		@videos = @channel.videos.all
