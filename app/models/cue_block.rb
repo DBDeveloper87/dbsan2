@@ -1,6 +1,9 @@
 class CueBlock < ApplicationRecord
   belongs_to :text_track
 
+  attribute :current_block
+  attribute :insert_position
+
   serialize :payload
 
   enum :cue_type, { subtitles_and_captions: 0,

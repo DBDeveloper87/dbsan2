@@ -33,8 +33,9 @@
 								- unless track.cue_blocks.empty?
 									%p
 										- track.cue_blocks.each do |b|
-											- b.payload.each do |p|
-												= p
+											- unless b.payload.nil?
+												- b.payload.each do |p|
+													= p
 		.col-4.overflow-auto{style: "max-height: 92vh"}
 			%turbo-frame{id: "right", data:{turbo:{action: "advance"}}}
 				- if track.cue_blocks.empty?
@@ -47,4 +48,4 @@
 								= f.label :file_import, "Import From File", class: "btn btn-dark btn-lg"
 				- else
 					.p-4
-						= render partial: "videos/cue_blocks/blocks", locals: {blocks: track.cue_blocks}		
+						= render partial: "videos/cue_blocks/blocks", locals: {blocks: track.cue_blocks, video: track.video}		

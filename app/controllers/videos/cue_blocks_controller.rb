@@ -1,5 +1,5 @@
 class Videos::CueBlocksController < ApplicationController
-	before_action :set_block, only: [:edit, :update]
+	before_action :set_block, only: [:edit, :update, :destroy]
 
 	def edit
 		@block.start = @block.start.strftime("%H:%M:%S.%L")
@@ -18,12 +18,66 @@ class Videos::CueBlocksController < ApplicationController
 		end
 	end
 
+	def create
+		track = TextTrack.find(create_params[:text_track_id])
+		blocks = track.cue_blocks.order(cue_num: :asc)
+		current_block = create_params[:current_block].to_i - 1
+		length = blocks.length - 1
+		if create_params[:insert_position] == "Above"
+			blocks[current_block..length].each_with_index do |b, i|
+				b.cue_num = b.cue_num + 1
+				b.save
+			end
+		elsif create_params[:insert_position] == "Below"
+			blocks[(current_block + 1)..length].each_with_index do |b, i|
+				b.cue_num = b.cue_num + 1
+				b.save
+			end
+		nd
+
+		@block = CueBlock.create(create_params)
+
+		if @block.save
+			@blocks = track.cue_blocks.order(cue_num: :asc)
+			@video = track.video
+			respond_to do |f|
+				f.turbo_stream
+			end
+		end
+	end
+
+
+	def destroy
+		@blocks = @block.text_track.cue_blocks.order(cue_num: :asc)
+		@video = @block.video
+		if @block.destroy
+			respond_to do |f|
+				update_numbers_after_destroy
+				f.turbo_stream
+			end
+		end
+	end
+
 	private
 		def set_block
 			@block = CueBlock.find(params[:id])
 		end
 
+		def create_params
+			params.require(:cue_block).permit(:text_track_id, :insert_position, :current_block, 
+				:cue_num, :cue_type, :start, :end, :sdh, payload: [])
+		end
+
 		def update_params
 			params.require(:cue_block).permit(:start, :end, :sdh, payload: [])
 		end
+
+		def update_numbers_after_destroy
+			blocks = @block.text_track.cue_blocks.order(cue_num: :asc)
+			blocks.each_with_index do |b, i|
+				b.cue_num = i + 1
+				b.save
+			end
+		end
+
 end
