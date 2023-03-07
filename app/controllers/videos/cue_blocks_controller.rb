@@ -33,7 +33,7 @@ class Videos::CueBlocksController < ApplicationController
 				b.cue_num = b.cue_num + 1
 				b.save
 			end
-		nd
+		end
 
 		@block = CueBlock.create(create_params)
 
