@@ -9,8 +9,8 @@
     %h2.text-center Camps and Retreats
     .row.mb-4
       - camps.each do |camp|
-        .col-6.border.border-dark.p-4
-          - if camp.start.year == 2023
+        - if camp.start.year == 2023
+          .col-6.border.border-dark.p-4
             %h3 #{link_to camp.title, camp_path(camp)}
             %p.text-muted From #{camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{camp.end.strftime("%A, %B %d, %Y %l:%M %p (EST)")}
     
