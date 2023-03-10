@@ -21,15 +21,15 @@ class Videos::CueBlocksController < ApplicationController
 	def create
 		track = TextTrack.find(create_params[:text_track_id])
 		blocks = track.cue_blocks.order(cue_num: :asc)
-		current_block = create_params[:current_block].to_i - 1
+		current_index = create_params[:current_block].to_i - 1
 		length = blocks.length - 1
 		if create_params[:insert_position] == "Above"
-			blocks[current_block..length].each_with_index do |b, i|
+			blocks[current_index..length].each do |b|
 				b.cue_num = b.cue_num + 1
 				b.save
 			end
 		elsif create_params[:insert_position] == "Below"
-			blocks[(current_block + 1)..length].each_with_index do |b, i|
+			blocks[(current_index + 1)..length].each do |b|
 				b.cue_num = b.cue_num + 1
 				b.save
 			end
@@ -73,9 +73,10 @@ class Videos::CueBlocksController < ApplicationController
 		end
 
 		def update_numbers_after_destroy
-			blocks = @block.text_track.cue_blocks.order(cue_num: :asc)
-			blocks.each_with_index do |b, i|
-				b.cue_num = i + 1
+			current_index = @block.cue_num - 1
+			length = @blocks.length - 1
+			@blocks[current_index..length].each do |b|
+				b.cue_num = b.cue_num - 1
 				b.save
 			end
 		end

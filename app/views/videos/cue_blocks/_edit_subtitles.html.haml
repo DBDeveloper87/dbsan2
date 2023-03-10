@@ -15,27 +15,28 @@
 					.form-floating
 						= f.text_field :end, placeholder: "End Time", class: "form-control border border-dark"
 						= f.label :end, "End Time"
-				- block.payload.each_with_index do |p, i|
-					.input-group.input-group-lg.mb-4
-						.form-floating
-							%input.border.border-dark.form-control{id: "cue_block_payload_#{i}", type: "text", placeholder: "Line 1", value: p, name: "cue_block[payload][]"}
-							%label{for: "cue_block_payload_#{i}"} Line #{i + 1}
-						.input-group-text.bg-dark.text-light
-							%span 40
-				- if block.payload.length == 0
-					.input-group.input-group-lg.mb-4
-						.form-floating
-							%input.border.border-dark.form-control{id: "cue_block_payload_1", type: "text", placeholder: "Line 1", name: "cue_block[payload][]"}
-							%label{for: "cue_block_payload_1"} Line 1
-						.input-group-text.bg-dark.text-light
-							%span 76
-				- if block.payload.length <= 1
-					.input-group.input-group-lg.mb-4
-						.form-floating
-							%input.border.border-dark.form-control{id: "cue_block_payload_1", type: "text", placeholder: "Line 2", name: "cue_block[payload][]"}
-							%label{for: "cue_block_payload_2"} Line 2
-						.input-group-text.bg-dark.text-light
-							%span 76
+				- unless block.payload.nil?
+					- block.payload.each_with_index do |p, i|
+						.input-group.input-group-lg.mb-4
+							.form-floating
+								%input.border.border-dark.form-control{id: "cue_block_payload_#{i}", type: "text", placeholder: "Line 1", value: p, name: "cue_block[payload][]"}
+								%label{for: "cue_block_payload_#{i}"} Line #{i + 1}
+							.input-group-text.bg-dark.text-light
+								%span 40
+					- if block.payload.length == 0
+						.input-group.input-group-lg.mb-4
+							.form-floating
+								%input.border.border-dark.form-control{id: "cue_block_payload_1", type: "text", placeholder: "Line 1", name: "cue_block[payload][]"}
+								%label{for: "cue_block_payload_1"} Line 1
+							.input-group-text.bg-dark.text-light
+								%span 76
+					- if block.payload.length <= 1
+						.input-group.input-group-lg.mb-4
+							.form-floating
+								%input.border.border-dark.form-control{id: "cue_block_payload_1", type: "text", placeholder: "Line 2", name: "cue_block[payload][]"}
+								%label{for: "cue_block_payload_2"} Line 2
+							.input-group-text.bg-dark.text-light
+								%span 76
 				.d-grid.d-block.mb-2.col-12
 					= f.check_box :sdh, { class: "btn-check" }
 					= f.label :sdh, "Contains SDH", class: "btn btn-outline-dark btn-lg text-start"

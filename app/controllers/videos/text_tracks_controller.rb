@@ -33,6 +33,7 @@ class Videos::TextTracksController < ApplicationController
 
 				respond_to do |f|
 					@blocks = @track.cue_blocks
+					@video = @track.video
 					f.turbo_stream
 				end
 			end
