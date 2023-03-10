@@ -5,6 +5,9 @@
 		.container-md.mb-4{data:{controller: "video-container"}}
 			.container{data:{video:{container:{target: "container"}}}}
 				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
+					- unless video.text_tracks.empty?
+						- video.text_tracks.each do |track|
+							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
 			%h1.mb-4 #{video.title}	
 			- if video.chroma_keyed?
 				%h2 Speed
