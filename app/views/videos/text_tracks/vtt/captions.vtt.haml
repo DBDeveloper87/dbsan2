@@ -6,5 +6,5 @@ WEBVTT
 	= i + 1
 	= raw(b.start.strftime("%H:%M:%S.%L") + @dash + b.end.strftime("%H:%M:%S.%L"))
 	- b.payload.each do |p|
-		= p
+		= raw(p)
 	= print "\n"
