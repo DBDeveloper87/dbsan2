@@ -1,2 +1,5 @@
 %turbo-frame{id: "block_#{@block.id}", data:{turbo:{action: "advance"}}}
-	= render partial: "videos/cue_blocks/edit_subtitles", locals: {block: @block}	
+	- if @block.cue_type == "subtitles_and_captions"
+		= render partial: "videos/cue_blocks/edit_subtitles", locals: {block: @block}
+	- elsif @block.cue_type == "chapters"
+		= render partial: "videos/cue_blocks/edit_chapter", locals: {block: @block}	

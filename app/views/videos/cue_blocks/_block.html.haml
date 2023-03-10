@@ -17,6 +17,9 @@
 					.p-2.me-4
 						%span.badge.bg-dark SDH
 			
-			- unless block.payload.nil?
-				- block.payload.each do |p|
-					%p #{p}
+			- unless block.cue_type == "paragraph_break"
+				- unless block.payload.nil?
+					- block.payload.each do |p|
+						%p #{p}
+			- else
+				%hr.border.border-dark.border-3.opacity-75.m-3

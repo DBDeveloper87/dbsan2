@@ -1,3 +1,6 @@
 = turbo_stream.update("blocks", partial: "videos/cue_blocks/blocks", locals: {blocks: @blocks, video: @video})
 - if @block.cue_type == "subtitles_and_captions"
 	= turbo_stream.replace("block_#{@block.id}", partial: "videos/cue_blocks/edit_subtitles", locals: {block: @block})
+- elsif @block.cue_type == "chapters"
+	= turbo_stream.replace("block_#{@block.id}", partial: "videos/cue_blocks/edit_chapter", locals: {block: @block})
+= turbo_stream.update("transcript", partial: "videos/text_tracks/transcript", locals: {track: @block.text_track})

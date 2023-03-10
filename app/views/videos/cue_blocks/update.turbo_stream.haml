@@ -1,1 +1,2 @@
-= turbo_stream.update("block_#{@block.id}", partial: "videos/cue_blocks/block", locals: {block: @block})
+= turbo_stream.update("block_#{@block.id}", partial: "videos/cue_blocks/block", locals: {block: @block, video: @video})
+= turbo_stream.update("transcript", partial: "videos/text_tracks/transcript", locals: {track: @block.text_track})

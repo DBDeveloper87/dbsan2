@@ -10,7 +10,8 @@ class CueBlock < ApplicationRecord
                     chapters: 1,
                     visual_descriptions: 2,
                     person_distinctions: 3,
-                    links: 4 }
+                    links: 4,
+                    paragraph_break: 5 }
 
   def video
     self.text_track.video

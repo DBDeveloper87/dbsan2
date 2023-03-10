@@ -1,2 +1,3 @@
 = turbo_stream.remove("block_#{@block.id}")
 = turbo_stream.update("blocks", partial: "videos/cue_blocks/blocks", locals: {blocks: @blocks, video: @video})
+= turbo_stream.update("transcript", partial: "videos/text_tracks/transcript", locals: {track: @block.text_track})

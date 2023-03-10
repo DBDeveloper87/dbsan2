@@ -1,1 +1,2 @@
 = turbo_stream.update("right", partial: "videos/cue_blocks/blocks", locals: {blocks: @blocks, video: @video})
+= turbo_stream.replace("transcript", partial: "videos/text_tracks/transcript", locals: {track: @track})

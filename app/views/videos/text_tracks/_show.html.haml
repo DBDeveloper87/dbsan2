@@ -26,16 +26,7 @@
 				%turbo-frame{id: "video_player"}
 					.p-0{style: "max-height: 60vh"}
 						%video{src: "#{track.video.original_upload.url}", preload: "metadata", width: "100%", controls: "true"}
-					- unless track.cue_blocks.empty?
-						.p-2{style: "max-height: 32vh"}
-							%h2 Transcript
-							.p-2.overflow-auto.border.border-dark{style: "max-height: 25vh"}
-								- unless track.cue_blocks.empty?
-									%p
-										- track.cue_blocks.each do |b|
-											- unless b.payload.nil?
-												- b.payload.each do |p|
-													= p
+					= render partial: "videos/text_tracks/transcript", locals: {track: track}
 		.col-4.overflow-auto{style: "max-height: 92vh"}
 			%turbo-frame{id: "right", data:{turbo:{action: "advance"}}}
 				- if track.cue_blocks.empty?

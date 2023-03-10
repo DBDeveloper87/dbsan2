@@ -13,6 +13,7 @@ class Videos::CueBlocksController < ApplicationController
 
 		if @block.update(update_params)
 			respond_to do |f|
+				@video = @block.video
 				f.turbo_stream
 			end
 		end
@@ -35,9 +36,20 @@ class Videos::CueBlocksController < ApplicationController
 			end
 		end
 
+		if create_params[:cue_type] == "subtitles_and_captions"
+			create_params[:payload] = []
+		end
+
 		@block = CueBlock.create(create_params)
 
 		if @block.save
+			@block.start = @block.start.strftime("%H:%M:%S.%L")
+			@block.end = @block.end.strftime("%H:%M:%S.%L")
+			unless @block.cue_type == "paragraph_break"
+				if @block.payload.nil?
+					@block.payload = []
+				end
+			end
 			@blocks = track.cue_blocks.order(cue_num: :asc)
 			@video = track.video
 			respond_to do |f|

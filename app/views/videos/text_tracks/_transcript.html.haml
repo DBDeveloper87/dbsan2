@@ -1,0 +1,20 @@
+- unless track.cue_blocks.empty?
+	%turbo-frame{id: "transcript", data:{turbo:{action: "advance"}}}
+		.p-2{style: "max-height: 32vh"}
+			%h2 Transcript
+			.p-2.overflow-auto.border.border-dark{style: "max-height: 25vh"}
+				- unless track.cue_blocks.empty?
+					%p
+						- track.cue_blocks.order(cue_num: :asc).each do |b|
+							- if b.cue_type == "subtitles_and_captions"
+								- unless b.payload.nil?
+									- b.payload.each do |p|
+										= p
+							- elsif b.cue_type == "paragraph_break"
+								</p><p>
+							- elsif b.cue_type == "chapters"
+								</p><h3>
+								- unless b.payload.nil?
+									- b.payload.each do |p|
+										= p
+								</h3><p>
