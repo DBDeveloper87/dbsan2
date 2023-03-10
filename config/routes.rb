@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :portfolio, controller: "portfolios"
     resources :playlists, controller: "videos/playlists"
     resources :videos do
-      resources :text_tracks, controller: "videos/text_tracks"
+      resources :text_tracks, controller: "videos/text_tracks" do
+        get "captions", to: "videos/text_tracks#captions"
+      end
       resources :cue_blocks, controller: "videos/cue_blocks"
     end
     resources :surveys do
