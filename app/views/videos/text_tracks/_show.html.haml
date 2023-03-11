@@ -26,7 +26,7 @@
 				%turbo-frame{id: "video_player"}
 					.p-0{style: "max-height: 60vh"}
 						%video{src: "#{track.video.original_upload.url}", preload: "metadata", width: "100%", controls: "true", playsinline: "true"}
-							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
+							%track{kind: "captions", srclang: "en", label: "English", src: video_text_track_captions_url(track.video, track), default: "true"}
 					= render partial: "videos/text_tracks/transcript", locals: {track: track}
 		.col-4.overflow-auto{style: "max-height: 92vh"}
 			%turbo-frame{id: "right", data:{turbo:{action: "advance"}}}
