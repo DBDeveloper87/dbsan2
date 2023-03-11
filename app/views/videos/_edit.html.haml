@@ -92,7 +92,10 @@
 											.align-self-center.text-center
 												.display-1.bi.bi-music-note-beamed
 												.heading-6 Image Sequences
-
+					.row
+						= form_with(model: video) do |f|
+							= f.label :original_upload, "Original Upload File"
+							= f.file_field :original_upload, direct_upload: true, onChange: "requestSubmit()"
 
 			.col-3
 				.position-relative.w-100.bg-dark.text-light{style: "padding-top: 56.25%"}
