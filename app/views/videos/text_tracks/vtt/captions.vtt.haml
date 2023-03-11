@@ -1,10 +1,1 @@
-WEBVTT
-
-= print "\n"
-
-- @blocks.each_with_index do |b, i|
-	= i + 1
-	= raw(b.start.strftime("%H:%M:%S.%L") + @dash + b.end.strftime("%H:%M:%S.%L"))
-	- b.payload.each do |p|
-		= raw(p)
-	= print "\n"
+= raw(@track.captions)

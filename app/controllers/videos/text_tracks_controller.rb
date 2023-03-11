@@ -14,6 +14,11 @@ class Videos::TextTracksController < ApplicationController
 	def show
 	end
 
+	def captions
+		@track = TextTrack.find(params[:text_track_id])
+		render template: 'videos/text_tracks/vtt/captions', layout: 'tracks', formats: [:vtt], content_type: "text/vtt"
+	end
+
 	def create
 		@track = @video.text_tracks.create(create_params)
 
