@@ -14,6 +14,7 @@ class Videos::CueBlocksController < ApplicationController
 		if @block.update(update_params)
 			respond_to do |f|
 				@video = @block.video
+				@block.text_track.create_vtt
 				f.turbo_stream
 			end
 		end
@@ -53,6 +54,7 @@ class Videos::CueBlocksController < ApplicationController
 			@blocks = track.cue_blocks.order(cue_num: :asc)
 			@video = track.video
 			respond_to do |f|
+				@block.text_track.create_vtt
 				f.turbo_stream
 			end
 		end
@@ -65,6 +67,7 @@ class Videos::CueBlocksController < ApplicationController
 		if @block.destroy
 			respond_to do |f|
 				update_numbers_after_destroy
+				@block.text_track.create_vtt
 				f.turbo_stream
 			end
 		end
