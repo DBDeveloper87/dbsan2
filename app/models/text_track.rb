@@ -60,7 +60,7 @@ class TextTrack < ApplicationRecord
   def create_vtt
     captions = self.cue_blocks.where(cue_type: "subtitles_and_captions").all.order(cue_num: :asc)
     vtt = ["WEBVTT\n\n"]
-    captions.each_with_index do |b, i|
+    captions[0..10].each_with_index do |b, i|
       vtt.append("#{i + 1}\n")
       vtt.append("#{b.start.strftime('%H:%M:%S.%L')} --> #{b.end.strftime('%H:%M:%S.%L')}\n")
       unless b.payload.nil?
