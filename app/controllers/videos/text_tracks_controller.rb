@@ -14,13 +14,6 @@ class Videos::TextTracksController < ApplicationController
 	def show
 	end
 
-	def captions
-		@track = TextTrack.find(params[:text_track_id])
-		@blocks = @track.cue_blocks.where(cue_type: "subtitles_and_captions").all.order(cue_num: :asc)
-		@dash = " --> "
-		render template: 'videos/text_tracks/vtt/captions', layout: 'tracks', formats: [:vtt], content_type: "text/vtt"
-	end
-
 	def create
 		@track = @video.text_tracks.create(create_params)
 
@@ -37,6 +30,7 @@ class Videos::TextTracksController < ApplicationController
 			
 			if @track.update(update_params)
 				@track.process_import(@file)
+				@track.create_vtt
 
 				respond_to do |f|
 					@blocks = @track.cue_blocks

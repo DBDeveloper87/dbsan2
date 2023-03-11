@@ -3,7 +3,7 @@ class TextTrack < ApplicationRecord
   belongs_to :language
   has_many :cue_blocks
   attribute :file_import
-
+  
   enum :status, { draft: 0, published: 0 }
 
   def process_import(file)
@@ -55,5 +55,23 @@ class TextTrack < ApplicationRecord
         sdh: false
       ])
     end
+  end
+
+  def create_vtt
+    captions = self.cue_blocks.where(cue_type: "subtitles_and_captions").all.order(cue_num: :asc)
+    vtt = ["WEBVTT\n\n"]
+    captions.each_with_index do |b, i|
+      vtt.append("#{i + 1}\n")
+      vtt.append("#{b.start.strftime('%H:%M:%S.%L')} --> #{b.end.strftime('%H:%M:%S.%L')}\n")
+      unless b.payload.nil?
+        b.payload.each do |p|
+          vtt.append("#{p}\n")
+        end
+      end
+      vtt.append("\n")
+    end
+
+    self.captions = vtt.join("")
+    self.save
   end
 end
