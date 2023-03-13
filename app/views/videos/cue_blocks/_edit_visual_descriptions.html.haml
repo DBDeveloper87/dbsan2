@@ -16,10 +16,10 @@
 						.form-floating.mb-4
 							%textarea.border.border-dark.form-control{id: "cue_block_payload_0", placeholder: "Visual Description", name: "cue_block[payload][]", data:{controller: "textarea-autogrow"}} #{p}
 							%label{for: "cue_block_payload_0"} Visual Description
-					- else
-						.form-floating.mb-4
-							%textarea.border.border-dark.form-control{id: "cue_block_payload_0", placeholder: "Visual Description", name: "cue_block[payload][]", data:{controller: "textarea-autogrow"}}
-							%label{for: "cue_block_payload_0"} Visual Description
+				- else
+					.form-floating.mb-4
+						%textarea.border.border-dark.form-control{id: "cue_block_payload_0", placeholder: "Visual Description", name: "cue_block[payload][]", data:{controller: "textarea-autogrow"}}
+						%label{for: "cue_block_payload_0"} Visual Description
 					
 				.form-floating.mb-4
 					= f.text_area :synthesize_text, placeholder: "Synthesize Text to Speech", class: "border border-dark form-control", data:{controller: "textarea-autogrow"}
