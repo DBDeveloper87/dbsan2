@@ -5,8 +5,10 @@ class Videos::CueBlocksController < ApplicationController
 		@block.start = @block.start.strftime("%H:%M:%S.%L")
 		@block.end = @block.end.strftime("%H:%M:%S.%L")
 		if @block.cue_type == "visual_descriptions"
-			if @block.synthesize_text.nil?
-				@block.synthesize_text = @block.payload.join(" ")
+			unless @block.payload.nil?
+				if @block.synthesize_text.nil?
+					@block.synthesize_text = @block.payload.join(" ")
+				end
 			end
 		end
 	end
