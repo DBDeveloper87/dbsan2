@@ -3,3 +3,5 @@
 		= render partial: "videos/cue_blocks/edit_subtitles", locals: {block: @block}
 	- elsif @block.cue_type == "chapters"
 		= render partial: "videos/cue_blocks/edit_chapter", locals: {block: @block}	
+	- elsif @block.cue_type == "visual_descriptions"
+		= render partial: "videos/cue_blocks/edit_visual_descriptions", locals: {block: @block}	

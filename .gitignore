@@ -42,3 +42,12 @@
 /config/certs
 /config/credentials/video_processor.key
 /video_processor.sh
+
+# Ignore synthesize test files
+request.json
+response.json
+synthesize-output-base64.txt
+synthesize-output-audio.mp3
+synthesize-output-audio-ruby.mp3
+synthesize-output-audio_female.mp3
+base64_commands.txt

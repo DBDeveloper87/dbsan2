@@ -8,21 +8,13 @@
 					%strong #{block.cue_type.titleize}
 				-#= render partial: "videos/cue_blocks/more_actions/show_more_actions", locals: {block: block}
 			= form_with(model: [block.video, block]) do |f|
-				.input-group.input-group-lg.mb-4
-					.form-floating
-						= f.text_field :start, placeholder: "Start Time", class: "form-control border border-dark"
-						= f.label :start, "Start Time"
-					.form-floating
-						= f.text_field :end, placeholder: "End Time", class: "form-control border border-dark"
-						= f.label :end, "End Time"
+				.form-floating
+					= f.text_field :start, placeholder: "Start Time", class: "form-control border border-dark"
+					= f.label :start, "Timestamp"
 				- unless block.payload.nil?
 					- block.payload.each do |p|
 						.form-floating
 							%input.border.border-dark.form-control{id: "cue_block_payload_#{i}", type: "text", placeholder: "Chapter Title", value: p, name: "cue_block[payload][]"}
 							%label{for: "cue_block_payload_#{i}"} Chapter Title
-					- if block.payload.length == 0
-						.form-floating
-							%input.border.border-dark.form-control{id: "cue_block_payload_1", type: "text", placeholder: "Chapter Title", name: "cue_block[payload][]"}
-							%label{for: "cue_block_payload_1"} Chapter Title
 				.row.p-2
 					%input.btn.btn-dark.btn-lg{type: "submit", value: "Save"}

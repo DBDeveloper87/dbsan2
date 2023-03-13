@@ -1,0 +1,27 @@
+%turbo-frame{id: "block_#{block.id}", data:{turbo:{action: "advance"}}}
+	.card.border.border-dark.mb-4
+		.card-body
+			.d-flex.mb-4
+				.p-2.bg-dark.text-light.text-center{style: "min-width: 15%; max-width: 15%"}
+					%strong #{block.cue_num}
+				.p-2.flex-grow-1
+					%strong #{block.cue_type.titleize}
+				-#= render partial: "videos/cue_blocks/more_actions/show_more_actions", locals: {block: block}
+			= form_with(model: [block.video, block]) do |f|
+				.form-floating.mb-4
+					= f.text_field :start, placeholder: "Start Time", class: "form-control border border-dark"
+					= f.label :start, "Start Time"
+				- block.payload.each do |p|
+					.form-floating.mb-4
+						%textarea.border.border-dark.form-control{id: "cue_block_payload_0", placeholder: "Visual Description", name: "cue_block[payload][]", data:{controller: "textarea-autogrow"}} #{p}
+						%label{for: "cue_block_payload_0"} Visual Description
+				.form-floating.mb-4
+					= f.text_area :synthesize_text, placeholder: "Synthesize Text to Speech", class: "border border-dark form-control", data:{controller: "textarea-autogrow"}
+					= f.label :synthesize_text, "Synthesize Text to Speech"
+					%span.text-muted.mb-1 This is the text that will be sent to the Google Cloud Text to Speech API to generate the audio clip.  It may differ slightly from the Visual Description to get it to pronounce correctly such as abbrievations.
+				.form-floating.mb-4
+					= f.text_area :ssml, placeholder: "Synthesize Speech Markup Language (SSML)", class: "border border-dark form-control", data:{controller: "textarea-autogrow"}
+					= f.label :ssml, "Synthesize Speech Markup Language (SSML)"
+					%span.text-muted.mb-1 Alternatively, for greater precision, we can send a SSML string to the API.  Note that Studio voices currently does not support this input method.
+				.row.p-2
+					%input.btn.btn-dark.btn-lg{type: "submit", value: "Save"}

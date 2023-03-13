@@ -23,3 +23,9 @@
 						%p #{p}
 			- else
 				%hr.border.border-dark.border-3.opacity-75.m-3
+
+			- if block.cue_type == "visual_descriptions"
+				- unless block.synthesize_speech_clips.empty?
+					- block.synthesize_speech_clips.each do |s|
+						%p #{s.ssml_gender.titleize} (#{s.voice_name.split("-")[2]})
+						%audio{controls: "true", src: url_for(s.audio_file)}

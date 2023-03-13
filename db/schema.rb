@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_043018) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_014014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -409,6 +409,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_043018) do
     t.string "link_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "synthesize_text"
+    t.text "ssml"
     t.index ["text_track_id"], name: "index_cue_blocks_on_text_track_id"
   end
 
@@ -656,6 +658,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_043018) do
     t.index ["channel_id"], name: "index_surveys_on_channel_id"
   end
 
+  create_table "synthesize_speech_clips", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "language_id"
+    t.string "language_code"
+    t.string "voice_name"
+    t.integer "ssml_gender"
+    t.text "encoded_text"
+    t.uuid "cue_block_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cue_block_id"], name: "index_synthesize_speech_clips_on_cue_block_id"
+    t.index ["language_id"], name: "index_synthesize_speech_clips_on_language_id"
+  end
+
   create_table "text_tracks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.string "label"
@@ -803,6 +818,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_043018) do
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "survey_sections", "surveys"
   add_foreign_key "surveys", "channels"
+  add_foreign_key "synthesize_speech_clips", "cue_blocks"
+  add_foreign_key "synthesize_speech_clips", "languages"
   add_foreign_key "text_tracks", "languages"
   add_foreign_key "text_tracks", "videos"
   add_foreign_key "videos", "channels"

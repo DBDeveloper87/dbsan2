@@ -2,6 +2,7 @@ class TextTrack < ApplicationRecord
   belongs_to :video
   belongs_to :language
   has_many :cue_blocks, dependent: :destroy
+  has_many :synthesize_speech_clips, through: :cue_blocks, dependent: :destroy
   attribute :file_import
   
   enum :status, { draft: 0, published: 0 }
@@ -9,7 +10,7 @@ class TextTrack < ApplicationRecord
   def process_import(file)
     blocks = file.split(/\r\n\r\n|\n\n/).map{ |s| s.split(/\r\n|\n/) }
 
-    if blocks[0].map { |a| a[0] == "WEBVTT" } then
+    if blocks[0].include?("WEBVTT")
       blocks.shift
     end
 
@@ -26,25 +27,25 @@ class TextTrack < ApplicationRecord
       end
 
       if timeline == 0
+        if block[0].include?(",")
+          block[0] = block[0].gsub(",", ".")
+        end
+
         sections = block[0].split(" ")
         start_time = sections[0]
         end_time = sections[2]
         payload = block.slice(1, length)
       else
+        if block[1].include?(",")
+          block[1] = block[1].gsub(",", ".")
+        end
+
         sections = block[1].split(" ")
         start_time = sections[0]
         end_time = sections[2]
         payload = block.slice(2, length)
       end
 
-      if start_time.include?(",")
-        start_time = start_time.gsub(",", ".")
-      end
-
-      if end_time.include?(",")
-        end_time = start_time.gsub(",", ".")
-      end
-          
       cue = self.cue_blocks.create([
         cue_num: cue_num,
         cue_type: 0,

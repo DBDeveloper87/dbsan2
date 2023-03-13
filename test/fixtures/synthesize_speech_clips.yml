@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  language: one
+  language_code: MyString
+  voice_name: MyString
+  ssml_gender: 1
+  encoded_text: MyText
+  cue_block: one
+
+two:
+  language: two
+  language_code: MyString
+  voice_name: MyString
+  ssml_gender: 1
+  encoded_text: MyText
+  cue_block: two

@@ -18,3 +18,11 @@
 									- b.payload.each do |p|
 										= p
 								</h3><p>
+							- elsif b.cue_type == "visual_descriptions"
+								</p><div class="border border-dark p-1 ps-0 mt-4 mb-4" style=" border-top-left-radius: 10px">
+								<span class="bg-dark text-light p-2" style="border-top-left-radius: 10px">VD:</span>
+								<p class="m-4">
+								- unless b.payload.nil?
+									- b.payload.each do |p|
+										= p
+								</p></div><p>

@@ -7,14 +7,11 @@
 		%li.mb-0
 			= button_to "Subtitle or Caption", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Above", current_block: block.cue_num, cue_num: block.cue_num, cue_type: "subtitles_and_captions", start: block.start, end: block.start }), class: "btn btn-outline-dark btn-lg dropdown-item"
 		%li.mb-0
-			= button_to "Chapter", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Above", current_block: block.cue_num, cue_num: block.cue_num, cue_type: "chapters", start: block.start, end: block.start }), class: "btn btn-outline-dark btn-lg dropdown-item"
-			
-			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Chapter	
+			= button_to "Chapter", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Above", current_block: block.cue_num, cue_num: block.cue_num, cue_type: "chapters", start: block.start, end: block.start }), class: "btn btn-outline-dark btn-lg dropdown-item"	
 		-#%li.mb-0
 			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Person Distinction
-		-#%li.mb-0
-			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Visual Description
-			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Paragraph Break
+		%li.mb-0
+			= button_to "Visual Description", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Above", current_block: block.cue_num, cue_num: block.cue_num, cue_type: "visual_descriptions", start: block.start, end: block.start }), class: "btn btn-outline-dark btn-lg dropdown-item"	
 		%li.mb-0
 			%hr.dropdown-divider
 		%li.mb-0
@@ -22,13 +19,11 @@
 		%li.mb-0
 			= button_to "Subtitle or Caption", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Below", current_block: block.cue_num, cue_num: block.cue_num + 1, cue_type: "subtitles_and_captions", start: block.end, end: block.end }), class: "btn btn-outline-dark btn-lg dropdown-item"
 		%li.mb-0
-			= button_to "Chapter", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Below", current_block: block.cue_num, cue_num: block.cue_num + 1, cue_type: "chapters", start: block.end, end: block.end }), class: "btn btn-outline-dark btn-lg dropdown-item"
-			
-			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Chapter	
+			= button_to "Chapter", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Below", current_block: block.cue_num, cue_num: block.cue_num + 1, cue_type: "chapters", start: block.end, end: block.end }), class: "btn btn-outline-dark btn-lg dropdown-item"	
 		-#%li.mb-0
 			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Person Distinction
-		-#%li.mb-0
-			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Visual Description
+		%li.mb-0
+			= button_to "Visual Description", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Below", current_block: block.cue_num, cue_num: block.cue_num + 1, cue_type: "visual_descriptions", start: block.end, end: block.end }), class: "btn btn-outline-dark btn-lg dropdown-item"	
 		%li.mb-0
 			= button_to "Paragraph Break", video_cue_blocks_path(video, cue_block: { text_track_id: block.text_track.id, insert_position: "Below", current_block: block.cue_num, cue_num: block.cue_num + 1, cue_type: "paragraph_break", start: block.start, end: block.start }), class: "btn btn-outline-dark btn-lg dropdown-item"
 			-#%a.btn.btn-outline-dark.btn-lg.dropdown-item{href: "#"} Paragraph Break

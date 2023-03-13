@@ -3,4 +3,6 @@
 	= turbo_stream.replace("block_#{@block.id}", partial: "videos/cue_blocks/edit_subtitles", locals: {block: @block})
 - elsif @block.cue_type == "chapters"
 	= turbo_stream.replace("block_#{@block.id}", partial: "videos/cue_blocks/edit_chapter", locals: {block: @block})
+- elsif @block.cue_type == "visual_descriptions"
+	= turbo_stream.replace("block_#{@block.id}", partial: "videos/cue_blocks/edit_visual_descriptions", locals: {block: @block})	
 = turbo_stream.update("transcript", partial: "videos/text_tracks/transcript", locals: {track: @block.text_track})

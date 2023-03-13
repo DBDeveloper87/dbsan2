@@ -4,12 +4,25 @@ class Videos::CueBlocksController < ApplicationController
 	def edit
 		@block.start = @block.start.strftime("%H:%M:%S.%L")
 		@block.end = @block.end.strftime("%H:%M:%S.%L")
+		if @block.cue_type == "visual_descriptions"
+			if @block.synthesize_text.nil?
+				@block.synthesize_text = @block.payload.join(" ")
+			end
+		end
 	end
 
 	def update
 		update_params[:start] = Time.zone.strptime(update_params[:start], "%H:%M:%S.%L")
-		update_params[:end] = Time.zone.strptime(update_params[:end], "%H:%M:%S.%L")
-		update_params[:payload] = update_params[:payload].reject { |e| e.empty? }
+		unless update_params[:end].nil?
+			update_params[:end] = Time.zone.strptime(update_params[:end], "%H:%M:%S.%L")
+		end
+		unless @block.cue_type == "paragraph_break"
+			unless update_params[:payload].nil?
+				update_params[:payload] = update_params[:payload].reject { |e| e.empty? }
+			else
+				update_params[:payload] = []
+			end
+		end
 
 		if @block.update(update_params)
 			respond_to do |f|
@@ -37,22 +50,18 @@ class Videos::CueBlocksController < ApplicationController
 			end
 		end
 
-		if create_params[:cue_type] == "subtitles_and_captions"
-			create_params[:payload] = []
-		end
-
 		@block = CueBlock.create(create_params)
 
 		if @block.save
 			@block.start = @block.start.strftime("%H:%M:%S.%L")
 			@block.end = @block.end.strftime("%H:%M:%S.%L")
+			@blocks = track.cue_blocks.order(cue_num: :asc)
+			@video = track.video
 			unless @block.cue_type == "paragraph_break"
 				if @block.payload.nil?
 					@block.payload = []
 				end
 			end
-			@blocks = track.cue_blocks.order(cue_num: :asc)
-			@video = track.video
 			respond_to do |f|
 				@block.text_track.create_vtt
 				f.turbo_stream
@@ -84,7 +93,7 @@ class Videos::CueBlocksController < ApplicationController
 		end
 
 		def update_params
-			params.require(:cue_block).permit(:start, :end, :sdh, payload: [])
+			params.require(:cue_block).permit(:start, :end, :sdh, :synthesize_text, :ssml, payload: [])
 		end
 
 		def update_numbers_after_destroy
