@@ -36,7 +36,17 @@
 			%p Your browser currently supports the following voices for SpeechSynthesis API
 			%ul#voices
 			:javascript
-				const voices = window.speechSynthesis.getVoices()
+				console.log("Hello World")
+				speechSynthesis.addEventListener("voiceschanged", () => {
+					const voices = speechSynthesis.getVoices()
+					voices.forEach((v) => {
+						var list = document.getElementById("voices")
+						const item = document.createElement("li")
+						item.innerText = "Language Code: " + v.lang + ", Voice Name: " + v.name
+						list.appendChild(item)
+					})
+				})
+				const voices = speechSynthesis.getVoices()
 				voices.forEach((v) => {
 					var list = document.getElementById("voices")
 					const item = document.createElement("li")
