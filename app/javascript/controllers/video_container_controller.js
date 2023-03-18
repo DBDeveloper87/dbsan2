@@ -178,9 +178,15 @@ export default class extends Controller {
     if (this.fsButtonIconTarget.classList.contains("bi-fullscreen")) {
       this.fsButtonIconTarget.classList.remove("bi-fullscreen")
       this.fsButtonIconTarget.classList.add("bi-fullscreen-exit")
+      this.fsButtonTarget.setAttribute("title", "Exit Fullscreen (f)")
+      const tooltip = bootstrap.Tooltip.getInstance('#fsButton')
+      tooltip.setContent({".tooltip-inner": "Exit Fullscreen (f)"})
     } else {
       this.fsButtonIconTarget.classList.add("bi-fullscreen")
       this.fsButtonIconTarget.classList.remove("bi-fullscreen-exit")
+      this.fsButtonTarget.setAttribute("title", "Enter Fullscreen (f)")
+      const tooltip = bootstrap.Tooltip.getInstance('#fsButton')
+      tooltip.setContent({".tooltip-inner": "Enter Fullscreen (f)"})
     }
   }
 }
