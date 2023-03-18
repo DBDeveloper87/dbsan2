@@ -156,9 +156,11 @@ export default class extends Controller {
     if (this.castButtonTarget.classList.contains("btn-dark")) {
       this.castButtonTarget.classList.remove("btn-dark")
       this.castButtonTarget.classList.add("btn-light")
+      this.castButtonTarget.setAttribute("aria-pressed", "true")
     } else {
       this.castButtonTarget.classList.add("btn-dark")
       this.castButtonTarget.classList.remove("btn-light")
+      this.castButtonTarget.setAttribute("aria-pressed", "false")
     }
   }
 
