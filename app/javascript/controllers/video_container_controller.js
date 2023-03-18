@@ -67,14 +67,12 @@ export default class extends Controller {
       this.playButtonTarget.setAttribute("title", "Pause (k)")
       const tooltip = bootstrap.Tooltip.getInstance('#playButton')
       tooltip.setContent({".tooltip-inner": "Pause (k)"})
-      this.playButton.setAttribute("aria-label", "Pause (k)")
     } else {
       this.playButtonIconTarget.classList.add("bi-play-fill")
       this.playButtonIconTarget.classList.remove("bi-pause-fill")
       this.playButtonTarget.setAttribute("title", "Play (k)")
       const tooltip = bootstrap.Tooltip.getInstance('#playButton')
       tooltip.setContent({".tooltip-inner": "Play (k)"})
-      this.playButton.setAttribute("aria-label", "Play (k)")
     }
   }
 
