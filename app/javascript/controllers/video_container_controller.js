@@ -119,12 +119,12 @@ export default class extends Controller {
       this.ccButtonTarget.classList.remove("btn-dark")
       this.ccButtonTarget.classList.add("btn-light")
       this.ccButtonTarget.classList.add("fw-bolder")
-      this.ccButtonTarget.setAttribute("aria-checked", "true")
+      this.ccButtonTarget.setAttribute("aria-pressed", "true")
     } else {
       this.ccButtonTarget.classList.add("btn-dark")
       this.ccButtonTarget.classList.remove("btn-light")
       this.ccButtonTarget.classList.remove("fw-bolder")
-      this.ccButtonTarget.setAttribute("aria-checked", "false")
+      this.ccButtonTarget.setAttribute("aria-pressed", "false")
     }
   }
 
