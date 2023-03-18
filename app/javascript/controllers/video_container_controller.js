@@ -1,9 +1,50 @@
 import { Controller } from "@hotwired/stimulus"
+import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
-  static targets = ["video", "container", "wheel"]
+  static targets = ["video", "container", "playButton", "playButtonIcon", "currentTime", 
+    "duration", "ccButton", "adButton", "settingsButton", "castButton", "pipButton",
+     "pipButtonIcon", "fsButton", "fsButtonIcon", "wheel"]
 
   connect() {
+    this.tooltips()
+    this.keyboard()
+
+    this.videoTarget.addEventListener("timeupdate", (event) => {
+      this.displayCurrentTime()
+    })
+
+    this.videoTarget.addEventListener("loadedmetadata", (event) => {
+      this.displayDuration()
+    })
+    
+  }
+
+  tooltips() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  }
+
+  keyboard() {
+    document.addEventListener("keydown", (event) => {
+      if (event.key == "k") {
+        this.playPause()
+      } else if (event.key == "c") {
+        this.toggleCC()
+      } else if (event.key == "a") {
+        this.toggleAD()
+      } else if (event.key == "s") {
+        this.toggleSettings()
+      } else if (event.key == "C") {
+        this.toggleCast()
+      } else if (event.key == "p") {
+        this.togglePip()
+      } else if (event.key == "f") {
+        this.toggleFs()
+      }
+    })
   }
 
   setBackground({params: { color, picker }}) {
@@ -17,5 +58,125 @@ export default class extends Controller {
 
   setSpeed({params: { speed }}) {
     this.videoTarget.playbackRate = speed
+  }
+
+  playPause() {
+    if (this.playButtonIconTarget.classList.contains("bi-play-fill")) {
+      this.playButtonIconTarget.classList.remove("bi-play-fill")
+      this.playButtonIconTarget.classList.add("bi-pause-fill")
+      this.playButtonTarget.setAttribute("title", "Pause (k)")
+      const tooltip = bootstrap.Tooltip.getInstance('#playButton')
+      tooltip.setContent({".tooltip-inner": "Pause (k)"})
+    } else {
+      this.playButtonIconTarget.classList.add("bi-play-fill")
+      this.playButtonIconTarget.classList.remove("bi-pause-fill")
+      this.playButtonTarget.setAttribute("title", "Play (k)")
+      const tooltip = bootstrap.Tooltip.getInstance('#playButton')
+      tooltip.setContent({".tooltip-inner": "Play (k)"})
+    }
+  }
+
+  displayCurrentTime() {
+    const currentTime = Math.trunc(this.videoTarget.currentTime)
+    const hours = Math.trunc(currentTime / 3600)
+    const minutes = Math.trunc((currentTime - (hours * 3600)) / 60)
+    const seconds = Math.trunc(currentTime - (hours * 3600) - (minutes * 60))
+    let sec_string = seconds.toString()
+    if (seconds < 10) {
+      sec_string = "0" + seconds.toString()
+    }
+
+    if (hours > 0) {
+      this.currentTimeTarget.datetime = "PT" + hours.toString() + "H" + minutes.toString() + "M" + seconds.toString()
+      this.currentTimeTarget.innerText = hours.toString() + ":" + minutes.toString() + ":" + sec_string
+    } else {
+      this.currentTimeTarget.datetime = "PT" + minutes.toString() + "M" + seconds.toString()
+      this.currentTimeTarget.innerText = minutes.toString() + ":" + sec_string
+    }
+  }
+
+  displayDuration() {
+    const duration = Math.trunc(this.videoTarget.duration)
+    const hours = Math.trunc(duration / 3600)
+    const minutes = Math.trunc((duration - (hours * 3600)) / 60)
+    const seconds = Math.trunc(duration - (hours * 3600) - (minutes * 60))
+    let sec_string = seconds.toString()
+    if (seconds < 10) {
+      sec_string = "0" + seconds.toString()
+    }
+
+    if (hours > 0) {
+      this.durationTarget.datetime = "PT" + hours.toString() + "H" + minutes.toString() + "M" + seconds.toString()
+      this.durationTarget.innerText = hours.toString() + ":" + minutes.toString() + ":" + sec_string
+    } else {
+      this.durationTarget.datetime = "PT" + minutes.toString() + "M" + seconds.toString()
+      this.durationTarget.innerText = minutes.toString() + ":" + sec_string
+    }
+  }
+
+  toggleCC() {
+    if (this.ccButtonTarget.classList.contains("btn-dark")) {
+      this.ccButtonTarget.classList.remove("btn-dark")
+      this.ccButtonTarget.classList.add("btn-light")
+      this.ccButtonTarget.classList.add("fw-bolder")
+      this.ccButtonTarget.setAttribute("aria-checked", "true")
+    } else {
+      this.ccButtonTarget.classList.add("btn-dark")
+      this.ccButtonTarget.classList.remove("btn-light")
+      this.ccButtonTarget.classList.remove("fw-bolder")
+      this.ccButtonTarget.setAttribute("aria-checked", "false")
+    }
+  }
+
+  toggleAD() {
+    if (this.adButtonTarget.classList.contains("btn-dark")) {
+      this.adButtonTarget.classList.remove("btn-dark")
+      this.adButtonTarget.classList.add("btn-light")
+      this.adButtonTarget.classList.add("fw-bolder")
+    } else {
+      this.adButtonTarget.classList.add("btn-dark")
+      this.adButtonTarget.classList.remove("btn-light")
+      this.adButtonTarget.classList.remove("fw-bolder")
+    }
+  }
+
+  toggleSettings() {
+    if (this.settingsButtonTarget.classList.contains("btn-dark")) {
+      this.settingsButtonTarget.classList.remove("btn-dark")
+      this.settingsButtonTarget.classList.add("btn-light")
+    } else {
+      this.settingsButtonTarget.classList.add("btn-dark")
+      this.settingsButtonTarget.classList.remove("btn-light")
+    }
+  }
+
+  toggleCast() {
+    if (this.castButtonTarget.classList.contains("btn-dark")) {
+      this.castButtonTarget.classList.remove("btn-dark")
+      this.castButtonTarget.classList.add("btn-light")
+    } else {
+      this.castButtonTarget.classList.add("btn-dark")
+      this.castButtonTarget.classList.remove("btn-light")
+    }
+  }
+
+  togglePip() {
+    if (this.pipButtonIconTarget.classList.contains("bi-pip")) {
+      this.pipButtonIconTarget.classList.remove("bi-pip")
+      this.pipButtonIconTarget.classList.add("bi-pip-fill")
+    } else {
+      this.pipButtonIconTarget.classList.add("bi-pip")
+      this.pipButtonIconTarget.classList.remove("bi-pip-fill")
+    }
+  }
+
+  toggleFs() {
+    if (this.fsButtonIconTarget.classList.contains("bi-fullscreen")) {
+      this.fsButtonIconTarget.classList.remove("bi-fullscreen")
+      this.fsButtonIconTarget.classList.add("bi-fullscreen-exit")
+    } else {
+      this.fsButtonIconTarget.classList.add("bi-fullscreen")
+      this.fsButtonIconTarget.classList.remove("bi-fullscreen-exit")
+    }
   }
 }

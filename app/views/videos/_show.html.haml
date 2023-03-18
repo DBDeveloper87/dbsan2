@@ -8,51 +8,62 @@
 					- unless video.text_tracks.empty?
 						- video.text_tracks.each do |track|
 							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
-			- if Rails.env == "development"
-				.bg-dark.text-light.p-2.d-flex
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"}
-							%i.bi.bi-play-fill
-					.p-2.flex-grow-1.align-self-center
-						%span 0:02:01 / 0:23:01
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"} CC
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"} AD
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"}
-							%i.bi.bi-gear-fill
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"}
-							%i.bi.bi-cast
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"}
-							%i.bi.bi-pip
-					.p-2
-						%button.btn.btn-lg.btn-dark.border.border-light{type: "button"}
-							%i.bi.bi-fullscreen
+			-#- if Rails.env == "development"
+			= render partial: "videos/controls/control_bar"
 
 			%h1.mb-4 #{video.title}	
 			%p Your browser currently supports the following voices for SpeechSynthesis API
-			%ul#voices
+			#englishUS
+				%h3 English (United States)
+			#englishGB
+				%h3 English (United Kingdom)
+			#englishAU
+				%h3 English (Australia)
+			#englishIE
+				%h3 English (India)
+			
 			:javascript
-				console.log("Hello World")
 				speechSynthesis.addEventListener("voiceschanged", () => {
 					const voices = speechSynthesis.getVoices()
-					voices.forEach((v) => {
-						var list = document.getElementById("voices")
-						const item = document.createElement("li")
-						item.innerText = "Language Code: " + v.lang + ", Voice Name: " + v.name
+					const englishUS = voices.filter((e) => {
+						return (e.lang === "en-US")
+					})
+					const englishGB = voices.filter((e) => {
+						return (e.lang === "en-GB")
+					})
+					const englishAU = voices.filter((e) => {
+						return (e.lang === "en-AU")
+					})
+					const englishIE = voices.filter((e) => {
+						return (e.lang === "en-IE")
+					})
+					
+					englishUS.forEach((v) => {
+						var list = document.getElementById("englishUS")
+						const item = document.createElement("p")
+						item.innerText = v.name
+						list.appendChild(item)
+					})
+					englishGB.forEach((v) => {
+						var list = document.getElementById("englishGB")
+						const item = document.createElement("p")
+						item.innerText = v.name
+						list.appendChild(item)
+					})
+					englishAU.forEach((v) => {
+						var list = document.getElementById("englishAU")
+						const item = document.createElement("p")
+						item.innerText = v.name
+						list.appendChild(item)
+					})
+					englishIE.forEach((v) => {
+						var list = document.getElementById("englishIE")
+						const item = document.createElement("p")
+						item.innerText = v.name
 						list.appendChild(item)
 					})
 				})
-				const voices = speechSynthesis.getVoices()
-				voices.forEach((v) => {
-					var list = document.getElementById("voices")
-					const item = document.createElement("li")
-					item.innerText = "Language Code: " + v.lang + ", Voice Name: " + v.name
-					list.appendChild(item)
-				})
+				
 
 			- if video.chroma_keyed?
 				%h2 Speed
