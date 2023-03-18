@@ -1,4 +1,4 @@
 .p-2
-	%button#playButton.btn.btn-lg.btn-dark.border.border-light{type: "button", data:{action: "click->video-container#playPause", bs: {toggle: "tooltip", placement: "top", title: "Play (k)"}, video:{container: {target: "playButton"}}}}
-		%i.bi.bi-play-fill{data: {video: {container: {target: "playButtonIcon"}}}}
+	%button#playButton.btn.btn-lg.btn-dark.border.border-light{type: "button", aria: {label: "Play (k)",} data:{action: "click->video-container#playPause", bs: {toggle: "tooltip", placement: "top", title: "Play (k)"}, video:{container: {target: "playButton"}}}}
+		%i.bi.bi-play-fill{aria: {hidden: "true"}, data: {video: {container: {target: "playButtonIcon"}}}}
 	
