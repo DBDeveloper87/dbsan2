@@ -42,13 +42,13 @@ export default class extends Controller {
     if (this.playButtonIconTarget.classList.contains("bi-play-fill")) {
       this.playButtonIconTarget.classList.remove("bi-play-fill")
       this.playButtonIconTarget.classList.add("bi-pause-fill")
-      this.playButtonTarget.setAttribute("title", "Pause (k)")
+      this.playButtonTarget.setAttribute("aria-label", "Pause (k)")
       const tooltip = bootstrap.Tooltip.getInstance('#playButton')
       tooltip.setContent({".tooltip-inner": "Pause (k)"})
     } else {
       this.playButtonIconTarget.classList.add("bi-play-fill")
       this.playButtonIconTarget.classList.remove("bi-pause-fill")
-      this.playButtonTarget.setAttribute("title", "Play (k)")
+      this.playButtonTarget.setAttribute("aria-label", "Play (k)")
       const tooltip = bootstrap.Tooltip.getInstance('#playButton')
       tooltip.setContent({".tooltip-inner": "Play (k)"})
     }
