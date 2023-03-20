@@ -4,7 +4,7 @@ import * as bootstrap from "bootstrap"
 export default class extends Controller {
   static targets = ["video", "container", "playButton", "playButtonIcon", "currentTime", 
     "duration", "ccButton", "adButton", "settingsButton", "castButton", "pipButton",
-     "pipButtonIcon", "fsButton", "fsButtonIcon", "wheel"]
+     "pipButtonIcon", "fsButton", "fsButtonIcon", "adMenuButton", "wheel"]
 
   connect() {
     this.tooltips()
@@ -125,6 +125,7 @@ export default class extends Controller {
       this.settingsButtonTarget.classList.remove("btn-dark")
       this.settingsButtonTarget.classList.add("btn-light")
       this.settingsButtonTarget.setAttribute("aria-expanded", "true")
+      this.adMenuButtonTarget.focus()
     } else {
       this.settingsButtonTarget.classList.add("btn-dark")
       this.settingsButtonTarget.classList.remove("btn-light")
