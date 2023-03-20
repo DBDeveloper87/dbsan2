@@ -8,8 +8,7 @@ export default class extends Controller {
 
   connect() {
     this.tooltips()
-    this.keyboard()
-
+    
     this.videoTarget.addEventListener("timeupdate", (event) => {
       this.displayCurrentTime()
     })
@@ -24,26 +23,6 @@ export default class extends Controller {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-  }
-
-  keyboard() {
-    document.addEventListener("keydown", (event) => {
-      if (event.key == "k") {
-        this.playPause()
-      } else if (event.key == "c") {
-        this.toggleCC()
-      } else if (event.key == "a") {
-        this.toggleAD()
-      } else if (event.key == "s") {
-        this.toggleSettings()
-      } else if (event.key == "C") {
-        this.toggleCast()
-      } else if (event.key == "p") {
-        this.togglePip()
-      } else if (event.key == "f") {
-        this.toggleFs()
-      }
     })
   }
 
@@ -146,9 +125,11 @@ export default class extends Controller {
     if (this.settingsButtonTarget.classList.contains("btn-dark")) {
       this.settingsButtonTarget.classList.remove("btn-dark")
       this.settingsButtonTarget.classList.add("btn-light")
+      this.settingsButtonTarget.setAttribute("aria-pressed", "true")
     } else {
       this.settingsButtonTarget.classList.add("btn-dark")
       this.settingsButtonTarget.classList.remove("btn-light")
+      this.settingsButtonTarget.setAttribute("aria-pressed", "false")
     }
   }
 
@@ -168,9 +149,15 @@ export default class extends Controller {
     if (this.pipButtonIconTarget.classList.contains("bi-pip")) {
       this.pipButtonIconTarget.classList.remove("bi-pip")
       this.pipButtonIconTarget.classList.add("bi-pip-fill")
+      this.pipButtonTarget.classList.remove("btn-dark")
+      this.pipButtonTarget.classList.add("btn-light")
+      this.pipButtonTarget.setAttribute("aria-pressed", "true")
     } else {
       this.pipButtonIconTarget.classList.add("bi-pip")
       this.pipButtonIconTarget.classList.remove("bi-pip-fill")
+      this.pipButtonTarget.classList.add("btn-dark")
+      this.pipButtonTarget.classList.remove("btn-light")
+      this.pipButtonTarget.setAttribute("aria-pressed", "false")
     }
   }
 

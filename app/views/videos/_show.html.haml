@@ -2,7 +2,7 @@
 	- if @channel.name == "ILY by Tricio"
 		= render partial: "videos/ilybytricio", locals: {video: video}
 	- else
-		.container-md.mb-4{data:{controller: "video-container"}}
+		.container-xl.mb-4{data:{controller: "video-container"}}
 			.container{data:{video:{container:{target: "container"}}}}
 				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
 					- unless video.text_tracks.empty?

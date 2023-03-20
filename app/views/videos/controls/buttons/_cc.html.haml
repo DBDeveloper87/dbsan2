@@ -1,2 +1,2 @@
-.p-2
-	%button#ccButton.btn.btn-lg.btn-dark.border.border-light{type: "button", aria:{label: "Subtitles / Captions (c)", pressed: "false"}, data: {action: "click->video-container#toggleCC", bs:{toggle: "tooltip", title: "Subtitles / Captions (c)", placement: "top"}, video: {container: {target: "ccButton"}}}} CC
+.p-2.d-none.d-md-inline-flex
+	%button#ccButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Subtitles / Captions (c)", aria: {pressed: "false"}, data: {action: "click->video-container#toggleCC keydown.c@document->video-container#toggleCC", bs:{toggle: "tooltip", title: "Subtitles / Captions (c)", placement: "top"}, video: {container: {target: "ccButton"}}}} CC
