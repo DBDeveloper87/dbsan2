@@ -124,11 +124,11 @@ export default class extends Controller {
     if (this.settingsButtonTarget.classList.contains("btn-dark")) {
       this.settingsButtonTarget.classList.remove("btn-dark")
       this.settingsButtonTarget.classList.add("btn-light")
-      // this.settingsButtonTarget.setAttribute("aria-expanded", "true")
+      this.settingsButtonTarget.setAttribute("aria-expanded", "true")
     } else {
       this.settingsButtonTarget.classList.add("btn-dark")
       this.settingsButtonTarget.classList.remove("btn-light")
-      // this.settingsButtonTarget.setAttribute("aria-expanded", "false")
+      this.settingsButtonTarget.setAttribute("aria-expanded", "false")
     }
   }
 
