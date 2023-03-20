@@ -1,3 +1,26 @@
-.p-2
-	%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {pressed: "false"}, data: {action: "click->video-container#toggleSettings keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
+.p-2.dropup
+	%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {expanded: "false"}, data: {action: "click->video-container#toggleSettings keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", toggle: "dropdown", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
 		%i.bi.bi-gear-fill{aria: {hidden: "true"}}
+	%ul.dropdown-menu.dropdown-menu-end.border.border-dark
+		%li.mb-0
+			.dropdown-item Audio Descriptions
+		%li.mb-0
+			.dropdown-item Subtitles / Captions
+		%li.mb-0
+			.dropdown-item Backgrounds
+		%li.mb-0
+			.dropdown-item Layout
+		%li.mb-0
+			.dropdown-item Quality
+		%li.mb-0
+			.dropdown-item Speed
+		%li.mb-0
+			.dropdown-divider
+		%li.mb-0
+			.dropdown-item Cast / AirPlay (C)
+		%li.mb-0
+			.dropdown-item Picture in Picture
+			%li.mb-0
+			.dropdown-divider
+		%li.mb-0
+			.dropdown-item Keyboard Shortcuts
