@@ -122,11 +122,19 @@ export default class extends Controller {
 
   toggleSettings() {
     if (this.settingsButtonTarget.classList.contains("btn-dark")) {
+      if (event.key == "s") {
+        this.settingsButtonTarget.click()
+      }
+
       this.settingsButtonTarget.classList.remove("btn-dark")
       this.settingsButtonTarget.classList.add("btn-light")
       this.settingsButtonTarget.setAttribute("aria-expanded", "true")
       this.adMenuButtonTarget.focus()
     } else {
+      if (event.key == "s") {
+        this.settingsButtonTarget.click()
+      }
+      
       this.settingsButtonTarget.classList.add("btn-dark")
       this.settingsButtonTarget.classList.remove("btn-light")
       this.settingsButtonTarget.setAttribute("aria-expanded", "false")

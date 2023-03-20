@@ -1,26 +1,42 @@
 .p-2.dropup
-	%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: {action: "click->video-container#toggleSettings keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", toggle: "dropdown", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
-		%i.bi.bi-gear-fill{aria: {hidden: "true"}}
+	%span{data: {bs: {toggle: "dropdown"}}}
+		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: {action: "click->video-container#toggleSettings keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
+			%i.bi.bi-gear-fill{aria: {hidden: "true"}}
 	%ul#settingsMenu.dropdown-menu.dropdown-menu-end.border.border-dark
 		%li.mb-0
-			%button#adMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg{type: "button", data: {video: {container: {target: "adMenuButton"}}}} Audio Descriptions
+			%button#adMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Audio Descriptions
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
-			.dropdown-item Subtitles / Captions
+			%button#ccMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Subtitles / Captions
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
-			.dropdown-item Backgrounds
+			%button#backgroundsMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Backgrounds
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
-			.dropdown-item Layout
+			%button#layoutMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Layout
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
-			.dropdown-item Quality
+			%button#qualityMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Quality
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
-			.dropdown-item Speed
+			%button#speedMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Speed
+				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
 		%li.mb-0
 			.dropdown-divider
 		%li.mb-0
-			.dropdown-item Cast / AirPlay (C)
+			%button#castMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Cast / AirPlay (C)
 		%li.mb-0
-			.dropdown-item Picture in Picture
+			%button#pipMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Picture in Picture (p)
 			%li.mb-0
 			.dropdown-divider
 		%li.mb-0
-			.dropdown-item Keyboard Shortcuts
+			%button#ksMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+				%span.p-2.flex-grow-1 Keyboard Shortcuts
