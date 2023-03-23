@@ -7,7 +7,7 @@ export default class extends Controller {
 
 	connect() {
 		if (this.textValue == "Percent") {
-			this.element.setAttribute("aria-valuetext", (this.element.value * 100) + "%")
+			this.element.setAttribute("aria-valuetext", Math.trunc(this.element.value * 100) + "%")
 		}
 	}
 
@@ -17,7 +17,7 @@ export default class extends Controller {
 
 	updateValueText() {
 		if (this.textValue == "Percent") {
-			this.element.setAttribute("aria-valuetext", (this.element.value * 100) + "%")
+			this.element.setAttribute("aria-valuetext", Math.trunc(this.element.value * 100) + "%")
 		}
 	}
 }
