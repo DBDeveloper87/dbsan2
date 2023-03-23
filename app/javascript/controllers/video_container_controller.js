@@ -4,7 +4,9 @@ import * as bootstrap from "bootstrap"
 export default class extends Controller {
   static targets = ["video", "container", "playButton", "playButtonIcon", "currentTime", 
     "duration", "ccButton", "adButton", "settingsButton", "castButton", "pipButton",
-     "pipButtonIcon", "fsButton", "fsButtonIcon", "adMenuButton", "wheel"]
+     "pipButtonIcon", "fsButton", "fsButtonIcon", "settingsDropUp", "settingsSubmenus", 
+     "settingsMenu", 
+     "adMenuButton", "adMenu", "wheel"]
 
   connect() {
     this.tooltips()
@@ -134,7 +136,7 @@ export default class extends Controller {
       if (event.key == "s") {
         this.settingsButtonTarget.click()
       }
-      
+
       this.settingsButtonTarget.classList.add("btn-dark")
       this.settingsButtonTarget.classList.remove("btn-light")
       this.settingsButtonTarget.setAttribute("aria-expanded", "false")
@@ -183,5 +185,10 @@ export default class extends Controller {
       const tooltip = bootstrap.Tooltip.getInstance('#fsButton')
       tooltip.setContent({".tooltip-inner": "Enter Fullscreen (f)"})
     }
+  }
+
+  settingsMenu() {
+    this.settingsSubmenusTarget.appendChild(this.settingsMenuTarget)
+    this.settingsDropUpTarget.appendChild(this.adMenuTarget)
   }
 }

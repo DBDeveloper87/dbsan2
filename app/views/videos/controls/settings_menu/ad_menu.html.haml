@@ -1,0 +1,24 @@
+%turbo-frame{id: "settingsMenu"}
+	.modal-content
+		.modal-header.text-dark
+			%i.bi.bi-arrow-left-circle-fill.me-4.heading-3
+			%h3.modal-title Audio Descriptions
+			%button.btn-close{type: "button", aria: {label: "Close"}, data: {bs: {dismiss: "modal"}}}
+		.model-body.text-dark.p-4
+			%p Audio Descriptions on this platform are synthesized speech derived from the Visual Descriptions available in the transcripts below the videos.
+
+			%p Enabling Audio Descriptions gives you control over the device voice you prefer, as well as the speaking rate, pitch and volume of the voice.
+
+			.list-group
+				%button.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.border.border-dark.d-flex.mb-2{type: "button"}
+					%span.p-2.flex-grow-1 Enable Audio Descriptions	
+
+			%section.mt-4{data: {ad: {target: "adSettings"}}}	
+				.list-group
+					%button.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.border.border-dark.d-flex.mb-2{type: "button"}
+						%span.p-2.flex-grow-1 Language
+						%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}	
+
+					%button.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.border.border-dark.d-flex.mb-2{type: "button"}
+						%span.p-2.flex-grow-1 Voice	
+						%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}

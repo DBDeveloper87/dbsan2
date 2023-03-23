@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :portfolio, controller: "portfolios"
     resources :playlists, controller: "videos/playlists"
     resources :videos do
+      get "ad_menu", to: "videos#ad_menu"
       resources :text_tracks, controller: "videos/text_tracks" do
         get "captions", to: "videos/text_tracks#captions"
       end

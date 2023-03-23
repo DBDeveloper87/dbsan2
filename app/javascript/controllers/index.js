@@ -40,3 +40,6 @@ application.register("uploads", UploadsController)
 
 import VideoContainerController from "./video_container_controller"
 application.register("video-container", VideoContainerController)
+
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)

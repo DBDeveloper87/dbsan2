@@ -1,0 +1,30 @@
+#settingsMenu.list-group
+	%a#adMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.border.border-dark.mb-2.d-flex{href: video_ad_menu_path(video)} 
+		%span.p-2.flex-grow-1 Audio Descriptions
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+
+	%button#ccMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.border.border-dark.mb-2.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Subtitles / Captions
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+	%button#backgroundsMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex.mb-2.border.border-dark{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Backgrounds
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+	%button#layoutMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Layout
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+	%button#qualityMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Quality
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+	%button#speedMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Speed
+		%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
+	%hr.list-group-item.mt-0.mb-0
+	%button#castMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Cast / AirPlay (C)
+	%button#pipMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Picture in Picture (p)
+	%hr.list-group-item.mt-0.mb-0
+	%button#ksMenuButton.list-group-item.list-group-item-action.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
+		%span.p-2.flex-grow-1 Keyboard Shortcuts
+
+	

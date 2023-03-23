@@ -17,7 +17,10 @@ class VideosController < ApplicationController
 	end
 
 	def show
-		
+	end
+
+	def ad_menu
+		render template: "videos/controls/settings_menu/ad_menu"
 	end
 
 	def create

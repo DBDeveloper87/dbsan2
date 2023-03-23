@@ -3,14 +3,18 @@
 		= render partial: "videos/ilybytricio", locals: {video: video}
 	- else
 		.container-xl.mb-4{data:{controller: "video-container"}}
-			.container{data:{video:{container:{target: "container"}}}}
-				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
-					- unless video.text_tracks.empty?
-						- video.text_tracks.each do |track|
-							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
-			-#- if Rails.env == "development"
-			= render partial: "videos/controls/control_bar"
+			- if Rails.env == "production"
+				.container{data:{video:{container:{target: "container"}}}}
+					%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
+						- unless video.text_tracks.empty?
+							- video.text_tracks.each do |track|
+								%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
+			= render partial: "videos/controls/control_bar", locals: {video: video}
 
+			.border.border-dark.p-4
+				%label.form-label.mb-4{for: "#speakingRate"} Speaking Rate
+				%input#speakingRate.slider{type: "range", min: "0", max: "2", step: "0.1", data: {controller: "slider", action: "mouseup->slider#maintainFocus"}}
+				%output{for: "#speakingRate"} 
 			%h1.mb-4 #{video.title}	
 			%p Your browser currently supports the following voices for SpeechSynthesis API
 			#englishUS

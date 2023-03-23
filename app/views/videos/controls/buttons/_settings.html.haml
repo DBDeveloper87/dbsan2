@@ -1,42 +1,14 @@
-.p-2.dropup
-	%span{data: {bs: {toggle: "dropdown"}}}
-		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: {action: "click->video-container#toggleSettings keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
+.p-2
+	%span{data: {bs: {toggle: "modal", target: "#videoSettings"}}}
+		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: { bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
 			%i.bi.bi-gear-fill{aria: {hidden: "true"}}
-	%ul#settingsMenu.dropdown-menu.dropdown-menu-end.border.border-dark
-		%li.mb-0
-			%button#adMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Audio Descriptions
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			%button#ccMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Subtitles / Captions
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			%button#backgroundsMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Backgrounds
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			%button#layoutMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Layout
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			%button#qualityMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Quality
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			%button#speedMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Speed
-				%i.bi.bi-caret-right-fill.align-self-center{aria: {hidden: "true"}}
-		%li.mb-0
-			.dropdown-divider
-		%li.mb-0
-			%button#castMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Cast / AirPlay (C)
-		%li.mb-0
-			%button#pipMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Picture in Picture (p)
-			%li.mb-0
-			.dropdown-divider
-		%li.mb-0
-			%button#ksMenuButton.dropdown-item.btn.btn-outline-dark.btn-lg.d-flex{type: "button", data: {video: {container: {target: "adMenuButton"}}}} 
-				%span.p-2.flex-grow-1 Keyboard Shortcuts
+	
+	#videoSettings.modal{tabindex: "-1"}
+		.modal-dialog
+			%turbo-frame{id: "settingsMenu"}
+				.modal-content
+					.modal-header
+						%h3.modal-title.text-dark Video Settings
+						%button.btn-close{type: "button", aria: {label: "Close"}, data: {bs: {dismiss: "modal"}}}
+					.model-body.text-dark.p-4
+						= render partial: "videos/controls/settings_menu/main", locals: {video: video}
