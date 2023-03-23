@@ -12,9 +12,9 @@
 			= render partial: "videos/controls/control_bar", locals: {video: video}
 
 			.border.border-dark.p-4
-				%label.form-label.mb-4{for: "#speakingRate"} Speaking Rate
-				%input#speakingRate.slider{type: "range", min: "0", max: "2", step: "0.1", data: {controller: "slider", action: "mouseup->slider#maintainFocus"}}
-				%output{for: "#speakingRate"} 
+				%label.form-label.mb-4{for: "speakingRate"} Speaking Rate
+				%input.slider{id: "speakingRate", type: "range", min: "0", max: "2", step: "0.1", data: {controller: "slider", action: "mouseup->slider#maintainFocus"}}
+
 			%h1.mb-4 #{video.title}	
 			%p Your browser currently supports the following voices for SpeechSynthesis API
 			#englishUS
