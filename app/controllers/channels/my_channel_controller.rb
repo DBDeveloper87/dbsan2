@@ -1,6 +1,6 @@
 class Channels::MyChannelController < ApplicationController
-	before_action :set_channel, only: [:show, :edit, :update]
-	before_action :render_home, only: :show
+	before_action :set_channel, only: [:show, :edit, :update, :special_event]
+	before_action :render_home, only: [:show, :special_event]
 	before_action :camps, only: :show
 	
 	def edit
@@ -10,9 +10,14 @@ class Channels::MyChannelController < ApplicationController
 		if @channel.name == "ILY by Tricio"
 			@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
 			@meta_title = @channel.name
-		end
-		
-		
+		end	
+	end
+
+	def special_event
+		if @channel.name == "ILY by Tricio"
+			@meta_mg_image = "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png"
+			@meta_title = @channel.name
+		end	
 	end
 
 	def update

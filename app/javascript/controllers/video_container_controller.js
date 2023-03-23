@@ -187,8 +187,5 @@ export default class extends Controller {
     }
   }
 
-  settingsMenu() {
-    this.settingsSubmenusTarget.appendChild(this.settingsMenuTarget)
-    this.settingsDropUpTarget.appendChild(this.adMenuTarget)
-  }
+  
 }
