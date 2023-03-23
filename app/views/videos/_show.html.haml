@@ -13,7 +13,20 @@
 
 			.border.border-dark.p-4
 				%label.form-label.mb-4{for: "speakingRate"} Speaking Rate
-				%input.slider{id: "speakingRate", type: "range", min: "0", max: "2", step: "0.1", data: {controller: "slider", action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {text_value: "Percent"}}}
+				.d-flex.p-2{data: {controller: "slider", slider: {text_value: "Percent"}}}
+					%input.slider.flex-grow-1{id: "speakingRate", type: "range", min: "0", max: "2", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
+					%output.p-2.ms-4.bg-dark.text-light.align-self-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}}
+			.border.border-dark.p-4
+				%label.form-label.mb-4{for: "pitch"} Pitch
+				.d-flex.p-2{data: {controller: "slider", slider: {text_value: "Percent"}}}
+					%input.slider.flex-grow-1{id: "pitch", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
+					%output.p-2.ms-4.bg-dark.text-light.align-self-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}}
+			.border.border-dark.p-4
+				%label.form-label.mb-4{for: "volume"} Pitch
+				.d-flex.p-2{data: {controller: "slider", slider: {text_value: "Percent"}}}
+					%input.slider.flex-grow-1{id: "volume", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
+					%output.p-2.ms-4.bg-dark.text-light.align-self-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}}
+				
 			
 			%h1.mb-4 #{video.title}	
 			%p Your browser currently supports the following voices for SpeechSynthesis API
