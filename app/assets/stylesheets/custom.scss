@@ -95,6 +95,10 @@ li {
   outline-offset: 0.125rem;     
 }
 
+.modal-backdrop {
+	--bs-backdrop-opacity: 1
+}
+
 @media (inverted-colors: inverted) {
 	.background-dark {
 		background: white;

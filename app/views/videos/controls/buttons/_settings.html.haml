@@ -3,7 +3,7 @@
 		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: { bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
 			%i.bi.bi-gear-fill{aria: {hidden: "true"}}
 	
-	#videoSettings.modal{tabindex: "-1"}
+	#videoSettings.modal.fade{tabindex: "-1", data: {bs: {backdrop: "static"}}}
 		.modal-dialog
 			%turbo-frame{id: "settingsMenu"}
 				.modal-content
