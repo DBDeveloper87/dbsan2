@@ -41,7 +41,7 @@ li {
 
 .slider::-webkit-slider-runnable-track {
 	background: #000000;
-	height: 0.5rem;
+	height: 0.5rem
 }
 
 .slider::-moz-range-track {
@@ -93,6 +93,21 @@ li {
   border: 1px solid #053a5f;
   outline: 3px solid #053a5f;
   outline-offset: 0.125rem;     
+}
+
+.ticks {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.125rem 1rem;
+}
+
+.tick {
+	position: relative;
+  display: flex;
+  justify-content: center;
+  width: 2px;
+  background: #000000;
+  height: 0.5rem;  
 }
 
 .modal-backdrop {
