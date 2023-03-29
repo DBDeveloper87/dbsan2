@@ -3,12 +3,11 @@
 		= render partial: "videos/ilybytricio", locals: {video: video}
 	- else
 		.container-xl.mb-4{data:{controller: "video-container"}}
-			- if Rails.env == "production"
-				.container{data:{video:{container:{target: "container"}}}}
-					%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
-						- unless video.text_tracks.empty?
-							- video.text_tracks.each do |track|
-								%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
+			.container{data:{video:{container:{target: "container"}}}}
+				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
+					- unless video.text_tracks.empty?
+						- video.text_tracks.each do |track|
+							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
 			= render partial: "videos/controls/control_bar", locals: {video: video}
 
 			.border.border-dark.p-4

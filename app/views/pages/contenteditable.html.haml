@@ -1,18 +1,6 @@
-.row
-	.col-md-6.mt-4.mx-auto
-		.form-floating{data:{controller: "content-json"}}
-			%textarea#input.form-control.border.border-dark{placeholder: "Test", data:{content_json: {target: "input"}}}
-			%label{for: "input", data:{content_json: {target: "label"}}} Test	
-		
-	.col-md-6.mt-4.mx-auto
-		.border.border-dark.p-4
-			= render partial: "content/blocks/paragraph"
-.col-md-6.mx-auto
-	- content_for :head do
-		= javascript_include_tag "prism.js", "data-turbo-track": "reload", defer: true
-	%pre.language-bash.line-numbers
-		%code
-			cd /.vin
-	
-	
-			
+.container
+	%h1 This page demonstrates the use of a contenteditable
+
+	.form-floating{data: {controller: "content-json"}}
+		%textarea#input.form-control.border.border-dark{placeholder: "Test", data: {content_json: {target: "input"}}}	
+		%label{for: "input"} Test
