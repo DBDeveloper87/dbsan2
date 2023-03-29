@@ -7,9 +7,9 @@ export default class extends Controller {
 	connect() {
 		if (this.inputTarget.value == "" || this.inputTarget.value == null) {
 			this.insertEditableContent()
-			this.insertBlock()
-			this.updateJSONString()		
+			this.insertBlock()	
 		}
+
 	}
 
 	insertEditableContent() {
@@ -19,7 +19,7 @@ export default class extends Controller {
 		editableContent.classList.add("border-dark")
 		editableContent.classList.add("p-4")
 		editableContent.classList.add("mt-4")
-		//editableContent.setAttribute("data-action", "keydown.enter@document->content-json#hello")
+		editableContent.setAttribute("data-action", "DOMCharacterDataModified->content-json#updateJSONString")
 		this.element.appendChild(editableContent)
 	}
 
@@ -32,33 +32,35 @@ export default class extends Controller {
             .createRange()
             .createContextualFragment(html);
 
-          editableContent.appendChild(fragment);
+          editableContent.appendChild(fragment)
+          this.updateJSONString()
         })
+  	
 	}
 	
 	updateJSONString() {
 		const ec = document.getElementById("editableContent")
-		const blocks = Array.from(ec.children)
+		let blocks = Array.from(ec.children)
 		let blockJSON = []
 		blocks.forEach(block => {
 			const children = Array.from(block.children)
 
 			let tag = "P"
-			let text = null
+			let html = null
 
 			children.forEach(child => {
-				if (child.tagName = tag) {
-					text = child.innerText
+				if (child.tagName == tag) {
+					html = child.innerHTML
 				}
 			})
 
 			const json = {
 				tag: tag,
-				text: text
+				html: html
 			}
-
 			blockJSON.push(json)
 		})
-		alert(blockJSON)
+		blocks = blockJSON
+		this.inputTarget.value = JSON.stringify( { blocks } )
 	}
 }
