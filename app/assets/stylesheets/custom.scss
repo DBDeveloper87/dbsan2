@@ -115,13 +115,17 @@ li {
 }
 
 .bg-ily {
-	background: #606060;
+	background: #606060	
+}
+.brand-ily {
 	color: #FFD700
 }
 
 @media (inverted-colors: inverted) {
 	.bg-ily {
-		background: #9F9F9F;
+		background: #9F9F9F		
+	}
+	.brand-ily {
 		color: #0028FF
 	}
 	.background-dark {
@@ -142,6 +146,7 @@ li {
 		background: black;
 		color: white;
 	}
+
 	.card {
 		background: black;
 		color: white;
