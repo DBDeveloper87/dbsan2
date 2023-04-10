@@ -14,11 +14,11 @@
 			%h1 Dinner and Trivia Night Fundraiser
 			%p.text-muted 
 				Hosted by: 
-				%a{href: "https://ilybytricio.dbsan.org", target: "_blank"} 
+				%a{href: "https://ilybytricio.dbsan.org", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "bottom", title: "Opens in new tab"}}} 
 					%span ILY by Tricio 
 					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
 				and 
-				%a{href: "https://www.facebook.com/UMNCoBo", target: "_blank"}
+				%a{href: "https://www.facebook.com/UMNCoBo", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "bottom", title: "Opens in new tab"}}}
 					%span University of Minnesota Deaf College bowl Program 
 					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
 			%p.text-muted Saturday, April 22, 2023 from 2:00 pm to 7:00 pm CDT
@@ -31,7 +31,7 @@
 			%h2 Registration
 			%p Deadline to register: <br>Friday, April 14, 2023
 			.row
-				%a.btn.btn-dark.btn-lg.m-4{href: "https://docs.google.com/forms/d/e/1FAIpQLSf_XIetNb3nvdsfap0Fu9OSg12xXwao6_cJ16v0lRt3InkOCw/viewform", target: "_blank", aria: {describedby: "ally-message--new-window"}} Register Now
+				%a.btn.btn-dark.btn-lg.m-4{href: "https://docs.google.com/forms/d/e/1FAIpQLSf_XIetNb3nvdsfap0Fu9OSg12xXwao6_cJ16v0lRt3InkOCw/viewform", target: "_blank", role: "button"}} Register Now
 			
 			%h2 Address
 			.row
@@ -39,9 +39,9 @@
 					%img{src: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=kZVbvvDSAykQ36muOPFnLQ&cb_client=search.gws-prod.gps&yaw=218.22334&pitch=0&thumbfov=100&w=128&h=128", width: "100%", alt: ""}
 				.col-9
 					%address
-						%a{href: "https://goo.gl/maps/xsS8TwRCi25xVZce7", target: "_blank", aria: {describedby: "ally-message--get-directions"}} 
-							Dendros Group, LLC
-							%i.bi.bi-pin-map-fill{aria: {hidden: "true"}}
+						%a{href: "https://goo.gl/maps/xsS8TwRCi25xVZce7", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", title: "Get directions", placement: "top"}}} 
+							%span Dendros Group, LLC
+							%i.bi.bi-pin-map-fill{aria: {label: "(get directions)"}}
 						%br
 						2642 University Ave W<br>
 						Suite 107<br>
@@ -50,9 +50,9 @@
 			%h2 Questions?
 			%p
 				Contact  
-				%a{href: "mailto:umncobo@gmail.com?subject=April 22 Dinner Fundraiser Inquiry", aria: {describedby: "ally-message--opens-mail-client"}}
-					UMNCoBo Committee
-					%i.bi.bi-envelope{aria: {hidden: "true"}}
+				%a{href: "mailto:umncobo@gmail.com?subject=April 22 Dinner Fundraiser Inquiry", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "top", title: "Opens mail client"}}}
+					%span UMNCoBo Committee
+					%i.bi.bi-envelope{aria: {label: "(opens mail client)"}}
 
 
 
@@ -105,7 +105,7 @@
 				.card-body
 					%h3.card-title Sauce Options
 					%ul.text-start
-						%li Tomato sauce with tomatoes grown in the volcanic soil of Italy, yellow onions, tomato paste, basil, and flat leaf parsley
+						%li Tomato sauce with tomatoes grown in the volcanic soil of Italy, yellow onions, tomato paste, basil, oregano, and flat leaf parsley
 						%li Garlic Alfredo Cashew vegan sauce made with yellow onions, Better than Bouillon vegetable paste, minced garlic, soaked cashews, lemon juice and nutritional yeast
 			.col-12.col-md-4.card
 				.card-body
@@ -125,52 +125,54 @@
 						%li The Famous Cheesecake
 						%li Vegan Lemon Cake
 			
-	%h2.text-center Pre-Order Your Cookies today!
-	%p.col-123.col-md-10.col-lg-8.mx-auto.text-center.text-muted These cookies will be available for pickup at the ILY Benefit Dinner with the University of Minnesota's Deaf College Bowl at Dendros Group, LLC's office on Saturday, April 22nd, 2023.
-	.row.mb-4
-		.col-12.col-md-6.col-lg-4.mt-4.mx-auto
-			.card
-				.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
-					%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/dark-chocolate-chip-cookie.png", width: "100%", alt: ""}
-				.card-body
-					.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
-						%h2.position-absolute.top-0.bottom-0.end-0.start-0 Dark Chocolate Chip Cookie
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/PP7HA7OHY4P7XWVG6QN2PUHF", role: "button"} 6 for $10
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/OGRGXGWOWSHA222Z23AVH4AC", role: "button"} 12 for $20
+	%section
+		%h2.text-center Pre-Order Your Cookies today!
+		%p.col-12.col-md-10.col-lg-8.mx-auto.text-center.text-muted These cookies will be available for pickup at the ILY Benefit Dinner with the University of Minnesota's Deaf College Bowl at Dendros Group, LLC's office on Saturday, April 22nd, 2023.
+		.row.mb-4
+			.col-12.col-md-6.col-lg-4.mt-4.mx-auto
+				.card
+					.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+						%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/dark-chocolate-chip-cookie.png", width: "100%", alt: ""}
+					.card-body
+						.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
+						%h3.position-absolute.top-0.bottom-0.end-0.start-0 Dark Chocolate Chip Cookie
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/PP7HA7OHY4P7XWVG6QN2PUHF", role: "button"} 
+								%span 6 for $10
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/OGRGXGWOWSHA222Z23AVH4AC", role: "button"} 
+								%span 12 for $20
 					
-		.col-12.col-md-6.col-lg-4.mt-4.mx-auto
-			.card
-				.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
-					%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/oatmeal-pumpkin-pie-spiced-raisin-cookie.png", width: "100%", alt: ""}
-				.card-body
-					.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
-						%h2.position-absolute.top-0.bottom-0.end-0.start-0 Oatmeal Raisin Cookie
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/RUS5MNN6XO4VDTPM4XSSP4DI", role: "button"} 6 for $10
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/FVIO5GTPTEUFEQCW465RLCO6", role: "button"} 12 for $20
+			.col-12.col-md-6.col-lg-4.mt-4.mx-auto
+				.card
+					.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+						%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/oatmeal-pumpkin-pie-spiced-raisin-cookie.png", width: "100%", alt: ""}
+					.card-body
+						.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
+							%h3.position-absolute.top-0.bottom-0.end-0.start-0 Oatmeal Raisin Cookie
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/RUS5MNN6XO4VDTPM4XSSP4DI", role: "button"} 
+								%span 6 for $10
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/FVIO5GTPTEUFEQCW465RLCO6", role: "button"} 
+								%SPAN 12 for $20
 					
-		.col-12.col-md-6.col-lg-4.mt-4.mx-auto
-			.card
-				.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
-					%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/mm_cookie.png", width: "100%", alt: ""}
-				.card-body
-					.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
-						%h2.position-absolute.top-0.bottom-0.end-0.start-0 M&M Candy Cookie
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/MLI2T7KKYHUCZTAHRP3GOWSK", role: "button"} 6 for $10
-					.row.mb-3
-						%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/NM7SYIEEPJR7QP6YRYYVHMT2", role: "button"} 12 for $20
+			.col-12.col-md-6.col-lg-4.mt-4.mx-auto
+				.card
+					.card-img-top.position-relative.w-100{style: "padding-top: 100%"}
+						%img.position-absolute.top-0.bottom-0.start-0.end-0{src: "https://storage.googleapis.com/dbsan-public/mm_cookie.png", width: "100%", alt: ""}
+					.card-body
+						.card-title.text-center.position-relative.w-100{style: "padding-top: 5rem"}
+							%h3.position-absolute.top-0.bottom-0.end-0.start-0 M&M Candy Cookie
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/MLI2T7KKYHUCZTAHRP3GOWSK", role: "button"} 
+								%span 6 for $10
+						.row.mb-3
+							%a.btn.btn-lg.btn-dark{href: "https://checkout.square.site/merchant/ML1YRQRFSHJBS/checkout/NM7SYIEEPJR7QP6YRYYVHMT2", role: "button"} 
+								%span 12 for $20
 					
 		
 
-	.col-md-8.mb-4.mt-4.mx-auto
-		%h2.text-center Disclaimer
-		%p.text-center Any food products produced by ILY by Tricio are homemade and not subject to state inspection.
-
-%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--new-window" } (opens in a new tab)
-%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--get-directions" } (get directions)
-
-%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--opens-mail-client" } (opens mail client)
+		.col-12.col-md-8.mb-4.mt-4.mx-auto
+			%h2.text-center Disclaimer
+			%p.text-center Any food products produced by ILY by Tricio are homemade and not subject to state inspection.
