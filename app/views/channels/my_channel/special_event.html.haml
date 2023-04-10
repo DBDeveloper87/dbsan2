@@ -16,12 +16,16 @@
 				Hosted by: 
 				%a{href: "https://ilybytricio.dbsan.org", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "bottom", title: "Opens in new tab"}}} 
 					%span ILY by Tricio 
-					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
+					%span.visually-hidden (opens in a new tab)
+					%i.bi.bi-window-plus{aria: {hidden: "true"}}
 				and 
 				%a{href: "https://www.facebook.com/UMNCoBo", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "bottom", title: "Opens in new tab"}}}
 					%span University of Minnesota Deaf College bowl Program 
-					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
+					%span.visually-hidden (opens in a new tab)
+					%i.bi.bi-window-plus{aria: {hidden: "true"}}
+			
 			%p.text-muted Saturday, April 22, 2023 from 2:00 pm to 7:00 pm CDT
+		
 		.p-2
 			%a.display-1{href: "https://www.facebook.com/events/902041030873693/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D", aria: {label: "View on Facebook"}}
 				%i.bi.bi-facebook{aria: {hidden: "true"}, data: {controller: "bootstrap", bs: {title: "View on Facebook", placement: "bottom", toggle: "tooltip"}}}
@@ -41,7 +45,8 @@
 					%address
 						%a{href: "https://goo.gl/maps/xsS8TwRCi25xVZce7", target: "_blank", data: {controller: "bootstrap", bs: {toggle: "tooltip", title: "Get directions", placement: "top"}}} 
 							%span Dendros Group, LLC
-							%i.bi.bi-pin-map-fill{aria: {label: "(get directions)"}}
+							%span.visually-hidden (get directions)
+							%i.bi.bi-pin-map-fill{aria: {hidden: "true"}}
 						%br
 						2642 University Ave W<br>
 						Suite 107<br>
@@ -52,7 +57,8 @@
 				Contact  
 				%a{href: "mailto:umncobo@gmail.com?subject=April 22 Dinner Fundraiser Inquiry", data: {controller: "bootstrap", bs: {toggle: "tooltip", placement: "top", title: "Opens mail client"}}}
 					%span UMNCoBo Committee
-					%i.bi.bi-envelope{aria: {label: "(opens mail client)"}}
+					%span.visually-hidden
+					%i.bi.bi-envelope{aria: {hidden: "true"}}
 
 
 
@@ -86,7 +92,7 @@
 
 	%section.text-center.mt-4
 		%h2 Menu
-		.col-12.col-md-8.mx-auto
+		.col-12.col-lg-10.mx-auto
 			%p.text-muted A delicious spread of salad, pasta cooked on-site, sauces, meatballs, dinner rolls and dessert.  The sauces aren't mixed with the pasta ahead of time, so you get to choose as we make your plate.
 		.row
 			.col-12.col-md-4.card
@@ -127,7 +133,7 @@
 			
 	%section
 		%h2.text-center Pre-Order Your Cookies today!
-		%p.col-12.col-md-10.col-lg-8.mx-auto.text-center.text-muted These cookies will be available for pickup at the ILY Benefit Dinner with the University of Minnesota's Deaf College Bowl at Dendros Group, LLC's office on Saturday, April 22nd, 2023.
+		%p.col-12.col-lg-10.mx-auto.text-center.text-muted These cookies will be available for pickup at the ILY Benefit Dinner with the University of Minnesota's Deaf College Bowl at Dendros Group, LLC's office on Saturday, April 22nd, 2023.
 		.row.mb-4
 			.col-12.col-md-6.col-lg-4.mt-4.mx-auto
 				.card
@@ -173,6 +179,6 @@
 					
 		
 
-		.col-12.col-md-8.mb-4.mt-4.mx-auto
+		.col-12.col-lg-10.mb-4.mt-4.mx-auto
 			%h2.text-center Disclaimer
 			%p.text-center Any food products produced by ILY by Tricio are homemade and not subject to state inspection.
