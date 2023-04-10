@@ -11,12 +11,20 @@
 			.d-md-block.text-center
 				%span.display-2 22
 		.flex-grow-1.p-2
-			%h2 Dinner and Trivia Night Fundraiser
-			%p.text-muted Hosted by: <a href="https://ilybytricio.dbsan.org" target="_blank" aria-describedby="ally-message--new-window">ILY by Tricio <i class="bi bi-window-plus" aria-hidden="true"></i></a> and <a href="https://www.facebook.com/UMNCoBo" target="_blank" aria-describedby="ally-message--new-window">University of Minnesota Deaf College bowl Program <i class="bi bi-window-plus" aria-hidden="true"></i></a>
+			%h1 Dinner and Trivia Night Fundraiser
+			%p.text-muted 
+				Hosted by: 
+				%a{href: "https://ilybytricio.dbsan.org", target: "_blank"} 
+					%span ILY by Tricio 
+					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
+				and 
+				%a{href: "https://www.facebook.com/UMNCoBo", target: "_blank"}
+					%span University of Minnesota Deaf College bowl Program 
+					%i.bi.bi-window-plus{aria: {label: "(opens in a new tab)"}}
 			%p.text-muted Saturday, April 22, 2023 from 2:00 pm to 7:00 pm CDT
 		.p-2
-			%a.display-1{href: "https://www.facebook.com/events/902041030873693/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D"}
-				%i.bi.bi-facebook{data: {controller: "bootstrap", bs: {title: "View on Facebook", placement: "bottom", toggle: "tooltip"}}}
+			%a.display-1{href: "https://www.facebook.com/events/902041030873693/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D", aria: {label: "View on Facebook"}}
+				%i.bi.bi-facebook{aria: {hidden: "true"}, data: {controller: "bootstrap", bs: {title: "View on Facebook", placement: "bottom", toggle: "tooltip"}}}
 	
 	%section.row.mt-4
 		.col-12.col-md-3.order-md-2
