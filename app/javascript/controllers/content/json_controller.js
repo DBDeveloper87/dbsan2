@@ -14,7 +14,7 @@ export default class extends Controller {
 
 	insertEditableContent() {
 		const editableContent = document.createElement("div")
-		editableContent.id = "editableContent"
+		editableContent.id = this.inputTarget.id + "_editableContent"
 		editableContent.classList.add("border")
 		editableContent.classList.add("border-dark")
 		editableContent.classList.add("p-4")
@@ -24,7 +24,7 @@ export default class extends Controller {
 	}
 
 	insertBlock() {
-		const editableContent = document.getElementById("editableContent")
+		const editableContent = document.getElementById(this.inputTarget.id + "_editableContent")
 		fetch("/blocks/paragraph?position=1" )
 			.then((res) => res.text())
         .then((html) => {
@@ -39,7 +39,7 @@ export default class extends Controller {
 	}
 	
 	updateJSONString() {
-		const ec = document.getElementById("editableContent")
+		const ec = document.getElementById(this.inputTarget.id + "_editableContent")
 		let blocks = Array.from(ec.children)
 		let blockJSON = []
 		blocks.forEach(block => {

@@ -1,0 +1,60 @@
+.row
+	.col-md-6.pt-4.mx-auto
+		.form-floating{data:{controller: "content-json"}}
+			%textarea#input.form-control.border.border-dark{placeholder: "Test", data:{content_json: {target: "input"}}}
+			%label{for: "input", data:{content_json: {target: "label"}}} Test	
+		
+	.col-md-6.mt-4.mx-auto
+		.border.border-dark.p-4
+			= render partial: "content/blocks/paragraph"
+.col-md-6.mx-auto
+	- content_for :head do
+		= javascript_include_tag "prism.js", "data-turbo-track": "reload", defer: true
+	%pre.language-bash.line-numbers
+		%code
+			cd /.vin
+	
+	
+			
+
+
+
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+	static targets = ["input", "toolbox", "contentBlock"]
+	static values = ["block"]
+
+	connect() {
+		//this.inputTarget.classList.add("d-none")
+		this.createEditable()
+		//var mainFrame = document.getElementById("contentEditable")
+		//mainFrame.addEventListener("DOMCharacterDataModified", (event) => {
+			//const blocks = this.blockJSON("contentEditable")
+			//this.inputTarget.value = JSON.stringify({ blocks })
+		//})
+		//mainFrame.addEventListener("keyup", (event) => {
+			//if(event.key === "Backspace") {
+				//const blocks = this.blockJSON("contentEditable")
+				//this.inputTarget.value = JSON.stringify({ blocks })
+			//}
+		//})	
+	}
+
+	createEditable() {
+		const mainFrame = document.createElement("p")
+		mainFrame.id = "contentEditable"
+		mainFrame.innerHTML = '<p class="border border-dark p-4" contenteditable="true">This is heaven</p>'
+		this.element.appendChild(mainFrame)
+	}
+	blockJSON(element) {
+		const blocks = []
+		const elm = document.getElementById(element)
+		const block = {
+			type: elm.tagName,
+			text: elm.innerText
+		}
+		blocks.push(block)
+		return blocks
+	}
+}

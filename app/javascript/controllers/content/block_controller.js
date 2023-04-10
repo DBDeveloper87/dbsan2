@@ -4,16 +4,25 @@ export default class extends Controller {
 	static targets = ["input", "toolbox", "toolbar", "toolbarP", "toolbarH2",
 		"toolbarH3", "toolbarH4", "toolbarH5", "toolbarH6",  "contentBlock"]
 	
+
 	connect() {
-		this.setToolbar()
-		this.contentBlockTarget.addEventListener("focus", (event) => {
-			this.toolboxTarget.classList.remove("d-none")
-		})
-		this.contentBlockTarget.addEventListener("keydown", (event) => this.newParagraph())
-		this.toolboxTarget.addEventListener("click", (event) => {
-			this.toolboxTarget.classList.add("active")
-		})
-		this.element.addEventListener("keyup", (event) => this.hideToolbar())	
+		const ec = this.element.parentNode
+		alert(ec.id)
+
+		//this.setToolbar()
+		//this.contentBlockTarget.addEventListener("keydown", (event) => this.newParagraph())
+		//this.toolboxTarget.addEventListener("click", (event) => {
+			//this.toolboxTarget.classList.add("active")
+		//})
+		//this.element.addEventListener("keyup", (event) => this.hideToolbar())	
+	}
+
+	showToolbox() {
+		this.toolboxTarget.classList.remove("d-none")
+	}
+
+	hideToolbox() {
+		this.toolboxTarget.classList.add("d-none")
 	}
 
 	newParagraph() {

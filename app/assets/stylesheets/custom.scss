@@ -114,7 +114,16 @@ li {
 	--bs-backdrop-opacity: 1
 }
 
+.bg-ily {
+	background: #606060;
+	color: #FFD700
+}
+
 @media (inverted-colors: inverted) {
+	.bg-ily {
+		background: #9F9F9F;
+		color: #0028FF
+	}
 	.background-dark {
 		background: white;
 	}
@@ -164,7 +173,5 @@ li {
 	}
 	.progress {
 		--bs-progress-bg: black
-	}
-	
-		
+	}		
 }

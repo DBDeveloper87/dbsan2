@@ -1,10 +1,123 @@
-%nav.navbar.bg-dark
+%nav.navbar.bg-ily
 	.container
-		%a.navbar-brand{href: "#", style: "color: gold"} 
+		%a.navbar-brand{href: "#"} 
 			%img{src: "https://storage.googleapis.com/dbsan-public/ILY%20by%20Tricio.png", width: "10%", alt: ""}
 			ILY by Tricio
-.container-xl.pt-4
-	%h1.text-center Pre-Order Your Cookies today!
+%main.container-xl.pt-4
+	.d-flex
+		.border.border-dark{aria: {hidden: "true"}}
+			.d-block.bg-dark.text-light.text-center.p-2
+				%span.display-6 APRL
+			.d-md-block.text-center
+				%span.display-2 22
+		.flex-grow-1.p-2
+			%h2 Dinner and Trivia Night Fundraiser
+			%p.text-muted Hosted by: <a href="https://ilybytricio.dbsan.org" target="_blank" aria-describedby="ally-message--new-window">ILY by Tricio <i class="bi bi-window-plus" aria-hidden="true"></i></a> and <a href="https://www.facebook.com/UMNCoBo" target="_blank" aria-describedby="ally-message--new-window">University of Minnesota Deaf College bowl Program <i class="bi bi-window-plus" aria-hidden="true"></i></a>
+			%p.text-muted Saturday, April 22, 2023 from 2:00 pm to 7:00 pm CDT
+		.p-2
+			%a.display-1{href: "https://www.facebook.com/events/902041030873693/?acontext=%7B%22event_action_history%22%3A[%7B%22mechanism%22%3A%22your_upcoming_events_unit%22%2C%22surface%22%3A%22bookmark%22%7D]%2C%22ref_notif_type%22%3Anull%7D"}
+				%i.bi.bi-facebook{data: {controller: "bootstrap", bs: {title: "View on Facebook", placement: "bottom", toggle: "tooltip"}}}
+	
+	%section.row.mt-4
+		.col-12.col-md-3.order-md-2
+			%h2 Registration
+			%p Deadline to register: <br>Friday, April 14, 2023
+			.row
+				%a.btn.btn-dark.btn-lg.m-4{href: "https://docs.google.com/forms/d/e/1FAIpQLSf_XIetNb3nvdsfap0Fu9OSg12xXwao6_cJ16v0lRt3InkOCw/viewform", target: "_blank", aria: {describedby: "ally-message--new-window"}} Register Now
+			
+			%h2 Address
+			.row
+				.col-3
+					%img{src: "https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=kZVbvvDSAykQ36muOPFnLQ&cb_client=search.gws-prod.gps&yaw=218.22334&pitch=0&thumbfov=100&w=128&h=128", width: "100%", alt: ""}
+				.col-9
+					%address
+						%a{href: "https://goo.gl/maps/xsS8TwRCi25xVZce7", target: "_blank", aria: {describedby: "ally-message--get-directions"}} 
+							Dendros Group, LLC
+							%i.bi.bi-pin-map-fill{aria: {hidden: "true"}}
+						%br
+						2642 University Ave W<br>
+						Suite 107<br>
+						St. Paul, MN 55114
+
+			%h2 Questions?
+			%p
+				Contact  
+				%a{href: "mailto:umncobo@gmail.com?subject=April 22 Dinner Fundraiser Inquiry", aria: {describedby: "ally-message--opens-mail-client"}}
+					UMNCoBo Committee
+					%i.bi.bi-envelope{aria: {hidden: "true"}}
+
+
+
+		.col-12.col-md-9.order-md-1
+			%h2 Description
+			%p Come join us for a pasta dinner cooked by Chef Tricio and stay for a fun-filled trivia game to support the University of Minnesota Deaf College Bowl (CoBo) team. Your support will contribute to the funds to cover expenses for the 2024 CoBo team to attend the 2024 National Association of the Deaf conference in July 2024.
+
+			%p Please register for this event; there will be no at-door sales. Registration will close on April 14th.
+
+			%p Dinner tickets are $20 each person; and can be paid three ways, please check registration form for more info. Tickets cover salad, pasta, drinks, and dessert.
+
+			%p Access accommodation requests also need to be sent by April 14 as well to ensure they are fulfilled.
+
+			%p Hope to see you there! 
+
+	%section.text-center.mt-4
+		%h2 Schedule
+		.row
+			.col-12.col-md-4.card{role: "text"}
+				.card-body
+					.h3.card-title 2:00 PM to 5:00 PM<span class="visually-hidden">:</span>
+					.card-text Dinner
+			.col-12.col-md-4.card{role: "text"}
+				.card-body
+					.h3.card-title 5:00 PM to 6:30 PM<span class="visually-hidden">:</span>
+					.card-text Trivia Game
+			.col-12.col-md-4.card{role: "text"}
+				.card-body
+					.h3.card-title 6:30 PM to 7:00 PM<span class="visually-hidden">:</span>
+					.card-text Dessert
+
+	%section.text-center.mt-4
+		%h2 Menu
+		.col-12.col-md-8.mx-auto
+			%p A delicious spread of salad, pasta cooked on-site, sauces, meatballs, dinner rolls and dessert.  The sauces aren't mixed with the pasta ahead of time, so you get to choose as we make your plate.
+		.row
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Salad Bar
+					%ul.text-start
+						%li Romaine, spinach, cucumbers, tomatoes, mixed olives
+						%li Homemade Italian dressing with red wine vineger and sunflower oil plus some herbs
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Pasta Options
+					%ul.text-start
+						%li Barilla 100% semolina spaghetti
+						%li Ronzoni Gluten Free spaghetti
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Sauce Options
+					%ul.text-start
+						%li Tomato sauce with tomatoes grown in the volcanic soil of Italy, yellow onions, tomato paste, basil, and flat leaf parsley
+						%li Garlic Alfredo Cashew vegan sauce made with yellow onions, Better than Bouillon vegetable paste, minced garlic, soaked cashews, lemon juice and nutritional yeast
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Meatballs
+					%ul.text-start
+						%li Simek's Classic Turkey Meatballs Gluten Free
+						%li Beyond Meatballs Gluten Free
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Rolls
+					%ul.text-start
+						%li Vegan Dinner Rolls made with oat milk, Melt Organic Unsalted Butter, King Arthur all-purpose flour, pink sea salt, granulated sugar, instant yeast
+			.col-12.col-md-4.card
+				.card-body
+					%h3.card-title Dessert
+					%ul.text-start
+						%li The Famous Cheesecake
+						%li Vegan Lemon Cake
+			
+	%h2.text-center Pre-Order Your Cookies today!
 	%p.col-123.col-md-10.col-lg-8.mx-auto.text-center.text-muted These cookies will be available for pickup at the ILY Benefit Dinner with the University of Minnesota's Deaf College Bowl at Dendros Group, LLC's office on Saturday, April 22nd, 2023.
 	.row.mb-4
 		.col-12.col-md-6.col-lg-4.mt-4.mx-auto
@@ -48,3 +161,8 @@
 	.col-md-8.mb-4.mt-4.mx-auto
 		%h2.text-center Disclaimer
 		%p.text-center Any food products produced by ILY by Tricio are homemade and not subject to state inspection.
+
+%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--new-window" } (opens in a new tab)
+%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--get-directions" } (get directions)
+
+%span.visually-hidden{aria: {hidden: "true"}, id: "ally-message--opens-mail-client" } (opens mail client)
