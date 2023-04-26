@@ -1,4 +1,5 @@
 class SurveysController < ApplicationController
+	before_action :authenticate_user!, only: [:new, :edit, :update, :create]
 	before_action :set_channel, only: [:index, :new]
 	before_action :set_survey, only: [:edit, :show, :update]
 	layout "surveys"
@@ -12,6 +13,11 @@ class SurveysController < ApplicationController
 	end
 
 	def edit
+		if params[:part].present?
+			if params[:part] == "title"
+				render partial: "surveys/basic_info/edit_title", locals: {survey: @survey}
+			end
+		end
 	end
 
 	def show
@@ -30,7 +36,7 @@ class SurveysController < ApplicationController
 
 	def update
 		if @survey.update(update_params)
-			redirect_to edit_survey_path(@survey, subdomain: @subdomain)
+			redirect_to edit_survey_path(@survey)
 		end
 	end
 

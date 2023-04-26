@@ -8,10 +8,6 @@
 	.row
 		= render partial: "sidebar", locals: {survey: @survey}
 		.col-md-9.p-4
-			= form_with(model: @survey) do |f|
-				.form-group.mb-4
-					= f.label :description, "Description"
-					= f.text_area :description, class: "form-control border border-dark", data:{controller: "textarea-autogrow"}
-				.row.m-2
-					= f.submit "Save", class: "btn btn-dark btn-lg"
-		
+			= render partial: "surveys/basic_info/title", locals: {survey: @survey}
+			
+					

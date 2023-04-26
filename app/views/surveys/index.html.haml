@@ -1,6 +1,12 @@
-.container.pt-4
-	%h1 Surveys for #{@channel.name}
-	= link_to "New Survey", new_survey_path(subdomain: @channel.subdomain.slug), class: "btn btn-lg btn-dark", role: "button"
+%main.container.pt-4
+	%h1.text-center Surveys
+	- if user_signed_in?
+		= link_to "New Survey", new_survey_path, class: "btn btn-lg btn-dark mb-4", role: "button"
 
 	- @surveys.each do |s|
-		%p #{link_to s.title, edit_survey_path(s, subdomain: @subdomain)}
+		.border.border-dark.p-4.mb-4
+			%h2 #{s.title}
+			= simple_format(s.description)
+			- if user_signed_in?
+				= link_to "Edit", edit_survey_path(s), class: "btn btn-dark btn-lg"
+			= link_to "View", survey_path(s), class: "btn btn-lg btn-dark"

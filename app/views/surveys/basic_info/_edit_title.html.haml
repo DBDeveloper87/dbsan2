@@ -1,0 +1,10 @@
+%turbo-frame{id: "title", data:{turbo: {action: "advance"}}}
+	= form_with(model: survey) do |f|
+		.input-group.mb-4
+			.form-floating
+				= f.text_field :title, placeholder: "Survey Title", class: "form-control border border-dark"
+				= f.label :title, "Survey Title"
+				
+			.input-group-text.bg-dark{data: {controller: "bootstrap"}}
+				%button.btn.btn-lg.btn-dark{type: "submit", title: "Save Title", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Save Title"}}}
+					%i.bi.bi-check-lg{aria: {hidden: "true"}}

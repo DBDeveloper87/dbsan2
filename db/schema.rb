@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_065924) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -727,6 +727,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_065924) do
     t.uuid "channel_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "long_description"
+    t.text "required_states"
+    t.text "required_counties"
+    t.integer "status"
+    t.datetime "response_open"
+    t.datetime "response_close"
+    t.boolean "require_informed_consent"
+    t.text "informed_consent"
+    t.text "exit_message"
+    t.string "slug"
     t.index ["channel_id"], name: "index_surveys_on_channel_id"
   end
 
