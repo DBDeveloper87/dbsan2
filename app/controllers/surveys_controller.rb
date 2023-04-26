@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :edit, :update, :create]
-	before_action :set_channel, only: [:index, :new]
+	before_action :set_channel, only: [:index, :new, :show, :edit]
 	before_action :set_survey, only: [:edit, :show, :update]
 	layout "surveys"
 
