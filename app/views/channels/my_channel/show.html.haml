@@ -4,6 +4,8 @@
 	= render partial: "dbsan", locals: {camps: Camp.all}
 - elsif @channel.name == "The Road Without Barriers"
 	= render partial: "trwb", locals: {channel: @channel, meta: @meta_title}
+- elsif @channel.name == "Dendros Group, LLC"
+	= render partial: "dendros", locals: {channel: @channel, meta: @meta_title}
 - else
 	.container.pt-4
 		%h1.text-center Hello World
