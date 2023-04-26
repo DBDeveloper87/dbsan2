@@ -1,0 +1,41 @@
+%nav.navbar.sticky-top.d-print-none.d-md-none
+	.container-fluid
+		.justify-content-start
+			%a.navbar-brand{href: channel_root_path}
+				- if @channel.brand_logo.attached?
+					%img.brand-bg{src: url_for(@channel.brand_logo), style: "height: 10vh", alt: "#{@channel.name} Logo"}
+				- else
+					%span #{@channel.name}
+		.justify-content-end
+			%button.navbar-toggler{type: "button", data:{bs:{toggle: "offcanvas", target: "#offcanvasNavbar"}}, aria:{controls: "offcanvasNavbar", label: "Menu"}}
+				%span.navbar-toggler-icon{aria: {hidden: "true"}}
+			
+			.offcanvas.offcanvas-end{tabindex: "-1", id: "offcanvasNavbar", aria:{labelledby: "offcanvasNavbarLabel"}}
+				.offcanvas-header
+					%span.offcanvas-title.text-dark{id: "offcanvasNavbarLabel"} #{@channel.name} Menu
+					%button.btn-close.text-reset{type: "button", data:{bs:{dismiss: "offcanvas"}}, aria:{label: "Close"}}
+				.offcanvas-body
+					%ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
+						- if @channel.channel_menus.any?
+							- menu = @channel.channel_menus.find_by(location: "Top Nav")
+							- menu.channel_menu_items.order(position: :asc).each do |m|
+								%li.nav-item.mb-0
+									%a.nav-link{href: m.external_url} #{m.name}
+			
+%nav.navbar.navbar-expand-sm.sticky-top.d-print-none.d-none.d-sm-none.d-md-block
+	.container
+		.justify-content-start
+			%a.navbar-brand{href: channel_root_path}
+				- if @channel.brand_logo.attached?
+					%img.brand-bg{src: url_for(@channel.brand_logo), style: "height: 10vh", alt: "#{@channel.name} Logo"}
+				- else
+					%span #{@channel.name}
+		.justify-content-center.mx-auto
+			%ul.navbar-nav
+				- if @channel.channel_menus.any?
+					- menu = @channel.channel_menus.find_by(location: "Top Nav")
+					- menu.channel_menu_items.order(position: :asc).each do |m|
+						%li.nav-item.mb-0
+							%a.nav-link{href: m.external_url} #{m.name}
+			
+		

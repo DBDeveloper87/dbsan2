@@ -1,8 +1,10 @@
 class Channels::MyChannelController < ApplicationController
+	before_action :authenticate_user!, only: [:edit, :update]
 	before_action :set_channel, only: [:show, :edit, :update, :special_event]
 	before_action :render_home, only: [:show, :special_event]
 	before_action :camps, only: :show
 	
+
 	def edit
 	end
 

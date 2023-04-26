@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_11_105615) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_26_041446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -365,12 +365,37 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_105615) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "channel_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "channel_menu_id", null: false
+    t.integer "position"
+    t.string "name"
+    t.string "icon_class"
+    t.string "external_url"
+    t.string "path"
+    t.boolean "open_tab"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_menu_id"], name: "index_channel_menu_items_on_channel_menu_id"
+  end
+
+  create_table "channel_menus", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "location"
+    t.uuid "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_channel_menus_on_channel_id"
+  end
+
   create_table "channels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.uuid "subdomain_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "domain_host"
+    t.string "navbar_bg"
+    t.string "navbar_bg_invert"
+    t.string "brand_bg"
+    t.string "brand_bg_invert"
     t.index ["subdomain_id"], name: "index_channels_on_subdomain_id"
   end
 
@@ -836,6 +861,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_11_105615) do
   add_foreign_key "challenge_milestones", "challenges"
   add_foreign_key "challenge_participants", "challenges"
   add_foreign_key "challenge_participants", "users"
+  add_foreign_key "channel_menu_items", "channel_menus"
+  add_foreign_key "channel_menus", "channels"
   add_foreign_key "channels", "subdomains"
   add_foreign_key "counties", "state_provinces"
   add_foreign_key "cue_blocks", "text_tracks"

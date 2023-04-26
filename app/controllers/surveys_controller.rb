@@ -1,10 +1,10 @@
 class SurveysController < ApplicationController
 	before_action :set_channel, only: [:index, :new]
 	before_action :set_survey, only: [:edit, :show, :update]
+	layout "surveys"
 
 	def index
 		@surveys = @channel.surveys.all
-		@subdomain = @channel.subdomain.slug
 	end
 
 	def new

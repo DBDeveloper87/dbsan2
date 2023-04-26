@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  channel_menu: one
+  position: 1
+  name: MyString
+  icon_class: MyString
+  external_url: MyString
+  path: MyString
+  open_tab: false
+
+two:
+  channel_menu: two
+  position: 1
+  name: MyString
+  icon_class: MyString
+  external_url: MyString
+  path: MyString
+  open_tab: false
