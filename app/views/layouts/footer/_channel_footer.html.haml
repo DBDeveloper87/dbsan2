@@ -1,0 +1,9 @@
+%footer.mt-auto.d-print-none.pb-4.mx-auto
+  %p.text-muted 2642 University Ave West Suite 170, Saint Paul MN 55114   |   (651) 428-1191   |  jonathan@dendros.com
+
+  - if @channel.channel_menus.any?
+    %ul.nav.mx-auto.justify-content-center
+      - menu = @channel.channel_menus.find_by(location: "Top Nav")
+      - menu.channel_menu_items.order(position: :asc).each do |m|
+        %li.nav-item.mb-0
+          %a.nav-link{href: m.external_url} #{m.name}

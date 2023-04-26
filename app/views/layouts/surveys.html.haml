@@ -22,5 +22,6 @@
   %body.d-flex.flex-column.min-vh-100
     = render partial: "layouts/navs/channel_topnav", locals: {channel: @channel}
     = yield
+    = render partial: "layouts/footer/channel_footer", locals: {channel: @channel}
     
     

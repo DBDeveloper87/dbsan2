@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_041446) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_26_065924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -659,6 +659,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_041446) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "channel_id"
+    t.index ["channel_id"], name: "index_social_networks_on_channel_id"
   end
 
   create_table "sponsors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -890,6 +892,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_041446) do
   add_foreign_key "question_options", "survey_questions"
   add_foreign_key "response_answers", "survey_questions"
   add_foreign_key "response_answers", "survey_responses"
+  add_foreign_key "social_networks", "channels"
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "survey_questions", "survey_sections"
   add_foreign_key "survey_responses", "surveys"
