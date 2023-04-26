@@ -32,13 +32,13 @@ class SurveysController < ApplicationController
 		subdomain = channel.subdomain.slug
 
 		if @survey.save
-			redirect_to edit_survey_path(@survey, subdomain: subdomain)
+			redirect_to edit_survey_path(@survey.slug)
 		end
 	end
 
 	def update
 		if @survey.update(update_params)
-			redirect_to edit_survey_path(@survey)
+			redirect_to edit_survey_path(@survey.slug)
 		end
 	end
 
@@ -52,7 +52,7 @@ class SurveysController < ApplicationController
 		end
 
 		def set_survey
-			@survey = Survey.find(params[:id])
+			@survey = Survey.find_by(slug: params[:slug])
 			@channel = @survey.channel
 			#@subdomain = @channel.subdomain.slug
 		end

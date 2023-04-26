@@ -4,5 +4,5 @@
 			%input#title.form-control.border.border-dark{type: "text", readonly: "true", value: "#{survey.title}"}
 			%label{for: "title"} Survey Title
 		.input-group-text.bg-dark{data: {controller: "bootstrap"}}
-			%a.btn.btn-lg.btn-dark{href: edit_survey_path(survey, part: "title"), title: "Edit Title", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Title"}}}
+			%a.btn.btn-lg.btn-dark{href: edit_survey_path(survey, slug: survey.slug, part: "title"), title: "Edit Title", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Title"}}}
 				%i.bi.bi-pencil{aria: {hidden: "true"}}
