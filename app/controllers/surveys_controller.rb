@@ -52,7 +52,7 @@ class SurveysController < ApplicationController
 		end
 
 		def set_survey
-			@survey = @channel.surveys.find_by(slug: params[:slug])
+			@survey = Survey.find_by(slug: params[:slug])
 		end
 
 		def set_channel
