@@ -1,0 +1,11 @@
+%turbo-frame{id: "slug", data:{turbo: {action: "advance"}}}
+	.input-group.mb-4
+		.form-floating
+			- if survey.slug.nil?
+				%input#slug.form-control.border.border-dark{type: "text", readonly: "true", value: "Please click edit to add a slug"}
+			- else
+				%input#slug.form-control.border.border-dark{type: "text", readonly: "true", value: "#{survey.slug}"}
+			%label{for: "slug"} Slug
+		.input-group-text.bg-dark{data: {controller: "bootstrap"}}
+			%a.btn.btn-dark.btn-lg{href: edit_survey_path(survey, part: "slug"), title: "Edit Slug", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Slug"}}}
+				%i.bi.bi-pencil{aria: {hidden: "true"}}

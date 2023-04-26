@@ -1,0 +1,12 @@
+%turbo-frame{id: "slug", data:{turbo: {action: "advance"}}}
+	= form_with(model: survey) do |f|
+		.input-group.mb-4
+			.form-floating
+				- if survey.slug.nil?
+					= f.text_field :slug, placeholder: "slug", class: "form-control border border-dark", value: survey.title.parameterize
+				- else
+					= f.text_field :slug, placeholder: "slug", class: "form-control border border-dark"
+				= f.label :slug, "Slug"
+			.input-group-text.bg-dark{data: {controller: "bootstrap"}}
+				%button.btn.btn-dark.btn-lg{type: "submit", title: "Save Slug", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Save Slug"}}}
+					%i.bi.bi-check-lg{aria: {hidden: "true"}}

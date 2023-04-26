@@ -16,6 +16,8 @@ class SurveysController < ApplicationController
 		if params[:part].present?
 			if params[:part] == "title"
 				render partial: "surveys/basic_info/edit_title", locals: {survey: @survey}
+			elsif params[:part] == "slug"
+				render partial: "surveys/basic_info/edit_slug", locals: {survey: @survey}
 			end
 		end
 	end
@@ -46,7 +48,7 @@ class SurveysController < ApplicationController
 		end
 
 		def update_params
-			params.require(:survey).permit(:description)
+			params.require(:survey).permit(:title, :slug, :description)
 		end
 
 		def set_survey
