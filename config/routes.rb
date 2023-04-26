@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   constraints(subdomain: "surveys") do
     get "/", to: "surveys#index"
+    get "/new", to: "surveys#new"
   end
   
   constraints(ChannelSubdomains) do
