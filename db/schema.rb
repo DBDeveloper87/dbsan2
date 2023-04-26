@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_014014) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_11_105615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -608,6 +608,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_014014) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "question_options", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_question_id", null: false
+    t.string "name"
+    t.integer "logic"
+    t.text "sub_logic"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_question_id"], name: "index_question_options_on_survey_question_id"
+  end
+
+  create_table "response_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_response_id", null: false
+    t.uuid "survey_question_id", null: false
+    t.text "long_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_question_id"], name: "index_response_answers_on_survey_question_id"
+    t.index ["survey_response_id"], name: "index_response_answers_on_survey_response_id"
+  end
+
   create_table "social_networks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "icon_class"
@@ -637,6 +657,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_014014) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_questions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_section_id", null: false
+    t.integer "position"
+    t.integer "question_type"
+    t.string "title"
+    t.text "description"
+    t.boolean "requiret"
+    t.boolean "conditionally_hidden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_section_id"], name: "index_survey_questions_on_survey_section_id"
+  end
+
+  create_table "survey_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_id", null: false
+    t.uuid "user_id", null: false
+    t.float "score"
+    t.boolean "informed_consent"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
+    t.index ["user_id"], name: "index_survey_responses_on_user_id"
   end
 
   create_table "survey_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -815,7 +860,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_014014) do
   add_foreign_key "product_image_sets", "products"
   add_foreign_key "products", "product_categories"
   add_foreign_key "profiles", "users"
+  add_foreign_key "question_options", "survey_questions"
+  add_foreign_key "response_answers", "survey_questions"
+  add_foreign_key "response_answers", "survey_responses"
   add_foreign_key "state_provinces", "countries"
+  add_foreign_key "survey_questions", "survey_sections"
+  add_foreign_key "survey_responses", "surveys"
+  add_foreign_key "survey_responses", "users"
   add_foreign_key "survey_sections", "surveys"
   add_foreign_key "surveys", "channels"
   add_foreign_key "synthesize_speech_clips", "cue_blocks"

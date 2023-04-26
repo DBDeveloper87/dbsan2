@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   require "domain_hosts"
   require "channel_subdomains"
 
+  constraints(subdomain: "surveys") do
+    get "/", to: "surveys#index"
+  end
+  
   constraints(ChannelSubdomains) do
     root "channels/my_channel#show", as: :channel_root
     get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
@@ -21,6 +25,8 @@ Rails.application.routes.draw do
       post "sections/new", to: "survey_sections#create"
     end
   end
+
+  resources :surveys, subdomain: "surveys"
   
   constraints subdomain: "store" do
     root "store/front#index", as: :store_root

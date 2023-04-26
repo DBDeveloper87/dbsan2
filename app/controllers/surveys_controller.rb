@@ -1,4 +1,4 @@
-class SurveysController < Channels::MyChannelController
+class SurveysController < ApplicationController
 	before_action :set_channel, only: [:index, :new]
 	before_action :set_survey, only: [:edit, :show, :update]
 
@@ -44,8 +44,26 @@ class SurveysController < Channels::MyChannelController
 		end
 
 		def set_survey
-			@survey = Survey.find_by(id: params[:id])
+			@survey = Survey.find(params[:id])
 			@channel = @survey.channel
-			@subdomain = @channel.subdomain.slug
+			#@subdomain = @channel.subdomain.slug
+		end
+
+		def set_channel
+			if Rails.env == "development"
+				if request.subdomain == "surveys"
+					@channel = Channel.find_by(name: "DeafBlind Support and Access Network")
+				else
+					@channel = Subdomain.find_by(slug: request.subdomain).channel
+				end
+			elsif Rails.env == "production"
+				if request.subdomain == "surveys" and request.domain == "dbsan.org"
+					@channel = Channel.find_by(name: "DeafBlind Support and Access Network")
+				elsif request.subdomain == "surveys"
+					@channel = Channel.find_by(domain_host: request.domain)
+				else
+					@channel = Subdomain.find_by(slug: request.subdomain).channel
+				end
+			end
 		end
 end
