@@ -52,9 +52,7 @@ class SurveysController < ApplicationController
 		end
 
 		def set_survey
-			@survey = Survey.find_by(slug: params[:slug])
-			@channel = @survey.channel
-			#@subdomain = @channel.subdomain.slug
+			@survey = @channel.surveys.find_by(slug: params[:slug])
 		end
 
 		def set_channel
@@ -69,7 +67,7 @@ class SurveysController < ApplicationController
 					@channel = Channel.find_by(name: "DeafBlind Support and Access Network")
 				elsif request.subdomain == "surveys"
 					@channel = Channel.find_by(domain_host: request.domain)
-				else
+				elsif request.domain == "dbsan.org"
 					@channel = Subdomain.find_by(slug: request.subdomain).channel
 				end
 			end
