@@ -21,7 +21,12 @@
 							- menu.channel_menu_items.order(position: :asc).each do |m|
 								%li.nav-item.mb-0
 									%a.nav-link{href: m.external_url} #{m.name}
-			
+						- if @channel.social_networks.any?
+							- @channel.social_networks.each do |n|
+								%li.nav-item.mb-0
+									%a.nav-link{href: n.url}
+										%i.bi{aria: {hidden: "true"}, class: "#{n.icon_class}"}
+										%span #{n.name}
 %nav.navbar.navbar-expand-sm.sticky-top.d-print-none.d-none.d-sm-none.d-md-block
 	.container
 		.justify-content-start
@@ -30,12 +35,19 @@
 					%img.brand-bg{src: url_for(@channel.brand_logo), style: "height: 10vh", alt: "#{@channel.name} Logo"}
 				- else
 					%span #{@channel.name}
-		.justify-content-center.mx-auto
+		.justify-content-end
 			%ul.navbar-nav
 				- if @channel.channel_menus.any?
 					- menu = @channel.channel_menus.find_by(location: "Top Nav")
 					- menu.channel_menu_items.order(position: :asc).each do |m|
 						%li.nav-item.mb-0
 							%a.nav-link{href: m.external_url} #{m.name}
+				- if @channel.social_networks.any?
+					- @channel.social_networks.each do |n|
+						%li.nav-item.mb-0{data: {controller: "bootstrap"}}
+							%a.nav-link{href: n.url, title: "Twitter", data: {bs: {toggle: "tooltip", placement: "bottom", title: "#{n.name}"}}}
+								%i.bi{aria: {hidden: "true"}, class: "#{n.icon_class}"}
+						
+								
 			
 		
