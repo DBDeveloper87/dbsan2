@@ -8,5 +8,5 @@
 			%h2 #{s.title}
 			= simple_format(s.description)
 			- if user_signed_in?
-				= link_to "Edit", edit_survey_path(s.slug), class: "btn btn-dark btn-lg"
-			= link_to "View", survey_path(s.slug), class: "btn btn-lg btn-dark"
+				= link_to "Edit", edit_survey_path(slug: s.slug), class: "btn btn-dark btn-lg"
+			= link_to "View", survey_path(slug: s.slug), class: "btn btn-lg btn-dark"

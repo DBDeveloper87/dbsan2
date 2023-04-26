@@ -21,7 +21,7 @@ Rails.application.routes.draw do
       end
       resources :cue_blocks, controller: "videos/cue_blocks"
     end
-    resources :surveys do
+    resources :surveys, param: :slug do
       resources :sections, controller: "survey_sections"
       post "sections/new", to: "survey_sections#create"
     end

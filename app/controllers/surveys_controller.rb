@@ -38,7 +38,7 @@ class SurveysController < ApplicationController
 
 	def update
 		if @survey.update(update_params)
-			redirect_to edit_survey_path(@survey.slug)
+			redirect_to edit_survey_path(slug: @survey.slug)
 		end
 	end
 
