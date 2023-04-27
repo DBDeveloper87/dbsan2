@@ -1,0 +1,9 @@
+%turbo-frame{id: "rightSide", data: {turbot: {action: "advance"}}}
+	%h2 Long Description
+	%p This is the actual description that goes on the survey's landing page.  To divide the text into paragraphs, please leave a blank line in the text field below.
+	= form_with(model: survey, url: survey_path(slug: survey.slug)) do |f|
+		.form-floating.mb-4
+			= f.text_area :long_description, placeholder: "Short Description", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+			= f.label :long_description, "Long Description"
+		.row
+			= f.submit "Save Changes", class: "btn btn-dark btn-lg"

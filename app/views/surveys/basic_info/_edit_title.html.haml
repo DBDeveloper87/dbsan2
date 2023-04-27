@@ -1,5 +1,5 @@
 %turbo-frame{id: "title", data:{turbo: {action: "advance"}}}
-	= form_with(model: survey) do |f|
+	= form_with(model: survey, url: survey_path(slug: survey.slug)) do |f|
 		.input-group.mb-4
 			.form-floating
 				= f.text_field :title, placeholder: "Survey Title", class: "form-control border border-dark"

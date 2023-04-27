@@ -1,0 +1,9 @@
+%turbo-frame{id: "rightSide", data: {turbot: {action: "advance"}}}
+	%h2 Short Description
+	%p The short description is the text on the index page and used in the social media sharing.
+	= form_with(model: survey, url: survey_path(slug: survey.slug)) do |f|
+		.form-floating.mb-4
+			= f.text_area :description, placeholder: "Short Description", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+			= f.label :description, "Short Description"
+		.row
+			= f.submit "Save Changes", class: "btn btn-dark btn-lg"

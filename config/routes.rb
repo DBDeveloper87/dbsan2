@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   require "channel_subdomains"
 
   constraints(subdomain: "surveys") do
-    get "/", to: "surveys#index"
-    get "/new", to: "surveys#new"
+    get "/", to: "surveys#index", as: "surveys_root"
+    get "/new", to: "surveys#new", as: "new_survey_subdomain"
+    get "/:slug", to: "surveys#show", as: "survey_subdomain"
   end
   
   constraints(ChannelSubdomains) do
@@ -22,8 +23,8 @@ Rails.application.routes.draw do
       resources :cue_blocks, controller: "videos/cue_blocks"
     end
     resources :surveys, param: :slug do
-      resources :sections, controller: "survey_sections"
-      post "sections/new", to: "survey_sections#create"
+      resources :sections, controller: "surveys/sections", param: :sec_num
+      #post "sections/new", to: "survey_sections#create"
     end
   end
 

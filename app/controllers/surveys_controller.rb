@@ -1,6 +1,6 @@
 class SurveysController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :edit, :update, :create]
-	before_action :set_channel, only: [:index, :new, :show, :edit]
+	before_action :set_channel, only: [:index, :new, :show, :edit, :update]
 	before_action :set_survey, only: [:edit, :show, :update]
 	layout "surveys"
 
@@ -18,6 +18,10 @@ class SurveysController < ApplicationController
 				render partial: "surveys/basic_info/edit_title", locals: {survey: @survey}
 			elsif params[:part] == "slug"
 				render partial: "surveys/basic_info/edit_slug", locals: {survey: @survey}
+			elsif params[:part] == "short_description"
+				render partial: "surveys/basic_info/edit_short_description", locals: {survey: @survey}
+			elsif params[:part] == "long_description"
+				render partial: "surveys/basic_info/edit_long_description", locals: {survey: @survey}
 			end
 		end
 	end
@@ -27,12 +31,13 @@ class SurveysController < ApplicationController
 
 	def create
 		@survey = Survey.create(create_params)
-		channel_id = create_params[:channel_id]
-		channel = Channel.find_by(id: channel_id)
-		subdomain = channel.subdomain.slug
-
+		
 		if @survey.save
-			redirect_to edit_survey_path(@survey.slug)
+			unless request.subdomain == "surveys"
+				redirect_to survey_path(slug: @survey.slug, subdomain: request.subdomain)
+			else
+				redirect_to survey_subdomain_path(@survey.slug)
+			end
 		end
 	end
 
@@ -48,7 +53,7 @@ class SurveysController < ApplicationController
 		end
 
 		def update_params
-			params.require(:survey).permit(:title, :slug, :description)
+			params.require(:survey).permit(:title, :slug, :description, :long_description)
 		end
 
 		def set_survey

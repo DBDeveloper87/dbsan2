@@ -8,6 +8,8 @@
 	.row
 		= render partial: "sidebar", locals: {survey: @survey}
 		.col-md-9.p-4
-			= render partial: "surveys/basic_info/title", locals: {survey: @survey}
-			= render partial: "surveys/basic_info/slug", locals: {survey: @survey}
-					
+			%turbo-frame{id: "rightSide", data: {turbo: {action: "advance"}}}
+				= render partial: "surveys/basic_info/title", locals: {survey: @survey}
+				= render partial: "surveys/basic_info/slug", locals: {survey: @survey}
+				= render partial: "surveys/basic_info/short_description", locals: {survey: @survey}	
+				= render partial: "surveys/basic_info/long_description", locals: {survey: @survey}	

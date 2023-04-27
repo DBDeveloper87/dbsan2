@@ -1,4 +1,7 @@
-.container.pt-4
-	%h1 #{@survey.title}
+.container-lg
+	.col-xl-8.mx-auto.pt-4
+		%h1 #{@survey.title}
 
-	= simple_format(@survey.description)
+		= simple_format(@survey.long_description)
+
+		%button.btn.btn-dark.btn-lg{type: "button", disabled: "true"} Participate in Survey

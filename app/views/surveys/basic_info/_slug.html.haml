@@ -9,3 +9,7 @@
 		.input-group-text.bg-dark{data: {controller: "bootstrap"}}
 			%a.btn.btn-dark.btn-lg{href: edit_survey_path(slug: survey.slug, part: "slug"), title: "Edit Slug", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Slug"}}}
 				%i.bi.bi-pencil{aria: {hidden: "true"}}
+	%p.text-muted Instead of using ID's in the URL, to make it easier to find the survey, we use a slug which is a dashed-seperated sequence of alphanurmical name representing the survey.  This allows you to access it via the two URLs below:
+	%ul.text-muted.mb-4
+		%li.mb-0 #{survey_subdomain_url(survey.slug)}
+		%li.mb-0 #{survey_url(slug: survey.slug, subdomain: survey.channel.subdomain.slug)}

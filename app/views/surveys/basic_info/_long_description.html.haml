@@ -1,0 +1,5 @@
+%turbo-frame{id: "long_description", data: {turbot: {action: "advance"}}}
+	.card.border.border-dark.mb-4
+		.card-body.d-flex
+			%a.stretched-link.text-decoration-none.text-dark.flex-grow-1.p-2{href: edit_survey_path(slug: survey.slug, part: "long_description"), data: {turbo: {frame: "rightSide"}}} Long Description
+			%i.bi.bi-chevron-right.p-2{aria: {hidden: "true"}}
