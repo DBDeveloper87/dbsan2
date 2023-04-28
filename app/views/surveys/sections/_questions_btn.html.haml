@@ -1,0 +1,5 @@
+%turbo-frame{id: "questions_btn", data: {turbot: {action: "advance"}}}
+	.card.border.border-dark.mb-4
+		.card-body.d-flex
+			%a.stretched-link.text-decoration-none.text-dark.flex-grow-1.p-2{href: survey_questions_path(survey_slug: section.survey.slug, sec_num: section.section_number), data: {turbo: {frame: "rightSide"}}} Questions
+			%i.bi.bi-chevron-right.p-2{aria: {hidden: "true"}}

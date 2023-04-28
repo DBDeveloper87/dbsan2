@@ -1,0 +1,11 @@
+%turbo-frame{id: "description", data: {turbo: {action: "advance"}}}
+	.d-flex
+		.flex-grow-1.p-2.ps-0
+			%h3 Description
+		.p2{data: {controller: "bootstrap"}}
+			%a.btn.btn-dark.btn-lg{href: edit_survey_section_path(survey_slug: section.survey.slug, sec_num: section.section_number, part: "description"), title: "Edit Description", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Description"}}}
+				%i.bi.bi-pencil{aria: {hidden: "true"}}	
+	- if section.content.nil? or section.content == ""
+		%p Click on edit to add a description
+	- else
+		= simple_format(section.content)	

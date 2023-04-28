@@ -7,17 +7,26 @@
 				= link_to "View", survey_path(@survey), class: "btn btn-lg btn-dark", role: "button"
 	.row
 		= render partial: "surveys/sidebar", locals: {survey: @survey}
-		.col-md-9.p-4
-			= form_with(model: @section, url: survey_section_path(survey_slug: @survey.slug, sec_num: @section.section_number)) do |f|
-				%h2 #{@section.section_number}. #{@section.title}
-				.form-floating.mb-4
-					= f.text_field :title, placeholder: "Section Title", class: "form-control border border-dark"
-					= f.label :title, "Section Title"
-
-				.form-group.mb-4
-					= f.label :content, "Section Description"
-					= f.text_area :content, data:{controller: "textarea-autogrow"}, class: "form-control border border-dark"
-
-				.row.p-2
-					= f.submit "Save Changes", class: "btn btn-dark btn-lg"
-			
+		.col-md-9.p-0
+			%turbo-frame{id: "rightSide", data: {turbo: {action: "advance"}}}
+				.d-flex.bg-dark.text-light.p-2
+					.p-2{data: {controller: "bootstrap"}}
+						%a.btn.btn-dark.btn-lg.border.border-light{href: "#", title: "Back", style: "border-radius: 50%", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Back"}}}
+							%i.bi.bi-chevron-left{aria: {hidden: "true"}}
+					.flex-grow-1.p-2
+						%h2 Section #{@section.section_number}
+					.p-2{data: {controller: "bootstrap"}}
+						%a.btn.btn-dark.btn-lg.border.border-light{href: "#", title: "Move Up", style: "border-radius: 50%", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Move Up"}}}
+							%i.bi.bi-chevron-up{aria: {hidden: "true"}}
+					.p-2{data: {controller: "bootstrap"}}
+						%a.btn.btn-dark.btn-lg.border.border-light{href: "#", title: "Move Down", style: "border-radius: 50%", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Move Down"}}}
+							%i.bi.bi-chevron-down{aria: {hidden: "true"}}
+					.p-2{data: {controller: "bootstrap"}}
+						%a.btn.btn-dark.btn-lg.border.border-light{href: "#", title: "Settings", style: "border-radius: 50%", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Settings"}}}
+							%i.bi.bi-gear{aria: {hidden: "true"}}
+				
+				.p-4
+					= render partial: "surveys/sections/title", locals: {section: @section}
+					= render partial: "surveys/sections/description", locals: {section: @section}
+					= render partial: "surveys/sections/questions_btn", locals: {section: @section}
+				

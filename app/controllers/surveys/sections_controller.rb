@@ -2,6 +2,13 @@ class Surveys::SectionsController < SurveysController
 	before_action :set_section, only: [:edit, :update]
 
 	def edit
+		if params[:part].present?
+			if params[:part] == "title"
+				render partial: "surveys/sections/edit_title", locals: {section: @section}
+			elsif params[:part] == "description"
+				render partial: "surveys/sections/edit_description", locals: {section: @section}
+			end
+		end
 	end
 
 	def create

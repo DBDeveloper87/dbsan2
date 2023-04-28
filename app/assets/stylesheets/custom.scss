@@ -138,13 +138,21 @@ li {
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--bs-dark-rgb: 250, 250, 250;
+		--bs-dark-rgb: 150, 150, 150;
 		--bs-light-rgb: 32, 32, 41;
 	}
 
 	body {
 		background: black;
 		color: white;
+	}
+
+	.nav-link {
+		color: #ffffff;
+	}
+
+	.nav-link:hover {
+		color: #999999
 	}
 
 	.card {

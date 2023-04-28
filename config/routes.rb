@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
     resources :surveys, param: :slug do
       resources :sections, controller: "surveys/sections", param: :sec_num
-      #post "sections/new", to: "survey_sections#create"
+      resources :questions, controller: "surveys/questions", param: :position
     end
   end
 

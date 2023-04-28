@@ -1,0 +1,17 @@
+%turbo-frame{id: "rightSide", data: {turbo: {action: "advance"}}}
+	.d-flex.bg-dark.text-light.p-2
+		.p-2{data: {controller: "bootstrap"}}
+			%a.btn.btn-dark.btn-lg.border.border-light{href: edit_survey_section_path(survey_slug: @survey.slug, sec_num: @section.section_number), title: "Back", style: "border-radius: 50%", data: {turbo: {frame: "rightSide"}, bs: {toggle: "tooltip", placement: "bottom", title: "Back"}}}
+				%i.bi.bi-chevron-left{aria: {hidden: "true"}}
+		.flex-grow-1.p-2
+			%h2 Section #{@section.section_number} Questions
+		.p-2{data: {controller: "bootstrap"}}
+			%a.btn.btn-dark.btn-lg.border.border-light{href: new_survey_question_path(survey_slug: @survey.slug, sec_num: @section.section_number), title: "New Question", style: "border-radius: 50%", data: {turbo: {frame: "new_question"}, bs: {toggle: "tooltip", placement: "bottom", title: "New Question"}}}
+				%i.bi.bi-plus{aria: {hidden: "true"}}
+
+
+	.p-4
+		= render partial: "surveys/questions/questions", locals: {questions: @questions}
+		%turbo-frame{id: "new_question", data: {turbo: {action: "advance"}}}
+			- if @questions.empty?
+				%p There are currently no questions in this section.
