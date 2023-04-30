@@ -1,0 +1,24 @@
+%turbo-frame{id: "question_#{q.id}", data: {turbo: {action: "advance"}}}
+	.border.border-dark.mb-4
+		.row.ps-2.pe-2
+			.col-1.bg-dark.text-light.d-flex
+				.align-self-center.mx-auto
+					%span #{q.position}
+			.col-11.bg-dark.text-light{data: {controller: "bootstrap"}}
+				.d-flex
+					.flex-grow-1.p-2.d-flex
+						.align-self-center
+							%span #{q.question_type.titleize}
+					.p-2
+						%a.btn.btn-dark.btn-lg.border.border-light{href: edit_survey_question_path(survey_slug: survey.slug, position: q.position, sec_num: section.section_number), title: "Edit Question #{q.position}", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Question #{q.position}"}}}
+							%i.bi.bi-pencil{aria: {hidden: "true"}}
+		.fieldset
+			.p-4
+				- unless q.title.nil?
+					%h3 #{q.title}
+				- unless q.description.nil?
+					= simple_format(q.description)
+				%h4 Options
+				%ul
+					- q.options.each do |o|
+						%li #{o.name}

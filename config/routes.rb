@@ -24,7 +24,14 @@ Rails.application.routes.draw do
     end
     resources :surveys, param: :slug do
       resources :sections, controller: "surveys/sections", param: :sec_num
-      resources :questions, controller: "surveys/questions", param: :position
+      resources :questions, controller: "surveys/questions", param: :position do
+        resources :options, controller: "surveys/questions/options", only: [], param: :index do
+          member do
+            delete "(:id)" => "surveys/questions/options#destroy", as: ""
+            post "/" => "surveys/questions/options#create"
+          end
+        end
+      end
     end
   end
 

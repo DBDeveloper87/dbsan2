@@ -1,0 +1,30 @@
+%turbo-frame{id: "question_#{q.id}", data: {turbo: {action: "advance"}}}
+	= form_with(model: q, url: survey_question_path(survey_slug: survey.slug, position: q.position, sec_num: section.section_number)) do |f|
+		.border.border-dark.mb-4
+			.row.ps-2.pe-2
+				.col-1.text-center.bg-dark.text-light.d-flex
+					.align-self-center.mx-auto 
+						= q.position
+				.col-11.p-0
+					.form-floating
+						= f.select :question_type, options_for_select(SurveyQuestion.question_types.map {|k, v| [k.titleize, k]}, selected: q.question_type), {prompt: "Choose one. . . "}, class: "form-select border border-dark", onChange: "requestSubmit()"
+						= f.label :question_type, "Question Type"
+
+			.p-4
+				.form-floating.mb-4
+					= f.text_area :title, placeholder: "Question Title", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+					= f.label :title, "Question Title"
+
+				.form-floating.mb-4
+					= f.text_area :description, placeholder: "Description / Help Text", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+					= f.label :description, "Description / Help Text"
+
+				%turbo-frame{id: "options"}
+					= f.fields_for :question_options, q.options do |of|
+						= render "surveys/questions/options/form", form: of, q: q
+
+				-#.text-start
+					-#= f.submit "Add Option", formaction: survey_question_option_path(survey_slug: q.survey_section.survey.slug, question_position: q.position, index: q.options.size, sec_num: q.survey_section.section_number), formmethod: :post, formnovalidate: true, id: "add_option"
+
+				.text-end
+					= f.submit "Done", class: "btn btn-dark btn-lg"

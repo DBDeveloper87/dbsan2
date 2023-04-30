@@ -1,0 +1,7 @@
+%turbo-frame{id: "question_#{q.id}_option_#{form.index}"}
+	= form.hidden_field :id
+	-#%p This is form index number #{form.index}.
+	.form-floating.mb-4
+		= form.text_field :name, placeholder: "Option #{form.index + 1}", class: "form-control border border-dark"
+		= form.label :name, "Option #{form.index + 1}"
+	-#= form.submit "Delete", formaction: survey_question_option_path(survey_slug: q.survey_section.survey.slug, question_position: q.position, index: form.index, id: form.object.id, sec_num: q.survey_section.section_number), formmethod: :delete, formnovalidate: true, data: {turbo: {frame: "question_#{q.id}_option_#{form.index}"}}

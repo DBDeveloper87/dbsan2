@@ -1,0 +1,7 @@
+= fields model: @question do |f|
+  = f.fields_for :question_options, @options, child_index: params[:index] do |of|
+    = turbo_stream.replace "add_option" do
+      = f.submit "Add Option", formaction: survey_question_option_path(survey_slug: @survey.slug, question_position: @question.position, index: of.index.to_i + 1, sec_num: @section.section_number), formmethod: :post, formnovalidate: true, id: "add_option"
+
+    = turbo_stream.append "options" do
+      = render "surveys/questions/options/form", form: task_form, q: @question

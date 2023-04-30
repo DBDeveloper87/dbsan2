@@ -1,0 +1,7 @@
+= fields model: @question do |f|
+	= f.fields_for :question_options, @options, child_index: params[:index] do |of|
+		%turbo-frame{id: "question_#{@question.id}_option_#{of.index}"}
+			= of.hidden_field :id, value: params[:id]
+			= of.hidden_field :_destroy, value: true
+
+= turbo_stream.remove(id: "question_#{@question.id}_option_#{params[:index]}")

@@ -1,9 +1,11 @@
 %turbo-frame{id: "new_question", data: {turbo: {action: "advance"}}}
-	= form_with(model: @question, url: survey_questions_path(survey_slug: @survey.slug)) do |f|
+	= form_with(model: @question, url: survey_questions_path(survey_slug: @survey.slug, sec_num: @section.section_number)) do |f|
 		.row.border.border-dark
 			.col-1.text-center.bg-dark.text-light.d-flex
-				.align-self-center.mx-auto #{@position}
+				.align-self-center.mx-auto 
+					= @position
+					= f.hidden_field :position, value: @position
 			.col-11.p-0
 				.form-floating
-					= f.select :question_type, options_for_select(SurveyQuestion.question_types.map {|k, v| [k.titleize, v]}), {prompt: "Choose one. . . "}, class: "form-select border border-dark", onChange: "requestSubmit()"
+					= f.select :question_type, options_for_select(SurveyQuestion.question_types.map {|k, v| [k.titleize, k]}), {prompt: "Choose one. . . "}, class: "form-select border border-dark", onChange: "requestSubmit()"
 					= f.label :question_type, "Question Type"

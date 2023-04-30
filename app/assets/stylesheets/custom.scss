@@ -138,17 +138,17 @@ li {
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--bs-dark-rgb: 150, 150, 150;
+		--bs-dark-rgb: 102, 102, 102;
 		--bs-light-rgb: 32, 32, 41;
 	}
 
 	body {
-		background: black;
-		color: white;
+		background: #212529;
+		color: #F5FAFA;
 	}
 
 	.nav-link {
-		color: #ffffff;
+		color: #F5FAFA;
 	}
 
 	.nav-link:hover {
@@ -156,33 +156,33 @@ li {
 	}
 
 	.card {
-		background: black;
-		color: white;
+		background: #212529;
+		color: #F5FAFA;
 	}
 	.btn-dark {
-		--bs-btn-bg: gray;
-		--bs-btn-color: black;
-		--bs-btn-hover-bg: gray;
-		--bs-btn-hover-color: black;
+		--bs-btn-bg: #3d7c85;
+		--bs-btn-color: #F5FAFA;
+		--bs-btn-hover-bg: #3d7c85;
+		--bs-btn-hover-color: #F5FAFA;
 	}
 	.btn-outline-dark {
-		--bs-btn-bg: black;
-		--bs-btn-color: #fff;
-		--bs-btn-hover-bg: black;
-		--bs-btn-hover-color: #fff;
-		--bs-btn-border-color: #fff;
-		--bs-btn-hover-border-color: #fff;
-		--bs-btn-active-bg: gray;
-		--bs-btn-active-color: black;
-		--bs-btn-active-border-color: #fff;
+		--bs-btn-bg: #212529;
+		--bs-btn-color: #F5FAFA;
+		--bs-btn-hover-bg: #212529;
+		--bs-btn-hover-color: #F5FAFA;
+		--bs-btn-border-color: #F5FAFA;
+		--bs-btn-hover-border-color: #F5FAFA;
+		--bs-btn-active-bg: #3d7c85;
+		--bs-btn-active-color: #F5FAFA;
+		--bs-btn-active-border-color: #F5FAFA;
 	}
 	.form-control {
-		background-color: #212529;
-		color: #fff;
+		background-color: #303030;
+		color: #F5FAFA;
 	}
 	.form-control:focus {
 		background: #212529;
-		color: #fff;
+		color: #F5FAFA;
 	}
 	.progress {
 		--bs-progress-bg: black
