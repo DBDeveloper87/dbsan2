@@ -1,7 +1,7 @@
 .col-md-3.bg-dark.text-light
 	= link_to "Basic Info", edit_survey_path(slug: survey.slug), class: "d-block p-2 text-light nav-link border border-light m-2 w-100"
 	- if survey.sections.count > 0
-		- survey.sections.each do |s|
+		- survey.sections.order(section_number: :asc).each do |s|
 			= link_to "#{s.section_number}. #{s.title}", edit_survey_section_path(survey_slug: @survey.slug, sec_num: s.section_number), class: "d-block p-2 text-light nav-link border border-light m-2 w-100"
 	
 
