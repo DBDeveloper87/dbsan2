@@ -6,8 +6,9 @@ class SurveyQuestion < ApplicationRecord
   before_validation :strip_whitespace
   before_validation :make_nil
   before_validation :join_text
+  after_create :perform_option_generation
 
-  validates :title, presence: true, on: :update
+  #validates :title, presence: true, on: :update
 
   enum question_type: {single_choice: 0,
                         multiple_choice: 1,
@@ -15,7 +16,10 @@ class SurveyQuestion < ApplicationRecord
                         long_answer: 3,
                         yes_no: 4,
                         true_false: 5,
-                        rating: 6
+                        rating: 6,
+                        name_fields: 7,
+                        email_address: 8,
+                        county_select: 9
                       }
 
   def options
@@ -23,6 +27,24 @@ class SurveyQuestion < ApplicationRecord
   end
 
   private
+    def perform_option_generation
+      if self.question_type == "county_select"
+        state = StateProvince.find_by(name: "Minnesota")
+        counties = state.counties.order(name: :asc).all
+        counties.each do |c|
+          self.options.create(name: c.name)
+        end
+      elsif self.question_type == "yes_no"
+        self.options.create(name: "Yes")
+        self.options.create(name: "No")
+      elsif self.question_type == "name_fields"
+        self.options.create(name: "First Name")
+        self.options.create(name: "Last Name")
+      elsif self.question_type == "email_address"
+        self.options.create(name: "Email Address")
+      end
+    end
+
     def strip_whitespace
       self.title = self.title.strip unless self.title.nil?
       self.description = self.description.strip unless self.description.nil?

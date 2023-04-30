@@ -1,2 +1,2 @@
 = turbo_stream.append("questions", partial: "surveys/questions/edit", locals: {q: @question, survey: @survey, section: @section, option: @option})
-= turbo_stream.replace("new_question", "")
+= turbo_stream.replace("new_question", partial: "surveys/questions/new", locals: {survey: @survey, section: @section})
