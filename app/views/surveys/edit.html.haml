@@ -4,7 +4,7 @@
 			%h1 #{@survey.title}
 		.p-2
 			.row.p-2
-				= link_to "View", survey_path(slug: @survey.slug), class: "btn btn-lg btn-dark", role: "button"
+				%a.btn.btn-dark.btn-lg{href: survey_path(slug: @survey.slug), data: {turbo: {frame: "_top"}}} View
 	.row
 		= render partial: "sidebar", locals: {survey: @survey}
 		.col-md-9.p-4

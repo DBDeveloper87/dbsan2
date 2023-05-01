@@ -1,9 +1,7 @@
 %main.container-lg
-	.col-xl-8.pt-4.mx-auto
-		%turbo-frame{id: "main"}
+	%turbo-frame{id: "main"}
+		.col-xl-8.pt-4.mx-auto
 			%h1 #{@section.title}
-
-
 			= form_with(model: @response, url: survey_response_path(survey_slug: @survey.slug, id: @response.id, sec_num: @section.section_number)) do |f|
 				- @questions.each do |q|
 					.fieldset.border.border-dark.p-4.mb-4
@@ -20,10 +18,6 @@
 							= render partial: "surveys/responses/long_answer", locals: {response: @response, q: q, f: f}
 						- when "rating"
 							= render partial: "surveys/responses/rating", locals: {response: @response, q: q, f: f}
-
-
-
-
 				.row.mt-4.mb-4
 					- if @section.section_number == @survey.sections.count
 						= f.submit "Submit", class: "btn btn-dark btn-lg"
