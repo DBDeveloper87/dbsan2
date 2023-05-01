@@ -1,5 +1,5 @@
 class Surveys::ResponsesController < SurveysController
-	skip_before_action :authenticate_user!, only: [:create, :edit]
+	skip_before_action :authenticate_user!, only: [:create, :edit, :update]
 	before_action :set_response, only: [:edit, :update]
 
 	def edit
