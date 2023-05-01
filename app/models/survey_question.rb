@@ -1,8 +1,10 @@
 class SurveyQuestion < ApplicationRecord
   belongs_to :survey_section
-  has_many :question_options
+  has_many :question_options, dependent: :destroy
   accepts_nested_attributes_for :question_options, reject_if: :all_blank, allow_destroy: true
+  has_many :response_answers
   
+
   before_validation :strip_whitespace
   before_validation :make_nil
   before_validation :join_text

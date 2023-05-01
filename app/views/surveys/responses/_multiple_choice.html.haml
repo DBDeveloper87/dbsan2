@@ -1,0 +1,11 @@
+%p This question is #{q.question_type.titleize}.
+
+= f.fields_for :response_answers, response.answers.build do |a|
+	= a.hidden_field :id
+	= a.hidden_field :survey_question_id, value: q.id
+
+	.row.mb-4
+		- q.options.each do |o|
+			.d-grid.d-block.mb-2.col-12
+				= a.check_box :question_option_ids, { multiple: true, class: "btn-check" }, o.id, false
+				= a.label :question_option_ids, o.name, value: o.id, class: "btn btn-outline-dark btn-lg text-start"

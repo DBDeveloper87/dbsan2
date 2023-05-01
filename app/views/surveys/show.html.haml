@@ -1,7 +1,8 @@
-.container-lg
-	.col-xl-8.mx-auto.pt-4
-		%h1 #{@survey.title}
+%main.container-lg
+	%turbo-frame{id: "main"}
+		.col-xl-8.mx-auto.pt-4
+			%h1 #{@survey.title}
 
-		= simple_format(@survey.long_description)
+			= simple_format(@survey.long_description)
 
-		%button.btn.btn-dark.btn-lg{type: "button", disabled: "true"} Participate in Survey
+			= button_to "Take Survey", survey_responses_path(survey_slug: @survey.slug), method: :post, class: "btn btn-dark btn-lg"

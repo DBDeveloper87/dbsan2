@@ -49,7 +49,7 @@ class Surveys::QuestionsController < SurveysController
 		def update_params
 			params.require(:survey_question).permit(:survey_setion_id, :position, :question_type, 
 				:title, :description, question_options_attributes: [:id, :_destroy, :name, 
-					:logic, :sub_logic])
+					:logic, :sub_logic, :rating_value])
 		end
 		
 		def set_question

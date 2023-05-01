@@ -1,0 +1,9 @@
+%p This question is a #{q.question_type.titleize}.  It grants the user a text area to respond to the question that will automatically grow with the content.
+
+= f.fields_for :response_answers, response.answers.build do |a|
+	= a.hidden_field :id
+	= a.hidden_field :survey_question_id, value: q.id
+
+	.form-floating.mb-4
+		= a.text_area :long_answer, placeholder: "Your Answer", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+		= a.label :long_answer, "Your Answer"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_30_161208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -640,7 +640,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
     t.text "sub_logic"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "rating_value"
     t.index ["survey_question_id"], name: "index_question_options_on_survey_question_id"
+  end
+
+  create_table "question_options_response_answers", id: false, force: :cascade do |t|
+    t.bigint "question_option_id"
+    t.bigint "response_answer_id"
+    t.index ["question_option_id"], name: "index_question_options_response_answers_on_question_option_id"
+    t.index ["response_answer_id"], name: "index_question_options_response_answers_on_response_answer_id"
   end
 
   create_table "response_answers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -701,12 +709,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
 
   create_table "survey_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "survey_id", null: false
-    t.uuid "user_id", null: false
+    t.uuid "user_id"
     t.float "score"
     t.boolean "informed_consent"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email_address"
+    t.text "include_sections"
     t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
     t.index ["user_id"], name: "index_survey_responses_on_user_id"
   end
@@ -718,6 +730,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
     t.uuid "survey_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "conditionally_hidden"
     t.index ["survey_id"], name: "index_survey_sections_on_survey_id"
   end
 
@@ -737,6 +750,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_26_083328) do
     t.text "informed_consent"
     t.text "exit_message"
     t.string "slug"
+    t.integer "survey_type"
     t.index ["channel_id"], name: "index_surveys_on_channel_id"
   end
 

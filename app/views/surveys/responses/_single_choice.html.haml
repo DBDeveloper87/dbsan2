@@ -1,0 +1,12 @@
+%p This question is #{q.question_type.titleize}.
+
+= f.fields_for :response_answers, response.answers.build do |a|
+	= a.hidden_field :id
+	= a.hidden_field :survey_question_id, value: q.id
+	
+	.row.mb-4
+		- q.options.each do |o|
+			.col-12.d-grid.d-block.mb-2
+				= a.radio_button :question_option_ids,  o.id, class: "btn-check"
+				- symlabel = ("question_option_ids_" + o.id).to_sym
+				= a.label symlabel, o.name, class: "btn btn-outline-dark btn-lg text-start"
