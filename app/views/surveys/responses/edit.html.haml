@@ -11,7 +11,7 @@
 					
 						- case q.question_type
 						- when "single_choice"
-							= render partial: "surveys/responses/single_choice", locals: {response: @response, q: q, f: f}
+							= render partial: "surveys/responses/multiple_choice", locals: {response: @response, q: q, f: f}
 						- when "multiple_choice"
 							= render partial: "surveys/responses/multiple_choice", locals: {response: @response, q: q, f: f}
 						- when "long_answer"

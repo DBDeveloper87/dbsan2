@@ -645,8 +645,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_161208) do
   end
 
   create_table "question_options_response_answers", id: false, force: :cascade do |t|
-    t.bigint "question_option_id"
-    t.bigint "response_answer_id"
+    t.uuid "question_option_id"
+    t.uuid "response_answer_id"
     t.index ["question_option_id"], name: "index_question_options_response_answers_on_question_option_id"
     t.index ["response_answer_id"], name: "index_question_options_response_answers_on_response_answer_id"
   end
@@ -914,6 +914,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_30_161208) do
   add_foreign_key "products", "product_categories"
   add_foreign_key "profiles", "users"
   add_foreign_key "question_options", "survey_questions"
+  add_foreign_key "question_options_response_answers", "question_options"
   add_foreign_key "response_answers", "survey_questions"
   add_foreign_key "response_answers", "survey_responses"
   add_foreign_key "social_networks", "channels"

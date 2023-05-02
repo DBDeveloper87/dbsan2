@@ -10,8 +10,8 @@ class AddColumnsToTables < ActiveRecord::Migration[7.0]
     add_column :question_options, :rating_value, :integer
     
     create_table :question_options_response_answers, id: false do |t|
-      t.belongs_to :question_option
-      t.belongs_to :response_answer
+      t.references :question_option, type: :uuid, foreign_key: true
+      t.references :response_answer, type: :uuid, foreigh_key: true
     end
   end
 end
