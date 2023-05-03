@@ -5,5 +5,6 @@
 	= a.hidden_field :survey_question_id, value: q.id
 
 	.form-floating.mb-4
+		= a.label :long_answer, "Your Answer", class: "visually-hidden"
 		= a.text_area :long_answer, placeholder: "Your Answer", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
-		= a.label :long_answer, "Your Answer"
+		= a.label :long_answer, "Your Answer", aria: {hidden: "true"}
