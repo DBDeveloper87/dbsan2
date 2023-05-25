@@ -1,4 +1,9 @@
 class Challenge < ApplicationRecord
+	enum status: {draft: 0,
+					published: 1,
+					completed: 3
+	}
+
 	has_one :photo
 	accepts_nested_attributes_for :photo
 
