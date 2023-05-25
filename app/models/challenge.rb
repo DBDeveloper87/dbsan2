@@ -77,7 +77,11 @@ class Challenge < ApplicationRecord
 		donations.each do |d|
 			total.append(d.amount_deci)
 		end
-		return total.sum
+		if total.empty?
+			return 0
+		else
+			return total.sum
+		end
 	end
 
 	def total_time
@@ -142,7 +146,11 @@ class Challenge < ApplicationRecord
 	end
 
 	def overall_percent
-		(self.total_raised * 100 / total_goal).ceil
+		if total_goal == 0
+			return 0
+		else
+			(self.total_raised * 100 / total_goal).ceil
+		end
 	end
 
 	def top_donors

@@ -2,14 +2,15 @@
 	%h1 New Challenge
 
 	= form_with(model: challenge) do |f|
-		= f.fields_for @banner do |p|
-			- if @banner.file.attached?
-				%img{src: url_for(@banner.file), alt: "", width: "100%"}
-
-			.row.form-group
-				= p.file_field :file
-				= p.label :file, "Cover Image"
-
+		
+		- if challenge.photo.nil?
+			= f.fields_for :photo, Photo.new do |p|
+				= p.hidden_field :id
+					
+				.row.form-group.mb-4
+					= p.label :file, "Cover Image"
+					= p.file_field :file
+					
 		.row.form-floating
 			= f.text_field :title, placeholder: "Title", class: "form-control border border-dark"
 			= f.label :title, "Title"

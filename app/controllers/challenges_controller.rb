@@ -9,12 +9,12 @@ class ChallengesController < ApplicationController
 
 	def new
 		@challenge = Challenge.new
-		@banner = @challenge.photo.build
+		
 	end
 
 	def edit
 		if @challenge.photo.nil?
-			@banner = @challenge.photl.build
+			@banner = @challenge.photo
 		else
 			@banner = @challenge.photo
 		end
