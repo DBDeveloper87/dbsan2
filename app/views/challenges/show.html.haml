@@ -8,7 +8,7 @@
 	.d-flex
 		.flex-grow-1.p-2
 			%h1 #{@challenge.title}
-		- if current_user&.id.in?(@users) and current_user&.admin?
+		- if current_user&.admin?
 			.p-2
 				.dropdown
 					%button.btn.btn-dark.btn-lg.dropdown-toggle{type: "button", data:{bs:{toggle: "dropdown"}}, aria:{expanded: "false"}} 
