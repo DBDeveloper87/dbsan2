@@ -1,5 +1,5 @@
 module ApplicationHelper
-	def exercise_activity_options
+	def exercise_time_activity_options
 		[
 			"Cycling (indoors)", 
 			"Cycling (outdoors)", 
@@ -17,6 +17,20 @@ module ApplicationHelper
 			"Weight lifting", 
 			"Yoga", 
 			"Other"
+		]
+	end
+
+	def exercise_distance_activity_options
+		[
+			"Boating",
+			"Cycling",
+			"Elliptical",
+			"Hiking",
+			"Jogging",
+			"Rollerskating",
+			"Running",
+			"Swimming",
+			"Walking"
 		]
 	end
 

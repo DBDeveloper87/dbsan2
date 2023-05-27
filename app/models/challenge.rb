@@ -14,6 +14,23 @@ class Challenge < ApplicationRecord
 	has_many :frequently_asked_questions
 	has_many :exercise_trackers, through: :challenge_participants
 	
+	def duplicate_challenge
+		new_challenge = self.dup
+		new_challenge.title = self.title + "Copy"
+		new_challenge.status = "draft"
+		new_challenge.save
+
+		self.faqs.each do |f|
+			new_faq = f.dup
+			new_faq.challenge_id = new_challenge.id
+			new_faq.save
+		end
+	end
+
+	def faqs
+		self.frequently_asked_questions
+	end
+
 	def activities
 		self.exercise_trackers
 	end
