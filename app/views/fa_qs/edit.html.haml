@@ -2,4 +2,4 @@
 	%h1 Edit Question
 
 	= form_with(model: @faq, url: challenge_faq_path(@challenge, @faq)) do |f|
-		= render partial: "form", locals: {f: f}
+		= render partial: "form", locals: {f: f, faq: @faq}

@@ -6,7 +6,7 @@
 
 	.col-9
 		.form-floating
-			= f.select :question_group, options_for_select([["Registration", "Registration"], ["Donations", "Donations"], ["Prizes", "Prizes"], ["About the Challenge", "About the Challenge"]]), {prompt: "Choose One. . . "}, class: "form-select form-select-lg border border-dark"
+			= f.select :question_group, options_for_select([["Registration", "Registration"], ["Donations", "Donations"], ["Prizes", "Prizes"], ["About the Challenge", "About the Challenge"]], selected: faq.question_group), {prompt: "Choose One. . . "}, class: "form-select form-select-lg border border-dark"
 		
 .row.mb-4
 	.col-3
