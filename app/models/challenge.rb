@@ -27,10 +27,6 @@ class Challenge < ApplicationRecord
 		end
 	end
 
-	def faqs
-		self.frequently_asked_questions
-	end
-
 	def activities
 		self.exercise_trackers
 	end

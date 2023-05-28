@@ -6,6 +6,7 @@
 		- if q.group_number == 0
 			%h2 #{q.question_group}
 			= q.answer.html_safe
+			= link_to "Edit", edit_challenge_faq_path(@challenge, q)
 
 	- @groups.each_with_index do |g, i|
 		- if i > 0
@@ -18,3 +19,4 @@
 							%h3 #{q.question}
 						.ms-4.ps-4
 							= q.answer.html_safe
+							= link_to "Edit", edit_challenge_faq_path(@challenge, q)

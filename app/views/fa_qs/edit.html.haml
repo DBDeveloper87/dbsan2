@@ -1,0 +1,5 @@
+.col-12.col-md-4.mx-auto.pt-4
+	%h1 Edit Question
+
+	= form_with(model: @faq, url: challenge_faq_path(@challenge, @faq)) do |f|
+		= render partial: "form", locals: {f: f}
