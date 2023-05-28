@@ -44,44 +44,10 @@ class ChallengesController < ApplicationController
 		@groups = @groups.uniq { |k| k[:id]}
 		@total_time = @challenge.total_time_in_words
 		@chart_data = {
-			labels: [
-				"Cycling (indoors)", 
-				"Cycling (outdoors)",
-				"Dancing",
-				"Elliptical", 			
-				"Hiking", 
-				"Martial arts", 
-				"Rowing", 
-				"Running (indoors)", 
-				"Running (outdoors)", 
-				"Skiing", 
-				"Swimming", 
-				"Walking (indoors)", 
-				"Walking (outdoors)", 
-				"Weight lifting", 
-				"Yoga", 
-				"Other"
-			],
+			labels: @challenge.exercise_time_options,
 			datasets: [{
 				label: "Total Time By Activity",
-				backgroundColor: [
-					"red",
-					"blue",
-					"green",
-					"orange",
-					"purple",
-					"yellow",
-					"gold",
-					"bronze",
-					"platinum",
-					"silver",
-					"white",
-					"pink",
-					"lime",
-					"red",
-					"green",
-					"orange"
-				],
+				backgroundColor: @challenge.colors,
 				borderColor: '#3B82F6',
 				data: @challenge.activity_values
 			}]

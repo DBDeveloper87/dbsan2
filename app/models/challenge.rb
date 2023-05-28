@@ -14,6 +14,8 @@ class Challenge < ApplicationRecord
 	has_many :frequently_asked_questions
 	has_many :exercise_trackers, through: :challenge_participants
 	
+	enum challenge_type: {for_time: 0, for_distance: 1}
+
 	def duplicate_challenge
 		new_challenge = self.dup
 		new_challenge.title = self.title + "Copy"
@@ -31,7 +33,7 @@ class Challenge < ApplicationRecord
 		self.exercise_trackers
 	end
 
-	def exercise_activity_options
+	def exercise_time_options
 		[
 			"Cycling (indoors)", 
 			"Cycling (outdoors)", 
@@ -52,27 +54,65 @@ class Challenge < ApplicationRecord
 		]
 	end
 
+
+	def exercise_distance_options
+		[
+			"Boating",
+			"Cycling",
+			"Elliptical",
+			"Hiking",
+			"Jogging",
+			"Rollerskating",
+			"Running",
+			"Swimming",
+			"Walking"
+		]
+	end
+
+	def colors
+		[
+			"red",
+			"blue",
+			"green",
+			"orange",
+			"purple",
+			"yellow",
+			"gold",
+			"bronze",
+			"platinum",
+			"silver",
+			"white",
+			"pink",
+			"lime",
+			"red",
+			"green",
+			"orange"
+		]
+	end
+
 	def activity_values
 		values = []
-		self.exercise_activity_options.each do |ea|
-			total = []
-			activities = self.activities.where(activity: ea).all
-			activities.each do |a|
-				time = a.time
-				hour = time.hour
-				minute = time.min
-				second = time.sec
-				if second > 0
-					minute = minute + 1
+		if self.challenge_type == "for_time"
+			self.exercise_time_options.each do |ea|
+				total = []
+				activities = self.activities.where(activity: ea).all
+				activities.each do |a|
+					time = a.time
+					hour = time.hour
+					minute = time.min
+					second = time.sec
+					if second > 0
+						minute = minute + 1
+					end
+					if hour > 0
+						minutes = minute + (60 * hour)
+					else
+						minutes = minute
+					end
+					total.append(minutes)
 				end
-				if hour > 0
-					minutes = minute + (60 * hour)
-				else
-					minutes = minute
-				end
-				total.append(minutes)
+				values.append(total.sum)
 			end
-			values.append(total.sum)
 		end
 		return values
 	end
