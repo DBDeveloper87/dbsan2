@@ -90,18 +90,13 @@
 		- if @challenge.challenge_type == "for_time"
 			- if @challenge.total_time > 0
 				.h3.text-center{aria:{hidden: "true"}} Total Time By Activity
-				.text-muted.text-center{aria: {hidden: "true"}} #{@total_time}
+				.text-muted.text-center{aria: {hidden: "true"}} #{@challenge_total_time_in_words}
 			
 				%canvas{aria:{hidden: "true"}, data:{controller: "chart", chart:{data:{value: @chart_data.to_json}, type:{value: "pie"}, options: {value: @chart_options.to_json}}}}
 				%figcaption.text-center
-					A pie chart of "Total Time By Activity" with a subtitle calculating total time at #{@total_time} showing 
-					- count = []
-					- @challenge.activity_values.each do |a|
-						- unless a == 0
-							- count.append(a)
-						= count.count 
+					A pie chart of "Total Time By Activity" with a subtitle calculating total time at #{@challenge.total_time_in_words} showing #{@challenge.unique_activities.count}
 					activities exercised, in minutes: 
-					- exercise_time_activity_options.each_with_index do |e, ei|
+					- @challenge.unique_activities.each_with_index do |e, ei|
 						- @challenge.activity_values.each_with_index do |a, ai|
 							- if ei == ai and a > 0
 								#{e} at #{a}.
