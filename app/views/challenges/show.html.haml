@@ -86,8 +86,8 @@
 								.display-4.fw-bolder #{@donor_count}
 								.display-6.fw-bolder Donors				
 	
-	- if @challenge.challenge_type == "for_time"
-		%figure.col-12.col-md-8.mb-4.mt-4.mx-auto
+	%figure.col-12.col-md-8.mb-4.mt-4.mx-auto
+		- if @challenge.challenge_type == "for_time"
 			- if @challenge.total_time > 0
 				.h3.text-center{aria:{hidden: "true"}} Total Time By Activity
 				.text-muted.text-center{aria: {hidden: "true"}} #{@total_time}
@@ -108,6 +108,9 @@
 			- else
 				.h3.text-center Total Time By Activity
 				.text-muted.text-center #{@total_time}
+		- elsif @challenge.challenge_type == "for_distance"
+			.h3.text-center Total Distance By Activity
+			.text-muted.text-center #{@total_time}
 			
 
 	- unless @fundraising.count == 0

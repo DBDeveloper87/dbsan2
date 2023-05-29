@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_143910) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_28_171152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -494,6 +494,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_143910) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "distance"
+    t.integer "distance_unit", default: 0, null: false
     t.index ["challenge_participant_id"], name: "index_exercise_trackers_on_challenge_participant_id"
   end
 

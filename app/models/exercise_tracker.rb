@@ -5,7 +5,8 @@ class ExerciseTracker < ApplicationRecord
   attribute :time_second
   has_one :photo, dependent: :destroy
   accepts_nested_attributes_for :photo
-
+  enum distance_unit: {miles: 0, kilometers: 1}
+  
   before_validation :convert_time
   after_create :check_milestones
 

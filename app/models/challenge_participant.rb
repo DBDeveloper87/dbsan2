@@ -27,6 +27,15 @@ class ChallengeParticipant < ApplicationRecord
     return total.inject(0) { |sum, t| sum + ((t.hour * 60 + t.min + t.sec / 60).round) }
   end
 
+  def total_distance
+    total = []
+    activities = self.activities.all
+    activities.each do |a|
+      total.append(a.distance)
+    end
+    return total.sum
+  end
+
   def full_name
     "#{self.first_name} #{self.last_name}"
   end

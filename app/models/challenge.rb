@@ -117,6 +117,14 @@ class Challenge < ApplicationRecord
 		return values
 	end
 
+	def unique_activities
+		activities = []
+		self.activities.each do |a|
+			activities.append(a.activity)
+		end
+		return activities.uniq
+	end
+
 	def faqs
 		self.frequently_asked_questions
 	end
@@ -150,6 +158,14 @@ class Challenge < ApplicationRecord
 		return total.sum
 	end
 
+	def total_distance
+		total = []
+		self.participants.each do |p|
+			total.append(p.total_distance)
+		end
+		return total.sum
+	end
+
 	def total_time_in_words
 		total_time = self.total_time
 		hours = total_time / 60
@@ -160,6 +176,15 @@ class Challenge < ApplicationRecord
 			return "#{hours} Hours and #{minutes} Minutes"
 		elsif hours == 0 and minutes > 0
 			return "#{minutes} Minutes"
+		else
+			return "No Activity Logged Yet"
+		end
+	end
+
+	def total_distance_in_words
+		total_distance = self.total_distance.ceil
+		if total_distance > 0
+			return "#{total_distance} Miles"
 		else
 			return "No Activity Logged Yet"
 		end
