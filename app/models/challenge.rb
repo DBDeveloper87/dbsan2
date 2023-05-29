@@ -122,7 +122,7 @@ class Challenge < ApplicationRecord
 		self.activities.each do |a|
 			activities.append(a.activity)
 		end
-		return activities.uniq
+		return activities.uniq.sort
 	end
 
 	def faqs
