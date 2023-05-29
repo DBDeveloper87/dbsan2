@@ -44,7 +44,7 @@ class ChallengesController < ApplicationController
 		@groups = @groups.uniq { |k| k[:id]}
 		@total_time = @challenge.total_time_in_words
 		@chart_data = {
-			labels: @challenge.exercise_time_options,
+			labels: @challenge.unique_activities,
 			datasets: [{
 				label: "Total Time By Activity",
 				backgroundColor: @challenge.colors,
