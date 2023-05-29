@@ -93,7 +93,7 @@ class Challenge < ApplicationRecord
 	def activity_values
 		values = []
 		if self.challenge_type == "for_time"
-			self.exercise_time_options.each do |ea|
+			self.unique_activities.each do |ea|
 				total = []
 				activities = self.activities.where(activity: ea).all
 				activities.each do |a|
