@@ -116,8 +116,7 @@
 								#{e} at #{number_with_precision(a, strip_insignificant_zeros: true, precision: 1)} miles.
 			- else
 				.h3.text-center Total Distance By Activity
-				.text-muted.text-center #{@challenge.total_distance_in_words}
-			
+				.text-muted.text-center{aria: {hidden: "true"}} #{number_with_precision(@challenge.total_distance, strip_insignificant_zeros: true, precision: 1)} Miles
 
 	- unless @fundraising.count == 0
 		%h2.text-center.mt-4 Fundraising Milestones
