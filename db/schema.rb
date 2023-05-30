@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_28_171152) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_112950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -354,6 +354,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_171152) do
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_challenge_participants_on_challenge_id"
     t.index ["user_id"], name: "index_challenge_participants_on_user_id"
+  end
+
+  create_table "challenge_pricings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "price"
+    t.text "perks"
+    t.boolean "shirt"
+    t.text "shirt_description"
+    t.uuid "challenge_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_challenge_pricings_on_challenge_id"
   end
 
   create_table "challenges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -891,6 +904,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_28_171152) do
   add_foreign_key "challenge_milestones", "challenges"
   add_foreign_key "challenge_participants", "challenges"
   add_foreign_key "challenge_participants", "users"
+  add_foreign_key "challenge_pricings", "challenges"
   add_foreign_key "channel_menu_items", "channel_menus"
   add_foreign_key "channel_menus", "channels"
   add_foreign_key "channels", "subdomains"
