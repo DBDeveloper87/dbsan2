@@ -113,6 +113,20 @@ class Challenge < ApplicationRecord
 				end
 				values.append(total.sum)
 			end
+		elsif self.challenge_type == "for_distance"
+			self.unique_activities.each do |ea|
+				total = []
+				activities = self.activities.where(activity: ea).all
+				activities.each do |a|
+					if a.distance_unit == "kilometers"
+						miles = a.distance * 0.621371
+					else
+						miles = a.distance
+					end
+					total.append(miles)
+				end
+				values.append(total.sum)
+			end
 		end
 		return values
 	end
@@ -181,8 +195,8 @@ class Challenge < ApplicationRecord
 		end
 	end
 
-	def total_distance_in_words
-		total_distance = self.total_distance.ceil
+	def total_distance_in_words 
+		total_distance = number_with_precision(self.total_distance, strip_insignificant_zeros: true, precision: 1)
 		if total_distance > 0
 			return "#{total_distance} Miles"
 		else
@@ -197,35 +211,39 @@ class Challenge < ApplicationRecord
 	def total_goal
 		by_milestone = []
 		milestones = self.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
-		participants = self.participants
-		participants.each_with_index do |p|
-			p_milestones = p.milestones
-			milestone_ids = []
-			milestones.each do |m|
-				milestone_ids.append(m.id)
-			end
+		if milestones.count > 0
+			participants = self.participants
+			participants.each_with_index do |p|
+				p_milestones = p.milestones
+				milestone_ids = []
+				milestones.each do |m|
+					milestone_ids.append(m.id)
+				end
 
-			p_milestone_ids = []
-			if p_milestones.count == 0
-				by_milestone.append(milestones.first.goal)
-			else
-				p_milestones.each do |m|
-					p_milestone_ids.append(m.challenge_milestone_id)
-				end
-				if p_milestone_ids.in?(milestone_ids)
-					p_milestone_ids.each do |i|
-						milestone_ids.remove(i)
+				p_milestone_ids = []
+				if p_milestones.count == 0
+					by_milestone.append(milestones.first.goal)
+				else
+					p_milestones.each do |m|
+						p_milestone_ids.append(m.challenge_milestone_id)
 					end
+					if p_milestone_ids.in?(milestone_ids)
+						p_milestone_ids.each do |i|
+							milestone_ids.remove(i)
+						end
+					end
+					milestones = []
+					milestone_ids.each do |mi|
+						milestones.append(ChallengeMilestone.find(mi))
+					end
+					milestones = milestones.sort_by { |k| k[:goal]}
+					by_milestone.append(milestones[0].goal)
 				end
-				milestones = []
-				milestone_ids.each do |mi|
-					milestones.append(ChallengeMilestone.find(mi))
-				end
-				milestones = milestones.sort_by { |k| k[:goal]}
-				by_milestone.append(milestones[0].goal)
 			end
+			return by_milestone.sum.to_f
+		else
+			return 0
 		end
-		return by_milestone.sum.to_f
 	end
 
 	def overall_percent

@@ -19,19 +19,27 @@ class ChallengeParticipant < ApplicationRecord
   end
 
   def total_time
-    total = []
-    activities = self.activities.all
-    activities.each do |a|
-      total.append(a.time)
+    if self.challenge.challenge_type == "for_time"
+      total = []
+      activities = self.activities.all
+      activities.each do |a|
+        total.append(a.time)
+      end
+      return total.inject(0) { |sum, t| sum + ((t.hour * 60 + t.min + t.sec / 60).round) }
+    else
+      return 0
     end
-    return total.inject(0) { |sum, t| sum + ((t.hour * 60 + t.min + t.sec / 60).round) }
   end
 
   def total_distance
     total = []
     activities = self.activities.all
     activities.each do |a|
-      total.append(a.distance)
+      if a.distance_unit == "kilometers"
+        total.append(a.distance * 0.621371)
+      else
+        total.append(a.distance)
+      end
     end
     return total.sum
   end

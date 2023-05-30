@@ -94,18 +94,29 @@
 			
 				%canvas{aria:{hidden: "true"}, data:{controller: "chart", chart:{data:{value: @chart_data.to_json}, type:{value: "pie"}, options: {value: @chart_options.to_json}}}}
 				%figcaption.text-center
-					A pie chart of "Total Time By Activity" with a subtitle calculating total time at #{@challenge.total_time_in_words} showing #{@challenge.unique_activities.count}
-					activities exercised, in minutes: 
+					A pie chart of "Total Time By Activity" with a subtitle calculating total time at #{@challenge.total_time_in_words} showing #{@challenge.unique_activities.count} activities exercised, in minutes: 
 					- @challenge.unique_activities.each_with_index do |e, ei|
 						- @challenge.activity_values.each_with_index do |a, ai|
 							- if ei == ai and a > 0
 								#{e} at #{a}.
 			- else
 				.h3.text-center Total Time By Activity
-				.text-muted.text-center #{@total_time}
+				.text-muted.text-center #{@challenge.total_time_in_words}
 		- elsif @challenge.challenge_type == "for_distance"
-			.h3.text-center Total Distance By Activity
-			.text-muted.text-center #{@total_time}
+			- if @challenge.total_distance > 0
+				.h3.text-center{aria: {hidden: "true"}} Total Distance By Activity
+				.text-muted.text-center{aria: {hidden: "true"}} #{number_with_precision(@challenge.total_distance, strip_insignificant_zeros: true, precision: 1)} Miles
+
+				%canvas{aria:{hidden: "true"}, data:{controller: "chart", chart:{data:{value: @chart_data.to_json}, type:{value: "pie"}, options: {value: @chart_options.to_json}}}}
+				%figcaption.text-center
+					A pie chart of "Total Distance By Activity" with a subtitle calculating total distance at #{number_with_precision(@challenge.total_distance, strip_insignificant_zeros: true, precision: 1)} miles showing #{@challenge.unique_activities.count} activities exercised, in miles: 
+					- @challenge.unique_activities.each_with_index do |e, ei|
+						- @challenge.activity_values.each_with_index do |a, ai|
+							- if ei == ai and a > 0
+								#{e} at #{number_with_precision(a, strip_insignificant_zeros: true, precision: 1)} miles.
+			- else
+				.h3.text-center Total Distance By Activity
+				.text-muted.text-center #{@challenge.total_distance_in_words}
 			
 
 	- unless @fundraising.count == 0

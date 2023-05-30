@@ -7,11 +7,14 @@ class ExerciseTracker < ApplicationRecord
   accepts_nested_attributes_for :photo
   enum distance_unit: {miles: 0, kilometers: 1}
   
-  before_validation :convert_time
+  before_validation :convert_time, if: :for_time?
   after_create :check_milestones
 
   validates :activity, presence: true
-  validates :time, presence: true
+  validates :time, presence: true, if: :for_time?
+  validates :distance, presence: true, if: :for_distance?
+  validates :distance_unit, presence: true, if: :for_distance?
+  
 
   def check_milestones
     total_time = self.challenge_participant.total_time
@@ -47,6 +50,14 @@ class ExerciseTracker < ApplicationRecord
   end
 
   private
+    def for_time?
+      self.challenge_participant.challenge.challenge_type == "for_time"
+    end
+
+    def for_distance?
+      self.challenge_participant.challenge.challenge_type == "for_distance"
+    end
+
     def convert_time
       hours = self.time_hour
       if hours == ""
@@ -61,7 +72,8 @@ class ExerciseTracker < ApplicationRecord
         seconds = 0
       end
 
-      #self.time = Time.zone.strptime("0:5:0", "%H:%M:%S")
       self.time = Time.zone.strptime("#{hours}:#{minutes}:#{seconds}", "%H:%M:%S")
+      
+
     end
 end

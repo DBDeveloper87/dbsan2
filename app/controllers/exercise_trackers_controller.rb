@@ -34,7 +34,8 @@ class ExerciseTrackersController < ApplicationController
 		end
 
 		def create_params
-			params.require(:exercise_tracker).permit(:activity, :time_hour, :time_minute,
+			params.require(:exercise_tracker).permit(:activity, :distance, :distance_unit, 
+				:time_hour, :time_minute,
 			 :time_second, :comment, photo_attributes: [:file, :alt_text, :image_type])
 		end
 end

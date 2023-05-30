@@ -17,21 +17,21 @@
 				%label.visually-hidden{for: "pageURL"} Page URL
 				%input#pageURL.form-control.border.border-dark{type: "text", readonly: "true", value: "#{challenge_participant_url(@challenge, @participant)}"}
 				%label{for: "pageURL", aria:{hidden: "true"}} Page URL
-			.progress.border.border-dark
-				.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
-			.mt-2.text-center.text-muted.fw-bolder 
-				#{number_to_currency(@raised)} / 
-				- if @raised.between?(0, 150)
-					$150.00
-				- elsif @raised.between?(151, 300)
-					$300.00
-				- elsif @raised.between?(301, 1000)
-					$1,000.00
-				- elsif @raised > 1000
-					$5,000.00
-				Raised
+			-#.progress.border.border-dark
+			-#	.progress-bar{role: "progressbar", style: "width: #{@percent}%", aria:{label: "#{@percent.ceil}% Amount Raised", valuenow: "#{@percent}", valuemin: "0", valuemax: "100"}}
+			-#.mt-2.text-center.text-muted.fw-bolder 
+			-#	#{number_to_currency(@raised)} / 
+			-#	- if @raised.between?(0, 150)
+			-#		$150.00
+			-#	- elsif @raised.between?(151, 300)
+			-#		$300.00
+			-#	- elsif @raised.between?(301, 1000)
+			-#		$1,000.00
+			-#	- elsif @raised > 1000
+			-#		$5,000.00
+			-#	Raised
 			.row.p-4
-				-# = link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
+				= link_to "Donate", new_donation_path(participant_id: @participant.id), class: "btn btn-lg btn-dark", role: "button"
 			- if @donations.count > 0
 				%h2 My Donors
 				- @unique_emails.each do |e|
@@ -58,8 +58,12 @@
 							.position-absolute.top-0.start-0.bottom-0.end-0.p-4.border-dark{style: "border: 0.5rem solid; border-radius: 50%", role: "text"} 
 								.row.h-100
 									.align-self-center.text-center
-										.display-4.fw-bolder #{@participant.total_time}
-										.display-6.fw-bolder Minutes		
+										- if @challenge.challenge_type == "for_time"
+											.display-4.fw-bolder #{@participant.total_time}
+											.display-6.fw-bolder Minutes
+										- elsif @challenge.challenge_type == "for_distance"	
+											.display-4.fw-bolder #{number_with_precision(@participant.total_distance, strip_insignificant_zeros: true, precision: 1)}
+											.display-6.fw-bolder Miles	
 				.col-12.col-md-7.mx-auto
 					.card
 						.card-body.position-relative.w-100{style: "padding-top: 70%"}
@@ -81,7 +85,7 @@
 
 			- if current_user&.id == @participant.user.id
 				.row.mt-4.mb-4.p-4
-					-# = link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
+					= link_to "Log Activity", new_challenge_participant_activity_path(@challenge, @participant), class: "btn btn-lg btn-dark", role: "button"
 			- @activities.each do |a|
 				.row.mb-4
 					.col-12.col-md-3
@@ -91,11 +95,22 @@
 							.flex-grow-1.p-2
 								= a.activity
 							.p-2
-								= a.time.strftime("%H:%M:%S")
+								- if @challenge.challenge_type == "for_time"
+									= a.time.strftime("%H:%M:%S")
+								- else
+									#{number_with_precision(a.distance, strip_insignificant_zeros: true, precision: 1)} 
+									- if a.distance_unit == "miles"
+										m
+									- else
+										km
 							- if current_user&.id == @participant.user.id
 								.p-2
-									= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, aria:{label: "Delete #{a.activity} for #{a.time.strftime("%H:%M:%S")}"}, class: "btn btn-dark btn-lg" do
-										%i.bi.bi-trash{aria: {hidden: "true"}}
+									- if @challenge.challenge_type == "for_time"
+										= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, aria:{label: "Delete #{a.activity} for #{a.time.strftime("%H:%M:%S")}"}, class: "btn btn-dark btn-lg" do
+											%i.bi.bi-trash{aria: {hidden: "true"}}
+									- elsif @challenge.challenge_type == "for_distance"
+										= button_to challenge_participant_activity_path(@challenge, @participant, a), form: {data: {turbo_confirm: "Are you sure?"}}, method: :delete, aria:{label: "Delete #{a.activity} for #{a.distance.ceil} #{a.distance_unit.capitalize}"}, class: "btn btn-dark btn-lg" do
+											%i.bi.bi-trash{aria: {hidden: "true"}}
 						
 						= simple_format(a.comment)
 
