@@ -1,0 +1,2 @@
+module Challenges::PricesHelper
+end

@@ -4,6 +4,7 @@ class ChallengeParticipant < ApplicationRecord
   has_many :participant_milestones
   belongs_to :challenge
   belongs_to :user
+  belongs_to :price, optional: true
   before_save :serialize_address
   serialize :addresses
 

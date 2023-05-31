@@ -1,0 +1,6 @@
+.container-md
+	.col-12.col-md-8.mx-auto.pt-4
+		%h1 New Pricing
+
+		= form_with(model: @price, url: challenge_price_path(@challenge, @price)) do |f|
+			= render partial: "challenges/prices/form", locals: {f: f, price: @price}

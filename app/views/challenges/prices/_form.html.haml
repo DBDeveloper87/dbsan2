@@ -1,0 +1,52 @@
+.form-floating.mb-4
+	= f.text_field :name, placeholder: "Name", class: "form-control border border-dark"
+	= f.label :name, "Name"
+.row
+	.col-12.col-md-3.mb-4
+		.input-group
+			.input-group-text.bg-dark
+				%span.text-light $
+			.form-floating
+				= f.number_field :price, placeholder: "Price", class: "form-control border border-dark text-end space-number", step: "0.01"
+				= f.label :price, "Price"
+
+	.col-12.col-md-9.mb-4
+		.row
+			= f.check_box :shirt, class: "btn-check"
+			= f.label :shirt, "Include T-Shirt", class: "btn btn-outline-dark btn-lg text-start"
+			
+.form-floating.mb-4
+	= f.text_area :description, placeholder: "Description", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+	= f.label :description, "Description"
+
+.fieldset.border.border-dark.p-4.mb-4
+	%legend Perks
+	- unless price.perks.nil?
+		- price.perks.each_with_index do |perk, i|
+			.form-floating.mb-4
+				%input.border.border-dark.form-control{id: "price_perks_#{i}", name: "price[perks][]", type: "text", placeholder: "Perk #{i + 1}", value: perk}
+				%label{for: "price_perks_#{i}"} Perk #{i + 1}
+		- remaining = 6 - price.perks.count
+		- remaining.times do |i|
+			.form-floating.mb-4
+				%input.border.border-dark.form-control{id: "price_perks_#{i + (remaining - 2)}", name: "price[perks][]", type: "text", placeholder: "Perk #{i + remaining - 1}"}
+				%label{for: "price_perks_#{i}"} Perk #{i + remaining - 1}
+	- else
+		- 6.times do |i|
+			.form-floating.mb-4
+				%input.border.border-dark.form-control{id: "price_perks_#{i}", name: "price[perks][]", type: "text", placeholder: "Perk #{i + 1}"}
+				%label{for: "price_perks_#{i}"} Perk #{i + 1}
+- if price.shirt_image.attached?
+	.text-center
+		%img.mb-4{src: url_for(price.shirt_image), alt: "", width: "50%"}
+- else
+	.form-group.mb-4
+		= f.label :shirt_image, "Upload Shirt Image", class: "d-block"
+		= f.file_field :shirt_image
+
+.form-floating.mb-4
+	= f.text_area :shirt_description, placeholder: "Shirt Description", class: "form-control border border-dark", data: {controller: "textarea-autogrow"}
+	= f.label :shirt_description, "Shirt Description"
+
+.row
+	= f.submit "Save", class: "btn btn-dark btn-lg"

@@ -7,6 +7,7 @@ class Challenge < ApplicationRecord
 	has_one :photo
 	accepts_nested_attributes_for :photo
 
+	has_many :prices
 	has_many :challenge_participants
 	has_many :users, through: :challenge_participants
 	has_many :donations, through: :challenge_participants

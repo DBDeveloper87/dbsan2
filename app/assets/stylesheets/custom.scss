@@ -15,6 +15,14 @@ li {
 	content: '*';
 	color: 'red';
 }
+.space-number::-webkit-outer-spin-button, 
+.space-number::-webkit-inner-spin-button { 
+margin-left: 20px; 
+}
+
+.space-number {
+	-moz-appearance:textfield;
+} 
 
 .image-upload > input {
 	display: none

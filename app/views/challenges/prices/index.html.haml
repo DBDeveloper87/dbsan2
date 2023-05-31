@@ -1,0 +1,25 @@
+.container-md
+	.col-12.col-md-8.mx-auto.pt-4
+		%h1 Pricing for #{@challenge.title}
+
+		= link_to "New Pricing", new_challenge_price_path(@challenge), class: "btn btn-dark btn-lg mb-4"
+
+		- @prices.each do |p|
+			.border.border-dark.p-4.mb-4
+				%h2 #{p.name}
+				- if p.price == 0
+					%p FREE
+				- else
+					%p #{number_to_currency(p.price)}
+
+				.row
+					.col-12.col-md-6.mb-4
+						%ul
+						- p.perks.each do |perk|
+							%li #{perk}
+					- if p.shirt?
+						.col-12.col-md-6.mb-4
+							%img{src: url_for(p.shirt_image), alt: "", width: "100%"}
+							%p.text-muted.text-center #{p.shirt_description}
+
+				= link_to "Edit", edit_challenge_price_path(@challenge, p), class: "btn btn-lg btn-dark"
