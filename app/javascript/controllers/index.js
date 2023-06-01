@@ -43,3 +43,6 @@ application.register("video-container", VideoContainerController)
 
 import SliderController from "./slider_controller"
 application.register("slider", SliderController)
+
+import ParticipantController from "./participant_controller"
+application.register("participant", ParticipantController)

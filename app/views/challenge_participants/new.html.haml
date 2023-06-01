@@ -1,4 +1,4 @@
-.col-xl-6.mx-auto.p-4
+.col-xl-6.mx-auto.p-4{data: {controller: "participant"}}
 	%h1 Challenge Registration
 
 	= form_with(model: @registrant, url: challenge_participants_path) do |f|
@@ -35,30 +35,79 @@
 			= f.text_field :country, placeholder: "Country", value: @country, class: "form-control border border-dark"
 			= f.label :country, "Country"
 
-		.fieldset.border.border-dark.p-2
+		- unless @challenge.prices.empty?
+			.fieldset.border.border-dark.p-2
+				%legend Pricing
+				%p Please choose one of the otpions below to register.
+				.row.row-cols-1.row-cols-md-2
+					- @challenge.prices.each_with_index do |p, i|
+						.col.mb-4
+							.card.border.border-dark.h-100
+								.card-body
+									- if i == 0
+										.d-grid.d-block.mb-2
+											- if p.shirt_image.attached?
+												= f.radio_button :price_id, p.id, class: "btn-check", data: {participant_target: "firstPrice", participant_shirt: p.shirt, participant_shirt_param: p.shirt, participant_shirtimg: p.shirt_image.url, participant_shirtimg_param: p.shirt_image.url, participant_shirtdescription: p.shirt_description,participant_shirtdescription_param: p.shirt_description, action: "click->participant#showHideShirtSizes"}, checked: true
+											- else
+												= f.radio_button :price_id, p.id, class: "btn-check", data: {participant_target: "firstPrice", participant_shirt: p.shirt, participant_shirt_param: p.shirt, participant_shirtimg: "placeholder", participant_shirtimg_param: "placeholder", participant_shirtdescription: p.shirt_description, participant_shirtdescription_param: p.shirt_description, action: "click->participant#showHideShirtSizes"}, checked: true
+											
+											= f.label "price_id_#{p.id}".to_sym, p.name, class: "btn btn-outline-dark btn-lg text-start"
+									- else
+										.d-grid.d-block.mb-2
+											- if p.shirt_image.attached?
+												= f.radio_button :price_id, p.id, class: "btn-check", data: {participant_shirt_param: p.shirt, participant_shirtimg_param: p.shirt_image.url, participant_shirtdescription_param: p.shirt_description, action: "click->participant#showHideShirtSizes"}
+											- else
+												= f.radio_button :price_id, p.id, class: "btn-check", data: {participant_shirt_param: p.shirt,participant_shirtimg_param: "placeholder", participant_shirtdescription_param: p.shirt_description, action: "click->participant#showHideShirtSizes"}
+											
+											= f.label "price_id_#{p.id}".to_sym, p.name, class: "btn btn-outline-dark btn-lg text-start"
+
+									
+									.d-flex{role: "text"}
+										.flex-grow-1.p-2
+											%span Price:
+										.p-2
+											- if p.price == 0
+												%span FREE
+											- else
+												%span #{number_to_currency(p.price)}
+
+									%ul
+										- p.perks.each do |perk|
+											%li.mb-2 #{perk}
+
+
+		.fieldset.border.border-dark.p-2.d-none{data: {participant: {target: "sizes"}}}
 			%legend T-shirt size
-			.row.mb-2
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "s", class: "btn-check"
-					= f.label :shirt_size_s, "S", class: "btn btn-outline-dark btn-lg"
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "m", class: "btn-check"
-					= f.label :shirt_size_m, "M", class: "btn btn-outline-dark btn-lg"
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "l", class: "btn-check"
-					= f.label :shirt_size_l, "L", class: "btn btn-outline-dark btn-lg"
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "xl", class: "btn-check"
-					= f.label :shirt_size_xl, "XL", class: "btn btn-outline-dark btn-lg"
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "2xl", class: "btn-check"
-					= f.label :shirt_size_2xl, "2XL", class: "btn btn-outline-dark btn-lg"
-				.col-4.col-md-2.d-grid.d-block.mb-2
-					= f.radio_button :shirt_size, "3xl", class: "btn-check"
-					= f.label :shirt_size_3xl, "3XL", class: "btn btn-outline-dark btn-lg"
-			.d-grid.d-block.mb-2
-				= f.radio_button :shirt_size, "none", class: "btn-check"
-				= f.label :shirt_size_none, "No shirt, thank you.", class: "btn btn-outline-dark btn-lg text-start"
+			.row
+				.col-12.col-md-4.order-1.order-md-2
+					%img{data: {participant_target: "shirtImage"}, alt: "", width: "100%"}
+				.col-12.col-md-8.order-2.order-md-1
+					%p{data: {participant_target: "shirtDescription"}}
+
+					%p Please select your shirt size.
+
+					.row.mb-2
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "s", class: "btn-check", data: {participant_target: ""}
+							= f.label :shirt_size_s, "S", class: "btn btn-outline-dark btn-lg"
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "m", class: "btn-check", data: {participant_target: "size"}
+							= f.label :shirt_size_m, "M", class: "btn btn-outline-dark btn-lg"
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "l", class: "btn-check", data: {participant_target: "size"}
+							= f.label :shirt_size_l, "L", class: "btn btn-outline-dark btn-lg"
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "xl", class: "btn-check", data: {participant_target: "size"}
+							= f.label :shirt_size_xl, "XL", class: "btn btn-outline-dark btn-lg"
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "2xl", class: "btn-check", data: {participant_target: "size"}
+							= f.label :shirt_size_2xl, "2XL", class: "btn btn-outline-dark btn-lg"
+						.col-4.col-md-2.d-grid.d-block.mb-2
+							= f.radio_button :shirt_size, "3xl", class: "btn-check", data: {participant_target: "size"}
+							= f.label :shirt_size_3xl, "3XL", class: "btn btn-outline-dark btn-lg"
+					.d-grid.d-block.mb-2
+						= f.radio_button :shirt_size, "none", class: "btn-check", data: {participant_target: "size"}
+						= f.label :shirt_size_none, "No shirt, thank you.", class: "btn btn-outline-dark btn-lg text-start"
 
 		.row.mt-4
 			= f.submit"Register", class: "btn btn-lg btn-dark"
