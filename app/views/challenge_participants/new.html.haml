@@ -1,16 +1,15 @@
-.col-xl-6.mx-auto.p-4{data: {controller: "participant"}}
+.col-xl-6.mx-auto.p-4{data: {controller: "participant", participant_challenge_value: @challenge.title}}
 	%h1 Challenge Registration
 
-	= form_with(model: @registrant, url: challenge_participants_path) do |f|
-		= f.hidden_field :user_id, value: current_user.id
+	= form_with(model: @registrant, url: challenge_participants_path, html: {data: { turbo: false}}) do |f|
 		.row.mt-4
 			.col-6
 				.form-floating.mb-4
-					= f.text_field :first_name, placeholder: "First Name", value: @first_name, class: "form-control border border-dark"
+					= f.text_field :first_name, placeholder: "First Name", value: @first_name, class: "form-control border border-dark", data: {participant_target: "firstName"}
 					= f.label :first_name, "First Name"
 			.col-6
 				.form-floating.mb-4
-					= f.text_field :last_name, placeholder: "Last Name", value: @last_name, class: "form-control border border-dark"
+					= f.text_field :last_name, placeholder: "Last Name", value: @last_name, class: "form-control border border-dark", data: {participant_target: "lastName"}
 					= f.label :last_name, "Last Name"
 		.form-floating.mb-4
 			= f.text_field :line_1, placeholder: "Address Line 1", value: @line_1, class: "form-control border border-dark"
@@ -38,7 +37,7 @@
 		- unless @challenge.prices.empty?
 			.fieldset.border.border-dark.p-2
 				%legend Pricing
-				%p Please choose one of the otpions below to register.
+				%p Please choose one of the options below to register.
 				.row.row-cols-1.row-cols-md-2
 					- @challenge.prices.each_with_index do |p, i|
 						.col.mb-4
@@ -88,27 +87,68 @@
 
 					.row.mb-2
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "s", class: "btn-check", data: {participant_target: ""}
+							= f.radio_button :shirt_size, "s", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_s, "S", class: "btn btn-outline-dark btn-lg"
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "m", class: "btn-check", data: {participant_target: "size"}
+							= f.radio_button :shirt_size, "m", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_m, "M", class: "btn btn-outline-dark btn-lg"
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "l", class: "btn-check", data: {participant_target: "size"}
+							= f.radio_button :shirt_size, "l", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_l, "L", class: "btn btn-outline-dark btn-lg"
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "xl", class: "btn-check", data: {participant_target: "size"}
+							= f.radio_button :shirt_size, "xl", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_xl, "XL", class: "btn btn-outline-dark btn-lg"
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "2xl", class: "btn-check", data: {participant_target: "size"}
+							= f.radio_button :shirt_size, "2xl", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_2xl, "2XL", class: "btn btn-outline-dark btn-lg"
 						.col-4.col-md-2.d-grid.d-block.mb-2
-							= f.radio_button :shirt_size, "3xl", class: "btn-check", data: {participant_target: "size"}
+							= f.radio_button :shirt_size, "3xl", class: "btn-check", data: {participant_target: "size"}, disabled: true
 							= f.label :shirt_size_3xl, "3XL", class: "btn btn-outline-dark btn-lg"
 					.d-grid.d-block.mb-2
-						= f.radio_button :shirt_size, "none", class: "btn-check", data: {participant_target: "size"}
+						= f.radio_button :shirt_size, "none", class: "btn-check", data: {participant_target: "size"}, disabled: true
 						= f.label :shirt_size_none, "No shirt, thank you.", class: "btn btn-outline-dark btn-lg text-start"
 
+		.fieldset.border.border-dark.p-2
+			%legend Tax Deductible Donation
+
+			%p Would you like to add a tax deductible donation to jump start fundraising during the challenge?
+
+			.row
+				.col-6.d-grid.d-block.mb-2
+					%input.btn-check{type: "radio", id: "donation_yes", name: "donation", data: {action: "click->participant#showHideDonationFields", participant_donations_param: "show"}}
+					%label.btn.btn-outline-dark.btn-lg{for: "donation_yes"} Yes
+
+				.col-6.d-grid.d-block.mb-2
+					%input.btn-check{type: "radio", id: "donation_no", name: "donation", checked: true, data: {action: "click->participant#showHideDonationFields", participant_donations_param: "hide"}}
+					%label.btn.btn-outline-dark.btn-lg{for: "donation_no"} No
+
+			.d-none{data: {participant_target: "donationFields"}}
+				= f.fields_for :donations, Donation.new do |d|
+					= d.hidden_field :challenge_participant_id, data: {participant_target: "donationField"}, disabled: true
+					.d-none
+						= d.hidden_field :program, placeholder: "Program", data: {participant_target: "donationField"}, disabled: true
+						
+					.fieldset.border.border-dark.p-2{data: {controller: "donation-other-amount"}}
+						%legend Donation amount
+						.row.mb-2
+							.col-6.col-md-3.d-grid.d-block.mb-2
+								= d.radio_button :amount, "1000", class: "btn-check", data:{donation_other_amount_target: "radio10", participant_target: "donationField", action: "change->donation-other-amount#removeOther"}, disabled: true
+								= d.label :amount_1000, "$10.00", class: "btn btn-outline-dark btn-lg"
+							.col-6.col-md-3.d-grid.d-block.mb-2
+								= d.radio_button :amount, "2500", class: "btn-check", data:{donation_other_amount_target: "radio25", participant_target: "donationField", action: "change->donation-other-amount#removeOther"}, disabled: true
+								= d.label :amount_2500, "$25.00", class: "btn btn-outline-dark btn-lg"
+							.col-6.col-md-3.d-grid.d-block.mb-2
+								= d.radio_button :amount, "5000", class: "btn-check", data:{donation_other_amount_target: "radio50", participant_target: "donationField", action: "change->donation-other-amount#removeOther"}, disabled: true
+								= d.label :amount_5000, "$50.00", class: "btn btn-outline-dark btn-lg"
+							.col-6.col-md-3.d-grid.d-block.mb-2
+								= d.radio_button :amount, "10000", class: "btn-check", data:{donation_other_amount_target: "radio100", participant_target: "donationField", action: "change->donation-other-amount#removeOther"}, disabled: true
+								= d.label :amount_10000, "$100.00", class: "btn btn-outline-dark btn-lg"
+						
+						.form-floating
+							= d.number_field :other_amount, placeholder: "Other Amount", min: 0, step: 0.01, class: "form-control border border-dark", data:{action: "click->donation-other-amount#uncheckRadios", donation_other_amount_target: "input_other", participant_target: "donationField"}, disabled: true
+							= d.label :other_amount, "Other Amount"
+
 		.row.mt-4
+			= javascript_include_tag "https://js.stripe.com/v3"
 			= f.submit"Register", class: "btn btn-lg btn-dark"
 		

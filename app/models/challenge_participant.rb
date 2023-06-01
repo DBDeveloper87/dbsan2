@@ -1,5 +1,6 @@
 class ChallengeParticipant < ApplicationRecord
   has_many :donations
+  accepts_nested_attributes_for :donations, reject_if: :all_blank
   has_many :exercise_trackers
   has_many :participant_milestones
   belongs_to :challenge

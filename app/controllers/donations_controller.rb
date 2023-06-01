@@ -15,7 +15,7 @@ class DonationsController < ApplicationController
 			if Rails.env.development?
 				success_url = "http://localhost:3000/donations_success?session_id={CHECKOUT_SESSION_ID}"
 				cancel_url = "http://localhost:3000/"
-		elsif Rails.env.production?
+			elsif Rails.env.production?
 				success_url = "https://www.dbsan.org/donations_success?session_id={CHECKOUT_SESSION_ID}"
 				cancel_url = "https://www.dbsan.org/"
 			end

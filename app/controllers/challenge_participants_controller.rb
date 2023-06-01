@@ -64,14 +64,112 @@ class ChallengeParticipantsController < ApplicationController
 	end
 
 	def create
-		@user = current_user.id
 		@registrant = @challenge.challenge_participants.build(register_params)
+		@registrant.user_id = current_user.id
+		unless @registrant.donations.empty?
+			@registrant.donations.first.user_id = current_user.id
+			@registrant.donations.first.email = current_user.email
+			@registrant.donations.first.name = @registrant.full_name
+		end
 
 		if @registrant.save
 			@challenge = @registrant.challenge
 			ChallengeMailer.with(registrant: @registrant).registered.deliver_now
-			redirect_to challenge_participant_path(@challenge, @registrant)
+			if @registrant.price.price == 0
+				redirect_to challenge_participant_path(@challenge, @registrant)
+			else
+				if Rails.env.development?
+					success_url = "http://localhost:3000/registration_success?session_id={CHECKOUT_SESSION_ID}"
+					cancel_url = challenge_url(@challenge)
+				elsif Rails.env.production?
+					success_url = "https://www.dbsan.org/registration_success?session_id={CHECKOUT_SESSION_ID}"
+					cancel_url = challenge_url(@challenge)
+				end
+
+				product_name = "#{@challenge.title} #{@registrant.price.name} Registration"
+				line_items = []
+				line_items.append(
+						{
+      						price_data: {
+        						currency: 'usd',
+        						product_data: {
+          						name: product_name
+        					},
+        					unit_amount: (@registrant.price.price * 100).to_i
+      						},
+      						quantity: 1,
+    					}
+					)
+
+				unless @registrant.donations.empty?
+					line_items.append(
+							{
+      							price_data: {
+        							currency: 'usd',
+        							product_data: {
+          							name: "#{@registrant.donations.first.program} Tax Deductible Donation"
+        						},
+        						unit_amount: @registrant.donations.first.amount.to_i
+      							},
+      							quantity: 1,
+    						}
+						)
+				end
+
+				data = {
+					line_items: line_items, 
+    				mode: 'payment',
+    				customer_email: current_user.email,
+    				success_url: success_url,
+    				cancel_url: cancel_url
+				}
+
+				session = Stripe::Checkout::Session.create(data)
+				redirect_to session.url, allow_other_host: true
+			end
 		end
+	end
+
+	def stripe_success
+		@session = Stripe::Checkout::Session.retrieve(params[:session_id])
+  		@customer = Stripe::Customer.retrieve(@session.customer)
+  		@line_items = Stripe::Checkout::Session.list_line_items(@session.id)	
+		@data = @line_items[:data]
+		@registration = @data.first[:description]
+		
+		@email = @customer[:email]
+		@name = @customer[:name]
+		@address = @customer[:address]
+		@zip = @address[:postal_code]
+		
+		@user = User.find_by(email: @email)
+		challenge_participants = ChallengeParticipant.where(user_id: @user.id).all
+		@participant = nil
+		challenge_participants.each do |c|
+			challenge = c.challenge.title
+			price_name = c.price.name
+			if @registration == "#{challenge} #{price_name} Registration"
+				c.paid = true
+				c.save
+				@participant = c
+			end
+		end
+
+		@challenge = @participant.challenge
+
+		if @data.count > 1
+			@program = @data.last[:description]
+			@program = @program.sub(" Tax Deductible Donation", "")
+
+			@donation = @participant.donations.first
+			@donation.paid = true
+			@donation.zip = @zip
+			@donation.save
+		
+			DonationMailer.with(donation: @donation.id).tax_deductible.deliver_now
+			DonationMailer.with(donation: @donation.id).notify_participant.deliver_now
+		end
+		redirect_to challenge_participant_path(@challenge, @participant)
 	end
 
 	private
@@ -81,7 +179,9 @@ class ChallengeParticipantsController < ApplicationController
 
 		def register_params
 			params.require(:challenge_participant).permit(:first_name, :last_name, :line_1, :line_2, 
-				:city, :state, :zip, :country, :shirt_size, :user_id)
+				:city, :state, :zip, :country, :price_id, :shirt_size, 
+				:user_id, donations_attributes: [:id, :challenge_participant_id, 
+					:program, :amount, :user_id, :email])
 		end
 
 		def set_participant

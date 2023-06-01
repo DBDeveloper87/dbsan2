@@ -158,6 +158,7 @@ Rails.application.routes.draw do
   end
   get "donations_success", to: "donations#success"
   get "donations_thank_you", to: "donations#thank_you"
+  get "registration_success", to: "challenge_participants#stripe_success"
   resources :challenges do
     get 'shirts', to: 'challenge_participants#shirts'
     resources :prices, controller: "challenges/prices"
