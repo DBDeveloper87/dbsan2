@@ -1,7 +1,7 @@
 - if @channel.social_networks.count > 0 then
   .container.text-center{data: {controller: "bootstrap"}}
     %span.text-muted Connect with us on social media:<br>
-    - @channel.social_networks.each do |n|
+    - @channel.social_networks.each do |network|
       %a{href: "#{network.url}", target: "_blank", title: "#{network.name}", data:{bs:{toggle: "tooltip", placement: "top", title: "#{network.name}"}}, aria:{label: "#{network.name}"}}
         %i{class: "#{network.icon_class}", aria:{hidden: "true"}}
     
