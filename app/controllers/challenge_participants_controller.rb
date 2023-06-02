@@ -147,7 +147,7 @@ class ChallengeParticipantsController < ApplicationController
 		@participant = nil
 		challenge_participants.each do |c|
 			challenge = c.challenge.title
-			unless c.price.empty?
+			unless c.price.nil?
 				price_name = c.price.name
 			else
 				price_name = ""
