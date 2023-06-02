@@ -147,7 +147,11 @@ class ChallengeParticipantsController < ApplicationController
 		@participant = nil
 		challenge_participants.each do |c|
 			challenge = c.challenge.title
-			price_name = c.price.name
+			unless c.price.empty?
+				price_name = c.price.name
+			else
+				price_name = ""
+			end
 			if @registration == "#{challenge} #{price_name} Registration"
 				c.paid = true
 				c.save
