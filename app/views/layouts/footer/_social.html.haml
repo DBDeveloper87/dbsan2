@@ -2,6 +2,6 @@
   .container.text-center{data: {controller: "bootstrap"}}
     %span.text-muted Connect with us on social media:<br>
     - @channel.social_networks.each do |network|
-      %a.btn.btn-lg.btndark.m-2{href: "#{network.url}", target: "_blank", title: "#{network.name}", data:{bs:{toggle: "tooltip", placement: "top", title: "#{network.name}"}}, aria:{label: "#{network.name}"}}
+      %a.btn.btn-lg.btn-dark.m-2{href: "#{network.url}", target: "_blank", title: "#{network.name}", data:{bs:{toggle: "tooltip", placement: "top", title: "#{network.name}"}}, aria:{label: "#{network.name}"}}
         %i{class: "#{network.icon_class}", aria:{hidden: "true"}}
     
