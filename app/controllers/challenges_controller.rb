@@ -34,8 +34,8 @@ class ChallengesController < ApplicationController
 			@raised.append(d.amount.to_i / 100.0)
 		end
 		@raised = @raised.sum
-		@exercise = @challenge.milestones.where(milestone_type: "Exercise").all
-		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising").all.order(goal: :asc)
+		@exercise = @challenge.milestones.where(milestone_type: "Exercise", hidden: false).all
+		@fundraising = @challenge.milestones.where(milestone_type: "Fundraising", hidden: false).all.order(goal: :asc)
 		@faqs = @challenge.faqs.all.order(group_number: :asc).order(question_number: :asc)
 		@groups = []
 		@faqs.each do |f|

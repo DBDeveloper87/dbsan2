@@ -30,7 +30,7 @@
 				= f.label :goal_unit, "Goal Unit"
 
 .d-grid.d-block.mb-4
-	= f.check_box :hidden, {class: "btn-check"}, true, false
+	= f.check_box :hidden, {class: "btn-check"}, checked_value: true, unchecked_value: false
 	= f.label :hidden, "Hidden", class: "btn btn-outline-dark btn-lg text-start"
 
 .form-floating.mb-4

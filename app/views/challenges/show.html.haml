@@ -136,7 +136,7 @@
 					.card-body.text-center
 						%h3.card-title #{f.name}
 						%p.card-text When you reach #{number_to_currency(f.goal, precision: 0)}, you are eligible to earn a #{f.prize}.
-	- unless @exercise.count == 0
+	- unless @exercise.count == 0 
 		%h2.text-center Exercise Milestones
 		.row
 			- @exercise.each do |f|
