@@ -47,7 +47,8 @@ class ChallengeMilestonesController < ApplicationController
 		end
 
 		def create_params
-			params.require(:challenge_milestone).permit(:milestone_type, :name, :prize, :goal, :goal_unit, 
+			params.require(:challenge_milestone).permit(:milestone_type, :name, :prize, :goal,
+			 :goal_unit, :hidden, :description,
 				photo_attributes: [:file, :image_type])
 		end
 end

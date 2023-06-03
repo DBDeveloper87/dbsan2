@@ -1,9 +1,9 @@
 .form-floating.mb-4
 	- if milestone.nil?
-		= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+		= f.select :milestone_type, options_for_select(challenge.milestone_categories), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
 		= f.label :milestone_type, "Type"
 	- else
-		= f.select :milestone_type, options_for_select([["Fundraising", "Fundraising"], ["Exercise", "Exercise"]], selected: milestone.milestone_type), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+		= f.select :milestone_type, options_for_select(challenge.milestone_categories, selected: milestone.milestone_type), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
 		= f.label :milestone_type, "Type"
 
 .form-floating.mb-4
@@ -23,11 +23,19 @@
 	.col-6.form-floating.mb-4
 		.form-floating.mb-4
 			- if milestone.nil?
-				= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]]), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+				= f.select :goal_unit, options_for_select(challenge.goal_units), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
 				= f.label :goal_unit, "Goal Unit"
 			- else
-				= f.select :goal_unit, options_for_select([["Minutes", "Minutes"], ["Dollars", "Dollars"]], selected: milestone.goal_unit), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
+				= f.select :goal_unit, options_for_select(challenge.goal_units, selected: milestone.goal_unit), {prompt: "Choose One. . . "}, class: "form-control border border-dark"
 				= f.label :goal_unit, "Goal Unit"
+
+.d-grid.d-block.mb-4
+	= f.check_box :hidden, {class: "btn-check"}, true, false
+	= f.label :hidden, "Hidden", class: "btn btn-outline-dark btn-lg text-start"
+
+.form-floating.mb-4
+	= f.text_area :description, placeholder: "Description", class: "form-control border-dark border", data: {controller: "textarea-autogrow"}
+	= f.label :description, "Description"
 
 = f.fields_for :photo, badge do |p|
 	.form-group

@@ -34,6 +34,23 @@ class Challenge < ApplicationRecord
 		self.exercise_trackers
 	end
 
+	def milestone_categories
+		[
+			"Fundraising",
+			"Exercise",
+			"Group Effort",
+			"Route"
+		]
+	end
+
+	def goal_units
+		[
+			"Minutes",
+			"Dollars",
+			"Miles"
+		]
+	end
+
 	def exercise_time_options
 		[
 			"Cycling (indoors)", 

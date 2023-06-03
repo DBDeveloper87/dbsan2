@@ -2,4 +2,4 @@
 	%h1 New Milestone
 
 	= form_with(model: @milestone, url: challenge_milestones_path(@challenge)) do |f|
-		= render partial: "form", locals: {f: f, milestone: @milestone, badge: @badge}
+		= render partial: "form", locals: {f: f, milestone: @milestone, badge: @badge, challenge: @challenge}
