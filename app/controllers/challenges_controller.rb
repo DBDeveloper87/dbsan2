@@ -27,7 +27,7 @@ class ChallengesController < ApplicationController
 		@participants.each do |p|
 			@users.append(p.user_id)
 		end
-		@donor_count = @challenge.donations.count
+		@donor_count = @challenge.donations.where(paid: true).count
 		@top_donors = @challenge.top_donors
 		@raised = []
 		@challenge.donations.each do |d|
