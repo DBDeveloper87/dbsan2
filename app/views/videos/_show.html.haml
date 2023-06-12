@@ -49,47 +49,54 @@
 				%h3 English (Australia)
 			#englishIE
 				%h3 English (India)
+			#all
+				%h3 All Voices
+
 			
 			:javascript
-				speechSynthesis.addEventListener("voiceschanged", () => {
-					const voices = speechSynthesis.getVoices()
-					const englishUS = voices.filter((e) => {
-						return (e.lang === "en-US")
-					})
-					const englishGB = voices.filter((e) => {
-						return (e.lang === "en-GB")
-					})
-					const englishAU = voices.filter((e) => {
-						return (e.lang === "en-AU")
-					})
-					const englishIE = voices.filter((e) => {
-						return (e.lang === "en-IE")
-					})
-					
-					englishUS.forEach((v) => {
-						var list = document.getElementById("englishUS")
-						const item = document.createElement("p")
-						item.innerText = v.name
-						list.appendChild(item)
-					})
-					englishGB.forEach((v) => {
-						var list = document.getElementById("englishGB")
-						const item = document.createElement("p")
-						item.innerText = v.name
-						list.appendChild(item)
-					})
-					englishAU.forEach((v) => {
-						var list = document.getElementById("englishAU")
-						const item = document.createElement("p")
-						item.innerText = v.name
-						list.appendChild(item)
-					})
-					englishIE.forEach((v) => {
-						var list = document.getElementById("englishIE")
-						const item = document.createElement("p")
-						item.innerText = v.name
-						list.appendChild(item)
-					})
+				const voices = speechSynthesis.getVoices()
+				const englishUS = voices.filter((e) => {
+					return (e.lang === "en-US")
+				})
+				const englishGB = voices.filter((e) => {
+					return (e.lang === "en-GB")
+				})
+				const englishAU = voices.filter((e) => {
+					return (e.lang === "en-AU")
+				})
+				const englishIE = voices.filter((e) => {
+					return (e.lang === "en-IE")
+				})
+
+				englishUS.forEach((v) => {
+					var list = document.getElementById("englishUS")
+					const item = document.createElement("p")
+					item.innerText = v.name
+					list.appendChild(item)
+				})
+				englishGB.forEach((v) => {
+					var list = document.getElementById("englishGB")
+					const item = document.createElement("p")
+					item.innerText = v.name
+					list.appendChild(item)
+				})
+				englishAU.forEach((v) => {
+					var list = document.getElementById("englishAU")
+					const item = document.createElement("p")
+					item.innerText = v.name
+					list.appendChild(item)
+				})
+				englishIE.forEach((v) => {
+					var list = document.getElementById("englishIE")
+					const item = document.createElement("p")
+					item.innerText = v.name
+					list.appendChild(item)
+				})
+				voices.forEach((v) => {
+					var list = document.getElementById("all")
+					const item = document.createElement("p")
+					item.innerText = v.name + " " + v.lang
+					list.appendChild(item)
 				})
 				
 
