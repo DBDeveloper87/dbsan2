@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_one :profile
   accepts_nested_attributes_for :profile
+  has_many :channel_owners
   has_many :event_attendees
   has_many :events, through: :event_attendees
   has_many :camp_applications

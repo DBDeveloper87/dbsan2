@@ -108,9 +108,6 @@ Rails.application.routes.draw do
       sessions: "users/sessions",
       unlocks: "users/unlocks"
     } 
-  devise_scope :user do
-    get "login" => "users/sessions", subdomain: "surveys"
-  end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Admin Console
@@ -131,6 +128,7 @@ Rails.application.routes.draw do
       end
     end
     resources :languages
+    resources :channel_owners
   end
   post 'filter_address', to: 'admin/addresses#filter_address'
   

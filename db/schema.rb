@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_03_003244) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_191153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -391,6 +391,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_03_003244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["channel_id"], name: "index_channel_menus_on_channel_id"
+  end
+
+  create_table "channel_owners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_channel_owners_on_channel_id"
+    t.index ["user_id"], name: "index_channel_owners_on_user_id"
   end
 
   create_table "channels", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -912,6 +921,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_03_003244) do
   add_foreign_key "challenge_participants", "users"
   add_foreign_key "channel_menu_items", "channel_menus"
   add_foreign_key "channel_menus", "channels"
+  add_foreign_key "channel_owners", "channels"
+  add_foreign_key "channel_owners", "users"
   add_foreign_key "channels", "subdomains"
   add_foreign_key "counties", "state_provinces"
   add_foreign_key "cue_blocks", "text_tracks"

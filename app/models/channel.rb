@@ -1,4 +1,5 @@
 class Channel < ApplicationRecord
+	has_one :channel_owner
 	belongs_to :subdomain
 	has_one_attached :brand_logo
 	has_many :channel_menus
