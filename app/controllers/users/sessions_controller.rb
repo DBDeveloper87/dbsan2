@@ -2,11 +2,13 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  layout "authentication", only: :new
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    @meta_title = "Login"
+    super
+  end
 
   # POST /resource/sign_in
   # def create
