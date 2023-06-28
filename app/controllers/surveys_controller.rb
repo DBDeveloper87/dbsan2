@@ -5,6 +5,7 @@ class SurveysController < ApplicationController
 	layout "surveys"
 
 	def index
+		@subdomain == request.subdomain
 		@surveys = @channel.surveys.all
 	end
 
@@ -57,8 +58,12 @@ class SurveysController < ApplicationController
 		end
 
 		def set_survey
-			@survey = Survey.find_by(slug: params[:slug])
+			unless params[:slug] == "login"
+				@survey = Survey.find_by(slug: params[:slug])
+			end
 		end
+
+		
 
 		def set_channel
 			if Rails.env == "development"

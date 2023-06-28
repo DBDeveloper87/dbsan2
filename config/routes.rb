@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   constraints(subdomain: "surveys") do
     get "/", to: "surveys#index", as: "surveys_root"
     get "/new", to: "surveys#new", as: "new_survey_subdomain"
-    get "/:slug", to: "surveys#show", as: "survey_subdomain"
+    get "/survey/:slug", to: "surveys#show", as: "survey_subdomain"
   end
   
   constraints(ChannelSubdomains) do
@@ -36,8 +36,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :surveys, subdomain: "surveys"
-  
   constraints subdomain: "store" do
     root "store/front#index", as: :store_root
     get "manage", to: "store/manage#index", as: :store_management
@@ -109,7 +107,10 @@ Rails.application.routes.draw do
       registrations: "users/registrations",
       sessions: "users/sessions",
       unlocks: "users/unlocks"
-    }
+    } 
+  devise_scope :user do
+    get "login" => "users/sessions", subdomain: "surveys"
+  end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Admin Console

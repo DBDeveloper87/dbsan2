@@ -1,7 +1,11 @@
 %main.container.pt-4
 	%h1.text-center Surveys
 	- if user_signed_in?
-		= link_to "New Survey", new_survey_path, class: "btn btn-lg btn-dark mb-4", role: "button"
+		- if @subdomain == "surveys"
+			= link_to "New Survey", new_survey_subdomain_path, class: "btn btn-lg btn-dark mb-4", role: "button"
+		- else
+			= link_to "New Survey", new_survey_subdomain_path, class: "btn btn-lg btn-dark mb-4", role: "button"
+		= button_to "Logout", destroy_user_session_path, class:"btn btn-lg btn-dark", method: :delete, data: { turbo: "false" }
 
 	- @surveys.each do |s|
 		.border.border-dark.p-4.mb-4

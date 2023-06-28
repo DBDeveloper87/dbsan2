@@ -32,7 +32,11 @@ class ApplicationController < ActionController::Base
 		domains = domains.uniq
 
 		if request.domain == "dbsan.org" or request.domain == "example.com"
-			channel = subdomain.channel
+			if request.subdomain == "surveys"
+				channel = Channel.find_by(domain_host: "dbsan.org")
+			else
+				channel = subdomain.channel
+			end
 		elsif request.domain.in?(domains)
 			channel = Channel.find_by(domain_host: request.domain)
 		end
