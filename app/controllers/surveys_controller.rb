@@ -5,6 +5,7 @@ class SurveysController < ApplicationController
 	layout "surveys"
 
 	def index
+		@meta_title = "Surveys | #{@channel.name}"
 		@subdomain == request.subdomain
 		@surveys = @channel.surveys.all
 	end
@@ -28,6 +29,7 @@ class SurveysController < ApplicationController
 	end
 
 	def show
+		@meta_title = "#{@survey.title} | #{@channel.name}"
 	end
 
 	def create
