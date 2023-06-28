@@ -1,0 +1,10 @@
+%h2 Channels
+
+%ul
+	- @channels.each do |c|
+		%li
+			= link_to "#{c.name}", new_admin_channel_owner_path(channel_id: c.id)
+			- unless c.channel_owner.nil?
+				%br
+				#{c.channel_owner.user.profile.first_name} #{c.channel_owner.user.profile.last_name}
+			

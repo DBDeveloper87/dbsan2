@@ -1,0 +1,16 @@
+%h2 Add Channel Owner
+
+= form_with(model: [:admin, @owner]) do |f|
+	- if @owner.errors.any?
+		%ul
+			- @owner.errors.full_messages.each do |e|
+				%li #{e}
+
+	.form-group.mb-4
+		= f.label :channel_id, "Channel ID"
+		= f.text_field :channel_id, value: @channel_id, class: "form-control border border-dark"
+	.form-group.mb-4
+		= f.label :user_id, "Owner"
+		= f.select :user_id, options_for_select(user_select), {prompt: "Choose one. . . "}, class: "form-select border border-dark"
+	.row
+		= f.submit "Save", class: "btn btn-dark btn-lg"
