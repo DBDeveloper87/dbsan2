@@ -10,6 +10,10 @@
 						.align-self-center
 							%span #{q.question_type.titleize}
 					.p-2
+						= button_to survey_question_path(survey_slug: survey.slug, position: q.position, sec_num: section.section_number), method: :delete, class: "btn btn-dark btn-lg border border-light" do
+							%i.bi.bi-trash{aria: {hidden: "true"}}
+							%span.text-light Delete
+					.p-2
 						%a.btn.btn-dark.btn-lg.border.border-light{href: edit_survey_question_path(survey_slug: survey.slug, position: q.position, sec_num: section.section_number), title: "Edit Question #{q.position}", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Edit Question #{q.position}"}}}
 							%i.bi.bi-pencil{aria: {hidden: "true"}}
 		.fieldset

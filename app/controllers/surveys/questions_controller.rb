@@ -1,6 +1,6 @@
 class Surveys::QuestionsController < SurveysController
-	before_action :get_section, only: [:index, :new, :create, :update, :edit]
-	before_action :set_question, only: [:edit, :update]
+	before_action :get_section, only: [:index, :new, :create, :update, :edit, :destroy]
+	before_action :set_question, only: [:edit, :update, :destroy]
 
 	def index
 		@questions = @section.questions.order(position: :asc).all
@@ -31,6 +31,15 @@ class Surveys::QuestionsController < SurveysController
 	def update
 		if @question.update(update_params)
 			respond_to do |f|
+				f.turbo_stream
+			end
+		end
+	end
+
+	def destroy
+		if @question.destroy
+			respond_to do|f|
+				@questions = @question.section.questions.order(position: :asc).all
 				f.turbo_stream
 			end
 		end

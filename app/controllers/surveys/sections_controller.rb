@@ -1,5 +1,5 @@
 class Surveys::SectionsController < SurveysController
-	before_action :set_section, only: [:edit, :update]
+	before_action :set_section, only: [:edit, :update, :destroy]
 
 	def edit
 		if params[:part].present?
@@ -29,6 +29,14 @@ class Surveys::SectionsController < SurveysController
 	def update
 		if @section.update(update_params)
 			redirect_to edit_survey_section_path(survey_slug: @survey.slug, sec_num: @section.section_number)
+		end
+	end
+
+	def destroy
+		respond_to do |f|
+			if @section.destroy
+				f.html { redirect_to edit_survey_path(slug: @survey.slug) }
+			end
 		end
 	end
 

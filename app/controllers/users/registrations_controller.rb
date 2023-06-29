@@ -3,16 +3,46 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  layout "authentication", only: :new
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @subdomain = Subdomain.find_by(slug: request.subdomain)
+    @channels = Channel.all
+    domains = []
+    @channels.each do |c|
+      domains.append(c.domain_host)
+    end
+    domains = domains.uniq
+
+    if request.domain == "dbsan.org" or request.domain == "example.com"
+      @channel = @subdomain.channel
+    elsif request.domain.in?(domains)
+      @channel = Channel.find_by(domain_host: request.domain)
+    end
+    
+    @meta_title = "Create Account"
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    @subdomain = Subdomain.find_by(slug: request.subdomain)
+    @channels = Channel.all
+    domains = []
+    @channels.each do |c|
+      domains.append(c.domain_host)
+    end
+    domains = domains.uniq
+
+    if request.domain == "dbsan.org" or request.domain == "example.com"
+      @channel = @subdomain.channel
+    elsif request.domain.in?(domains)
+      @channel = Channel.find_by(domain_host: request.domain)
+    end
+    
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,7 +72,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, profile_attributes: [:first_name, :last_name]])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute, 
+      channel_members_attributes: [:id, :channel_id, :user_id],
+      profile_attributes: [:first_name, :last_name]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

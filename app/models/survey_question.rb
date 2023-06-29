@@ -2,14 +2,14 @@ class SurveyQuestion < ApplicationRecord
   belongs_to :survey_section
   has_many :question_options, dependent: :destroy
   accepts_nested_attributes_for :question_options, reject_if: :all_blank, allow_destroy: true
-  has_many :response_answers
+  has_many :response_answers, dependent: :destroy
   
 
   before_validation :strip_whitespace
   before_validation :make_nil
   before_validation :join_text
   after_create :perform_option_generation
-
+  before_destroy :update_positions
   #validates :title, presence: true, on: :update
 
   enum question_type: {single_choice: 0,
@@ -26,6 +26,10 @@ class SurveyQuestion < ApplicationRecord
 
   def options
     self.question_options
+  end
+
+  def section
+    self.survey_section
   end
 
   private
@@ -59,5 +63,13 @@ class SurveyQuestion < ApplicationRecord
 
     def join_text
       self.title = self.title.split(/\r\n\r\n|\n\n/).join(" ") unless self.title.nil?
+    end
+
+    def update_positions
+      questions = self.section.questions
+      questions[self.position..questions.count-1].each do |q|
+        q.position = q.position-1
+        q.save
+      end
     end
 end

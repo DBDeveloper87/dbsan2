@@ -1,6 +1,7 @@
 class Channels::MyChannelController < ApplicationController
 	before_action :authenticate_user!, only: [:edit, :update]
 	before_action :set_channel, only: [:show, :edit, :update, :special_event]
+	before_action :require_owner_or_channel_admin, only: [:edit, :update]
 	before_action :render_home, only: [:show, :special_event]
 	before_action :camps, only: :show
 	
@@ -29,6 +30,27 @@ class Channels::MyChannelController < ApplicationController
 	end
 
 	private
+		def require_owner_or_channel_admin
+			channel_admins = []
+			unless @channel.members.empty?
+				@channel.members.each do |m|
+					if m.channel_admin?
+						channel_admins.append(m.user.id)
+					end
+				end
+			end
+
+			if @channel.owner.present?
+				unless @channel.owner.user.id == current_user&.id or channel_admins.include?(current_user&.id)
+					redirect_to root_path
+				end
+			else
+				unless channel_admins.include?(current_user&.id)
+					redirect_to root_path
+				end
+			end
+		end
+
 		def camps
 			@camps = Camp.all
 		end

@@ -50,7 +50,19 @@
             = f.password_field :password_confirmation, placeholder: "Confirm Password", class: "form-control border border-dark"
             = f.label :password_confirmation, "Confirm Password"
         
-      .row
+      = f.fields_for :channel_members, ChannelMember.new do |c|
+        .form-floating.mb-4
+          %input.form-control.border.border-dark{type: "text", id: "channel_name", value: @channel.name, readonly: true}
+          %label{for: "channel_name"} Channel
+          = c.hidden_field :channel_id, value: @channel.id
+          = c.hidden_field :user_id
+
+
+      .row.mb-4
         = button_tag(class: "btn btn-dark btn-lg") do 
-          %i.bi.bi-door-open
+          %i.bi.bi-door-open{aria: {hidden: "true"}}
           %span Create Account
+
+      %p.text-center 
+        Already have an account? 
+        = link_to "Login", new_user_session_path

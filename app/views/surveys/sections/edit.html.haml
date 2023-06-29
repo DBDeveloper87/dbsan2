@@ -16,6 +16,9 @@
 					.flex-grow-1.p-2
 						%h2 Section #{@section.section_number}
 					.p-2{data: {controller: "bootstrap"}}
+						= button_to survey_section_path(survey_slug: @survey.slug, sec_num: @section.section_number), method: :delete, data: {bs: {toggle: "tooltip", placement: "bottom", title: "Move Up"}}, title: "Delete", aria: {label: "Delete"}, class: "btn btn-dark btn-lg border border-light", style: "border-radius: 50%" do 
+							%i.bi.bi-trash{aria: {hidden: "true"}}
+					.p-2{data: {controller: "bootstrap"}}
 						%a.btn.btn-dark.btn-lg.border.border-light{href: "#", title: "Move Up", style: "border-radius: 50%", data: {bs: {toggle: "tooltip", placement: "bottom", title: "Move Up"}}}
 							%i.bi.bi-chevron-up{aria: {hidden: "true"}}
 					.p-2{data: {controller: "bootstrap"}}

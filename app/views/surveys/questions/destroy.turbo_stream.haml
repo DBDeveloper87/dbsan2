@@ -1,0 +1,3 @@
+= turbo_stream.remove("question_#{@question.id}")
+= turbo_stream.replace("questions", partial: "surveys/questions/questions", locals: {questions: @section.questions.order(position: :asc).all, survey: @section.survey, section: @section})
+= turbo_stream.replace("new_question", partial: "surveys/questions/new", locals: {survey: @section.survey, section: @section})

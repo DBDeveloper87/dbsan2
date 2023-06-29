@@ -44,7 +44,6 @@ class Channels::MembersController < ApplicationController
 					redirect_to root_path
 				end
 			end
-			
 		end
 
 		def create_params
