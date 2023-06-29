@@ -36,7 +36,7 @@ class Channels::MembersController < ApplicationController
 			end
 
 			if @channel.owner.present?
-				unless @channel.owner.user.id == current_user&.id
+				unless @channel.owner.user.id == current_user&.id or channel_admins.include?(current_user&.id)
 					redirect_to root_path
 				end
 			else
@@ -44,6 +44,7 @@ class Channels::MembersController < ApplicationController
 					redirect_to root_path
 				end
 			end
+			
 		end
 
 		def create_params
