@@ -30,7 +30,7 @@ class Channels::MembersController < ApplicationController
 			unless @channel.members.empty?
 				@channel.members.each do |m|
 					if m.channel_admin?
-						channel_admins.append(m.id)
+						channel_admins.append(m.user.id)
 					end
 				end
 			end
@@ -40,7 +40,7 @@ class Channels::MembersController < ApplicationController
 					redirect_to root_path
 				end
 			else
-				unless current_user&.id.in?(channel_admins)
+				unless channel_admins.include?(current_user&.id)
 					redirect_to root_path
 				end
 			end
