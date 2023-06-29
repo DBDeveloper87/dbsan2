@@ -4,6 +4,13 @@ class Survey < ApplicationRecord
   has_many :survey_responses
   before_create :add_slug
 
+  enum survey_type: {survey: 0,
+                    open_interview: 1,
+                    camp_application: 2,
+                    non_graded_quiz: 3,
+                    graded_quiz: 4
+  }
+
   def sections
     self.survey_sections
   end

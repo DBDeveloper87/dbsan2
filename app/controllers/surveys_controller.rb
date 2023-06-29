@@ -20,6 +20,8 @@ class SurveysController < ApplicationController
 				render partial: "surveys/basic_info/edit_title", locals: {survey: @survey}
 			elsif params[:part] == "slug"
 				render partial: "surveys/basic_info/edit_slug", locals: {survey: @survey}
+			elsif params[:part] == "survey_type"
+				render partial: "surveys/basic_info/edit_survey_type", locals: {survey: @survey}
 			elsif params[:part] == "short_description"
 				render partial: "surveys/basic_info/edit_short_description", locals: {survey: @survey}
 			elsif params[:part] == "long_description"
@@ -56,7 +58,7 @@ class SurveysController < ApplicationController
 		end
 
 		def update_params
-			params.require(:survey).permit(:title, :slug, :description, :long_description)
+			params.require(:survey).permit(:title, :slug, :description, :long_description, :survey_type)
 		end
 
 		def set_survey

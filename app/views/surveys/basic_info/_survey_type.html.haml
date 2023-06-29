@@ -1,0 +1,6 @@
+%turbo-frame{id: "survey_type", data: {turbot: {action: "advance"}}}
+	.card.border.border-dark.mb-4
+		.card-body.d-flex
+			%a.stretched-link.text-decoration-none.text-dark.flex-grow-1.p-2{href: edit_survey_path(slug: survey.slug, part: "survey_type"), data: {turbo: {frame: "rightSide"}}} Survey Type
+			%span.align-self-center.p-2 #{survey.survey_type.titleize}
+			%i.align-self-center.bi.bi-chevron-right{aria: {hidden: "true"}}

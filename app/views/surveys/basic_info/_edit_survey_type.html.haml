@@ -1,0 +1,9 @@
+%turbo-frame{id: "rightSide", data: {turbot: {action: "advance"}}}
+	%h2 Survey Type
+	%p Please select the survey type.  This gives you access to specific features.
+	= form_with(model: survey, url: survey_path(slug: survey.slug)) do |f|
+		- Survey.survey_types.each do |k, v|
+			.col-12.d-grid.d-block.mb-2
+				= f.radio_button :survey_type, k, class: "btn-check", onChange: "requestSubmit()"
+				- symlabel = ("survey_type_" + k).to_sym
+				= f.label symlabel, k.titleize, class: "btn btn-outline-dark btn-lg text-start"
