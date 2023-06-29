@@ -5,7 +5,7 @@ class Channels::MembersController < ApplicationController
 
 	def index
 		@meta_title = "Members | #{@channel.name}"
-		@members = @channel.members.all.sort { |s| s.last_name}
+		@members = @channel.members.all.sort { |a, b| a.last_name <=> b.last_name}
 	end
 
 	def new
