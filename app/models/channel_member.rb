@@ -8,7 +8,7 @@ class ChannelMember < ApplicationRecord
               associate: 3,
               staff: 4
               }
-
+  
   def first_name
     self.user.profile.first_name
   end

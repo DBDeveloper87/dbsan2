@@ -2,7 +2,7 @@
 	%h1 Members
 	= link_to "Add Member", new_member_path, class: "btn btn-dark btn-lg mb-4"
 
-	- @members.order(last_name: :asc).each do |m|
+	- @members.each do |m|
 		.card.border.border-dark.p-4
 			.d-flex
 				.p-2.flex-grow-1
