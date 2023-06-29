@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  channel: one
+  user: one
+  role: 1
+  event_manager: false
+  video_manager: false
+  survey_manager: false
+
+two:
+  channel: two
+  user: two
+  role: 1
+  event_manager: false
+  video_manager: false
+  survey_manager: false

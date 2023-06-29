@@ -1,0 +1,38 @@
+.container-lg.pt-4
+	%h1 Members
+	= link_to "Add Member", new_member_path, class: "btn btn-dark btn-lg mb-4"
+
+	- @members.each do |m|
+		.card.border.border-dark.p-4
+			.d-flex
+				.p-2.flex-grow-1
+					%h2.card-title #{m.first_name} #{m.last_name}
+				.p-2
+					%strong: Role: #{m.role.titleize}
+			.row
+				.col-6.col-md-3.border.border-dark
+					%h3.text-center Event Manager
+					- if m.event_manager?
+						%p.text-center Yes
+					- else
+						%p.text-center No
+				.col-6.col-md-3.border.border-dark
+					%h3.text-center Video Manager
+					- if m.video_manager?
+						%p.text-center Yes
+					- else
+						%p.text-center No
+				.col-6.col-md-3.border.border-dark
+					%h3.text-center Survey Manager
+					- if m.event_manager?
+						%p.text-center Yes
+					- else
+						%p.text-center No
+				.col-6.col-md-3.border.border-dark
+					%h3.text-center Channel Admin
+					- if m.channel_admin?
+						%p.text-center Yes
+					- else
+						%p.text-center No
+
+

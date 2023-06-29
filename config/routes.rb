@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   
   constraints(ChannelSubdomains) do
     root "channels/my_channel#show", as: :channel_root
-    get 'settings', to: 'channels/my_channel#edit', as: "channel_settings"
+    get 'manage', to: 'channels/my_channel#edit', as: "channel_settings"
     get "special_event", to: "channels/my_channel#special_event"
     patch 'settings', to: 'channels/my_channel#update', as: "channel_update"
+    resources :members, controller: "channels/members"
     resources :portfolio, controller: "portfolios"
     resources :playlists, controller: "videos/playlists"
     resources :videos do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_28_191153) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -370,6 +370,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_191153) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.integer "challenge_type"
+  end
+
+  create_table "channel_members", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "channel_id", null: false
+    t.uuid "user_id", null: false
+    t.integer "role", default: 0
+    t.boolean "event_manager", default: false, null: false
+    t.boolean "video_manager", default: false, null: false
+    t.boolean "survey_manager", default: false, null: false
+    t.boolean "channel_admin", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_channel_members_on_channel_id"
+    t.index ["user_id"], name: "index_channel_members_on_user_id"
   end
 
   create_table "channel_menu_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -919,6 +933,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_191153) do
   add_foreign_key "challenge_participants", "challenges"
   add_foreign_key "challenge_participants", "prices"
   add_foreign_key "challenge_participants", "users"
+  add_foreign_key "channel_members", "channels"
+  add_foreign_key "channel_members", "users"
   add_foreign_key "channel_menu_items", "channel_menus"
   add_foreign_key "channel_menus", "channels"
   add_foreign_key "channel_owners", "channels"
