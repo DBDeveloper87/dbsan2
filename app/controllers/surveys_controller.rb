@@ -34,7 +34,7 @@ class SurveysController < ApplicationController
 		@meta_title = "#{@survey.title} | #{@channel.name}"
 		@interviewers = []
 		@survey.interviewers.each do |i|
-			@interviewers.append(i.id)
+			@interviewers.append(i.user.id)
 		end
 	end
 
