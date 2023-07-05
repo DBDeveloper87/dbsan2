@@ -32,6 +32,10 @@ class SurveysController < ApplicationController
 
 	def show
 		@meta_title = "#{@survey.title} | #{@channel.name}"
+		@interviewers = []
+		@survey.interviewers.each do |i|
+			@interviewers.append(i.id)
+		end
 	end
 
 	def create
