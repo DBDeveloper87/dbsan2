@@ -34,15 +34,12 @@
 								%h3.card-title #{r.interviewer.full_name}
 							- else
 								%h3.card-title Unknown Interviewer
-
+								
 							- unless r.interviewees.empty?
 								%p 
 									%strong Interviewees:
-									- ifr.interviewees.nil?
-										No interviewees assigned yet.
-									- else
-										- r.interviewees.each do |i|
-											#{i.first_name} #{i.last_name},
+									- r.interviewees.each do |i|
+										#{i.first_name} #{i.last_name},
 
 							%a.btn.btn-dark.btn-lg{href: edit_survey_response_path(survey_slug: @survey.slug, id: r.id), data: {turbo_frame: "_top"}} Continue
 						
