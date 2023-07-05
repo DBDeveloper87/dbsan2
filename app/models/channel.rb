@@ -16,4 +16,13 @@ class Channel < ApplicationRecord
 	def owner
 		self.channel_owner
 	end
+
+	def member_list_options
+		members = self.members.all.sort { |a, b| a.last_name <=> b.last_name}
+		list = []
+		members.each do |m|
+			list.append([m.full_name, m.user.id])
+		end
+		return list
+	end
 end

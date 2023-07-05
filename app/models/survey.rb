@@ -2,6 +2,8 @@ class Survey < ApplicationRecord
   belongs_to :channel
   has_many :survey_sections, dependent: :destroy
   has_many :survey_responses
+  has_many :interviewers
+
   before_create :add_slug
 
   enum survey_type: {survey: 0,

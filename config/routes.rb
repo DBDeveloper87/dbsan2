@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resources :cue_blocks, controller: "videos/cue_blocks"
     end
     resources :surveys, param: :slug do
+      resources :interviewers, controller: "surveys/interviewers"
       resources :responses, controller: "surveys/responses"
       resources :sections, controller: "surveys/sections", param: :sec_num
       resources :questions, controller: "surveys/questions", param: :position do

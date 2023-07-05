@@ -1,0 +1,41 @@
+.container.pt-4
+	.d-flex
+		.flex-grow-1.p-2
+			%h1 #{@survey.title}
+		.p-2
+			.row.p-2
+				%a.btn.btn-dark.btn-lg{href: survey_path(slug: @survey.slug), data: {turbo: {frame: "_top"}}} View
+	.row
+		= render partial: "sidebar", locals: {survey: @survey}
+		.col-md-9.p-4
+			%turbo-frame{id: "rightSide", data: {turbo: {action: "advance"}}}
+				%h2 Interviews
+
+				%nav.mb-4.nav.nav-pills.nav-justified
+					- if params[:list_filter] == "all"
+						%a.nav-link.active{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "all")} All (#{@responses.count})
+					- else
+						%a.nav-link{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "all")} All (#{@survey.responses.count})
+
+					- if params[:list_filter] == "created"
+						%a.nav-link.active{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "created")} Created (#{@responses.count})
+					- else
+						%a.nav-link{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "created")} Created (#{@survey.responses.where(status: "created").count})
+
+					- if params[:list_filter] == "completed"
+						%a.nav-link.active{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "completed")} Completed (#{@responses.count})
+					- else
+						%a.nav-link{href: survey_responses_path(survey_slug: @survey.slug, list_filter: "completed")} Completed (#{@survey.responses.where(status: "completed").count})
+
+				- @responses.each do |r|
+					.card.border.border-dark.mb-4
+						.card-body
+							%h3.card-title #{r.interviewer.full_name}
+							- unless r.interviewees.empty?
+								%p 
+									%strong Interviewees:
+									- r.interviewees.each do |i|
+										#{i.first_name} #{i.last_name},
+
+							%a.btn.btn-dark.btn-lg{href: edit_survey_response_path(survey_slug: @survey.slug, id: r.id), data: {turbo_frame: "_top"}} Continue
+						

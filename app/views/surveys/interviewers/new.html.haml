@@ -1,0 +1,22 @@
+.container.pt-4
+	.d-flex
+		.flex-grow-1.p-2
+			%h1 #{@survey.title}
+		.p-2
+			.row.p-2
+				%a.btn.btn-dark.btn-lg{href: survey_path(slug: @survey.slug), data: {turbo: {frame: "_top"}}} View
+	.row
+		= render partial: "sidebar", locals: {survey: @survey}
+		.col-md-9.p-4
+			%turbo-frame{id: "rightSide", data: {turbo: {action: "advance"}}}
+				%h2 Add Interviewer
+
+				= form_with(model: @interviewer, url: survey_interviewers_path(survey_slug: @survey.slug)) do |f|
+					.form-floating.mb-4
+						= f.select :user_id, options_for_select(@members_list_options), {prompt: "Choose one. . . "}, class: "form-select border border-dark"
+						= f.label user_id: "Select Member"
+
+					.actions
+						= f.submit "Add", class: "btn btn-dark btn-lg"
+
+				

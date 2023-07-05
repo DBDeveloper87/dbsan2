@@ -1,7 +1,7 @@
 %nav.navbar.sticky-top.d-print-none.d-md-none
 	.container-fluid
 		.justify-content-start
-			%a.navbar-brand{href: channel_root_path}
+			%a.navbar-brand{href: "https://www.dendros.com"}
 				- if @channel.brand_logo.attached?
 					%img.brand-bg{src: url_for(@channel.brand_logo), style: "height: 10vh", alt: "#{@channel.name} Logo"}
 				- else
@@ -30,7 +30,7 @@
 %nav.navbar.navbar-expand-sm.sticky-top.d-print-none.d-none.d-sm-none.d-md-block
 	.container
 		.justify-content-start
-			%a.navbar-brand{href: channel_root_path}
+			%a.navbar-brand{href: "https://www.dendros.com"}
 				- if @channel.brand_logo.attached?
 					%img.brand-bg{src: url_for(@channel.brand_logo), style: "height: 10vh", alt: "#{@channel.name} Logo"}
 				- else

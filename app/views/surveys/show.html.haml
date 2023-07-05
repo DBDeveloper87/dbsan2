@@ -5,4 +5,7 @@
 
 			= simple_format(@survey.long_description)
 
-			= button_to "Take Survey", survey_responses_path(survey_slug: @survey.slug), method: :post, class: "btn btn-dark btn-lg"
+			- unless  @survey.survey_type.titleize == "Open Interview"
+				= button_to "Take Survey", survey_responses_path(survey_slug: @survey.slug), method: :post, class: "btn btn-dark btn-lg"
+			- if @survey.interviewers.map { |i| i.user_id == current_user&.id }
+				= button_to "Start an Interview", survey_responses_path(survey_slug: @survey.slug, include_interviewer: true), method: :post, class: "btn btn-dark btn-lg"

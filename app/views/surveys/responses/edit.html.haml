@@ -1,23 +1,29 @@
 %main.container-lg
 	%turbo-frame{id: "main"}
 		.col-xl-8.pt-4.mx-auto
-			%h1 #{@section.title}
-			= form_with(model: @response, url: survey_response_path(survey_slug: @survey.slug, id: @response.id, sec_num: @section.section_number)) do |f|
-				- @questions.each do |q|
-					.fieldset.border.border-dark.p-4.mb-4
-						%legend #{q.title}
-						- unless q.description.nil?
-							%p #{q.description}
+			- if @survey.survey_type.titleize == "Open Interview"
+				- if @response.interviewees.empty?
+					= render partial: "surveys/responses/interviewees", locals: {survey: @survey, response: @response}
+				- else
+					%h1 #{@section.title}
+					= form_with(model: @response, url: survey_response_path(survey_slug: @survey.slug, id: @response.id, sec_num: @section.section_number)) do |f|
+						- @questions.each do |q|
+							.fieldset.border.border-dark.p-4.mb-4
+								%legend #{q.title}
+								- unless q.description.nil?
+									%p #{q.description}
 					
-						- case q.question_type
-						- when "single_choice"
-							= render partial: "surveys/responses/single_choice", locals: {response: @response, q: q, f: f}
-						- when "multiple_choice"
-							= render partial: "surveys/responses/multiple_choice", locals: {response: @response, q: q, f: f}
-						- when "long_answer"
-							= render partial: "surveys/responses/long_answer", locals: {response: @response, q: q, f: f}
-						- when "rating"
-							= render partial: "surveys/responses/rating", locals: {response: @response, q: q, f: f}
-				.row.mt-4.mb-4
-					- if @section.section_number == @survey.sections.count
-						= f.submit "Submit", class: "btn btn-dark btn-lg"
+								- case q.question_type
+								- when "single_choice"
+									= render partial: "surveys/responses/single_choice", locals: {response: @response, q: q, f: f}
+								- when "multiple_choice"
+									= render partial: "surveys/responses/multiple_choice", locals: {response: @response, q: q, f: f}
+								- when "long_answer"
+									= render partial: "surveys/responses/long_answer", locals: {response: @response, q: q, f: f}
+								- when "rating"
+									= render partial: "surveys/responses/rating", locals: {response: @response, q: q, f: f}
+						.row.mt-4.mb-4
+							- if @section.section_number == @survey.sections.count
+								= f.submit "Submit", class: "btn btn-dark btn-lg"
+							- else
+								= f.submit "Continue", class: "btn btn-dark btn-lg"

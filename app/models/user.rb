@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :channel_owners
   has_many :channel_members
   accepts_nested_attributes_for :channel_members
-  
   has_many :channels, through: :channel_members
+  has_many :interviewers
   has_many :event_attendees
   has_many :events, through: :event_attendees
   has_many :camp_applications

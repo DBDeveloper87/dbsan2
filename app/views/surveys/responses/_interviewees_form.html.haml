@@ -1,0 +1,13 @@
+.nested-form-wrapper{data: {new_record: "#{f.object.new_record?}"}}
+  .d-flex
+    .form-floating.flex-grow-1
+      = f.text_field :first_name, placeholder: "Last Name", class: "form-control border border-dark"
+      = f.label :first_name, "First Name"
+    .form-floating.flex-grow-1
+      = f.text_field :last_name, placeholder: "Last Name", class: "form-control border border-dark"
+      = f.label :last_name, "Last Name"
+    .p-2{data: {controller: "bootstrap"}}
+      %button.btn.btn-lg.btn-dark.text-light{type: "button", title: "Remove Interviewee", data: {bs: {title: "Remove Interviewee", placement: "bottom", toggle: "tooltip"}, action: "nested-form#remove"}} 
+        %i.bi.bi-trash
+    
+  = f.hidden_field :_destroy

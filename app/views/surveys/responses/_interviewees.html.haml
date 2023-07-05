@@ -1,0 +1,18 @@
+%h1 Who am I interviewing?
+
+%p Today, I (#{@response.interviewer.full_name}), will be interviewing you.  May I please have your first and last name?
+
+= form_with(model: @response, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }, url: survey_response_path(survey_slug: @survey.slug, id: @response.id)) do |f|
+	%template{data: {nested_form_target: "template"}}
+		= f.fields_for :interviewees, Interviewee.new, child_index: 'NEW_RECORD' do |ifs|
+			= render "surveys/responses/interviewees_form", f: ifs 
+
+	= f.fields_for :interviewees do |ifs|
+		= render "surveys/responses/interviewees_form", f: ifs
+
+	%div{data: {nested_form_target: "target"}}
+
+	%button.mb-4.btn.btn-lg.btn-dark{type: "button", data: {action: "nested-form#add"}} Add Interviewee
+	
+	.row
+		= f.submit "Continue", class: "btn btn-dark btn-lg"

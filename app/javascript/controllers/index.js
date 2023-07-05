@@ -10,6 +10,9 @@ application.register("bootstrap", BootstrapController)
 import Chart from 'stimulus-chartjs'
 application.register('chart', Chart)
 
+import NestedForm from 'stimulus-rails-nested-form'
+application.register('nested-form', NestedForm)
+
 import CovidController from "./covid_controller"
 application.register("covid", CovidController)
 

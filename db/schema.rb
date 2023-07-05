@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_05_092252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -539,6 +539,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
     t.index ["challenge_id"], name: "index_frequently_asked_questions_on_challenge_id"
   end
 
+  create_table "interviewees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_response_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "state"
+    t.string "county"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_response_id"], name: "index_interviewees_on_survey_response_id"
+  end
+
+  create_table "interviewers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "survey_id", null: false
+    t.uuid "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["survey_id"], name: "index_interviewers_on_survey_id"
+    t.index ["user_id"], name: "index_interviewers_on_user_id"
+  end
+
   create_table "languages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "dialect"
@@ -764,6 +784,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
     t.string "last_name"
     t.string "email_address"
     t.text "include_sections"
+    t.uuid "interviewer_id"
+    t.index ["interviewer_id"], name: "index_survey_responses_on_interviewer_id"
     t.index ["survey_id"], name: "index_survey_responses_on_survey_id"
     t.index ["user_id"], name: "index_survey_responses_on_user_id"
   end
@@ -948,6 +970,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
   add_foreign_key "event_attendees", "users"
   add_foreign_key "exercise_trackers", "challenge_participants"
   add_foreign_key "frequently_asked_questions", "challenges"
+  add_foreign_key "interviewees", "survey_responses"
+  add_foreign_key "interviewers", "surveys"
+  add_foreign_key "interviewers", "users"
   add_foreign_key "participant_milestones", "challenge_milestones"
   add_foreign_key "participant_milestones", "challenge_participants"
   add_foreign_key "phone_numbers", "camp_application_emergencies"
@@ -971,6 +996,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_28_220527) do
   add_foreign_key "social_networks", "channels"
   add_foreign_key "state_provinces", "countries"
   add_foreign_key "survey_questions", "survey_sections"
+  add_foreign_key "survey_responses", "interviewers"
   add_foreign_key "survey_responses", "surveys"
   add_foreign_key "survey_responses", "users"
   add_foreign_key "survey_sections", "surveys"
