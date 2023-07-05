@@ -22,6 +22,9 @@
 									= render partial: "surveys/responses/long_answer", locals: {response: @response, q: q, f: f}
 								- when "rating"
 									= render partial: "surveys/responses/rating", locals: {response: @response, q: q, f: f}
+								- when "yes_no"
+									= render partial: "surveys/responses/single_choice", locals: {response: @response, q: q, f: f}
+
 						.row.mt-4.mb-4
 							- if @section.section_number == @survey.sections.count
 								= f.submit "Submit", class: "btn btn-dark btn-lg"
