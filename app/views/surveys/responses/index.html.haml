@@ -30,7 +30,11 @@
 				- @responses.each do |r|
 					.card.border.border-dark.mb-4
 						.card-body
-							%h3.card-title #{r.interviewer.full_name}
+							- unless r.interviewer.nil?
+								%h3.card-title #{r.interviewer.full_name}
+							- else
+								%h3.card-title Unknown Interviewer
+								
 							- unless r.interviewees.empty?
 								%p 
 									%strong Interviewees:
