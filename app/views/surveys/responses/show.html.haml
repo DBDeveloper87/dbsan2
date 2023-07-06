@@ -30,19 +30,22 @@
 						= simple_format(ra.long_answer)
 
 						%ul.list-group.ms-4
+							- option_ids = []
+							- ra.question_options.each do |ro|
+								- option_ids.append(ro.id)
+
 							- q.question_options.each do |qo|
-								- ra.question_options.each do |ro|
-									- if qo.id == ro.id
-										%li.list-group-item.bg-dark.text-light
-											- unless qo.rating_value.nil?
-												#{qo.rating_value} -- #{qo.name}
-											- else
-												#{qo.name}
-									- else
-										%li.list-group-item.border.border-dark
-											- unless qo.rating_value.nil?
-												#{qo.rating_value} -- #{qo.name}
-											- else
-												#{qo.name}
+								- if qo.id.in?(option_ids)
+									%li.list-group-item.bg-dark.text-light
+										- unless qo.rating_value.nil?
+											#{qo.rating_value} -- #{qo.name}
+										- else
+											#{qo.name}
+								- else
+									%li.list-group-item.border.border-dark
+										- unless qo.rating_value.nil?
+											#{qo.rating_value} -- #{qo.name}
+										- else
+											#{qo.name}
 
 
