@@ -1,7 +1,7 @@
 class Surveys::ResponsesController < SurveysController
 	skip_before_action :authenticate_user!, only: [:create, :edit, :update]
 	before_action :get_survey, only: :index
-	before_action :set_response, only: [:edit, :update]
+	before_action :set_response, only: [:edit, :update, :show]
 
 	def index
 		filter = params[:list_filter]
@@ -29,6 +29,9 @@ class Surveys::ResponsesController < SurveysController
 		unless @section.nil?
 			@questions = @section.questions.order(position: :asc).all
 		end
+	end
+
+	def show
 	end
 
 	def create
