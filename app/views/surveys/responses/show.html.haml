@@ -1,0 +1,48 @@
+%main.container-lg
+	%turbo-frame{id: "main"}
+		.col-xl-8.pt-4.mx-auto
+			%h1 #{@survey.title}
+
+			= simple_format(@survey.long_description)
+
+			%h2 Interview Information
+			%p 
+				%string Interviewer
+				#{@response.interviewer.full_name}
+			%p
+				%strong Interviewees
+			%ul
+				- @response.interviewees.each do |i|
+					%li #{i.first_name} #{i.last_name}
+
+			- @survey.sections.order(section_number: :asc).each do |s|
+				%h2 #{s.title}
+				= simple_format(s.content)
+
+				- s.questions.order(position: :asc).each do |q|
+					%h3 #{q.position}. #{q.title}
+					
+					= simple_format(q.description)
+
+					%p This question is #{q.question_type.titleize}.
+
+					- @response.response_answers.where(survey_question_id: q.id).all.each do |ra|
+						= simple_format(ra.long_answer)
+
+						%ul.list-group.ms-4
+							- q.question_options.each do |qo|
+								- ra.question_options.each do |ro|
+									- if qo.id == ro.id
+										%li.list-group-item.bg-dark.text-light
+											- unless qo.rating_value.nil?
+												#{qo.rating_value} -- #{qo.name}
+											- else
+												#{qo.name}
+									- else
+										%li.list-group-item.border.border-dark
+											- unless qo.rating_value.nil?
+												#{qo.rating_value} -- #{qo.name}
+											- else
+												#{qo.name}
+
+

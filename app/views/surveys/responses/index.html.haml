@@ -41,5 +41,7 @@
 									- r.interviewees.each do |i|
 										#{i.first_name} #{i.last_name},
 
+							%a.btn.btn-dark.btn-lg{href: survey_response_path(survey_slug: @survey.slug, id: r.id), data: {turbo_frame: "_top"}} View
+
 							%a.btn.btn-dark.btn-lg{href: edit_survey_response_path(survey_slug: @survey.slug, id: r.id), data: {turbo_frame: "_top"}} Continue
 						
