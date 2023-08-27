@@ -5,7 +5,7 @@
 		= link_to "New Camp or Retreat", new_camp_path
 		
 	- @camps.each do |camp|
-		- if camp.start.year == 2023
+		- if Date.today > camp.start
 			%h2 #{link_to camp.title, camp_path(camp)}
 			%p.text-muted From #{camp.start.in_time_zone.strftime("%A, %B %d, %Y %l:%M %p")} to #{camp.end.strftime("%A, %B %d, %Y %l:%M %p (EST)")}
 		
