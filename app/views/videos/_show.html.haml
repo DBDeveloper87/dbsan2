@@ -40,17 +40,17 @@
 				
 			
 			%h1.mb-4 #{video.title}	
-			%p Your browser currently supports the following voices for SpeechSynthesis API
-			#englishUS
-				%h3 English (United States)
-			#englishGB
-				%h3 English (United Kingdom)
-			#englishAU
-				%h3 English (Australia)
-			#englishIE
-				%h3 English (India)
-			#all
-				%h3 All Voices
+			-#%p Your browser currently supports the following voices for SpeechSynthesis API
+			-##englishUS
+				-#%h3 English (United States)
+			-##englishGB
+				-#%h3 English (United Kingdom)
+			-##englishAU
+				-#%h3 English (Australia)
+			-3#englishIE
+				-#%h3 English (India)
+			-##all
+				-#%h3 All Voices
 
 			
 			:javascript
@@ -101,6 +101,7 @@
 				
 
 			- if video.chroma_keyed?
+				%p Chroma-Keyed
 				%h2 Speed
 				.d-flex
 					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
