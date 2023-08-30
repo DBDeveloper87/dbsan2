@@ -1,78 +1,75 @@
 %turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
-	- if @channel.name == "ILY by Tricio"
-		= render partial: "videos/ilybytricio", locals: {video: video}
-	- else
-		.container-xl.mb-4{data:{controller: "video-container"}}
-			.container{data:{video:{container:{target: "container"}}}}
-				%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
-					- unless video.text_tracks.empty?
-						- video.text_tracks.each do |track|
-							%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
-			= render partial: "videos/controls/control_bar", locals: {video: video}
+	.container-xl.mb-4{data:{controller: "video-container"}}
+		.container{data:{video:{container:{target: "container"}}}}
+			%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
+				- unless video.text_tracks.empty?
+					- video.text_tracks.each do |track|
+						%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
+		= render partial: "videos/controls/control_bar", locals: {video: video}
 
-			.border.border-dark.p-4
-				%label.form-label.mb-4{for: "speakingRate"} Speaking Rate
-				.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
-					.flex-grow-1
-						.ticks
-							- 21.times do
-								%span.tick 
-						%input.slider{id: "speakingRate", type: "range", min: "0", max: "2", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}	
-					%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
-			.border.border-dark.p-4
-				%label.form-label.mb-4{for: "pitch"} Pitch
-				.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
-					.flex-grow-1
-						.ticks
-							- 11.times do
-								%span.tick 
-						%input.slider{id: "pitch", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
-					%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
-			.border.border-dark.p-4
-				%label.form-label.mb-4{for: "volume"} Volume
-				.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
-					.flex-grow-1
-						.ticks
-							- 11.times do
-								%span.tick 
-						%input.slider{id: "volume", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
-					%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
+		.border.border-dark.p-4
+			%label.form-label.mb-4{for: "speakingRate"} Speaking Rate
+			.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
+				.flex-grow-1
+					.ticks
+						- 21.times do
+							%span.tick 
+					%input.slider{id: "speakingRate", type: "range", min: "0", max: "2", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}	
+				%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
+		.border.border-dark.p-4
+			%label.form-label.mb-4{for: "pitch"} Pitch
+			.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
+				.flex-grow-1
+					.ticks
+						- 11.times do
+							%span.tick 
+					%input.slider{id: "pitch", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
+				%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
+		.border.border-dark.p-4
+			%label.form-label.mb-4{for: "volume"} Volume
+			.d-flex.p-2.align-items-center{data: {controller: "slider", slider: {text_value: "Percent"}}}
+				.flex-grow-1
+					.ticks
+						- 11.times do
+							%span.tick 
+					%input.slider{id: "volume", type: "range", min: "0", max: "1", step: "0.1", data: {action: "mouseup->slider#maintainFocus change->slider#updateValueText", slider: {target: "slider"}}}
+				%output.p-2.ms-4.bg-dark.text-light.align-self-center.text-center{aria: {hidden: "true"}, data: {slider: {target: "output"}}, style: "width: 4rem"}
 				
 			
-			%h1.mb-4 #{video.title}	
-			- if video.chroma_keyed?
-				%p Chroma-Keyed
-				%h2 Speed
-				.d-flex
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 2.0}}}, action: "click->video-container#setSpeed"} } 2.0x
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 1.0}}}, action: "click->video-container#setSpeed"} } 1.0x
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.5}}}, action: "click->video-container#setSpeed"} } 0.5x
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.25}}}, action: "click->video-container#setSpeed"} } 0.25x
+		%h1.mb-4 #{video.title}	
+		- if video.chroma_keyed?
+			%p Chroma-Keyed
+			%h2 Speed
+			.d-flex
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 2.0}}}, action: "click->video-container#setSpeed"} } 2.0x
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 1.0}}}, action: "click->video-container#setSpeed"} } 1.0x
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.5}}}, action: "click->video-container#setSpeed"} } 0.5x
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.25}}}, action: "click->video-container#setSpeed"} } 0.25x
 					
 
-				%h2 Solid Backgrounds
-				.d-flex
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "red"}}}, action: "click->video-container#setBackground"} } Red
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "teal"}}}, action: "click->video-container#setBackground"} } Teal
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "brown"}}}, action: "click->video-container#setBackground"} } Brown
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "black"}}}, action: "click->video-container#setBackground"} } Black
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gray"}}}, action: "click->video-container#setBackground"} } Gray
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "blue"}}}, action: "click->video-container#setBackground"} } Blue
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gold"}}}, action: "click->video-container#setBackground"} } Gold
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "silver"}}}, action: "click->video-container#setBackground"} } Silver
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "purple"}}}, action: "click->video-container#setBackground"} } Purple
-					%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "pink"}}}, action: "click->video-container#setBackground"} } Pink
+			%h2 Solid Backgrounds
+			.d-flex
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "red"}}}, action: "click->video-container#setBackground"} } Red
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "teal"}}}, action: "click->video-container#setBackground"} } Teal
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "brown"}}}, action: "click->video-container#setBackground"} } Brown
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "black"}}}, action: "click->video-container#setBackground"} } Black
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gray"}}}, action: "click->video-container#setBackground"} } Gray
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "blue"}}}, action: "click->video-container#setBackground"} } Blue
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "gold"}}}, action: "click->video-container#setBackground"} } Gold
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "silver"}}}, action: "click->video-container#setBackground"} } Silver
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "purple"}}}, action: "click->video-container#setBackground"} } Purple
+				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{color:{param: "pink"}}}, action: "click->video-container#setBackground"} } Pink
 					
 
-				%h2 Curtain Backgrounds
-				%p Not yet developed
+			%h2 Curtain Backgrounds
+			%p Not yet developed
 
-				%h2 Color Wheel
-				%p If the solid color options we decide on aren't enough for the end user, they can choose it from the color wheel here.
-				.d-flex
-					%label.form-label{for: "colorPicker"} Color Picker
-					%input#colorPicker.form-control.form-control-color{type: "color", data:{video:{container:{target: "wheel", picker:{param: "changed"}}}, action: "input->video-container#setBackground"}}
+			%h2 Color Wheel
+			%p If the solid color options we decide on aren't enough for the end user, they can choose it from the color wheel here.
+			.d-flex
+				%label.form-label{for: "colorPicker"} Color Picker
+				%input#colorPicker.form-control.form-control-color{type: "color", data:{video:{container:{target: "wheel", picker:{param: "changed"}}}, action: "input->video-container#setBackground"}}
 
-				%h2 Quality
-				%p Will incorporate once the rendering of speed and framerate is determined.  Available in 480p, 720p, 1080p and 4K, whichever is less than the original upload.  So if one uploads 1080p, then only 720p and 480p will also be produced.
+			%h2 Quality
+			%p Will incorporate once the rendering of speed and framerate is determined.  Available in 480p, 720p, 1080p and 4K, whichever is less than the original upload.  So if one uploads 1080p, then only 720p and 480p will also be produced.
