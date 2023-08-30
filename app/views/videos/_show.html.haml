@@ -5,11 +5,8 @@
 				- unless video.text_tracks.empty?
 					- video.text_tracks.each do |track|
 						%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
-		= render partial: "videos/controls/control_bar", locals: {video: video}
+			= render partial: "videos/controls/control_bar", locals: {video: video}
 
-		%h1.mb-4 #{video.title}	
-		- if video.chroma_keyed?
-			%p Chroma-Keyed
 			%h2 Speed
 			.d-flex
 				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
@@ -18,6 +15,10 @@
 				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.5}}}, action: "click->video-container#setSpeed"} } 0.5x
 				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.25}}}, action: "click->video-container#setSpeed"} } 0.25x
 					
+		%h1.mb-4 #{video.title}	
+		- if video.chroma_keyed?
+			%p Chroma-Keyed
+			
 
 			%h2 Solid Backgrounds
 			.d-flex
