@@ -1,6 +1,6 @@
 %turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
 	.container-xl.p-0.mb-4{data:{controller: "video-container"}}
-		.container-md.p-0{data:{video:{container:{target: "container"}}}}
+		.container-lg.p-0{data:{video:{container:{target: "container"}}}}
 			%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", width: "100%", playsinline: "true"}
 				- unless video.text_tracks.empty?
 					- video.text_tracks.each do |track|
