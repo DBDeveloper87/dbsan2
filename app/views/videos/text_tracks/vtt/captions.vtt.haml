@@ -1,1 +1,7 @@
-= raw(@track.captions)
+- @blocks.each_with_index do |b, i|
+	= i + 1
+	= raw("#{b.start.strftime('%H:%M:%S.%L')} --> #{b.end.strftime('%H:%M:%S.%L')} align:start")
+	- unless b.payload.nil?
+		- b.payload.each do |p|
+			= raw(p)
+	= raw("\n")

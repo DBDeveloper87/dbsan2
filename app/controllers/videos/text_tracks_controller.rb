@@ -16,6 +16,7 @@ class Videos::TextTracksController < ApplicationController
 
 	def captions
 		@track = TextTrack.find(params[:text_track_id])
+		@blocks = @track.cue_blocks.where(cue_type: "subtitles_and_captions").all.order(cue_num: :asc)
 		render template: 'videos/text_tracks/vtt/captions', layout: 'tracks', formats: [:vtt], content_type: "text/vtt"
 	end
 
