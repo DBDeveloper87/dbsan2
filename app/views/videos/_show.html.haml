@@ -1,12 +1,13 @@
 %turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
-	.container-xl.mb-4{data:{controller: "video-container"}}
-		.container{data:{video:{container:{target: "container"}}}}
-			%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", controls: "true", width: "100%", playsinline: "true"}
+	.container-xl.p-0.mb-4{data:{controller: "video-container"}}
+		.container-md.p-0{data:{video:{container:{target: "container"}}}}
+			%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", width: "100%", playsinline: "true"}
 				- unless video.text_tracks.empty?
 					- video.text_tracks.each do |track|
 						%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
 			= render partial: "videos/controls/control_bar", locals: {video: video}
 
+		.container-md.mt-4
 			%h2 Speed
 			.d-flex
 				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x

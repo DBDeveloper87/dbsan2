@@ -3,7 +3,7 @@ import * as bootstrap from "bootstrap"
 
 export default class extends Controller {
   static targets = ["video", "container", "playButton", "playButtonIcon", "currentTime", 
-    "duration", "ccButton", "adButton", "settingsButton", "castButton", "pipButton",
+    "duration", "decreasePlaybackButton", "playbackRate", "increasePlaybackButton", "ccButton", "adButton", "settingsButton", "castButton", "pipButton",
      "pipButtonIcon", "fsButton", "fsButtonIcon", "settingsDropUp", "settingsSubmenus", 
      "settingsMenu", 
      "adMenuButton", "adMenu", "wheel"]
@@ -17,7 +17,19 @@ export default class extends Controller {
 
     this.videoTarget.addEventListener("loadedmetadata", (event) => {
       this.displayDuration()
-    })  
+    }) 
+
+    this.videoTarget.addEventListener("ended", (event) => {
+      this.playButtonIconTarget.classList.add("bi-play-fill")
+      this.playButtonIconTarget.classList.remove("bi-pause-fill")
+      this.playButtonTarget.setAttribute("aria-label", "Play (k)")
+      const tooltip = bootstrap.Tooltip.getInstance('#playButton')
+      tooltip.setContent({".tooltip-inner": "Play (k)"})
+    }) 
+
+    this.decreasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate / 2)
+    this.playbackRateTarget.innerText = this.videoTarget.playbackRate.toFixed(2) + "x"
+    this.increasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate * 2)
   }
 
   tooltips() {
@@ -38,6 +50,21 @@ export default class extends Controller {
 
   setSpeed({params: { speed }}) {
     this.videoTarget.playbackRate = speed
+
+    if (this.videoTarget.playbackRate > 0.25) {
+      this.decreasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate / 2)
+      this.decreasePlaybackButtonTarget.disabled = false
+    } else {
+      this.decreasePlaybackButtonTarget.disabled = true
+    }
+    this.playbackRateTarget.innerText = this.videoTarget.playbackRate.toFixed(2) + "x"
+    if (this.videoTarget.playbackRate < 4) {
+      this.increasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate * 2)
+      this.increasePlaybackButtonTarget.disabled = false
+    } else {
+      this.increasePlaybackButtonTarget.disabled = true
+    }
+
   }
 
   playPause() {
@@ -129,19 +156,10 @@ export default class extends Controller {
       if (event.key == "s") {
         this.settingsButtonTarget.click()
       }
-
-      this.settingsButtonTarget.classList.remove("btn-dark")
-      this.settingsButtonTarget.classList.add("btn-light")
-      this.settingsButtonTarget.setAttribute("aria-expanded", "true")
-      this.adMenuButtonTarget.focus()
     } else {
       if (event.key == "s") {
         this.settingsButtonTarget.click()
       }
-
-      this.settingsButtonTarget.classList.add("btn-dark")
-      this.settingsButtonTarget.classList.remove("btn-light")
-      this.settingsButtonTarget.setAttribute("aria-expanded", "false")
     }
   }
 

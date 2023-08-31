@@ -1,0 +1,8 @@
+.p-2.d-none.d-sm-inline-flex
+	%button#decreasePlaybackButton.btn.btn-dark.btn-lg.border.border-light{type: "button", aria: {label: "Decrease Playback Rate (shift + down)"}, data: {action: "click->video-container#setSpeed keydown.shift+down@document->video-container#setSpeed", bs: {title: "Decrease Playback Rate (shift + down)", toggle: "tooltip", placement: "top"}, video: {container: {target: "decreasePlaybackButton"}}}}
+		%i.bi.bi-chevron-down{aria: {hidden: "true"}}
+	.p-2.border.border-light
+		%span{data: {video: {container: {target: "playbackRate"}}}} --
+	%button#increasePlaybackButton.btn.btn-dark.btn-lg.border.border-light{type: "button", aria: {label: "Increase Playback Rate (shift + up)"}, data: {action: "click->video-container#setSpeed keydown.shift+up@document->video-container#setSpeed", bs: {title: "Increase Playback Rate (shift + up)", toggle: "tooltip", placement: "top"}, video: {container: {target: "increasePlaybackButton"}}}}
+		%i.bi.bi-chevron-up{aria: {hidden: "true"}}
+	

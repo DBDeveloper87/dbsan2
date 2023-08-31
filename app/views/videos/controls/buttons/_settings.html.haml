@@ -1,6 +1,6 @@
 .p-2
 	%span{data: {bs: {toggle: "modal", target: "#videoSettings"}}}
-		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: { bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}}
+		%button#settingsButton.btn.btn-lg.btn-dark.border.border-light{type: "button", title: "Settings (s)", aria: {controls: "#settingsMenu", expanded: "false"}, data: { action: "keydown.s@document->video-container#toggleSettings", bs:{toggle: "tooltip", title: "Settings (s)", placement: "top"}, video: {container: {target: "settingsButton"}}}} 
 			%i.bi.bi-gear-fill{aria: {hidden: "true"}}
 	
 	#videoSettings.modal.fade{tabindex: "-1", data: {bs: {backdrop: "static"}}}
