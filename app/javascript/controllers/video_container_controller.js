@@ -30,6 +30,11 @@ export default class extends Controller {
     this.decreasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate / 2)
     this.playbackRateTarget.innerText = this.videoTarget.playbackRate.toFixed(2) + "x"
     this.increasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate * 2)
+    
+    this.videoTarget.addEventListener("ratechange", (event) => {
+      this.updateSpeedControls()
+    })
+
   }
 
   tooltips() {
@@ -50,21 +55,24 @@ export default class extends Controller {
 
   setSpeed({params: { speed }}) {
     this.videoTarget.playbackRate = speed
+  }
 
+  updateSpeedControls() {
     if (this.videoTarget.playbackRate > 0.25) {
       this.decreasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate / 2)
       this.decreasePlaybackButtonTarget.disabled = false
     } else {
       this.decreasePlaybackButtonTarget.disabled = true
     }
+    
     this.playbackRateTarget.innerText = this.videoTarget.playbackRate.toFixed(2) + "x"
+    
     if (this.videoTarget.playbackRate < 4) {
       this.increasePlaybackButtonTarget.setAttribute("data-video-container-speed-param", this.videoTarget.playbackRate * 2)
       this.increasePlaybackButtonTarget.disabled = false
     } else {
       this.increasePlaybackButtonTarget.disabled = true
     }
-
   }
 
   playPause() {

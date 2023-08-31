@@ -1,0 +1,27 @@
+%turbo-frame{id: "settingsMenu"}
+	.modal-content{data: { controller: "video-playback-rate"}}
+		.modal-header.text-dark
+			%h3.modal-title Playback Rate
+			%button.btn-close{type: "button", aria: {label: "Close"}, data: {bs: {dismiss: "modal"}}}
+		.model-body.text-dark.p-4
+			.row.mb-4
+				.d-grid.d-block.mb-2
+					%input#rate025.btn-check{type: "radio", name: "playback_rate", data: {action: "click->video-playback-rate#updateValue", video: {playback: {rate: {target: "rate025", speed: {param: "0.25"}}}}}}
+					%label.btn.btn-outline-dark.btn-lg.text-start{for: "rate025"} 0.25x
+				
+				.d-grid.d-block.mb-2
+					%input#rate050.btn-check{type: "radio", name: "playback_rate", data: {action: "click->video-playback-rate#updateValue", video: {playback: {rate: {target: "rate050", speed: {param: "0.50"}}}}}}
+					%label.btn.btn-outline-dark.btn-lg.text-start{for: "rate050"} 0.50x
+				
+				.d-grid.d-block.mb-2
+					%input#rate100.btn-check{type: "radio", name: "playback_rate", data: {action: "click->video-playback-rate#updateValue", video: {playback: {rate: {target: "rate100", speed: {param: "1.00"}}}}}}
+					%label.btn.btn-outline-dark.btn-lg.text-start{for: "rate100"} 1.00x
+				
+				.d-grid.d-block.mb-2
+					%input#rate200.btn-check{type: "radio", name: "playback_rate", data: {action: "click->video-playback-rate#updateValue", video: {playback: {rate: {target: "rate200", speed: {param: "2.00"}}}}}}
+					%label.btn.btn-outline-dark.btn-lg.text-start{for: "rate200"} 2.00x
+				
+				.d-grid.d-block.mb-2
+					%input#rate400.btn-check{type: "radio", name: "playback_rate", data: {action: "click->video-playback-rate#updateValue", video: {playback: {rate: {target: "rate400", speed: {param: "4.00"}}}}}}
+					%label.btn.btn-outline-dark.btn-lg.text-start{for: "rate400"} 4.00x
+					

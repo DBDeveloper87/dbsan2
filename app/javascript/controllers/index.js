@@ -49,3 +49,6 @@ application.register("slider", SliderController)
 
 import ParticipantController from "./participant_controller"
 application.register("participant", ParticipantController)
+
+import VideoPlaybackRateController from "./videos/playback_rate_controller"
+application.register("video-playback-rate", VideoPlaybackRateController)

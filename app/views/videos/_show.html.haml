@@ -1,22 +1,15 @@
 %turbo-frame{id: "content", data:{turbo:{action: "advance"}}}
 	.container-xl.p-0.mb-4{data:{controller: "video-container"}}
 		.container-lg.p-0{data:{video:{container:{target: "container"}}}}
-			%video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", width: "100%", playsinline: "true"}
+			%video#video{data:{video:{container:{target: "video"}}}, src: video.original_upload.url, preload: "metadata", width: "100%", playsinline: "true"}
 				- unless video.text_tracks.empty?
 					- video.text_tracks.each do |track|
 						%track{kind: "captions", srclang: "en", label: "English (CC)", src: video_text_track_captions_path(track.video, track), default: "true"}
 			= render partial: "videos/controls/control_bar", locals: {video: video}
 
-		.container-md.mt-4
-			%h2 Speed
-			.d-flex
-				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 4.0}}}, action: "click->video-container#setSpeed"} } 4.0x
-				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 2.0}}}, action: "click->video-container#setSpeed"} } 2.0x
-				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 1.0}}}, action: "click->video-container#setSpeed"} } 1.0x
-				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.5}}}, action: "click->video-container#setSpeed"} } 0.5x
-				%button.m-4.btn-dark.btn.btn-lg{type: "button", data:{video:{container:{speed:{param: 0.25}}}, action: "click->video-container#setSpeed"} } 0.25x
-					
-		%h1.mb-4 #{video.title}	
+		.container-lg.mt-4
+			%h1.mb-4 #{video.title}	
+		
 		- if video.chroma_keyed?
 			%p Chroma-Keyed
 			

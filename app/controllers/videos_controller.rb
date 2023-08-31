@@ -2,6 +2,7 @@ class VideosController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :new, :edit, :create, :update]
 	before_action :get_channel
 	before_action :set_video, only: [:show, :edit, :update]
+	before_action :set_video_id, only: [:ad_menu, :playback_rate]
 	layout "channel", only: [:show]
 
 	def index
@@ -21,6 +22,10 @@ class VideosController < ApplicationController
 
 	def ad_menu
 		render template: "videos/controls/settings_menu/ad_menu"
+	end
+
+	def playback_rate
+		render template: "videos/controls/settings_menu/playback_rate"
 	end
 
 	def create
@@ -64,6 +69,14 @@ class VideosController < ApplicationController
 
 		def set_video
 			@video = @channel.videos.find(params[:id])
+			@meta_title = "#{@video.title} | #{@video.channel.name}"
+			@meta_og_type = "video.movie"
+			@meta_og_url = video_url(@video)
+			#@meta_og_image = "https://storage.googleapis.com/dbsan-public/poster.png"
+		end
+
+		def set_video_id
+			@video = @channel.videos.find(params[:video_id])
 			@meta_title = "#{@video.title} | #{@video.channel.name}"
 			@meta_og_type = "video.movie"
 			@meta_og_url = video_url(@video)

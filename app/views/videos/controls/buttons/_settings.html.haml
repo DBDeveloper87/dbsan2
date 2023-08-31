@@ -5,10 +5,4 @@
 	
 	#videoSettings.modal.fade{tabindex: "-1", data: {bs: {backdrop: "static"}}}
 		.modal-dialog
-			%turbo-frame{id: "settingsMenu"}
-				.modal-content
-					.modal-header
-						%h3.modal-title.text-dark Video Settings
-						%button.btn-close{type: "button", aria: {label: "Close"}, data: {bs: {dismiss: "modal"}}}
-					.model-body.text-dark.p-4
-						= render partial: "videos/controls/settings_menu/main", locals: {video: video}
+			= render partial: "videos/controls/settings_menu/main", locals: {video: video}
