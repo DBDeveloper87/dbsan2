@@ -2,7 +2,8 @@
 	= render partial: "videos/controls/buttons/play_pause"
 	= render partial: "videos/controls/time_range"
 	= render partial: "videos/controls/playback_rate"
-	= render partial: "videos/controls/buttons/cc"
+	- unless video.text_tracks.empty?
+		= render partial: "videos/controls/buttons/cc"
 	= render partial: "videos/controls/buttons/ad"
 	= render partial: "videos/controls/buttons/settings", locals: {video: video}
 	= render partial: "videos/controls/buttons/cast"

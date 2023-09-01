@@ -58,6 +58,10 @@ class TextTrack < ApplicationRecord
     end
   end
 
+  def audio_descriptions
+    self.cue_blocks.where(cue_type: "visual_descriptions").all.order(cue_num: :asc)
+  end
+
   def create_vtt
     captions = self.cue_blocks.where(cue_type: "subtitles_and_captions").all.order(cue_num: :asc)
     vtt = ["WEBVTT\n\n"]
