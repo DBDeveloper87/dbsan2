@@ -23,8 +23,6 @@ class CueBlock < ApplicationRecord
   private
     def generate_audio
       voices = [
-        { languageCode: "en-US", voice_name: "en-US-Studio-M", ssmlGender: "MALE" },
-        { languageCode: "en-US", voice_name: "en-US-Studio-O", ssmlGender: "FEMALE" },
         { languageCode: "en-US", voice_name: "en-US-Neural2-D", ssmlGender: "MALE" },
         { languageCode: "en-US", voice_name: "en-US-Neural2-F", ssmlGender: "FEMALE" }
       ]
@@ -61,9 +59,6 @@ class CueBlock < ApplicationRecord
           clip.save
         
         end
-
-
-
       end
     end
 

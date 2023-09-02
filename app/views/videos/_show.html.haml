@@ -10,33 +10,34 @@
 		.container-lg.mt-4
 			%h1.mb-4 #{video.title}	
 
-			- unless video.text_tracks.empty? and video.text_tracks.first.audio_descriptions.empty?
-				%p There are Audio Descriptions.  You can listen to them here.
-				- video.text_tracks.first.audio_descriptions.each_with_index do |a, i|
-					.border.border-dark
-						.p-2.bg-dark.text-light.ps-4.pe-4 #{i + 1}.  #{a.start.strftime('%H:%M:%S.%L')}
+			- unless video.text_tracks.empty?
+				- unless video.text_tracks.first.audio_descriptions.empty?
+					%p There are Audio Descriptions.  You can listen to them here.
+					- video.text_tracks.first.audio_descriptions.each_with_index do |a, i|
+						.border.border-dark
+							.p-2.bg-dark.text-light.ps-4.pe-4 #{i + 1}.  #{a.start.strftime('%H:%M:%S.%L')}
 						
-						.p-4
-							%h2 Original Text
-							%p #{a.payload.join(" ")}
+							.p-4
+								%h2 Original Text
+								%p #{a.payload.join(" ")}
 
-							%h2 Synthesize Text
-							%p #{a.synthesize_text}
+								%h2 Synthesize Text
+								%p #{a.synthesize_text}
 						
-						.row.p-4
-							- a.synthesize_speech_clips.each do |s|
-								.col-3.border.border-dark.p-4
-									- case s.voice_name
-										-when "en-US-Studio-M"
-											%p Name: Studio Male
-										- when "en-US-Studio-O"
-											%p Name: Studio Female
-										- when "en-US-Neural2-D"
-											%p Name: Neural2 Male
-										- when "en-US-Neural2-F"
-											%p Name: Neural2 Female
+							.row.p-4
+								- a.synthesize_speech_clips.each do |s|
+									.col-3.border.border-dark.p-4
+										- case s.voice_name
+											-when "en-US-Studio-M"
+												%p Name: Studio Male
+											- when "en-US-Studio-O"
+												%p Name: Studio Female
+											- when "en-US-Neural2-D"
+												%p Name: Neural2 Male
+											- when "en-US-Neural2-F"
+												%p Name: Neural2 Female
 
-									%audio{src: s.audio_file.url, controls: "true"}
+										%audio{src: s.audio_file.url, controls: "true"}
 
 		
 		- if video.chroma_keyed?
