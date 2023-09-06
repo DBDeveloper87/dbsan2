@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_05_092252) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_06_022101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -834,6 +834,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_092252) do
     t.index ["language_id"], name: "index_synthesize_speech_clips_on_language_id"
   end
 
+  create_table "synthesize_speech_voices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "language_id", null: false
+    t.integer "voice_type"
+    t.string "voice_name"
+    t.string "human_name"
+    t.integer "ssml_gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_synthesize_speech_voices_on_language_id"
+  end
+
   create_table "text_tracks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "video_id", null: false
     t.string "label"
@@ -842,7 +853,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_092252) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "captions"
     t.index ["language_id"], name: "index_text_tracks_on_language_id"
     t.index ["video_id"], name: "index_text_tracks_on_video_id"
   end
@@ -1003,6 +1013,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_05_092252) do
   add_foreign_key "surveys", "channels"
   add_foreign_key "synthesize_speech_clips", "cue_blocks"
   add_foreign_key "synthesize_speech_clips", "languages"
+  add_foreign_key "synthesize_speech_voices", "languages"
   add_foreign_key "text_tracks", "languages"
   add_foreign_key "text_tracks", "videos"
   add_foreign_key "videos", "channels"

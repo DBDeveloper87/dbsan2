@@ -1,8 +1,11 @@
 class Language < ApplicationRecord
-	
-
 	before_validation :strip
-	has_one :text_track
+	has_many :text_tracks
+	has_many :synthesize_speech_voices
+
+	def voices
+		self.synthesize_speech_voices
+	end
 	
 
 
