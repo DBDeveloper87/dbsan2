@@ -5,7 +5,11 @@ class DonationsController < ApplicationController
 
 	def new
 		@donation = Donation.new
-		@program = "#{@challenge.title} for #{@participant.full_name}"
+		unless @challenge.nil?
+			@program = "#{@challenge.title} for #{@participant.full_name}"
+		else
+			@program = "General Budget"
+		end
 	end
 
 	def create
