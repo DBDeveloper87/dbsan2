@@ -35,8 +35,8 @@
 						.text-end.text-muted
 							= Time.zone
 
-			.form-floating
-				= f.text_field :app_url, class: "form-control border border-dark"
+			.form-floating.mb-4
+				= f.text_field :app_url, placeholder: "Link to Application", class: "form-control border border-dark"
 				= f.label :app_url, "Link to Application"
 
 			.form-floating.mb-4

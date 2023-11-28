@@ -53,7 +53,7 @@ class CampsController < ApplicationController
     
     private
 		def camp_params
-    		params.require(:camp).permit(:title, :start, :end, :description, :app_url)
+    		params.require(:camp).permit(:title, :start, :end, :app_url, :description)
     	end
 
     	def set_camp
