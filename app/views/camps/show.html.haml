@@ -11,7 +11,8 @@
 			- else
 				.col-md-4.d-grid.d-block
 					-# = link_to "Apply Now", new_camp_camp_application_path(@camp), class: "btn btn-primary btn-lg"
-					%a.btn.btn-dark.btn-lg{href: "https://docs.google.com/forms/d/e/1FAIpQLScf3xZ_v2WzcPDDGLQay4EleTyHZseOZ8hmFqtWK3y99zxjEA/viewform"} Apply Now
+					- unless @camp.app_url.nil?
+						%a.btn.btn-dark.btn-lg{href: @camp.app_url} Apply Now
 			
 			- if current_user&.admin?
 				.col-md-4.d-grid.d-block
