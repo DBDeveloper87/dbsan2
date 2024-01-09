@@ -43,6 +43,9 @@
 /config/credentials/video_processor.key
 /video_processor.sh
 
+# ignore stylesheet
+/app/assets/stylesheets/old_dark.scss
+
 # Ignore synthesize test files
 request.json
 response.json
