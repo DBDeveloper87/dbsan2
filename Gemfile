@@ -105,4 +105,4 @@ gem 'stripe'
 gem "google-cloud-storage", "~> 1.8", require: false
 
 # Google Cloud Text To Speech
-#gem 'google-cloud-text_to_speech'
+gem 'google-cloud-text_to_speech'
