@@ -1,6 +1,11 @@
 .container
-	%h1 This page demonstrates the use of a contenteditable
+	.form-check
+		%input#switch.form-check-input{type: "checkbox", style: "width: 6rem; height: 3rem"}
+		%label.form-check-label{for: "switch"} Testing Switch
+		
 
-	.form-floating{data: {controller: "content-json"}}
-		%textarea#input.form-control.border.border-dark{placeholder: "Test", data: {content_json: {target: "input"}}}	
-		%label{for: "input"} Test
+	-#%h1 This page demonstrates the use of a contenteditable
+
+	-#.form-floating{data: {controller: "content-json"}}
+		-#%textarea#input.form-control.border.border-dark{placeholder: "Test", data: {content_json: {target: "input"}}}	
+		-#%label{for: "input"} Test
