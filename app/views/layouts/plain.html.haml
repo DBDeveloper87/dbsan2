@@ -1,0 +1,22 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title "Shifting the Bootstrap Colors"
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}
+    %meta{property: "og:title", content: @meta_title}
+    - unless @meta_og_type.nil?
+      %meta{property: "og:type", content: @meta_og_type}
+    - unless @meta_og_url.nil?
+      %meta{property: "og:url", content: @meta_og_url}
+    - unless @meta_og_image.nil?
+      %meta{property: "og:image", content: @meta_og_image}
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = yield :head
+  %body.d-flex.flex-column.min-vh-100
+    = yield
+    
+    

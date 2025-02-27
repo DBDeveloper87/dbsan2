@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+	layout "plain", only: :contenteditable
+
 	def contenteditable
 	end
 
