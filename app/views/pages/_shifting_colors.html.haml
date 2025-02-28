@@ -1001,6 +1001,206 @@
 								%dd 10.7:1
 					.border.border-dark.cyan-example.p-4.text-center
 						%p.p-0 Example Text
+
+		%h2 Bootstrap's Tints and Shades
+		%p Except for the white, black and grays, Bootstrap provides 4 tints and 4 shades for each of the other colors defined above.  This is achieved by mixing white to create the tints and mixing black to create the shades. So, in <code>_variables.scss</code> for instance, the variables $blue-100 to $blue-900 are defined as:
+
+		%pre.mt-4.mb-4.language-scss.line-numbers
+			%code
+				:preserve
+					// _variables.scss
+					
+					$blue:    	#0d6efd !default;
+
+					$blue-100: tint-color($blue, 80%) !default;
+					$blue-200: tint-color($blue, 60%) !default;
+					$blue-300: tint-color($blue, 40%) !default;
+					$blue-400: tint-color($blue, 20%) !default;
+					$blue-500: $blue !default;
+					$blue-600: shade-color($blue, 20%) !default;
+					$blue-700: shade-color($blue, 40%) !default;
+					$blue-800: shade-color($blue, 60%) !default;
+
+
+		%p The <code class="language-scss">tint-color()</code> and <code class="language-scss">shade-color()</code> refers to SASS's <code class="language-scss">mix()</code> function, as defined in the <code>_functions.scss</code> file:
+
+		%pre.mt-4.mb-4.language-scss.line-numbers
+			%code
+				:preserve
+					// _functions.scss
+
+					// scss-docs-start color-functions
+					// Tint a color: mix a color with white
+					@function tint-color($color, $weight) {
+						@return mix(white, $color, $weight);
+					}
+
+					// Shade a color: mix a color with black
+					@function shade-color($color, $weight) {
+						@return mix(black, $color, $weight);
+					}
+
+		%p Therefore, when you compile the SCSS files into CSS, these tints and shades resolve to the following values:
+
+		%pre.mt-4.mb-4.language-css.line-numbers
+			%code
+				:preserve
+					root, 
+					[data-bs-theme: light] {
+						--bs-blue: #0d6efd;
+						--bs-blue-100: #cfe2ff ;
+						--bs-blue-200: #9ec5fe;
+						--bs-blue-300: #6ea8fe;
+						--bs-blue-400: #3d8bfd;
+						--bs-blue-500: #0d6efd;
+						--bs-blue-600: #0a58ca;
+						--bs-blue-700: #084298;
+						--bs-blue-800: #052c65;
+						--bs-blue-900: #031633;
+					}
+
+		%p Because these values can change if you change the base color's hex code when they mix, and it's not defined in SASS directly beyond the function, we need a way to evaluate the values of each of the tints and shades.  In addition, these tints and shades are not included in the Bootstrap compiled CSS by default to keep the file size low.  However, in building a theme editor that gives the designers the power to choose colors while enforcing contrast, these colors would be available in the theme editor anyway.
+
+		%p To evaluate the SCASS mix() function's returning values without compiling the full CSS as we look for new colors to shift the color palette toward a full 7:1 contrast, we can use Ruby to perform this task.  In the below code, we evaluate the values of the tints and shades for blue.
+
+		%p This code requires three gems.
+
+		%ul
+			%li 
+				%a{href: "https://github.com/halostatue/color"} Color gem
+				This gem is used to create the color objects which we use for RGB and HSL color spaces.
+			%li 
+				%a{href: "https://github.com/sass/sassc-ruby"} Sassc gem
+				This gem preprocesses SASS into CSS files.
+			%li
+				%a{href: "https://github.com/jfairbank/chroma"} Chroma gem
+				At times, the SASS will resolve a CSS color to CSS color names instead of the hex code.  So we use this gem to convert the color name to hex.
+
+
+		%pre.mt-4.mb-4.language-ruby.line-numbers
+			%code
+				:preserve
+					require 'color'
+					require 'sassc'
+					require 'chroma'
+
+					# Define standard white and black
+					WHITE = Color::RGB.new(255, 255, 255)
+					BLACK = Color::RGB.new(0, 0, 0)
+
+					# Process SASS to CSS Values
+					def sass_mix(color1, color2, weight)
+						scss_code = <<~SCSS
+							$mixed: mix(\#{color1}, \#{color2}, \#{weight}%);
+							div { background-color: $mixed; }
+						SCSS
+
+						engine = SassC::Engine.new(scss_code, syntax: :scss)
+						result = engine.render
+
+						# Extract computed color from `background-color`
+						result = result.match(/background-color:\s*([^;]+)/)[1].strip
+
+						# Sometimes the SASS will resolve to a color name from the CSS Colors; however, this messes up the code, so this is where Chroma comes in and changes it to hex codes.
+						unless result.start_with?("#")
+							result = Chroma.paint(result).to_hex
+						end 
+
+						rgb = Color::RGB.by_hex(result)
+						hsl = rgb.to_hsl
+						hue = hsl.hue
+						contrast_white = contrast_ratio(rgb, WHITE)
+						contrast_black = contrast_ratio(rgb, BLACK)
+						passes_white = contrast_white >= 4.5
+						passes_black = contrast_black >= 4.5
+
+						return_hash = {
+							rgb: rgb,
+							hue: hue,
+							contrast_white: contrast_white,
+							passes_white: passes_white,
+							contrast_black: contrast_black,
+							passes_black: passes_black
+						}
+
+						return return_hash
+					end
+
+					# Function to compute contrast ratio
+					def contrast_ratio(rgb1, rgb2)
+						# Normalize to a 0-1 range
+						rgb_values = [
+							rgb1.red / 255.0, rgb1.green / 255.0, rgb1.blue / 255.0,
+							rgb2.red / 255.0, rgb2.green / 255.0, rgb2.blue / 255.0
+						]
+
+						# Convert to Linear RGB
+						rgb_values.map! do |channel|
+							channel <= 0.03928 ? (channel / 12.92) : ((channel + 0.055) / 1.055) ** 2.4
+						end
+
+						r1, g1, b1, r2, g2, b2 = rgb_values
+
+						# Calculate Luminance
+						l1 = 0.2126 * r1 + 0.7152 * g1 + 0.0722 * b1
+						l2 = 0.2126 * r2 + 0.7152 * g2 + 0.0722 * b2
+
+						# Sort the L Values
+						l1, l2 = [l1, l2].sort.reverse
+
+						# Calculate Contrast
+						contrast = (l1 + 0.05) / (l2 + 0.05)
+
+						return contrast
+					end
+
+					blue_500 = Color::RGB.by_hex("#0d6efd")
+					blue_500_hsl = blue_500.to_hsl
+					blue_500_hue = blue_500_hsl.hue
+					blue_500_contrast_white = contrast_ratio(blue_500, WHITE)
+					blue_500_contrast_black = contrast_ratio(blue_500, BLACK)
+					blue_500_passes_white = blue_500_contrast_white >= 4.5
+					blue_500_passes_black = blue_500_contrast_black >= 4.5
+
+					blue_500_hash = {
+						name: "Blue 500",
+						rgb: blue_500,
+						hue: blue_500_hue,
+						contrast_white: blue_500_contrast_white,
+						passes_white: blue_500_passes_white,
+						contrast_black: blue_500_contrast_black,
+						passes_black: blue_500_passes_black
+					}
+
+					blue_100 = sass_mix("white", "#\#{blue_500.hex}", 80).merge(name: "Blue 100")
+					blue_200 = sass_mix("white", "#\#{blue_500.hex}", 60).merge(name: "Blue 200")
+					blue_300 = sass_mix("white", "#\#{blue_500.hex}", 40).merge(name: "Blue 300")
+					blue_400 = sass_mix("white", "#\#{blue_500.hex}", 20).merge(name: "Blue 400")
+					blue_600 = sass_mix("black", "#\#{blue_500.hex}", 20).merge(name: "Blue 600")
+					blue_700 = sass_mix("black", "#\#{blue_500.hex}", 40).merge(name: "Blue 700")
+					blue_800 = sass_mix("black", "#\#{blue_500.hex}", 60).merge(name: "Blue 800")
+					blue_900 = sass_mix("black", "#\#{blue_500.hex}", 80).merge(name: "Blue 900")
+
+					values = [
+						blue_100,
+						blue_200,
+						blue_300,
+						blue_400,
+						blue_500_hash,
+						blue_600,
+						blue_700,
+						blue_800,
+						blue_900
+					]
+
+					puts "\tColor Name \tHex Code \tHue \tWhite Contrast \tPasses White \tBlack Contrast \tPasses Black"
+					puts "\t---------------------------------------------------------------------------------------------------------"
+					values.each do |color|  
+						puts "\t\#{color[:name]} \t#\#{color[:rgb].hex} \t\#{color[:hue]} \t\#{color[:contrast_white]} \t\#{color[:passes_white]} \t\#{color[:contrast_black]} \t\#{color[:passes_black]}"
+					end
+					
+					
+					
 						
 
 		
