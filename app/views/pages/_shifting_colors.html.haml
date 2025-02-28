@@ -22,8 +22,8 @@
 	!function(){function t(t){var e=document.createElement("textarea");e.value=t.getText(),e.style.top="0",e.style.left="0",e.style.position="fixed",document.body.appendChild(e),e.focus(),e.select();try{var o=document.execCommand("copy");setTimeout((function(){o?t.success():t.error()}),1)}catch(e){setTimeout((function(){t.error(e)}),1)}document.body.removeChild(e)}"undefined"!=typeof Prism&&"undefined"!=typeof document&&(Prism.plugins.toolbar?Prism.plugins.toolbar.registerButton("copy-to-clipboard",(function(e){var o=e.element,n=function(t){var e={copy:"Copy","copy-error":"Press Ctrl+C to copy","copy-success":"Copied!","copy-timeout":5e3};for(var o in e){for(var n="data-prismjs-"+o,c=t;c&&!c.hasAttribute(n);)c=c.parentElement;c&&(e[o]=c.getAttribute(n))}return e}(o),c=document.createElement("button");c.className="copy-to-clipboard-button",c.setAttribute("type","button");var r=document.createElement("span");return c.appendChild(r),u("copy"),function(e,o){e.addEventListener("click",(function(){!function(e){navigator.clipboard?navigator.clipboard.writeText(e.getText()).then(e.success,(function(){t(e)})):t(e)}(o)}))}(c,{getText:function(){return o.textContent},success:function(){u("copy-success"),i()},error:function(){u("copy-error"),setTimeout((function(){!function(t){window.getSelection().selectAllChildren(t)}(o)}),1),i()}}),c;function i(){setTimeout((function(){u("copy")}),n["copy-timeout"])}function u(t){r.textContent=n[t],c.setAttribute("data-copy-state",t)}})):console.warn("Copy to Clipboard plugin loaded before Toolbar plugin."))}();
 
 
-.container
-	.col-lg-8.pt-4.pb-4.mb-4.mx-auto
+.container-lg
+	.col-xl-8.pt-4.pb-4.mb-4.mx-auto
 		:css
 			dl {
 				margin: 0; 
@@ -74,7 +74,7 @@
 
 		%figure.ps-4.quote-figure
 			%blockquote.blockquote.pt-4.pb-4
-				%p The presentation of text and images of text has a contrast ratio of at least 4.5;1, except for the following:
+				%p The presentation of text and images of text has a contrast ratio of at least <math><mn>4.5</mn><mo>:</mo><mn>1</mn></math>, except for the following:
 
 				%dl
 					%div
@@ -691,7 +691,7 @@
 			}
 
 		.row.mb-4
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Black
@@ -717,7 +717,7 @@
 					.border.border-dark.black-example.p-4.text-center
 						%p.p-0 Example Text
 					
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title White
@@ -743,7 +743,7 @@
 					.border.border-dark.white-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Blue
@@ -768,7 +768,7 @@
 								%dd 4.7:1
 					.border.border-dark.blue-example.p-4.text-center
 						%p.p-0 Example Text
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Indigo
@@ -794,7 +794,7 @@
 					.border.border-dark.indigo-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Purple
@@ -820,7 +820,7 @@
 					.border.border-dark.purple-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Pink
@@ -846,7 +846,7 @@
 					.border.border-dark.pink-example.p-4.text-center
 						%p.p-0 Example Text
 						
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Red
@@ -872,7 +872,7 @@
 					.border.border-dark.red-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Orange
@@ -898,7 +898,7 @@
 					.border.border-dark.orange-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Yellow
@@ -924,7 +924,7 @@
 					.border.border-dark.yellow-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Green
@@ -950,7 +950,7 @@
 					.border.border-dark.green-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Teal
@@ -976,7 +976,7 @@
 					.border.border-dark.teal-example.p-4.text-center
 						%p.p-0 Example Text
 
-			.col.col-md-6
+			.col-12.col-md-6
 				.card
 					.card-body
 						%h3.card-title Cyan
@@ -1048,7 +1048,7 @@
 					root, 
 					[data-bs-theme: light] {
 						--bs-blue: #0d6efd;
-						--bs-blue-100: #cfe2ff ;
+						--bs-blue-100: #cfe2ff;
 						--bs-blue-200: #9ec5fe;
 						--bs-blue-300: #6ea8fe;
 						--bs-blue-400: #3d8bfd;
@@ -1198,6 +1198,195 @@
 					values.each do |color|  
 						puts "\t\#{color[:name]} \t#\#{color[:rgb].hex} \t\#{color[:hue]} \t\#{color[:contrast_white]} \t\#{color[:passes_white]} \t\#{color[:contrast_black]} \t\#{color[:passes_black]}"
 					end
+
+		%h3 Blue Tints and Shades
+		%p The following are the tints and shades defined in the SCSS files for blue.  <code language="scss">$blue-500</code> is not shown here as it is the same as <code language="scss">$blue</code>.
+
+		:css
+			.blue-100-example {
+				background-color: #cfe2ff;
+				color: #000000;
+			}
+			.blue-200-example {
+				background-color: #9ec5fe;
+				color: #000000;
+			}
+			.blue-300-example {
+				background-color: #6ea8fe;
+				color: #000000;
+			}
+			.blue-400-example {
+				background-color: #3d8bfd;
+				color: #000000;
+			}
+
+			@media (inverted-colors: inverted) {
+				.blue-100-example {
+					background-color: #301d00;
+					color: #ffffff;
+				}
+				.blue-200-example {
+					background-color: #613a01;
+					color: #ffffff;
+				}
+				.blue-300-example {
+					background-color: #915701;
+					color: #ffffff;
+				}
+				.blue-400-example {
+					background-color: #c27402;
+					color: #ffffff;
+				}
+			}
+
+		.row.mb-4
+			.col-12
+				.card
+					.card-body
+						.row
+							.col-12.col-md-10
+								%h4.card-title Blue-100
+								%dl.row.ms-4.ps-4
+									%div.col-12.col-md-6
+										%dt Hex Code
+										%dd #cfe2ff
+									%div.col-12.col-md-6
+										%dt Red, Green, Blue
+										%dd 207, 226, 255
+									%div.col-12.col-md-6
+										%dt Relative Luminance
+										%dd 0.7487811050138904
+									%div.col-12.col-md-6
+										%dt Hue
+										%dd 216.25
+									%div.col-12.col-md-6
+										%dt Contrast Against White
+										%dd 1.3:1
+									%div.col-12.col-md-6
+										%dt Contrast Against Black
+										%dd 15.97:1
+									%div.col-12.col-md-6
+										%dt Bootstrap Value
+										Tdd tint-color($blue, 80%)
+									%div.col-12.col-md-6
+										%dt SASS Funcion
+										%dd mix(#ffffff, #0d6efd, 80%)
+							.col-12.col-md-2.border.border-dark.blue-100-example.p-4.d-flex.align-items-center.text-center
+								%p.w-100.p-0 Example Text
+
+			.col-12
+				.card
+					.card-body
+						.row
+							.col-12.col-md-10
+								%h4.card-title Blue-200
+								%dl.row.ms-4.ps-4
+									%div.col-12.col-md-6
+										%dt Hex Code
+										%dd #9ec5fe
+									%div.col-12.col-md-6
+										%dt Red, Green, Blue
+										%dd 158, 197, 254
+									%div.col-12.col-md-6
+										%dt Relative Luminance
+										%dd 0.5435736248136283
+									%div.col-12.col-md-6
+										%dt Hue
+										%dd 215.62499999999997
+									%div.col-12.col-md-6
+										%dt Contrast Against White
+										%dd 1.8:1
+									%div.col-12.col-md-6
+										%dt Contrast Against Black
+										%dd 11.9:1
+									%div.col-12.col-md-6
+										%dt Bootstrap Value
+										Tdd tint-color($blue, 60%)
+									%div.col-12.col-md-6
+										%dt SASS Funcion
+										%dd mix(#ffffff, #0d6efd, 60%)
+							.col-12.col-md-2.border.border-dark.blue-200-example.p-4.d-flex.align-items-center.text-center
+								%p.w-100.p-0 Example Text
+
+			.col-12
+				.card
+					.card-body
+						.row
+							.col-12.col-md-10
+								%h4.card-title Blue-300
+								%dl.row.ms-4.ps-4
+									%div.col-12.col-md-6
+										%dt Hex Code
+										%dd #6ea8fe
+									%div.col-12.col-md-6
+										%dt Red, Green, Blue
+										%dd 110, 168, 254
+									%div.col-12.col-md-6
+										%dt Relative Luminance
+										%dd 0.3847601736825047
+									%div.col-12.col-md-6
+										%dt Hue
+										%dd 215.83333333333331
+									%div.col-12.col-md-6
+										%dt Contrast Against White
+										%dd 2.4:1
+									%div.col-12.col-md-6
+										%dt Contrast Against Black
+										%dd 8.7:1
+									%div.col-12.col-md-6
+										%dt Bootstrap Value
+										Tdd tint-color($blue, 40%)
+									%div.col-12.col-md-6
+										%dt SASS Funcion
+										%dd mix(#ffffff, #0d6efd, 40%)
+							.col-12.col-md-2.border.border-dark.blue-300-example.p-4.d-flex.align-items-center.text-center
+								%p.w-100.p-0 Example Text
+
+			.col-12
+				.card
+					.card-body
+						.row
+							.col-12.col-md-10
+								%h4.card-title Blue-400
+								%dl.row.ms-4.ps-4
+									%div.col-12.col-md-6
+										%dt Hex Code
+										%dd #3d8bfd
+									%div.col-12.col-md-6
+										%dt Red, Green, Blue
+										%dd 110, 168, 254
+									%div.col-12.col-md-6
+										%dt Relative Luminance
+										%dd 0.3847601736825047
+									%div.col-12.col-md-6
+										%dt Hue
+										%dd 215.83333333333331
+									%div.col-12.col-md-6
+										%dt Contrast Against White
+										%dd 2.4:1
+									%div.col-12.col-md-6
+										%dt Contrast Against Black
+										%dd 8.7:1
+									%div.col-12.col-md-6
+										%dt Bootstrap Value
+										Tdd tint-color($blue, 40%)
+									%div.col-12.col-md-6
+										%dt SASS Funcion
+										%dd mix(#ffffff, #0d6efd, 40%)
+							.col-12.col-md-2.border.border-dark.blue-400-example.p-4.d-flex.align-items-center.text-center
+								%p.w-100.p-0 Example Text
+
+			
+
+						-#--bs-blue-300: 
+						-#--bs-blue-400: 
+						-#--bs-blue-500: #0d6efd;
+						-#--bs-blue-600: #0a58ca;
+						-#--bs-blue-700: #084298;
+						-#--bs-blue-800: #052c65;
+						-#--bs-blue-900: #031633;
+
+
 					
 					
 					
