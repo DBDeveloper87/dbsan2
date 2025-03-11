@@ -1,4 +1,8 @@
 :css
+	:root {
+		--bs-border-color: #525a62;
+	}
+
 	.braille-page {
 		aspect-ratio: 11.5 / 11;
 		height: 11in;
@@ -24,6 +28,21 @@
 		font-variant-numeric: tabular-nums; /* Ensures equal spacing */
 	}
 
+	.braille-line-grid {
+		display: grid;
+		grid-template-columns: repeat(40, 1fr); /* 40 equal-width columns */
+		grid-auto-flow: column; /* Forces content to align in columns */
+		white-space: nowrap; /* Prevents unintended wrapping */
+		overflow: hidden; /* Ensures no line breaks */
+		width: 100%;
+		font-size: 180%;
+		line-height: 1.15;
+		font-family: monospace;
+		font-variant-numeric: tabular-nums; /* Uniform spacing */
+		text-align: center; /* Ensures each character is centered */
+		letter-spacing: 0.05em; /* Adjust as needed to space out characters */
+	}
+
 	.braille-line span {
 		display: flex;
 		align-items: center;
@@ -44,19 +63,20 @@
 			
 		%main.flex-grow-1.d-flex.justify-content-center.align-items-start.p-4{style: "max-height: 100%; overflow: auto"}
 			.d-block{style: "overflow: auto; width: max-content;"}
-				- 3.times do
-					.braille-page.border.border-4.p-4{contenteditable: "true"}
-						- 25.times do
-							.braille-line
-								- 5.times do
-									%span ⠏
-									%span ⠁
-									%span ⠞
-									%span ⠗
-									%span ⠊
-									%span ⠉
-									%span ⠅
-									%span ⠲
+				.braille-page.border.border-4.p-4{contenteditable: "true"}
+					.braille-line-grid
+						⠠⠏⠁⠞⠗⠊⠉⠅⠀⠠⠛⠁⠗⠽⠀⠠⠧⠑⠇⠇⠊⠁⠀⠼⠁⠊⠓⠛⠤⠼⠃⠁⠃⠋⠀⠿⠿⠿⠿⠿
+					.braille-line
+						- 5.times do
+							%span ⠏
+							%span ⠁
+							%span ⠞
+							%span ⠗
+							%span ⠊
+							%span ⠉
+							%span ⠅
+							%span ⠲
+
 							
 		
 		
